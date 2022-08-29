@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="zsc">
+<title>快乐的一天 - 3.2 基于方案满意度的多属性决策方法</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - 3.2 基于方案满意度的多属性决策方法">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+<div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">3.2 基于方案满意度的多属性决策方法</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">3.2 基于方案满意度的多属性决策方法</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i></button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">查看源代码</a></li></ul></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">uncertain</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2019年2月26日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+<li>
+<a href="#%E5%BE%90%E6%B3%BD%E6%B0%B4%E4%B8%8D%E7%A1%AE%E5%AE%9A%E5%A4%9A%E5%B1%9E%E6%80%A7%E5%86%B3%E7%AD%96%E6%96%B9%E6%B3%95%E4%B8%8E%E5%BA%94%E7%94%A881%E9%A1%B5" id="toc-徐泽水不确定多属性决策方法与应用81页" class="nav-link active" data-scroll-target="#%E5%BE%90%E6%B3%BD%E6%B0%B4%E4%B8%8D%E7%A1%AE%E5%AE%9A%E5%A4%9A%E5%B1%9E%E6%80%A7%E5%86%B3%E7%AD%96%E6%96%B9%E6%B3%95%E4%B8%8E%E5%BA%94%E7%94%A881%E9%A1%B5">徐泽水《不确定多属性决策方法与应用》81页</a>
+  <ul class="collapse">
+<li><a href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E6%8A%8A%E5%8E%9F%E5%A7%8B%E5%86%B3%E7%AD%96%E7%9F%A9%E9%98%B5a-%E5%88%A9%E7%94%A8%E9%80%82%E5%BD%93%E7%9A%84%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E8%A7%84%E8%8C%83%E5%8C%96%E4%B8%BArr%E4%B8%BA%E5%BD%92%E4%B8%80%E5%8C%96%E5%90%8E%E7%9A%84%E7%9F%A9%E9%98%B5" id="toc-第一步-把原始决策矩阵a-利用适当的方法进行规范化为rr为归一化后的矩阵" class="nav-link" data-scroll-target="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E6%8A%8A%E5%8E%9F%E5%A7%8B%E5%86%B3%E7%AD%96%E7%9F%A9%E9%98%B5a-%E5%88%A9%E7%94%A8%E9%80%82%E5%BD%93%E7%9A%84%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E8%A7%84%E8%8C%83%E5%8C%96%E4%B8%BArr%E4%B8%BA%E5%BD%92%E4%B8%80%E5%8C%96%E5%90%8E%E7%9A%84%E7%9F%A9%E9%98%B5">第一步: 把原始决策矩阵A 利用适当的方法进行规范化为R，R为归一化后的矩阵</a></li>
+  <li><a href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E6%B1%82%E5%87%BA%E7%BB%BC%E5%90%88%E5%B1%9E%E6%80%A7%E6%AD%A3%E7%90%86%E6%83%B3%E5%80%BCz_max%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E5%B1%9E%E6%80%A7%E8%B4%9F%E7%90%86%E6%83%B3%E5%80%BCz_min" id="toc-第二步-求出综合属性正理想值z_max以及综合属性负理想值z_min" class="nav-link" data-scroll-target="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E6%B1%82%E5%87%BA%E7%BB%BC%E5%90%88%E5%B1%9E%E6%80%A7%E6%AD%A3%E7%90%86%E6%83%B3%E5%80%BCz_max%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E5%B1%9E%E6%80%A7%E8%B4%9F%E7%90%86%E6%83%B3%E5%80%BCz_min">第二步 ： 求出综合属性正理想值z_max,以及综合属性负理想值z_min</a></li>
+  <li><a href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E6%B1%82%E5%87%BA%E5%90%84%E6%96%B9%E6%8C%89%E7%9A%84%E6%BB%A1%E6%84%8F%E5%BA%A6pw-%E7%9F%A9%E9%98%B5%E7%9A%84%E6%AF%8F%E4%B8%80%E8%A1%8C%E4%B8%BA%E5%AF%B9%E5%BA%94%E6%96%B9%E6%A1%88%E7%9A%84%E6%BB%A1%E6%84%8F%E5%BA%A6%E7%9F%A9%E9%98%B5" id="toc-第三步-求出各方按的满意度pw-矩阵的每一行为对应方案的满意度矩阵" class="nav-link" data-scroll-target="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E6%B1%82%E5%87%BA%E5%90%84%E6%96%B9%E6%8C%89%E7%9A%84%E6%BB%A1%E6%84%8F%E5%BA%A6pw-%E7%9F%A9%E9%98%B5%E7%9A%84%E6%AF%8F%E4%B8%80%E8%A1%8C%E4%B8%BA%E5%AF%B9%E5%BA%94%E6%96%B9%E6%A1%88%E7%9A%84%E6%BB%A1%E6%84%8F%E5%BA%A6%E7%9F%A9%E9%98%B5">第三步： 求出各方按的满意度，PW 矩阵的每一行为对应方案的满意度矩阵</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="徐泽水不确定多属性决策方法与应用81页" class="level1"><h1>徐泽水《不确定多属性决策方法与应用》81页</h1>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">##  3.2 基于方案满意度的多属性决策方法---徐泽水《不确定多属性决策方法与应用》81页 --3.2.2 实例分析</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">A</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">47177</span>, <span class="fl">16.61</span>, <span class="fl">8.89</span>, <span class="fl">31.05</span>, <span class="fl">15.77</span>,</span>
+<span>      <span class="fl">43323</span>, <span class="fl">9.08</span>, <span class="fl">3.65</span>, <span class="fl">29.80</span>, <span class="fl">8.44</span>,</span>
+<span>      <span class="fl">59023</span>, <span class="fl">13.84</span>, <span class="fl">6.06</span>, <span class="fl">26.55</span>, <span class="fl">12.87</span>,</span>
+<span>      <span class="fl">46821</span>, <span class="fl">10.59</span>, <span class="fl">3.51</span>, <span class="fl">22.46</span>, <span class="fl">7.41</span>,</span>
+<span>      <span class="fl">41646</span>, <span class="fl">13.24</span>, <span class="fl">4.64</span>, <span class="fl">24.33</span>, <span class="fl">9.33</span>,</span>
+<span>      <span class="fl">26446</span>, <span class="fl">10.16</span>, <span class="fl">2.38</span>, <span class="fl">26.80</span>, <span class="fl">9.85</span>,</span>
+<span>      <span class="fl">38381</span>, <span class="fl">11.97</span>, <span class="fl">4.79</span>, <span class="fl">26.45</span>, <span class="fl">10.64</span>,</span>
+<span>      <span class="fl">57808</span>, <span class="fl">10.29</span>, <span class="fl">4.54</span>, <span class="fl">23.00</span>, <span class="fl">9.23</span>,</span>
+<span>      <span class="fl">28869</span>, <span class="fl">7.68</span>, <span class="fl">2.12</span>, <span class="fl">31.08</span>, <span class="fl">9.05</span>,</span>
+<span>      <span class="fl">38812</span>, <span class="fl">8.92</span>, <span class="fl">3.38</span>, <span class="fl">25.68</span>, <span class="fl">8.73</span>,</span>
+<span>      <span class="fl">30721</span>, <span class="fl">10.87</span>, <span class="fl">4.15</span>, <span class="fl">30.36</span>, <span class="fl">11.44</span>,</span>
+<span>      <span class="fl">24848</span>, <span class="fl">10.77</span>,<span class="fl">2.42</span>, <span class="fl">30.71</span>, <span class="fl">11.37</span>,</span>
+<span>      <span class="fl">26925</span>, <span class="fl">9.34</span>, <span class="fl">3.06</span>, <span class="fl">30.11</span>, <span class="fl">10.84</span>,</span>
+<span>      <span class="fl">23269</span>, <span class="fl">8.25</span>, <span class="fl">2.58</span>, <span class="fl">32.57</span>, <span class="fl">8.62</span>,</span>
+<span>      <span class="fl">28267</span>, <span class="fl">8.13</span>, <span class="fl">3.17</span>, <span class="fl">29.25</span>, <span class="fl">9.17</span>,</span>
+<span>      <span class="fl">21583</span>, <span class="fl">7.14</span>, <span class="fl">4.66</span>, <span class="fl">35.35</span>, <span class="fl">11.27</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">A</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">A</span>,nrow <span class="op">=</span> <span class="fl">16</span>,ncol <span class="op">=</span> <span class="fl">5</span>,byrow <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">A</span> <span class="co"># 原始决策矩阵</span></span>
+<span><span class="co">#&gt;        V1    V2   V3    V4    V5</span></span>
+<span><span class="co">#&gt;  1: 47177 16.61 8.89 31.05 15.77</span></span>
+<span><span class="co">#&gt;  2: 43323  9.08 3.65 29.80  8.44</span></span>
+<span><span class="co">#&gt;  3: 59023 13.84 6.06 26.55 12.87</span></span>
+<span><span class="co">#&gt;  4: 46821 10.59 3.51 22.46  7.41</span></span>
+<span><span class="co">#&gt;  5: 41646 13.24 4.64 24.33  9.33</span></span>
+<span><span class="co">#&gt;  6: 26446 10.16 2.38 26.80  9.85</span></span>
+<span><span class="co">#&gt;  7: 38381 11.97 4.79 26.45 10.64</span></span>
+<span><span class="co">#&gt;  8: 57808 10.29 4.54 23.00  9.23</span></span>
+<span><span class="co">#&gt;  9: 28869  7.68 2.12 31.08  9.05</span></span>
+<span><span class="co">#&gt; 10: 38812  8.92 3.38 25.68  8.73</span></span>
+<span><span class="co">#&gt; 11: 30721 10.87 4.15 30.36 11.44</span></span>
+<span><span class="co">#&gt; 12: 24848 10.77 2.42 30.71 11.37</span></span>
+<span><span class="co">#&gt; 13: 26925  9.34 3.06 30.11 10.84</span></span>
+<span><span class="co">#&gt; 14: 23269  8.25 2.58 32.57  8.62</span></span>
+<span><span class="co">#&gt; 15: 28267  8.13 3.17 29.25  9.17</span></span>
+<span><span class="co">#&gt; 16: 21583  7.14 4.66 35.35 11.27</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="第一步-把原始决策矩阵a-利用适当的方法进行规范化为rr为归一化后的矩阵" class="level2"><h2 class="anchored" data-anchor-id="第一步-把原始决策矩阵a-利用适当的方法进行规范化为rr为归一化后的矩阵">第一步: 把原始决策矩阵A 利用适当的方法进行规范化为R，R为归一化后的矩阵</h2>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#### 第一步: 把原始决策矩阵A 利用适当的方法进行规范化为R，R为归一化后的矩阵</span></span>
+<span><span class="co">### norm_matrix()函数，根据书中收益型属性（按公式1.2）与成本型属性(按公式1.4)分别进行归一化</span></span>
+<span><span class="co">#####  注意这个与前面的norm_matrix函数(即下面norm_matrix2)结果相同，只是代码显得更少了,保证了列名不变</span></span>
+<span><span class="va">norm_matrix</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">A</span>, <span class="va">shouyi</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">chengben</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">shouyi</span><span class="op">)</span> <span class="op">|</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">chengben</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">is.matrix</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span> <span class="va">A</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span>  <span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">chengben</span><span class="op">)</span><span class="op">)</span> <span class="va">chengben</span> <span class="op">=</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">m</span>, <span class="va">shouyi</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">shouyi</span><span class="op">)</span><span class="op">)</span> <span class="va">shouyi</span> <span class="op">=</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">m</span>, <span class="va">chengben</span><span class="op">)</span></span>
+<span>  <span class="co"># 如果输入的shouyi与chengben向量交集不为空，且并集不是全集，则算法出错</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="va">shouyi</span>, <span class="va">chengben</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span>, <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setequal</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">union</a></span><span class="op">(</span><span class="va">shouyi</span>, <span class="va">chengben</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">R</span> <span class="op">=</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span> <span class="co"># 重新赋值</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">chengben</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">R</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">[</span><span class="va">shouyi</span><span class="op">]</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, .SDcols <span class="op">=</span> <span class="va">shouyi</span><span class="op">]</span> <span class="co"># 收益型属性归一化 （书中1.2式）</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">shouyi</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">R</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">[</span><span class="va">chengben</span><span class="op">]</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="va">x</span>  <span class="op">)</span>, .SDcols <span class="op">=</span> <span class="va">chengben</span><span class="op">]</span><span class="co"># 成本型属性归一化 （书中1.3式）</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="va">R</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">[</span><span class="va">shouyi</span><span class="op">]</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, .SDcols <span class="op">=</span> <span class="va">shouyi</span><span class="op">]</span> <span class="co"># 收益型属性归一化 （书中1.2式）</span></span>
+<span>    <span class="va">R</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">[</span><span class="va">chengben</span><span class="op">]</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="va">x</span>  <span class="op">)</span>, .SDcols <span class="op">=</span> <span class="va">chengben</span><span class="op">]</span><span class="co"># 成本型属性归一化 （书中1.3式）</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDF.html">setDF</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">norm_matrix2</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">A</span>,<span class="va">shouyi</span><span class="op">=</span><span class="cn">NULL</span>,<span class="va">chengben</span><span class="op">=</span><span class="cn">NULL</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">is.matrix</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span><span class="va">A</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">shouyi</span><span class="op">)</span> <span class="op">|</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">chengben</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">chengben</span><span class="op">)</span><span class="op">)</span> <span class="va">chengben</span> <span class="op">=</span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">m</span>,<span class="va">shouyi</span><span class="op">)</span> </span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">shouyi</span><span class="op">)</span><span class="op">)</span> <span class="va">shouyi</span> <span class="op">=</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">m</span>,<span class="va">chengben</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="va">shouyi</span>,<span class="va">chengben</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="fl">0</span>,<span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setequal</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">union</a></span><span class="op">(</span><span class="va">shouyi</span>,<span class="va">chengben</span><span class="op">)</span>,<span class="fl">1</span><span class="op">:</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">chengben</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="co"># 对决策矩阵进行重命名</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'V'</span>,<span class="fl">1</span><span class="op">:</span><span class="va">m</span><span class="op">)</span></span>
+<span>    <span class="va">shouyi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"V"</span>,<span class="va">shouyi</span><span class="op">)</span></span>
+<span>    <span class="va">R</span> <span class="op">=</span> <span class="va">A</span>    </span>
+<span>    <span class="co"># 归一化</span></span>
+<span>    <span class="va">R</span><span class="op">[</span>,<span class="st">':='</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">shouyi</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="va">x</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,.SDcols <span class="op">=</span><span class="va">shouyi</span><span class="op">]</span> <span class="co"># 收益型属性归一化 （书中1.2式）</span></span>
+<span>  <span class="op">}</span><span class="kw">else</span> <span class="kw">if</span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">shouyi</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="co">#对决策矩阵进行重命名</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'V'</span>,<span class="fl">1</span><span class="op">:</span><span class="va">m</span><span class="op">)</span></span>
+<span>    <span class="va">chengben</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"V"</span>,<span class="va">chengben</span><span class="op">)</span></span>
+<span>    <span class="va">R</span> <span class="op">=</span> <span class="va">A</span></span>
+<span>    <span class="co"># 归一化</span></span>
+<span>    <span class="va">R</span><span class="op">[</span>,<span class="st">':='</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">chengben</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">.SD</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,.SDcol <span class="op">=</span> <span class="va">chengben</span><span class="op">]</span><span class="co"># 成本型属性归一化 （书中1.3式）</span></span>
+<span>  <span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="co">#对决策矩阵进行重命名</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'V'</span>,<span class="fl">1</span><span class="op">:</span><span class="va">m</span><span class="op">)</span></span>
+<span>    <span class="va">shouyi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"V"</span>,<span class="va">shouyi</span><span class="op">)</span></span>
+<span>    <span class="va">chengben</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"V"</span>,<span class="va">chengben</span><span class="op">)</span></span>
+<span>    <span class="va">R</span> <span class="op">=</span> <span class="va">A</span></span>
+<span>    <span class="co"># 归一化</span></span>
+<span>    <span class="va">R</span><span class="op">[</span>,<span class="st">':='</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">shouyi</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="va">x</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,.SDcols <span class="op">=</span><span class="va">shouyi</span><span class="op">]</span> <span class="co"># 收益型属性归一化 （书中1.2式）</span></span>
+<span>    <span class="va">R</span><span class="op">[</span>,<span class="st">':='</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">chengben</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">.SD</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,.SDcol <span class="op">=</span> <span class="va">chengben</span><span class="op">]</span><span class="co"># 成本型属性归一化 （书中1.3式）    </span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">R</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">R</span> <span class="op">=</span> <span class="fu">norm_matrix</span><span class="op">(</span><span class="va">A</span>, chengben <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">R</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       V1    V2    V3    V4    V5</span></span>
+<span><span class="co">#&gt; 1  0.799 1.000 1.000 0.723 1.000</span></span>
+<span><span class="co">#&gt; 2  0.734 0.547 0.411 0.754 0.535</span></span>
+<span><span class="co">#&gt; 3  1.000 0.833 0.682 0.846 0.816</span></span>
+<span><span class="co">#&gt; 4  0.793 0.638 0.395 1.000 0.470</span></span>
+<span><span class="co">#&gt; 5  0.706 0.797 0.522 0.923 0.592</span></span>
+<span><span class="co">#&gt; 6  0.448 0.612 0.268 0.838 0.625</span></span>
+<span><span class="co">#&gt; 7  0.650 0.721 0.539 0.849 0.675</span></span>
+<span><span class="co">#&gt; 8  0.979 0.620 0.511 0.977 0.585</span></span>
+<span><span class="co">#&gt; 9  0.489 0.462 0.238 0.723 0.574</span></span>
+<span><span class="co">#&gt; 10 0.658 0.537 0.380 0.875 0.554</span></span>
+<span><span class="co">#&gt; 11 0.520 0.654 0.467 0.740 0.725</span></span>
+<span><span class="co">#&gt; 12 0.421 0.648 0.272 0.731 0.721</span></span>
+<span><span class="co">#&gt; 13 0.456 0.562 0.344 0.746 0.687</span></span>
+<span><span class="co">#&gt; 14 0.394 0.497 0.290 0.690 0.547</span></span>
+<span><span class="co">#&gt; 15 0.479 0.489 0.357 0.768 0.581</span></span>
+<span><span class="co">#&gt; 16 0.366 0.430 0.524 0.635 0.715</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="第二步-求出综合属性正理想值z_max以及综合属性负理想值z_min" class="level2"><h2 class="anchored" data-anchor-id="第二步-求出综合属性正理想值z_max以及综合属性负理想值z_min">第二步 ： 求出综合属性正理想值z_max,以及综合属性负理想值z_min</h2>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">###### 第二步 ： 求出综合属性正理想值z_max,以及综合属性负理想值z_min</span></span>
+<span><span class="va">M_zonghe_position</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">R</span>,<span class="va">lower_c</span>,<span class="va">upper_c</span><span class="op">)</span><span class="op">{</span></span>
+<span>   <span class="co">#综合属性正理想值z_max</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://R-Forge.R-project.org/projects/rglp/">Rglpk</a></span><span class="op">)</span></span>
+<span>    <span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span>    <span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span>    <span class="co">## 约束条件，权和向量为1 </span></span>
+<span>    <span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">m</span><span class="op">)</span>,nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> </span>
+<span>    <span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"=="</span><span class="op">)</span></span>
+<span>    <span class="va">rhs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="co">## </span></span>
+<span>    <span class="va">types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span><span class="op">)</span> <span class="co"># 表示解为实数</span></span>
+<span>    <span class="va">bounds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">1L</span><span class="op">:</span><span class="va">m</span>, val <span class="op">=</span> <span class="va">lower_c</span><span class="op">)</span>,</span>
+<span>                   upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">1L</span><span class="op">:</span><span class="va">m</span>, val <span class="op">=</span> <span class="va">upper_c</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="co">###  下面 max_obj 函数中的xx为R矩阵的某一行</span></span>
+<span>    <span class="va">max_obj</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">xx</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/Rglpk/man/Rglpk_solve.html">Rglpk_solve_LP</a></span><span class="op">(</span><span class="va">xx</span>, <span class="va">mat</span>, <span class="va">dir</span>, <span class="va">rhs</span>, <span class="va">bounds</span>, <span class="va">types</span>,max <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">optimum</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">R</span>, <span class="fl">1</span>, <span class="va">max_obj</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">z_max</span> <span class="op">=</span> <span class="fu">M_zonghe_position</span><span class="op">(</span><span class="va">R</span>,lower_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.22</span>,<span class="fl">0.18</span>,<span class="fl">0.15</span>,<span class="fl">0.23</span>,<span class="fl">0.16</span><span class="op">)</span>,upper_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.24</span>,<span class="fl">0.20</span>,<span class="fl">0.17</span>,<span class="fl">0.26</span>,<span class="fl">0.17</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">z_max</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] 0.890 0.623 0.851 0.706 0.735 0.585 0.703 0.777 0.522 0.633 0.631 0.576</span></span>
+<span><span class="co">#&gt; [13] 0.575 0.502 0.555 0.534</span></span>
+<span></span>
+<span></span>
+<span><span class="co">## 求出综合属性负理想值</span></span>
+<span><span class="va">M_zonghe_negative</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">R</span>,<span class="va">lower_c</span>,<span class="va">upper_c</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="co">#综合属性负理想值z_min</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">is.data.table</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">)</span> <span class="va">R</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://R-Forge.R-project.org/projects/rglp/">Rglpk</a></span><span class="op">)</span></span>
+<span>  <span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span>  <span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span>  <span class="co">## 约束条件，权和向量为1 </span></span>
+<span>  <span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">m</span><span class="op">)</span>,nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> </span>
+<span>  <span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"=="</span><span class="op">)</span></span>
+<span>  <span class="va">rhs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="co">## </span></span>
+<span>  <span class="va">types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span><span class="op">)</span> <span class="co"># 表示解为实数</span></span>
+<span>  <span class="va">bounds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">1L</span><span class="op">:</span><span class="va">m</span>, val <span class="op">=</span> <span class="va">lower_c</span><span class="op">)</span>,</span>
+<span>                 upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">1L</span><span class="op">:</span><span class="va">m</span>, val <span class="op">=</span> <span class="va">upper_c</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="co">###  下面 max_obj 函数中的xx为R矩阵的某一行</span></span>
+<span>  <span class="va">min_obj</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">xx</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/Rglpk/man/Rglpk_solve.html">Rglpk_solve_LP</a></span><span class="op">(</span><span class="va">xx</span>, <span class="va">mat</span>, <span class="va">dir</span>, <span class="va">rhs</span>, <span class="va">bounds</span>, <span class="va">types</span><span class="op">)</span><span class="op">$</span><span class="va">optimum</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">R</span>, <span class="fl">1</span>, <span class="va">min_obj</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">z_min</span> <span class="op">=</span> <span class="fu">M_zonghe_negative</span><span class="op">(</span><span class="va">R</span>,lower_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.22</span>,<span class="fl">0.18</span>,<span class="fl">0.15</span>,<span class="fl">0.23</span>,<span class="fl">0.16</span><span class="op">)</span>,upper_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.24</span>,<span class="fl">0.20</span>,<span class="fl">0.17</span>,<span class="fl">0.26</span>,<span class="fl">0.17</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">z_min</span></span>
+<span><span class="co">#&gt;  [1] 0.8799025 0.6122816 0.8442960 0.6869648 0.7224206 0.5680731 0.6945892</span></span>
+<span><span class="co">#&gt;  [8] 0.7600534 0.5084315 0.6185512 0.6213819 0.5605654 0.5620055 0.4893540</span></span>
+<span><span class="co">#&gt; [15] 0.5430971 0.5233214</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="第三步-求出各方按的满意度pw-矩阵的每一行为对应方案的满意度矩阵" class="level2"><h2 class="anchored" data-anchor-id="第三步-求出各方按的满意度pw-矩阵的每一行为对应方案的满意度矩阵">第三步： 求出各方按的满意度，PW 矩阵的每一行为对应方案的满意度矩阵</h2>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#####  第三步： 求出各方按的满意度，PW 矩阵的每一行为对应方案的满意度矩阵，</span></span>
+<span><span class="co"># 把满意度矩阵的每一行乘以对应属性的权重，则为该方案的满意度，但此时属性权重未知</span></span>
+<span><span class="co"># 通过建立线性目标函数，求解出属性权重</span></span>
+<span><span class="va">PW</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span>,nrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">PW</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">=</span> <span class="op">(</span><span class="va">R</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">-</span> <span class="va">z_min</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">z_max</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">z_min</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">PW</span></span>
+<span><span class="co">#&gt;             [,1]        [,2]         [,3]        [,4]       [,5]</span></span>
+<span><span class="co">#&gt;  [1,]  -7.820666 11.65256149  11.65256149 -15.1896961  11.652561</span></span>
+<span><span class="co">#&gt;  [2,]  11.145778 -6.00900673 -18.47012741  12.9486991  -7.058863</span></span>
+<span><span class="co">#&gt;  [3,]  22.923509 -1.62874601 -23.94335797   0.2436666  -4.150187</span></span>
+<span><span class="co">#&gt;  [4,]   5.606157 -2.60510136 -15.40681623  16.5088261 -11.448630</span></span>
+<span><span class="co">#&gt;  [5,]  -1.373481  6.09491123 -16.36028397  16.3793613 -10.672955</span></span>
+<span><span class="co">#&gt;  [6,]  -7.029567  2.55423994 -17.59326739  15.8143586   3.311256</span></span>
+<span><span class="co">#&gt;  [7,]  -4.979815  2.92839875 -17.50474858  17.3674915  -2.235035</span></span>
+<span><span class="co">#&gt;  [8,]  13.013027 -8.33758206 -14.79304717  12.8414038 -10.367462</span></span>
+<span><span class="co">#&gt;  [9,]  -1.441419 -3.43690273 -20.14420736  15.9848337   4.883279</span></span>
+<span><span class="co">#&gt; [10,]   2.696916 -5.63428706 -16.47249835  17.6965044  -4.490027</span></span>
+<span><span class="co">#&gt; [11,] -10.399110  3.40588154 -15.93163587  12.2046922  10.724431</span></span>
+<span><span class="co">#&gt; [12,]  -9.130713  5.74617525 -18.86296457  11.1727327  10.494447</span></span>
+<span><span class="co">#&gt; [13,]  -7.990561  0.02312869 -16.44500376  13.8874395   9.466552</span></span>
+<span><span class="co">#&gt; [14,]  -7.630903  0.58843249 -15.97617926  16.0642115   4.593201</span></span>
+<span><span class="co">#&gt; [15,]  -5.286466 -4.41756470 -15.36276214  18.5132509   3.161791</span></span>
+<span><span class="co">#&gt; [16,] -15.310838 -9.07672150   0.08382542  10.8811429  18.581452</span></span>
+<span></span>
+<span><span class="co">### 通过满意度矩阵，求出属性权重</span></span>
+<span><span class="va">M_w</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">R</span>,<span class="va">lower_c</span>,<span class="va">upper_c</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://R-Forge.R-project.org/projects/rglp/">Rglpk</a></span><span class="op">)</span></span>
+<span>  <span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span>  <span class="va">m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span>  <span class="va">obj</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">R</span>, <span class="fl">2</span>, <span class="va">sum</span><span class="op">)</span><span class="op">)</span> <span class="co"># 设置目标函数</span></span>
+<span>  <span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">m</span><span class="op">)</span>,nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># 约束条件，权和向量为1 </span></span>
+<span>  <span class="va">dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"=="</span><span class="op">)</span></span>
+<span>  <span class="va">rhs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span><span class="op">)</span></span>
+<span>  <span class="va">bounds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">1L</span><span class="op">:</span><span class="va">m</span>, val <span class="op">=</span> <span class="va">lower_c</span><span class="op">)</span>,</span>
+<span>                 upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ind <span class="op">=</span> <span class="fl">1L</span><span class="op">:</span><span class="va">m</span>, val <span class="op">=</span> <span class="va">upper_c</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Rglpk/man/Rglpk_solve.html">Rglpk_solve_LP</a></span><span class="op">(</span><span class="va">obj</span>, <span class="va">mat</span>, <span class="va">dir</span>, <span class="va">rhs</span>, <span class="va">bounds</span>, <span class="va">types</span>,max <span class="op">=</span><span class="cn">TRUE</span> <span class="op">)</span><span class="op">$</span><span class="va">solution</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">w</span> <span class="op">=</span> <span class="fu">M_w</span><span class="op">(</span><span class="va">PW</span>,lower_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.22</span>,<span class="fl">0.18</span>,<span class="fl">0.15</span>,<span class="fl">0.23</span>,<span class="fl">0.16</span><span class="op">)</span>,upper_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.24</span>,<span class="fl">0.20</span>,<span class="fl">0.17</span>,<span class="fl">0.26</span>,<span class="fl">0.17</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">w</span> <span class="co"># 权重</span></span>
+<span><span class="co">#&gt; [1] 0.22 0.20 0.15 0.26 0.17</span></span>
+<span><span class="co">### 通过权重确定方案综合指标值</span></span>
+<span><span class="va">z</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">R</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">*</span><span class="va">w</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">z</span></span>
+<span><span class="co">#&gt;  [1] 0.8839165 0.6193408 0.8475817 0.7011357 0.7335354 0.5851453 0.7034886</span></span>
+<span><span class="co">#&gt;  [8] 0.7693701 0.5212981 0.6306097 0.6310837 0.5758520 0.5752496 0.5018189</span></span>
+<span><span class="co">#&gt; [15] 0.5552379 0.5317315</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>##第四步，#按降序排列，最大的为方案最优</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#########第四步，#按降序排列，最大的为方案最优</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">z</span>,<span class="fl">4</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">rank</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">.</span>,decreasing<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="co">#按降序排列，最大的为最优</span></span>
+<span><span class="co">#&gt;  [1]  1  3  8  5  7  4 11 10  2  6 12 13 15 16  9 14</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+<!-- -->
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 3.2 基于方案满意度的多属性决策方法</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2019-02-26'</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> uncertain</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> F,<span class="at">warning =</span> F,<span class="at">comment =</span> <span class="st">"#&gt;"</span>,<span class="at">collapse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># 徐泽水《不确定多属性决策方法与应用》81页</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  3.2 基于方案满意度的多属性决策方法---徐泽水《不确定多属性决策方法与应用》81页 --3.2.2 实例分析</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>A <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">47177</span>, <span class="fl">16.61</span>, <span class="fl">8.89</span>, <span class="fl">31.05</span>, <span class="fl">15.77</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>      <span class="dv">43323</span>, <span class="fl">9.08</span>, <span class="fl">3.65</span>, <span class="fl">29.80</span>, <span class="fl">8.44</span>,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>      <span class="dv">59023</span>, <span class="fl">13.84</span>, <span class="fl">6.06</span>, <span class="fl">26.55</span>, <span class="fl">12.87</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>      <span class="dv">46821</span>, <span class="fl">10.59</span>, <span class="fl">3.51</span>, <span class="fl">22.46</span>, <span class="fl">7.41</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>      <span class="dv">41646</span>, <span class="fl">13.24</span>, <span class="fl">4.64</span>, <span class="fl">24.33</span>, <span class="fl">9.33</span>,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>      <span class="dv">26446</span>, <span class="fl">10.16</span>, <span class="fl">2.38</span>, <span class="fl">26.80</span>, <span class="fl">9.85</span>,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>      <span class="dv">38381</span>, <span class="fl">11.97</span>, <span class="fl">4.79</span>, <span class="fl">26.45</span>, <span class="fl">10.64</span>,</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>      <span class="dv">57808</span>, <span class="fl">10.29</span>, <span class="fl">4.54</span>, <span class="fl">23.00</span>, <span class="fl">9.23</span>,</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>      <span class="dv">28869</span>, <span class="fl">7.68</span>, <span class="fl">2.12</span>, <span class="fl">31.08</span>, <span class="fl">9.05</span>,</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>      <span class="dv">38812</span>, <span class="fl">8.92</span>, <span class="fl">3.38</span>, <span class="fl">25.68</span>, <span class="fl">8.73</span>,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>      <span class="dv">30721</span>, <span class="fl">10.87</span>, <span class="fl">4.15</span>, <span class="fl">30.36</span>, <span class="fl">11.44</span>,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>      <span class="dv">24848</span>, <span class="fl">10.77</span>,<span class="fl">2.42</span>, <span class="fl">30.71</span>, <span class="fl">11.37</span>,</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>      <span class="dv">26925</span>, <span class="fl">9.34</span>, <span class="fl">3.06</span>, <span class="fl">30.11</span>, <span class="fl">10.84</span>,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>      <span class="dv">23269</span>, <span class="fl">8.25</span>, <span class="fl">2.58</span>, <span class="fl">32.57</span>, <span class="fl">8.62</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>      <span class="dv">28267</span>, <span class="fl">8.13</span>, <span class="fl">3.17</span>, <span class="fl">29.25</span>, <span class="fl">9.17</span>,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>      <span class="dv">21583</span>, <span class="fl">7.14</span>, <span class="fl">4.66</span>, <span class="fl">35.35</span>, <span class="fl">11.27</span>)</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span> <span class="fu">matrix</span>(A,<span class="at">nrow =</span> <span class="dv">16</span>,<span class="at">ncol =</span> <span class="dv">5</span>,<span class="at">byrow =</span> T) <span class="sc">%&gt;%</span> <span class="fu">data.table</span>()</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>A <span class="co"># 原始决策矩阵</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 第一步: 把原始决策矩阵A 利用适当的方法进行规范化为R，R为归一化后的矩阵</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="do">#### 第一步: 把原始决策矩阵A 利用适当的方法进行规范化为R，R为归一化后的矩阵</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="do">### norm_matrix()函数，根据书中收益型属性（按公式1.2）与成本型属性(按公式1.4)分别进行归一化</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="do">#####  注意这个与前面的norm_matrix函数(即下面norm_matrix2)结果相同，只是代码显得更少了,保证了列名不变</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>norm_matrix <span class="ot">=</span> <span class="cf">function</span>(A, <span class="at">shouyi =</span> <span class="cn">NULL</span>, <span class="at">chengben =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">is.null</span>(shouyi) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.null</span>(chengben))</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.matrix</span>(A)) A <span class="ot">=</span> <span class="fu">data.table</span>(A)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">=</span> <span class="fu">ncol</span>(A)</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(chengben)) chengben <span class="ot">=</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span>m, shouyi)</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(shouyi)) shouyi <span class="ot">=</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span>m, chengben)</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 如果输入的shouyi与chengben向量交集不为空，且并集不是全集，则算法出错</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(<span class="fu">intersect</span>(shouyi, chengben)) <span class="sc">==</span> <span class="dv">0</span>, <span class="fu">setequal</span>(<span class="fu">union</span>(shouyi, chengben), <span class="dv">1</span><span class="sc">:</span>m))</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>  R <span class="ot">=</span><span class="fu">copy</span>(A) <span class="co"># 重新赋值</span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(chengben) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>    R[, <span class="fu">colnames</span>(R)[shouyi] <span class="sc">:</span><span class="er">=</span> <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) x <span class="sc">/</span> <span class="fu">max</span>(x)), .SDcols <span class="ot">=</span> shouyi] <span class="co"># 收益型属性归一化 （书中1.2式）</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">length</span>(shouyi) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    R[, <span class="fu">colnames</span>(R)[chengben] <span class="sc">:</span><span class="er">=</span> <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) <span class="fu">min</span>(x) <span class="sc">/</span> x  ), .SDcols <span class="ot">=</span> chengben]<span class="co"># 成本型属性归一化 （书中1.3式）</span></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span>{</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>    R[, <span class="fu">colnames</span>(R)[shouyi] <span class="sc">:</span><span class="er">=</span> <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) x <span class="sc">/</span> <span class="fu">max</span>(x)), .SDcols <span class="ot">=</span> shouyi] <span class="co"># 收益型属性归一化 （书中1.2式）</span></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>    R[, <span class="fu">colnames</span>(R)[chengben] <span class="sc">:</span><span class="er">=</span> <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) <span class="fu">min</span>(x) <span class="sc">/</span> x  ), .SDcols <span class="ot">=</span> chengben]<span class="co"># 成本型属性归一化 （书中1.3式）</span></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">setDF</span>(R))</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>norm_matrix2 <span class="ot">=</span> <span class="cf">function</span>(A,<span class="at">shouyi=</span><span class="cn">NULL</span>,<span class="at">chengben=</span><span class="cn">NULL</span>){</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.matrix</span>(A))A <span class="ot">=</span> <span class="fu">data.table</span>(A)</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">is.null</span>(shouyi) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.null</span>(chengben))</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">=</span> <span class="fu">ncol</span>(A)</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(chengben)) chengben <span class="ot">=</span><span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span>m,shouyi) </span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(shouyi)) shouyi <span class="ot">=</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span>m,chengben)</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(<span class="fu">intersect</span>(shouyi,chengben))<span class="sc">==</span><span class="dv">0</span>,<span class="fu">setequal</span>(<span class="fu">union</span>(shouyi,chengben),<span class="dv">1</span><span class="sc">:</span>m))</span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( <span class="fu">length</span>(chengben) <span class="sc">==</span> <span class="dv">0</span> ){</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 对决策矩阵进行重命名</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(A)<span class="ot">=</span><span class="fu">paste0</span>(<span class="st">'V'</span>,<span class="dv">1</span><span class="sc">:</span>m)</span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>    shouyi <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"V"</span>,shouyi)</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>    R <span class="ot">=</span> A    </span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 归一化</span></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>    R[,<span class="st">':='</span>(<span class="fu">c</span>(shouyi),<span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x)x<span class="sc">/</span><span class="fu">max</span>(x))),.SDcols <span class="ot">=</span>shouyi] <span class="co"># 收益型属性归一化 （书中1.2式）</span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>( <span class="fu">length</span>(shouyi) <span class="sc">==</span> <span class="dv">0</span> ){</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>    <span class="co">#对决策矩阵进行重命名</span></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(A)<span class="ot">=</span><span class="fu">paste0</span>(<span class="st">'V'</span>,<span class="dv">1</span><span class="sc">:</span>m)</span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>    chengben <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"V"</span>,chengben)</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>    R <span class="ot">=</span> A</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 归一化</span></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>    R[,<span class="st">':='</span>(<span class="fu">c</span>(chengben),<span class="fu">lapply</span>(.SD,<span class="cf">function</span>(x)<span class="fu">min</span>(x)<span class="sc">/</span>x)),.SDcol <span class="ot">=</span> chengben]<span class="co"># 成本型属性归一化 （书中1.3式）</span></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>    <span class="co">#对决策矩阵进行重命名</span></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(A)<span class="ot">=</span><span class="fu">paste0</span>(<span class="st">'V'</span>,<span class="dv">1</span><span class="sc">:</span>m)</span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>    shouyi <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"V"</span>,shouyi)</span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>    chengben <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"V"</span>,chengben)</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>    R <span class="ot">=</span> A</span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 归一化</span></span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a>    R[,<span class="st">':='</span>(<span class="fu">c</span>(shouyi),<span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x)x<span class="sc">/</span><span class="fu">max</span>(x))),.SDcols <span class="ot">=</span>shouyi] <span class="co"># 收益型属性归一化 （书中1.2式）</span></span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>    R[,<span class="st">':='</span>(<span class="fu">c</span>(chengben),<span class="fu">lapply</span>(.SD,<span class="cf">function</span>(x)<span class="fu">min</span>(x)<span class="sc">/</span>x)),.SDcol <span class="ot">=</span> chengben]<span class="co"># 成本型属性归一化 （书中1.3式）    </span></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>  R <span class="ot">=</span> <span class="fu">as.data.frame</span>(R)</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(R)</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>R <span class="ot">=</span> <span class="fu">norm_matrix</span>(A, <span class="at">chengben =</span> <span class="dv">4</span>)</span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(R,<span class="dv">3</span>)</span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## 第二步 ： 求出综合属性正理想值z_max,以及综合属性负理想值z_min</span></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a><span class="do">###### 第二步 ： 求出综合属性正理想值z_max,以及综合属性负理想值z_min</span></span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a>M_zonghe_position <span class="ot">=</span> <span class="cf">function</span>(R,lower_c,upper_c){</span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a>   <span class="co">#综合属性正理想值z_max</span></span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(Rglpk)</span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">=</span> <span class="fu">nrow</span>(R)</span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">=</span> <span class="fu">ncol</span>(R)</span>
+<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a>    <span class="do">## 约束条件，权和向量为1 </span></span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>    mat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>,m),<span class="at">nrow =</span> <span class="dv">1</span>) </span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a>    dir <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"=="</span>)</span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>    rhs <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>    <span class="do">## </span></span>
+<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>    types <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"C"</span>) <span class="co"># 表示解为实数</span></span>
+<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>    bounds <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">lower =</span> <span class="fu">list</span>(<span class="at">ind =</span> 1L<span class="sc">:</span>m, <span class="at">val =</span> lower_c),</span>
+<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a>                   <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">ind =</span> 1L<span class="sc">:</span>m, <span class="at">val =</span> upper_c))</span>
+<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>    <span class="do">###  下面 max_obj 函数中的xx为R矩阵的某一行</span></span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>    max_obj <span class="ot">=</span> <span class="cf">function</span>(xx) <span class="fu">Rglpk_solve_LP</span>(xx, mat, dir, rhs, bounds, types,<span class="at">max =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>optimum</span>
+<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">apply</span>(R, <span class="dv">1</span>, max_obj))</span>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>z_max <span class="ot">=</span> <span class="fu">M_zonghe_position</span>(R,<span class="at">lower_c =</span> <span class="fu">c</span>(<span class="fl">0.22</span>,<span class="fl">0.18</span>,<span class="fl">0.15</span>,<span class="fl">0.23</span>,<span class="fl">0.16</span>),<span class="at">upper_c =</span> <span class="fu">c</span>(<span class="fl">0.24</span>,<span class="fl">0.20</span>,<span class="fl">0.17</span>,<span class="fl">0.26</span>,<span class="fl">0.17</span>))</span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(z_max,<span class="dv">3</span>)</span>
+<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a><span class="do">## 求出综合属性负理想值</span></span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>M_zonghe_negative <span class="ot">=</span> <span class="cf">function</span>(R,lower_c,upper_c){</span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>  <span class="co">#综合属性负理想值z_min</span></span>
+<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.data.table</span>(R)) R <span class="ot">=</span> <span class="fu">as.data.frame</span>(R)</span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(Rglpk)</span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(R)</span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">=</span> <span class="fu">ncol</span>(R)</span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a>  <span class="do">## 约束条件，权和向量为1 </span></span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>,m),<span class="at">nrow =</span> <span class="dv">1</span>) </span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>  dir <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"=="</span>)</span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>  rhs <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a>  <span class="do">## </span></span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>  types <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"C"</span>) <span class="co"># 表示解为实数</span></span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">lower =</span> <span class="fu">list</span>(<span class="at">ind =</span> 1L<span class="sc">:</span>m, <span class="at">val =</span> lower_c),</span>
+<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a>                 <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">ind =</span> 1L<span class="sc">:</span>m, <span class="at">val =</span> upper_c))</span>
+<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a>  <span class="do">###  下面 max_obj 函数中的xx为R矩阵的某一行</span></span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a>  min_obj <span class="ot">=</span> <span class="cf">function</span>(xx) <span class="fu">Rglpk_solve_LP</span>(xx, mat, dir, rhs, bounds, types)<span class="sc">$</span>optimum</span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">apply</span>(R, <span class="dv">1</span>, min_obj))</span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a>z_min <span class="ot">=</span> <span class="fu">M_zonghe_negative</span>(R,<span class="at">lower_c =</span> <span class="fu">c</span>(<span class="fl">0.22</span>,<span class="fl">0.18</span>,<span class="fl">0.15</span>,<span class="fl">0.23</span>,<span class="fl">0.16</span>),<span class="at">upper_c =</span> <span class="fu">c</span>(<span class="fl">0.24</span>,<span class="fl">0.20</span>,<span class="fl">0.17</span>,<span class="fl">0.26</span>,<span class="fl">0.17</span>))</span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a>z_min</span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a><span class="fu">##  第三步： 求出各方按的满意度，PW 矩阵的每一行为对应方案的满意度矩阵</span></span>
+<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a><span class="do">#####  第三步： 求出各方按的满意度，PW 矩阵的每一行为对应方案的满意度矩阵，</span></span>
+<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a><span class="co"># 把满意度矩阵的每一行乘以对应属性的权重，则为该方案的满意度，但此时属性权重未知</span></span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a><span class="co"># 通过建立线性目标函数，求解出属性权重</span></span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a>PW <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="at">ncol =</span> <span class="fu">ncol</span>(R),<span class="at">nrow =</span> <span class="fu">nrow</span>(R))</span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(R)){</span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(R)){</span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>    PW[i,j] <span class="ot">=</span> (R[i,j] <span class="sc">-</span> z_min[i])<span class="sc">/</span>(z_max[i] <span class="sc">-</span> z_min[i])</span>
+<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>PW</span>
+<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a><span class="do">### 通过满意度矩阵，求出属性权重</span></span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a>M_w <span class="ot">=</span> <span class="cf">function</span>(R,lower_c,upper_c){</span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(Rglpk)</span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(R)</span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">=</span> <span class="fu">ncol</span>(R)</span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a>  obj <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">apply</span>(R, <span class="dv">2</span>, sum)) <span class="co"># 设置目标函数</span></span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>,m),<span class="at">nrow =</span> <span class="dv">1</span>) <span class="co"># 约束条件，权和向量为1 </span></span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a>  dir <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"=="</span>)</span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>  rhs <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>  types <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"C"</span>)</span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">lower =</span> <span class="fu">list</span>(<span class="at">ind =</span> 1L<span class="sc">:</span>m, <span class="at">val =</span> lower_c),</span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>                 <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">ind =</span> 1L<span class="sc">:</span>m, <span class="at">val =</span> upper_c))</span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">Rglpk_solve_LP</span>(obj, mat, dir, rhs, bounds, types,<span class="at">max =</span><span class="cn">TRUE</span> )<span class="sc">$</span>solution)</span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a>w <span class="ot">=</span> <span class="fu">M_w</span>(PW,<span class="at">lower_c =</span> <span class="fu">c</span>(<span class="fl">0.22</span>,<span class="fl">0.18</span>,<span class="fl">0.15</span>,<span class="fl">0.23</span>,<span class="fl">0.16</span>),<span class="at">upper_c =</span> <span class="fu">c</span>(<span class="fl">0.24</span>,<span class="fl">0.20</span>,<span class="fl">0.17</span>,<span class="fl">0.26</span>,<span class="fl">0.17</span>))</span>
+<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a>w <span class="co"># 权重</span></span>
+<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a><span class="do">### 通过权重确定方案综合指标值</span></span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> <span class="fu">apply</span>(R, <span class="dv">1</span>, <span class="cf">function</span>(x)<span class="fu">sum</span>(x<span class="sc">*</span>w))</span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>##第四步，#按降序排列，最大的为方案最优</span>
+<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a><span class="do">#########第四步，#按降序排列，最大的为方案最优</span></span>
+<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(z,<span class="dv">4</span>)<span class="sc">%&gt;%</span> rank <span class="sc">%&gt;%</span> <span class="fu">order</span>(.,<span class="at">decreasing=</span>T)<span class="co">#按降序排列，最大的为最优</span></span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

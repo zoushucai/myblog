@@ -1,0 +1,15 @@
+---
+title: "笔记"
+listing:
+  contents: posts
+  type: table #default # 呈现的方式
+  fields: [date, title]
+  page-size: 30 # 每一页的条目
+  categories: true
+  sort: "date desc"
+  sort-ui: [date]
+  filter-ui: true
+  date-format: iso
+page-layout: full        # 排版页面
+title-block-banner: true # 突出标题栏
+---

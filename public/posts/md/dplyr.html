@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="zsc">
+
+<title>快乐的一天 - dplyr – 1基本函数简介</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - dplyr – 1基本函数简介">
+<meta property="og:description" content="由于R语言每一个步骤没有赋值的话，是不会改变原有的数据，都是建立一个新的数据。原有数据不改变。">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">dplyr – 1基本函数简介</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">dplyr – 1基本函数简介</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">dplyr</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2018年1月1日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#dplyr初始" id="toc-dplyr初始" class="nav-link active" data-scroll-target="#dplyr初始">0、dplyr初始</a></li>
+  <li><a href="#filter-行过滤" id="toc-filter-行过滤" class="nav-link" data-scroll-target="#filter-行过滤">1、filter 行过滤</a></li>
+  <li><a href="#select-列过滤" id="toc-select-列过滤" class="nav-link" data-scroll-target="#select-列过滤">2、select 列过滤</a>
+  <ul class="collapse">
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
+  </ul></li>
+  <li><a href="#mutate-添加新变量组成新数据集-原数据不改变" id="toc-mutate-添加新变量组成新数据集-原数据不改变" class="nav-link" data-scroll-target="#mutate-添加新变量组成新数据集-原数据不改变">3、mutate 添加新变量，组成新数据集。 原数据不改变 。</a></li>
+  <li><a href="#概况数据行组成新数据集-原数据不改变" id="toc-概况数据行组成新数据集-原数据不改变" class="nav-link" data-scroll-target="#概况数据行组成新数据集-原数据不改变">4、概况数据（行），组成新数据集。 原数据不改变 。</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="dplyr初始" class="level2">
+<h2 class="anchored" data-anchor-id="dplyr初始">0、dplyr初始</h2>
+<p>由于R语言每一个步骤没有赋值的话，是不会改变原有的数据，都是建立一个新的数据。原有数据不改变。</p>
+<ul>
+<li><p><strong><code>dplyr::tbl_df(iris)</code>：</strong> 将数据转化为tbl类。只会显示适合屏幕大小的数据：</p></li>
+<li><p><strong><code>dplyr::glimpse(iris)</code>：</strong> tbl数据的信息密集概括。 类似str()函数</p></li>
+<li><p><strong><code>dplyr::%&gt;%</code>：</strong> 将左边的对象作为第一个参数（或参数 .）传递到右边的函数中。利用%&gt;%进行“Piping”管道操作增强了代码的可读性， <code>R  x %&gt;% f(y) 相当于  f(x, y)      y %&gt;% f(x, ., z) 相当于  f(x, y, z )</code></p></li>
+</ul>
+</section>
+<section id="filter-行过滤" class="level2">
+<h2 class="anchored" data-anchor-id="filter-行过滤">1、filter 行过滤</h2>
+<ul>
+<li><strong><code>filter(iris, Sepal.Length &gt; 7)</code>：</strong>抽取符合逻辑条件的数据记录。<br>
+</li>
+<li><strong><code>distinct(iris)</code>：</strong>删除重复记录。 distinct(iris, Species) 保留iris某一列的唯一值</li>
+<li><strong><code>sample_frac(iris, 0.5, replace = TRUE)</code>：</strong>随机选取部分数据(占总体的0.5)记录。<br>
+</li>
+<li><strong><code>sample_n(iris, 10, replace = TRUE)</code>：</strong>随机选取n条数据记录。<br>
+</li>
+<li><strong><code>slice(iris, 10:15)</code>：</strong>通过位置选取数据记录。<br>
+</li>
+<li><strong><code>top_n(storms, 2, date)</code>：</strong>选取并排列前n条数据记录 （若为分组数据则按组排序）</li>
+</ul>
+</section>
+<section id="select-列过滤" class="level2">
+<h2 class="anchored" data-anchor-id="select-列过滤">2、select 列过滤</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(.data, ...)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename_all</span>(.tbl, <span class="at">.funs =</span> <span class="fu">list</span>(), ...)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rename_if</span>(.tbl, .predicate, <span class="at">.funs =</span> <span class="fu">list</span>(), ...)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rename_at</span>(.tbl, .vars, <span class="at">.funs =</span> <span class="fu">list</span>(), ...)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(.data, ...)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">select_all</span>(.tbl, <span class="at">.funs =</span> <span class="fu">list</span>(), ...)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">select_if</span>(.tbl, .predicate, <span class="at">.funs =</span> <span class="fu">list</span>(), ...)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">select_at</span>(.tbl, .vars, <span class="at">.funs =</span> <span class="fu">list</span>(), ...)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="arguments" class="level3">
+<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><code>.tbl</code></th>
+<th>A <code>tbl</code> object.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.funs</code></td>
+<td>A function <code>fun</code>, a purrr style lambda <code>~ fun(.)</code> or a list of either form.</td>
+</tr>
+<tr class="even">
+<td><code>...</code></td>
+<td>Additional arguments for the function calls in <code>.funs</code>. These are evaluated only once, with <a href="http://127.0.0.1:31926/help/library/rlang/html/tidy-dots.html">tidy dots</a> support. <br>注意: .funs一般是一个函数列表,处理自变量之外,一般不知道额外参数,要指定额外参数,此时需要在这里特别指定.</td>
+</tr>
+<tr class="odd">
+<td><code>.predicate</code></td>
+<td>A predicate function to be applied to the columns or a logical vector. The variables for which <code>.predicate</code> is or returns <code>TRUE</code>are selected. This argument is passed to<code>rlang::as_function()</code> and thus supports quosure-style lambda functions and strings representing function names.<br>直译过来,指的是谓词函数, 必须是返回<code>ture</code> or <code>false</code> 的逻辑函数. 像<code>is.character,all,is.null</code>等等.</td>
+</tr>
+<tr class="even">
+<td><code>.vars</code></td>
+<td>A list of columns generated by <code>vars()</code>, a character vector of column names, a numeric vector of column positions, or <code>NULL</code>.<br> 可以用字符串 或者列索引(数字) 组成的列,匹配列名用</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><strong><code>select(df, newname=a, b, c )</code>:</strong> 通过列名或帮助函数选取列变量。 同时也可以对列名进行重命名。</p></li>
+<li><p><strong><code>select(df, a:b)</code>:</strong> 选取在a和b之间的所有列（包含 a和b）</p></li>
+<li><p><strong><code>select(df, -a)</code>:</strong> 选取除a以外的所有列</p></li>
+<li><p><strong><code>select(df,...,funs)</code>:</strong></p></li>
+<li><p><strong><code>df</code>:</strong> 数据框</p></li>
+<li><p><strong><code>funs:</code></strong> 所用函数( 注意:: 一般不建议在选择列的同时,对列进行操作)</p></li>
+</ul>
+<blockquote class="blockquote">
+<ul>
+<li><strong><code>contains(".")</code>：</strong> 选取名称中含有字符的列。
+<ul>
+<li><strong><code>starts_with("Sepal")</code> :</strong>选取名称以指定字符串为首的列。<br>
+</li>
+</ul></li>
+<li><strong><code>ends_with("Length")</code> ：</strong>选取名称以指定字符串结尾的列。<br>
+</li>
+<li><strong><code>matches(".t.")</code>：</strong> 选取名称符合指定表达式规则的列。<br>
+</li>
+<li><strong><code>num_range("x", 1:5)</code>:</strong>选取名为x1、x2、x3、x4、x5的列。<br>
+</li>
+<li><strong><code>one_of(c("Species", "Genus"))</code> :</strong>选取名称在指定名字组内的列。 e.g.&nbsp;<code>a:b</code> eg. <code>-a</code></li>
+<li><strong><code>everything([ df ])</code>：</strong> 列较多的情况下把不需要排序的列用evything()直接列出。当有df是返回1:df的列数,当为向量是返回1: 向量长度。 eg: <code>select(iris,Species,everything())</code></li>
+</ul>
+</blockquote>
+<ul>
+<li><p><strong><code>select_if(df, &lt;条件&gt;, fun)</code>:</strong>对df数据集 选出满足条件为真的列执行fun。</p>
+<ul>
+<li><code>&lt;条件&gt;</code>是对整个列属性进行判断筛选(真则保留，假则丢弃)。然后在对列名进行处理。</li>
+<li><code>funs</code>是对列名进行筛选处理.</li>
+<li>注意： 当同时使用<code>&lt;条件&gt;, fun</code> 时，以条件为准，<code>fun</code>是对满足条件后的列的列名进行处理，不能对列进行进一步筛选。</li>
+<li><code>select(df,...,funs)</code> 和<code>select_if(df,&lt;条件&gt;)</code>的区别
+<ul>
+<li><code>select_if</code>的条件是对列的属性进行筛选</li>
+<li><code>select</code>中的<code>funs</code>函数是对列名进行筛选</li>
+</ul></li>
+</ul></li>
+<li><p><code>select_at(.tbl, .vars, .funs = list(), ...)</code> 是对<code>select_if</code>的加强版</p>
+<ul>
+<li><code>select_at(mtcars, vars(-contains("ar"), starts_with("c"))</code> 可以看做是多个对列名多个条件的筛选。</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="mutate-添加新变量组成新数据集-原数据不改变" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-添加新变量组成新数据集-原数据不改变">3、mutate 添加新变量，组成新数据集。 原数据不改变 。</h2>
+<ul>
+<li><p><strong><code>rename()</code></strong> 重命列名 eg. <code>rename(iris, petal_length = Petal.Length)</code></p>
+<ul>
+<li><code>rename_all(iris,funs(c(1:5)))</code>或<code>rename_all(iris,funs(c("A","B","C","D","E")))</code>把整个列名都重新赋值</li>
+<li><code>rename_at(.tbl, .vars, .funs = list())</code></li>
+<li><code>rename_if(.tbl, .predicate, .funs = list())</code></li>
+<li>建议把参数<code>.vars=... , .funs = ...</code>显示调用，不然函数会报错</li>
+</ul></li>
+<li><p><strong><code>mutate(mtcars, gpm = 1/mpg)</code>：</strong> 在原有数据的基础上添加新列（多列）组成新数据集。 原数据不改变 。</p></li>
+<li><p><strong><code>transmute(mtcars, gpm = 1/mpg)</code>：</strong>直接创建一个新列（多列）组成新数据集。</p>
+<ul>
+<li><p><strong><code>mutate_all(.tbl, .funs, …)</code></strong> : 对<strong>每一列</strong>应用 funs，组成新数据集，</p></li>
+<li><p><code>mutate_at(.tbl, .vars, .funs, ..., .cols = NULL)</code>：对<strong>指定的列</strong>运行窗口函数，组成新数据，</p></li>
+<li><p><strong><code>mutate_if(.tbl, .predicate, .funs, …)</code></strong>：对<strong>指定类型的列</strong>运行窗口函数，组成新数据，</p>
+<blockquote class="blockquote">
+<p><strong><code>vars()</code>:</strong> 表示需要进行概述的列</p>
+<p><strong><code>.funs</code>的用法</strong></p>
+<ul>
+<li>建议显示调用改参数<code>.funs=</code><br>
+</li>
+<li>直接在函数中写明需要运行的函数: <code>mutate_all(faithful, .funs(log))</code></li>
+<li>结合funs写出调用的函数: <code>mutate_all(faithful, funs(log(.), log2(.)))</code>
+<ul>
+<li>运行两个以上函数，保留原数据的基础上增加新列，新列会自动根据函数名自动重命名</li>
+<li>也可以自己重命名,：<code>mutate_all(faithful, funs(a=log(.), b= log2(.)))</code></li>
+<li>当funs只有一个时且自己进行重命名时，会保留原数据的基础上增加新列构成新数据，<code>mutate_all(faithful, funs(a=log2(.)))</code></li>
+<li>mutate_if(car,is.character,as.factor )也可以直接省略括号</li>
+</ul></li>
+</ul>
+<p>还可以把NULL赋值给列，已达到删除列的效果。</p>
+<p>以下用法类似： <code>summarise_all(.tbl, .funs, ...)</code></p>
+<p><code>summarise_if(.tbl, .predicate, .funs, ...)</code></p>
+<p><code>summarise_at(.tbl, .vars, .funs, ..., .cols = NULL)</code></p>
+<p><code>mutate_all(.tbl, .funs, ...)</code></p>
+<p><code>mutate_if(.tbl, .predicate, .funs, ...)</code></p>
+<p><code>mutate_at(.tbl, .vars, .funs, ..., .cols = NULL)</code></p>
+<p><code>transmute_all(.tbl, .funs, ...)</code></p>
+<p><code>transmute_if(.tbl, .predicate, .funs, ...)</code></p>
+<p><code>transmute_at(.tbl, .vars, .funs, ..., .cols = NULL)</code></p>
+</blockquote></li>
+</ul></li>
+<li><p>窗体函数（.funs）</p>
+<ul>
+<li><p><code>lead(x, n = 1L, default = NA, order_by = NULL, ...)</code></p></li>
+<li><p><code>lag(x, n = 1L, default = NA, order_by = NULL, ...)　</code></p>
+<blockquote class="blockquote">
+<p>lead和lag函数主要用于替换数据，lead表示整体向前替换，lag表示整体向后替换，n表示替换的个数，default表示要替换的结果，默认为NA 。order_by是根据某一列进行排序。</p>
+</blockquote></li>
+<li><p><code>cume_dist()</code>： 累积分布。</p></li>
+<li><p><code>dense_rank()</code>： 无缝排序。</p></li>
+<li><p><code>min_rank()</code>： 排序。并列时，其他序号顺延。</p></li>
+<li><p><code>ntile()</code> ： 把向量分为n份。</p></li>
+<li><p><code>percent_rank()</code>： 把数据在[0, 1]中重组并排列。</p></li>
+<li><p><code>row_number()</code>： 排序。并列时，位置在前的并列数 据序号在前。</p></li>
+<li><p><code>between()</code>： 数值是否在a和b之间？</p>
+<ul>
+<li><p><code>cumall()</code>： 累积all函数</p></li>
+<li><p><code>cumany()</code> ： 累积any函数</p></li>
+<li><p><code>cummean()</code> ： 累积mean函数</p></li>
+<li><p><code>cumsum()</code> ： 累积sum函数</p></li>
+<li><p><code>cummax()</code> ： 累积max函数</p></li>
+<li><p><code>cummin()</code>： 累积 min函数</p></li>
+<li><p><code>cumprod()</code>： 累积prod函数</p></li>
+<li><p><code>pmax()</code> ： 针对元素的max函数</p></li>
+<li><p><code>pmin()</code>： 针对元素的min函数</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="概况数据行组成新数据集-原数据不改变" class="level2">
+<h2 class="anchored" data-anchor-id="概况数据行组成新数据集-原数据不改变">4、概况数据（行），组成新数据集。 原数据不改变 。</h2>
+<ul>
+<li><code>summarise(iris, avg = mean(Sepal.Length))</code> 将数据概括为单行数值。
+<ul>
+<li><strong><code>summarise_all(.tbl, .funs, ...)</code></strong> : 对<strong>每一列</strong>运行概述函数</li>
+<li><strong><code>summarise_at(.tbl, .vars, .funs, ..., .cols=NULL)</code></strong> :对<strong>指定的列</strong>运行概述函数</li>
+<li><strong><code>summarise_if(.tbl, .predicate, .funs)</code></strong>: 对<strong>指定类型的列</strong>运行概述函数</li>
+</ul></li>
+<li><code>count(iris, Species, wt = Sepal.Length)</code> 计算各变量中每一个特定值的⾏行数（带权重或不带 权重）.
+<ul>
+<li><code>wt</code>可选参数
+<ul>
+<li>不带<code>wt</code>时：对分组进行<strong>计数</strong>统计</li>
+<li>带<code>wt</code>时，对分组后的变量<code>Sepal.Length</code>进行<strong>求和</strong>统计</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>利用概述函数概括数据信息，输入数值向量而返回单一数值，如：</p>
+<p><strong>计数</strong></p>
+<ul>
+<li><strong><code>length(x)</code></strong>：返回一组<strong>向量（包括列表）或因子的长度</strong></li>
+<li><strong><code>nrow() / ncol()</code></strong>：总行数/总列数</li>
+<li><strong><code>n()</code></strong>：返回观测行的行数，<strong>不能单独使用</strong>（可被用于 <code>summarise()、mutate()、filter()</code> ）</li>
+<li><code>n_distinct(x, na.rm=FALSE)</code>：返回不重复的行数
+<ul>
+<li><strong><code>sum(!is.na())</code></strong>：计算非空值的行数</li>
+</ul></li>
+</ul>
+<p><strong>位置与序列</strong></p>
+<ul>
+<li><strong><code>first(x)/last(x)</code></strong> 向量的最后一个值。<br>
+</li>
+<li><strong><code>nth(x,n)</code></strong> 返回向量的第n个值。</li>
+</ul>
+<p><strong>分布</strong></p>
+<ul>
+<li><strong><code>IQR()</code></strong> 向量的IQR（四分位距）。</li>
+<li><strong><code>min() /max()</code></strong> 向量中的最小(大)值。<br>
+</li>
+<li><strong><code>mean()</code></strong> 向量中的均值。 <strong>mean(!is.na())</strong> ：非空值的均值</li>
+<li><strong><code>median()</code></strong> 向量中的中位数。<br>
+</li>
+<li><strong><code>var()</code></strong> 向量中的⽅方差。<br>
+</li>
+<li><strong><code>sd()</code></strong> 向量中的标准差。</li>
+<li><strong><code>range()</code></strong> 返回值域，即最大最小值</li>
+<li><strong><code>colSums(x) / rowSums(x)</code></strong>：各列/行求和</li>
+<li><strong><code>colMeans(x) / rowMeans(x)</code></strong>：各列/行求均值</li>
+</ul>
+<section id="section" class="level4">
+<h4 class="anchored" data-anchor-id="section"></h4>
+<p>##5、分组汇总 - <code>group_by(.data, ..., add = FALSE)</code></p>
+<ul>
+<li><p><code>ungroup(x, ...)</code></p>
+<blockquote class="blockquote">
+<p><code>...</code>： 表示用于分组的列名；</p>
+<p><code>add= FALSE</code>默认)</p>
+<ul>
+<li><code>FALSE</code>，表示会覆盖原来的分组，相当于对源数据重新分组；</li>
+<li>若为<code>TRUE</code>,则不覆盖，相当于在原来的基础上在进行分组；</li>
+</ul>
+<blockquote class="blockquote">
+<p><code>group_by(iris, Species)</code> 把在Species中的值相同的数据组合成行。</p>
+<p><code>ungroup(iris)</code> 从数据框中移除组合信息。</p>
+<ul>
+<li><code>iris   %&gt;%   group_by(Species)   %&gt;%   summarise(…)</code>为每一个分组分别计算行概述。<br>
+</li>
+<li><code>iris   %&gt;%   group_by(Species)   %&gt;%   mutate(…)</code> 按组计算新变量。</li>
+</ul>
+</blockquote>
+<p>同样也有</p>
+<p><code>group_by_all(.tbl, .funs = list(), ...)</code></p>
+<p><code>group_by_at(.tbl, .vars, .funs = list(), ..., .add = FALSE)</code></p>
+<p><code>group_by_if(.tbl, .predicate, .funs = list(), ..., .add = FALSE)</code></p>
+</blockquote></li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<pre class="markdown" data-shortcodes="false"><code>---
+title: dplyr -- 1基本函数简介
+date: '2018-01-01'
+categories:
+  - r
+  - dplyr
+---
+
+
+## 0、dplyr初始
+由于R语言每一个步骤没有赋值的话，是不会改变原有的数据，都是建立一个新的数据。原有数据不改变。
+
+- **`dplyr::tbl_df(iris)`：** 将数据转化为tbl类。只会显示适合屏幕大小的数据：
+
+- **`dplyr::glimpse(iris)`：** tbl数据的信息密集概括。 类似str()函数
+
+- **`dplyr::%&gt;%`：** 将左边的对象作为第一个参数（或参数 .）传递到右边的函数中。利用%&gt;%进行“Piping”管道操作增强了代码的可读性， 
+   ```R
+   x %&gt;% f(y) 相当于  f(x, y)    
+   y %&gt;% f(x, ., z) 相当于  f(x, y, z )
+  ```
+  
+
+## 1、filter 行过滤
+
+-  **`filter(iris, Sepal.Length &gt; 7) `：**抽取符合逻辑条件的数据记录。     
+-  **`distinct(iris) `：**删除重复记录。 distinct(iris, Species)  保留iris某一列的唯一值
+-  **`sample_frac(iris, 0.5, replace = TRUE) `：**随机选取部分数据(占总体的0.5)记录。     
+-  **`sample_n(iris, 10, replace = TRUE) `：**随机选取n条数据记录。     
+-  **`slice(iris, 10:15) `：**通过位置选取数据记录。   
+-  **`top_n(storms, 2, date) `：**选取并排列前n条数据记录 （若为分组数据则按组排序）  
+
+## 2、select 列过滤
+
+```R
+rename(.data, ...)
+rename_all(.tbl, .funs = list(), ...)
+rename_if(.tbl, .predicate, .funs = list(), ...)
+rename_at(.tbl, .vars, .funs = list(), ...)
+
+
+select(.data, ...)
+select_all(.tbl, .funs = list(), ...)
+select_if(.tbl, .predicate, .funs = list(), ...)
+select_at(.tbl, .vars, .funs = list(), ...)
+
+```
+
+### Arguments
+
+| `.tbl`       | A `tbl` object.                                              |
+| ------------ | ------------------------------------------------------------ |
+| `.funs`      | A function `fun`, a purrr style lambda `~ fun(.)` or a list of either form. |
+| `...`        | Additional arguments for the function calls in `.funs`. These are evaluated only once, with [tidy dots](http://127.0.0.1:31926/help/library/rlang/html/tidy-dots.html) support. &lt;br&gt;注意: .funs一般是一个函数列表,处理自变量之外,一般不知道额外参数,要指定额外参数,此时需要在这里特别指定. |
+| `.predicate` | A predicate function to be applied to the columns or a logical vector. The variables for which `.predicate` is or returns `TRUE`are selected. This argument is passed to`rlang::as_function()` and thus supports quosure-style lambda functions and strings representing function names.&lt;br&gt;直译过来,指的是谓词函数, 必须是返回`ture` or `false` 的逻辑函数. 像`is.character,all,is.null`等等. |
+| `.vars`      | A list of columns generated by `vars()`, a character vector of column names, a numeric vector of column positions, or `NULL`.&lt;br&gt; 可以用字符串 或者列索引(数字) 组成的列,匹配列名用 |
+
+-   **`select(df, newname=a, b, c ) `:** 通过列名或帮助函数选取列变量。 同时也可以对列名进行重命名。 
+  
+  -   **`select(df, a:b)  `:** 选取在a和b之间的所有列（包含 a和b）
+  -   **`select(df, -a)  `:**   选取除a以外的所有列  
+  
+-   **`select(df,...,funs)`:**
+  
+  -   **`df`:** 数据框
+  -   **`funs:`** 所用函数( 注意::  一般不建议在选择列的同时,对列进行操作)
+  
+  &gt; - **`contains(".") `：**   选取名称中含有字符的列。 
+  &gt;   - **`starts_with("Sepal")`  :**选取名称以指定字符串为首的列。      
+  &gt; - **`ends_with("Length")` ：**选取名称以指定字符串结尾的列。     
+  &gt; - **`matches(".t.")`：** 选取名称符合指定表达式规则的列。   
+  &gt; - **`num_range("x", 1:5) `:**选取名为x1、x2、x3、x4、x5的列。    
+  &gt; - **`one_of(c("Species", "Genus")) ` :**选取名称在指定名字组内的列。    e.g. ` a:b `  eg.  `-a`
+  &gt; - **`everything([ df ])`：**  列较多的情况下把不需要排序的列用evything()直接列出。当有df是返回1:df的列数,当为向量是返回1: 向量长度。 eg: `select(iris,Species,everything())`
+
+- **`select_if(df, &lt;条件&gt;, fun)`:**对df数据集 选出满足条件为真的列执行fun。
+    
+    - `&lt;条件&gt;`是对整个列属性进行判断筛选(真则保留，假则丢弃)。然后在对列名进行处理。
+    - `funs`是对列名进行筛选处理.
+    - 注意： 当同时使用`&lt;条件&gt;, fun` 时，以条件为准，`fun`是对满足条件后的列的列名进行处理，不能对列进行进一步筛选。
+    - `select(df,...,funs)` 和`select_if(df,&lt;条件&gt;)`的区别
+        - `select_if`的条件是对列的属性进行筛选
+        - `select`中的`funs`函数是对列名进行筛选
+- `select_at(.tbl, .vars, .funs = list(), ...)` 是对`select_if`的加强版
+    
+    - `select_at(mtcars, vars(-contains("ar"), starts_with("c"))` 可以看做是多个对列名多个条件的筛选。
+
+## 3、mutate 添加新变量，组成新数据集。 原数据不改变 。
+
+- **`rename()`** 重命列名  eg.  `rename(iris, petal_length = Petal.Length)`
+
+   - `rename_all(iris,funs(c(1:5)))`或`rename_all(iris,funs(c("A","B","C","D","E")))`把整个列名都重新赋值
+   - `rename_at(.tbl, .vars, .funs = list())` 
+   - `rename_if(.tbl, .predicate, .funs = list())`
+   - 建议把参数`.vars=... , .funs = ...`显示调用，不然函数会报错   
+
+- **`mutate(mtcars, gpm = 1/mpg)`：**  在原有数据的基础上添加新列（多列）组成新数据集。 原数据不改变 。  
+
+- **`transmute(mtcars, gpm = 1/mpg)`：**直接创建一个新列（多列）组成新数据集。  
+  - **`mutate_all(.tbl, .funs, …)`** :  对**每一列**应用 funs，组成新数据集，
+  - `mutate_at(.tbl, .vars, .funs, ..., .cols = NULL) `：对**指定的列**运行窗口函数，组成新数据，
+  - **`mutate_if(.tbl, .predicate, .funs, …) `**：对**指定类型的列**运行窗口函数，组成新数据，
+
+    &gt; **`vars() `:** 表示需要进行概述的列  
+    &gt;
+    &gt; **`.funs`的用法**
+    &gt;
+    &gt;  - 建议显示调用改参数`.funs=`  
+    &gt;  - 直接在函数中写明需要运行的函数:  `mutate_all(faithful, .funs(log))`
+    &gt;  - 结合funs写出调用的函数:  `mutate_all(faithful, funs(log(.), log2(.)))`
+    &gt;     + 运行两个以上函数，保留原数据的基础上增加新列，新列会自动根据函数名自动重命名
+    &gt;     + 也可以自己重命名,：`mutate_all(faithful, funs(a=log(.), b= log2(.)))`
+    &gt;     + 当funs只有一个时且自己进行重命名时，会保留原数据的基础上增加新列构成新数据，`mutate_all(faithful, funs(a=log2(.)))`
+    &gt;     + mutate_if(car,is.character,as.factor )也可以直接省略括号
+    &gt;
+    &gt; 还可以把NULL赋值给列，已达到删除列的效果。
+    &gt;
+    &gt; 以下用法类似：
+    &gt; `summarise_all(.tbl, .funs, ...) `
+    &gt;
+    &gt; `summarise_if(.tbl, .predicate, .funs, ...)`
+    &gt;
+    &gt; `summarise_at(.tbl, .vars, .funs, ..., .cols = NULL)`
+    &gt;
+    &gt; 
+    &gt;
+    &gt; `mutate_all(.tbl, .funs, ...)`
+    &gt;
+    &gt; `mutate_if(.tbl, .predicate, .funs, ...)`
+    &gt;
+    &gt; `mutate_at(.tbl, .vars, .funs, ..., .cols = NULL)`
+    &gt;
+    &gt; 
+    &gt;
+    &gt; `transmute_all(.tbl, .funs, ...)`  
+    &gt;
+    &gt; `transmute_if(.tbl, .predicate, .funs, ...)`  
+    &gt;
+    &gt; `transmute_at(.tbl, .vars, .funs, ..., .cols = NULL) ` 
+
+- 窗体函数（.funs）
+   - `lead(x, n = 1L, default = NA, order_by = NULL, ...)`
+
+   - `lag(x, n = 1L, default = NA, order_by = NULL, ...)　`
+
+     &gt; lead和lag函数主要用于替换数据，lead表示整体向前替换，lag表示整体向后替换，n表示替换的个数，default表示要替换的结果，默认为NA 。order_by是根据某一列进行排序。
+
+   - `cume_dist() `： 累积分布。   
+
+   - `dense_rank() `： 无缝排序。   
+
+   - `min_rank() `： 排序。并列时，其他序号顺延。   
+
+   - `ntile()` ： 把向量分为n份。      
+
+   - `percent_rank() `： 把数据在[0, 1]中重组并排列。   
+
+   - `row_number() `： 排序。并列时，位置在前的并列数 据序号在前。     
+
+   - `between() `： 数值是否在a和b之间？     
+
+     
+
+      - `cumall() `： 累积all函数      
+
+      - `cumany()` ： 累积any函数     
+
+      - `cummean()` ： 累积mean函数    
+
+      - `cumsum()` ： 累积sum函数   
+
+      - `cummax()` ： 累积max函数   
+
+      - `cummin() `： 累积  min函数    
+
+      - `cumprod() `： 累积prod函数    
+
+      - `pmax()` ： 针对元素的max函数   
+
+      - `pmin() `： 针对元素的min函数  
+
+   
+
+
+## 4、概况数据（行），组成新数据集。 原数据不改变 。
+
+- `summarise(iris, avg = mean(Sepal.Length))` 将数据概括为单行数值。 
+  - **`summarise_all(.tbl, .funs, ...)`** : 对**每一列**运行概述函数
+  - **`summarise_at(.tbl, .vars, .funs, ..., .cols=NULL)`** :对**指定的列**运行概述函数
+  - **`summarise_if(.tbl, .predicate, .funs)`**: 对**指定类型的列**运行概述函数
+- `count(iris, Species, wt = Sepal.Length)` 计算各变量中每一个特定值的⾏行数（带权重或不带 权重）.
+  - `wt`可选参数
+    - 不带`wt`时：对分组进行**计数**统计
+    - 带`wt`时，对分组后的变量`Sepal.Length`进行**求和**统计
+
+
+
+
+
+利用概述函数概括数据信息，输入数值向量而返回单一数值，如：
+
+**计数**
+
+- **`length(x)`**：返回一组**向量（包括列表）或因子的长度**
+- **`nrow() / ncol()`**：总行数/总列数
+- **`n()`**：返回观测行的行数，**不能单独使用**（可被用于 `summarise()、mutate()、filter()` ）
+- `n_distinct(x, na.rm=FALSE)`：返回不重复的行数
+  - **`sum(!is.na())`**：计算非空值的行数
+
+**位置与序列**
+
+- **`first(x)/last(x)`**    向量的最后一个值。   
+- **`nth(x,n)`** 返回向量的第n个值。  
+
+**分布**
+
+- **`IQR()`** 向量的IQR（四分位距）。
+- **`min() /max()`** 向量中的最小(大)值。   
+- **`mean()`** 向量中的均值。  **mean(!is.na())** ：非空值的均值
+- **`median()`** 向量中的中位数。   
+- **`var()`** 向量中的⽅方差。  
+- **`sd()`** 向量中的标准差。
+- **`range()`** 返回值域，即最大最小值
+- **`colSums(x) / rowSums(x)`**：各列/行求和
+- **`colMeans(x) / rowMeans(x)`**：各列/行求均值
+
+#### 
+
+
+##5、分组汇总
+- `group_by(.data, ..., add = FALSE)`
+
+- `ungroup(x, ...)  `
+
+  &gt; `... `： 表示用于分组的列名；
+  &gt;
+  &gt; `add= FALSE`默认)
+  &gt;
+  &gt; - `FALSE`，表示会覆盖原来的分组，相当于对源数据重新分组；
+  &gt; - 若为`TRUE`,则不覆盖，相当于在原来的基础上在进行分组；
+  &gt;
+  &gt; &gt; `group_by(iris, Species)` 把在Species中的值相同的数据组合成行。   
+  &gt; &gt;
+  &gt; &gt; `ungroup(iris)` 从数据框中移除组合信息。
+  &gt; &gt;
+  &gt; &gt; -   `iris   %&gt;%   group_by(Species)   %&gt;%   summarise(…) `为每一个分组分别计算行概述。   
+  &gt; &gt; -   `iris   %&gt;%   group_by(Species)   %&gt;%   mutate(…)` 按组计算新变量。      
+  &gt;
+  &gt; 同样也有
+  &gt;
+  &gt; `group_by_all(.tbl, .funs = list(), ...)   `
+  &gt;
+  &gt; `group_by_at(.tbl, .vars, .funs = list(), ..., .add = FALSE)`
+  &gt;
+  &gt; `group_by_if(.tbl, .predicate, .funs = list(), ..., .add = FALSE)`
+
+
+
+
+
+
+</code></pre>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

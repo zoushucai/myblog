@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="zsc">
+<title>快乐的一天 - 非标准计算</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - 非标准计算">
+<meta property="og:description" content="将表达式捕获转为语言对象，捕获表达式意味着防止表达式被执行，而将其本身存储为变量的形式。具有这个功能的函数有如下几个函数，注意其不同。">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+<div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">非标准计算</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">非标准计算</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i></button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">查看源代码</a></li></ul></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2019年5月2日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+<li>
+<a href="#%E6%8D%95%E8%8E%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F" id="toc-捕获表达式" class="nav-link active" data-scroll-target="#%E6%8D%95%E8%8E%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F">1. 捕获表达式</a>
+  <ul class="collapse">
+<li><a href="#quote" id="toc-quote" class="nav-link" data-scroll-target="#quote">1.1 quote() :</a></li>
+  <li><a href="#substitute" id="toc-substitute" class="nav-link" data-scroll-target="#substitute">1.2 substitute</a></li>
+  <li><a href="#%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8" id="toc-创建函数调用" class="nav-link" data-scroll-target="#%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8">1. 3. 创建函数调用</a></li>
+  <li><a href="#substitute_q-%E5%AF%B9substituted%E7%9A%84%E8%A1%A5%E5%85%85" id="toc-substitute_q-对substituted的补充" class="nav-link" data-scroll-target="#substitute_q-%E5%AF%B9substituted%E7%9A%84%E8%A1%A5%E5%85%85">1.4 .substitute_q() 对substituted()的补充</a></li>
+  <li><a href="#subs%E5%87%BD%E6%95%B0" id="toc-subs函数" class="nav-link" data-scroll-target="#subs%E5%87%BD%E6%95%B0">1.5. subs()函数</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#%E5%AF%B9%E6%8D%95%E8%8E%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%90%8E%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F" id="toc-对捕获表达式后的处理方式" class="nav-link" data-scroll-target="#%E5%AF%B9%E6%8D%95%E8%8E%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%90%8E%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F">2. 对捕获表达式后的处理方式</a>
+  <ul class="collapse">
+<li><a href="#%E6%89%A7%E8%A1%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F-eval" id="toc-执行表达式-eval" class="nav-link" data-scroll-target="#%E6%89%A7%E8%A1%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F-eval">2.1. 执行表达式 — — eval()</a></li>
+  <li><a href="#eval-%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95" id="toc-eval-函数的用法" class="nav-link" data-scroll-target="#eval-%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95">2.2 eval 函数的用法</a></li>
+  <li><a href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8F%98" id="toc-表达式与字符串相互转变" class="nav-link" data-scroll-target="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8F%98">2 .3 .表达式与字符串相互转变</a></li>
+  </ul>
+</li>
+  <li><a href="#%E5%8F%82%E8%80%83" id="toc-参考" class="nav-link" data-scroll-target="#%E5%8F%82%E8%80%83">参考</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="捕获表达式" class="level2"><h2 class="anchored" data-anchor-id="捕获表达式">1. 捕获表达式</h2>
+<p>将表达式捕获转为语言对象，捕获表达式意味着防止表达式被执行，而将其本身存储为变量的形式。具有这个功能的函数有如下几个函数，注意其不同。</p>
+<section id="quote" class="level3"><h3 class="anchored" data-anchor-id="quote">1.1 quote() :</h3>
+<p>​ <code><a href="https://rdrr.io/r/base/substitute.html">quote()</a></code>捕获到函数调用是会返回调用，而捕获到变量名时会返回一个符号，只要代码语法正确，它就会返回表示被捕获表达式本身的语言对象。即便函数不存在或者变量未定义，也可以捕获表达式本身。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">)</span>   <span class="co"># 定义一个表达式调用,但是这些变量没有定义</span></span>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; a + b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "call"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 变成语言对象类型，</span></span>
+<span><span class="co">#&gt; [1] "language"</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">rnorm</span><span class="op">)</span></span>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; rnorm</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "name"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 变成符号对象类型，</span></span>
+<span><span class="co">#&gt; [1] "symbol"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="fu">xfun</span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="co"># xfun都么有定义</span></span>
+<span><span class="co">#&gt; xfun(a = 1:n)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>理解：变量和符号对象的区别，以及函数和调用对象的区别。</strong></p>
+<p>变量是对象的名称，而符号对象就是名称的本身。函数是可以被调用的对象，而调用对象是不会被计算的，它表示整个函数调用的语言对象。</p>
+<p>eg： <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>就是一个可以被调用的函数(可以使用<code>rnorm(5)</code>进行调用,产生5个随机数)，但是<code>quote(rnorm)</code>返回一个符号对象，<code>quote(rnorm(5))</code>返回一个调用的对象，这两者都是语言本身。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]  0.6234336 -0.3239481  0.9412338  1.0596836 -0.1199735</span></span>
+<span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">rnorm</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 返回一个符号对象</span></span>
+<span><span class="co">#&gt; [1] "symbol"</span></span>
+<span></span>
+<span><span class="va">x1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span> <span class="co"># 返回一个调用对象</span></span>
+<span><span class="co">#&gt; [1] "language"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span> <span class="co"># 将调用对象转变为list，以便查看其内部结构， 可以看出本次调用有两部分组成：函数符号和一个参数</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; rnorm</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] 5</span></span>
+<span><span class="va">x1</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; rnorm</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">x1</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="co"># 第一个元素是一个符号对象</span></span>
+<span><span class="co">#&gt; [1] "symbol"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x1</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "name"</span></span>
+<span></span>
+<span><span class="va">x1</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> </span>
+<span><span class="co">#&gt; [1] 5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">x1</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="co"># 第二个元素是一个数值</span></span>
+<span><span class="co">#&gt; [1] "double"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x1</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "numeric"</span></span>
+<span><span class="co">## 总结：</span></span>
+<span><span class="co"># 1.quote()将变量名捕获为符号对象，将一个函数捕获为调用对象。这两者都是语言对象</span></span>
+<span><span class="co"># 2.可以用is.symbol() / is.name() 和 is.call 分别检查对象是否为符号对象或调用对象</span></span>
+<span><span class="co"># 3.可以用is.language()同时检查符号和调用</span></span>
+<span><span class="co"># 4. quote不把字面值(这里指的的表达式里使用数值等，而非数值变量。eg：数字、逻辑值、字符串)转变为语言对象，而是使其保持原样。--- 少用</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>常常捕获全局环境中的表达式，函数环境中建议用<code><a href="https://rdrr.io/r/base/substitute.html">substitute()</a></code>，<code><a href="https://rdrr.io/r/base/substitute.html">substitute()</a></code>用于捕获表达式，并且用捕获的表达式替换现有的符号,而<code><a href="https://rdrr.io/r/base/substitute.html">quote()</a></code>不会进行第二步，把表达式替换成现有的符号</strong></p>
+</section><section id="substitute" class="level3"><h3 class="anchored" data-anchor-id="substitute">1.2 substitute</h3>
+<section id="用来捕获函数参数表达式" class="level5"><h5 class="anchored" data-anchor-id="用来捕获函数参数表达式">1.2.1 用来捕获函数参数表达式</h5>
+<p>​ <code><a href="https://rdrr.io/r/base/substitute.html">substitute()</a></code>可以作用任意的用户输入，该函数用于捕获表达式，并且用捕获的表达式替换现有的符号。常常与<code><a href="https://rdrr.io/r/base/deparse.html">deparse()</a></code>连用，出现在函数环境中(对表达式进行替换, 不能替换的则保留下来)。</p>
+<p><code>deparse(substitute())</code>函数以<code><a href="https://rdrr.io/r/base/substitute.html">substitute()</a></code> 的结果(一个表达式)为参数，并把它转变成一个字符串。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="co">### 1.substitute() 的使用对比</span></span>
+<span><span class="va">a</span> <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="va">b</span> <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span> <span class="op">+</span> <span class="va">b</span> <span class="op">+</span> <span class="va">z</span><span class="op">)</span></span>
+<span><span class="co">#&gt; a + b + z</span></span>
+<span></span>
+<span><span class="va">f</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">a</span><span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="va">b</span> <span class="op">=</span> <span class="fl">2</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">+</span><span class="va">z</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">f</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 1 + 2 + z</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">+</span><span class="va">z</span><span class="op">)</span></span>
+<span><span class="co">#&gt; a + b + z</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">+</span><span class="va">z</span> , <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>,b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="co"># 可以指定list(用名称--值的形式)，进行表达式替换</span></span>
+<span><span class="co">#&gt; 1 + 2 + z</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><code><a href="https://rdrr.io/r/base/substitute.html">substitute()</a></code>还可以替换表达式中的函数.</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">+</span><span class="va">z</span> ,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'+'</span> <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="co">#&gt; f(f(a, b), z)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">+</span><span class="va">z</span> ,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'+'</span> <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">sin</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="co">#&gt; sin(sin(a, b), z)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">+</span><span class="va">z</span> ,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'+'</span> <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">`*`</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="co">#&gt; a * b * z</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>总结： 形式上，通过用list的形式对表达式中的所有名字进行检查替换(注意R中的所有动作都是函数，也可以对函数进行替换，如上)，其表达式中的名字替换规则如下：</p>
+<ol type="1">
+<li>一个普通变量，它就被变量的值替换。</li>
+<li>一个函数参数，它就被与约定相关联的表达式替换。</li>
+<li>
+<code>...</code>，它被<code>...</code>的内容替换。</li>
+<li>以上都没有，则名字原样保留不变</li>
+</ol></section><section id="substitute的缺点" class="level5"><h5 class="anchored" data-anchor-id="substitute的缺点">1.2.2. substitute的缺点</h5>
+<ul>
+<li>如果某个表达式存储在变量中，则它不会对表达式进行替换。这时需要用到pryr::substitute_q()函数。</li>
+<li>如果substitute它在全局环境中运行时(不特殊指定替换)，它从不进行替换，最好用作函数环境中。这时可以用pryr::subs()函数</li>
+</ul>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="va">x</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">a</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span>  <span class="co"># x存储了一个表达式</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">x</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>,b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># 对x调用参数替换，无效</span></span>
+<span><span class="co">#&gt; x</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">=</span> <span class="fl">3</span> </span>
+<span><span class="va">b</span> <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">+</span><span class="va">z</span><span class="op">)</span> <span class="co"># 无效</span></span>
+<span><span class="co">#&gt; a + b + z</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>注意：</strong><code>subs()</code>和<code><a href="https://rdrr.io/r/base/substitute.html">substitute()</a></code>函数都可以用第二个参数重写正在使用的当前环境，并通过名字—值的列表对来提供替换。后面讲解<code>subs()</code>函数</p>
+</section></section><section id="创建函数调用" class="level3"><h3 class="anchored" data-anchor-id="创建函数调用">1. 3. 创建函数调用</h3>
+<p>前面已学习函数调用相关内容，我们可以通过以下方式创建函数调用，注意：下面方式得到的结果等价(一模一样)</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="va">call_1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">5</span>,mean <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">call_2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span><span class="st">"rnorm"</span>,<span class="fl">5</span>,mean <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">call_3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/call.html">as.call</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">rnorm</span><span class="op">)</span>,<span class="fl">5</span>,mean <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="va">call_1</span></span>
+<span><span class="co">#&gt; rnorm(5, mean = 3)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">call_1</span>,<span class="va">call_2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">call_2</span>,<span class="va">call_3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="substitute_q-对substituted的补充" class="level3"><h3 class="anchored" data-anchor-id="substitute_q-对substituted的补充">1.4 .substitute_q() 对substituted()的补充</h3>
+<p>前面提到<code><a href="https://rdrr.io/r/base/substitute.html">substitute()</a></code>存在缺点，当某个表达式存储在变量中，则它不会对表达式进行替换。此时可以用<code>substitute_q()</code>函数。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="va">x</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">a</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span>  <span class="co"># x存储了一个表达式</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">x</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>,b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># 对x调用参数替换，无效</span></span>
+<span><span class="co">#&gt; x</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>,b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>  <span class="co"># 对直接变量参数替换,有效</span></span>
+<span><span class="co">#&gt; 1 + 2</span></span>
+<span></span>
+<span><span class="fu">pryr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pryr/man/substitute_q.html">substitute_q</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>,b<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># 对x调用参数替换，有效</span></span>
+<span><span class="co">#&gt; 1 + 2</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="subs函数" class="level3"><h3 class="anchored" data-anchor-id="subs函数">1.5. subs()函数</h3>
+<p><code>subs()</code>函数，可以在全局环境中直接对变量表达式替换。<strong>subs() 和substitute()的第二个参数都可以重写正在使用的当前环境</strong>。并通过名字—值的列表对来提供替换。这里就不在多说。subs的其它的工作方式与substitute()函数相同。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="va">b</span> <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">)</span> <span class="co">#  对变量表达式替换，无效</span></span>
+<span><span class="co">#&gt; a + b</span></span>
+<span><span class="fu">pryr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pryr/man/subs.html">subs</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">)</span> <span class="co"># 对变量表达式替换</span></span>
+<span><span class="co">#&gt; 1 + 2</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span><span class="fl">10</span>,b <span class="op">=</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; 10 + 20</span></span>
+<span><span class="fu">pryr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pryr/man/subs.html">subs</a></span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span><span class="fl">10</span>,b <span class="op">=</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; 10 + 20</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section></section><section id="对捕获表达式后的处理方式" class="level2"><h2 class="anchored" data-anchor-id="对捕获表达式后的处理方式">2. 对捕获表达式后的处理方式</h2>
+<section id="执行表达式-eval" class="level3"><h3 class="anchored" data-anchor-id="执行表达式-eval">2.1. 执行表达式 — — eval()</h3>
+<p>​ 前面提到的几种方法都可以捕获表达式，捕获表达式之后，下一步就是对其进行求值，可以用eval()函数完成。</p>
+<p>​ 比如：我们直接在控制台输入sin(1),其本质相当于执行了两个步骤：1.先捕获这个表达式，2在执行这个这个表达式。于是我们可以通过quote和eval进行分步计算.</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># 直接一步完成。</span></span>
+<span><span class="co">#&gt; [1] 0.841471</span></span>
+<span></span>
+<span><span class="co">## 分步进行</span></span>
+<span><span class="va">call_1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">call_1</span></span>
+<span><span class="co">#&gt; sin(1)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">call_1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.841471</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># 由于quote可以捕获未定义的变量，故eval执行时可能会报错,eg:</span></span>
+<span><span class="va">call_2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">xx</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">call_2</span></span>
+<span><span class="co">#&gt; sin(xx)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">call_2</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="co">#&gt; Error in eval(call_2) : object 'xx' not found</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">xx</span><span class="op">)</span> <span class="op">)</span> <span class="co"># 报错信息和上面的类似</span></span>
+<span><span class="co">#&gt; Error in try(sin(xx)) : object 'xx' not found</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># eval()可以允许我们提供一个list来计算给定的表达式，从而可以不需要创建一个变量x</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">call_2</span> ,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>xx <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.841471</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="eval-函数的用法" class="level3"><h3 class="anchored" data-anchor-id="eval-函数的用法">2.2 eval 函数的用法</h3>
+<pre><code>eval(expr, envir = parent.frame(),
+           enclos = if(is.list(envir) || is.pairlist(envir))
+                       parent.frame() else baseenv())</code></pre>
+<p><code>expr</code> : 要计算的表达式，如果只提供这一个参数，即在当前环境中对表达式求值</p>
+<p><code>envir</code>： 是一个用于计算<code>expr</code>的环境，数据框或者列表。</p>
+<p><code>encols</code>： 如果在<code>envir</code>中找不到相应的变量，它会在<code>encols</code>参数中找，然后在<code>encols</code>参数的父环境中查找。如果能在<code>envir</code>参数中找到，则<code>encols</code>会被忽略。</p>
+<p>以下有是哪个便捷函数：(其实本质上都可以用eval来实现)</p>
+<ul>
+<li>
+<code>evalq(expr, envir, enclos)</code> 等价于 <code>eval(quote(expr),…)</code> ，在当前环境中计算表达式。</li>
+<li>
+<code>eval.parent(expr, n = 1)</code> 等价于 <code>eval(expr,parent.frame(n))</code>，在父环境中计算表达式。</li>
+<li>
+<code>local(expr, envir = new.env())</code> 等价于 <code>eval(quote(expr),environment = new.nev())</code>，在新环境中计算表达式。</li>
+</ul>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="co">## 参考《R语言编程指南》</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">qs</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">range</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">range</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">range</span><span class="op">)</span></span>
+<span>  <span class="va">selector</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">range</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>. <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="co"># parent.frame()指的是eval()的调用环境，也就是qs()的执行环境。</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span> <span class="va">x</span><span class="op">[</span><span class="va">selector</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># trim_margin删除向量x的前n个元素和后n个元素，保留中间的元素</span></span>
+<span><span class="va">trim_margin</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu">qs</span><span class="op">(</span><span class="va">x</span>,<span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="va">.</span><span class="op">-</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">x</span><span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
+<span><span class="fu">trim_margin</span><span class="op">(</span><span class="va">x</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 4 5 6</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="表达式与字符串相互转变" class="level3"><h3 class="anchored" data-anchor-id="表达式与字符串相互转变">2 .3 .表达式与字符串相互转变</h3>
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/base/deparse.html">deparse()</a></code>: 将表达式转变为字符串.</li>
+<li>
+<code><a href="https://rdrr.io/r/base/parse.html">parse()</a></code>: 将字符串转变成表达式.由于parse的主要用途是将代码文件解析到硬盘，所以第一个参数是文件路径。注意如果代码是字符向量，那么需要使用text参数。</li>
+</ul>
+<pre><code>parse(file = "", n = NULL, text = NULL, prompt = "?",
+      keep.source = getOption("keep.source"), srcfile,
+      encoding = "unknown")
+      
+deparse(expr, width.cutoff = 60L,
+        backtick = mode(expr) %in% c("call", "expression", "(", "function"),
+        control = c("keepNA", "keepInteger", "niceNames", "showAttributes"),
+        nlines = -1L)</code></pre>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">*</span><span class="fl">10</span><span class="op">)</span> <span class="co"># 表达式里面用 &lt;- ,等号为出错</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/deparse.html">deparse</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "y &lt;- x * 10"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/parse.html">parse</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html">deparse</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; expression(y &lt;- x * 10)</span></span>
+<span></span>
+<span><span class="co">## 把代码写入一个文件中</span></span>
+<span><span class="co"># cat("x &lt;- c(1, 4)\n  x ^ 3 -10 ; outer(1:7, 5:9)\n", file = 'aa.txt')</span></span>
+<span><span class="co"># parse(file = 'a.txt', n = 3)# 把文件中的代码转变为表达式</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt; Platform: aarch64-apple-darwin20 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: macOS Monterey 12.5.1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRblas.0.dylib</span></span>
+<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] Rcpp_1.0.9        codetools_0.2-18  digest_0.6.29     jsonlite_1.8.0   </span></span>
+<span><span class="co">#&gt;  [5] magrittr_2.0.3    evaluate_0.16     rlang_1.0.4       stringi_1.7.8    </span></span>
+<span><span class="co">#&gt;  [9] cli_3.3.0         pryr_0.1.5        rstudioapi_0.14   rmarkdown_2.16.1 </span></span>
+<span><span class="co">#&gt; [13] tools_4.2.1       stringr_1.4.1     htmlwidgets_1.5.4 xfun_0.32        </span></span>
+<span><span class="co">#&gt; [17] yaml_2.3.5        fastmap_1.1.0     compiler_4.2.1    htmltools_0.5.3  </span></span>
+<span><span class="co">#&gt; [21] knitr_1.40</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section></section><section id="参考" class="level2"><h2 class="anchored" data-anchor-id="参考">参考</h2>
+<p>《高级R语言编程》</p>
+<p>《R语言编程指南》</p>
+<p>《R语言核心编程技巧第二版》</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 非标准计算</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2019-05-02'</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> r</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> F,<span class="at">warning =</span> F,<span class="at">comment =</span> <span class="st">"#&gt;"</span>,<span class="at">collapse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 捕获表达式</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>将表达式捕获转为语言对象，捕获表达式意味着防止表达式被执行，而将其本身存储为变量的形式。具有这个功能的函数有如下几个函数，注意其不同。</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.1 quote() :</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>​       <span class="in">`quote()`</span>捕获到函数调用是会返回调用，而捕获到变量名时会返回一个符号，只要代码语法正确，它就会返回表示被捕获表达式本身的语言对象。即便函数不存在或者变量未定义，也可以捕获表达式本身。</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span>  <span class="fu">quote</span>(a<span class="sc">+</span>b)   <span class="co"># 定义一个表达式调用,但是这些变量没有定义</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x) <span class="co"># 变成语言对象类型，</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">quote</span>(rnorm)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x) <span class="co"># 变成符号对象类型，</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="fu">quote</span>(<span class="fu">xfun</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span>n)) <span class="co"># xfun都么有定义</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>**理解：变量和符号对象的区别，以及函数和调用对象的区别。**</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>变量是对象的名称，而符号对象就是名称的本身。函数是可以被调用的对象，而调用对象是不会被计算的，它表示整个函数调用的语言对象。</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>eg： <span class="in">`rnorm()`</span>就是一个可以被调用的函数(可以使用<span class="in">`rnorm(5)`</span>进行调用,产生5个随机数)，但是<span class="in">`quote(rnorm)`</span>返回一个符号对象，<span class="in">`quote(rnorm(5))`</span>返回一个调用的对象，这两者都是语言本身。</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">quote</span>(rnorm)</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x) <span class="co"># 返回一个符号对象</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">quote</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x1) <span class="co"># 返回一个调用对象</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(x1) <span class="co"># 将调用对象转变为list，以便查看其内部结构， 可以看出本次调用有两部分组成：函数符号和一个参数</span></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>x1[[<span class="dv">1</span>]]</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x1[[<span class="dv">1</span>]]) <span class="co"># 第一个元素是一个符号对象</span></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x1[[<span class="dv">1</span>]])</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>x1[[<span class="dv">2</span>]] </span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x1[[<span class="dv">2</span>]]) <span class="co"># 第二个元素是一个数值</span></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x1[[<span class="dv">2</span>]])</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a><span class="do">## 总结：</span></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.quote()将变量名捕获为符号对象，将一个函数捕获为调用对象。这两者都是语言对象</span></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.可以用is.symbol() / is.name() 和 is.call 分别检查对象是否为符号对象或调用对象</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.可以用is.language()同时检查符号和调用</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. quote不把字面值(这里指的的表达式里使用数值等，而非数值变量。eg：数字、逻辑值、字符串)转变为语言对象，而是使其保持原样。--- 少用</span></span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>**常常捕获全局环境中的表达式，函数环境中建议用`substitute()`，`substitute()`用于捕获表达式，并且用捕获的表达式替换现有的符号,而`quote()`不会进行第二步，把表达式替换成现有的符号** </span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.2 substitute</span></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.1 用来捕获函数参数表达式</span></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>​           <span class="in">`substitute()`</span>可以作用任意的用户输入，该函数用于捕获表达式，并且用捕获的表达式替换现有的符号。常常与<span class="in">`deparse()`</span>连用，出现在函数环境中(对表达式进行替换, 不能替换的则保留下来)。</span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a><span class="in">`deparse(substitute())`</span>函数以<span class="in">`substitute()`</span> 的结果(一个表达式)为参数，并把它转变成一个字符串。</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a><span class="do">### 1.substitute() 的使用对比</span></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a <span class="sc">+</span> b <span class="sc">+</span> z)</span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a>f <span class="ot">=</span> <span class="cf">function</span>(){</span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a>  a<span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">substitute</span>(a<span class="sc">+</span>b<span class="sc">+</span>z)</span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>()</span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b<span class="sc">+</span>z)</span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b<span class="sc">+</span>z , <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>,<span class="at">b =</span> <span class="dv">2</span>))<span class="co"># 可以指定list(用名称--值的形式)，进行表达式替换</span></span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a><span class="in">`substitute()`</span>还可以替换表达式中的函数.</span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b<span class="sc">+</span>z ,<span class="fu">list</span>(<span class="st">'+'</span> <span class="ot">=</span><span class="fu">quote</span>(f)) )</span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b<span class="sc">+</span>z ,<span class="fu">list</span>(<span class="st">'+'</span> <span class="ot">=</span><span class="fu">quote</span>(sin)) )</span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b<span class="sc">+</span>z ,<span class="fu">list</span>(<span class="st">'+'</span> <span class="ot">=</span><span class="fu">quote</span>(<span class="st">`</span><span class="at">*</span><span class="st">`</span>)) )</span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a>总结： 形式上，通过用list的形式对表达式中的所有名字进行检查替换(注意R中的所有动作都是函数，也可以对函数进行替换，如上)，其表达式中的名字替换规则如下：</span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>一个普通变量，它就被变量的值替换。</span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>一个函数参数，它就被与约定相关联的表达式替换。</span>
+<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="in">`...`</span>，它被<span class="in">`...`</span>的内容替换。</span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>以上都没有，则名字原样保留不变</span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.2.  substitute的缺点</span></span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>如果某个表达式存储在变量中，则它不会对表达式进行替换。这时需要用到pryr::substitute_q()函数。</span>
+<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>如果substitute它在全局环境中运行时(不特殊指定替换)，它从不进行替换，最好用作函数环境中。这时可以用pryr::subs()函数</span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">=</span> <span class="fu">quote</span>(a <span class="sc">+</span> b)  <span class="co"># x存储了一个表达式</span></span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(x,<span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>,<span class="at">b =</span> <span class="dv">2</span>)) <span class="co"># 对x调用参数替换，无效</span></span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">3</span> </span>
+<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b<span class="sc">+</span>z) <span class="co"># 无效</span></span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a>**注意：**<span class="in">`subs()`</span>和<span class="in">`substitute()`</span>函数都可以用第二个参数重写正在使用的当前环境，并通过名字—值的列表对来提供替换。后面讲解<span class="in">`subs()`</span>函数</span>
+<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. 3. 创建函数调用</span></span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a>前面已学习函数调用相关内容，我们可以通过以下方式创建函数调用，注意：下面方式得到的结果等价(一模一样)</span>
+<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a>call_1 <span class="ot">=</span> <span class="fu">quote</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>,<span class="at">mean =</span> <span class="dv">3</span>))</span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a>call_2 <span class="ot">=</span> <span class="fu">call</span>(<span class="st">"rnorm"</span>,<span class="dv">5</span>,<span class="at">mean =</span> <span class="dv">3</span>)</span>
+<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>call_3 <span class="ot">=</span> <span class="fu">as.call</span>( <span class="fu">list</span>(<span class="fu">quote</span>(rnorm),<span class="dv">5</span>,<span class="at">mean =</span> <span class="dv">3</span>) )</span>
+<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a>call_1</span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(call_1,call_2)</span>
+<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(call_2,call_3)</span>
+<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.4 .substitute_q() 对substituted()的补充</span></span>
+<span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a>前面提到<span class="in">`substitute()`</span>存在缺点，当某个表达式存储在变量中，则它不会对表达式进行替换。此时可以用<span class="in">`substitute_q()`</span>函数。</span>
+<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">=</span> <span class="fu">quote</span>(a <span class="sc">+</span> b)  <span class="co"># x存储了一个表达式</span></span>
+<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(x,<span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>,<span class="at">b =</span> <span class="dv">2</span>)) <span class="co"># 对x调用参数替换，无效</span></span>
+<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b,<span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>,<span class="at">b =</span> <span class="dv">2</span>))  <span class="co"># 对直接变量参数替换,有效</span></span>
+<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a>pryr<span class="sc">::</span><span class="fu">substitute_q</span>(x, <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>,<span class="at">b=</span><span class="dv">2</span>)) <span class="co"># 对x调用参数替换，有效</span></span>
+<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.5. subs()函数</span></span>
+<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a><span class="in">`subs()`</span>函数，可以在全局环境中直接对变量表达式替换。**subs() 和substitute()的第二个参数都可以重写正在使用的当前环境**。并通过名字—值的列表对来提供替换。这里就不在多说。subs的其它的工作方式与substitute()函数相同。</span>
+<span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b) <span class="co">#  对变量表达式替换，无效</span></span>
+<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a>pryr<span class="sc">::</span><span class="fu">subs</span>(a<span class="sc">+</span>b) <span class="co"># 对变量表达式替换</span></span>
+<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a<span class="sc">+</span>b,<span class="fu">list</span>(<span class="at">a =</span><span class="dv">10</span>,<span class="at">b =</span><span class="dv">20</span>)) </span>
+<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a>pryr<span class="sc">::</span><span class="fu">subs</span>(a<span class="sc">+</span>b,<span class="fu">list</span>(<span class="at">a =</span><span class="dv">10</span>,<span class="at">b =</span><span class="dv">20</span>)) </span>
+<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 对捕获表达式后的处理方式</span></span>
+<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.1. 执行表达式 — — eval()</span></span>
+<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a>​       前面提到的几种方法都可以捕获表达式，捕获表达式之后，下一步就是对其进行求值，可以用eval()函数完成。 </span>
+<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a>​       比如：我们直接在控制台输入sin(1),其本质相当于执行了两个步骤：1.先捕获这个表达式，2在执行这个这个表达式。于是我们可以通过quote和eval进行分步计算.</span>
+<span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(<span class="dv">1</span>) <span class="co"># 直接一步完成。</span></span>
+<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a><span class="do">## 分步进行</span></span>
+<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a>call_1 <span class="ot">=</span> <span class="fu">quote</span>(<span class="fu">sin</span>(<span class="dv">1</span>))</span>
+<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a>call_1</span>
+<span id="cb15-211"><a href="#cb15-211" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(call_1)</span>
+<span id="cb15-212"><a href="#cb15-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-213"><a href="#cb15-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-214"><a href="#cb15-214" aria-hidden="true" tabindex="-1"></a><span class="co"># 由于quote可以捕获未定义的变量，故eval执行时可能会报错,eg:</span></span>
+<span id="cb15-215"><a href="#cb15-215" aria-hidden="true" tabindex="-1"></a>call_2 <span class="ot">=</span> <span class="fu">quote</span>(<span class="fu">sin</span>(xx))</span>
+<span id="cb15-216"><a href="#cb15-216" aria-hidden="true" tabindex="-1"></a>call_2</span>
+<span id="cb15-217"><a href="#cb15-217" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">eval</span>(call_2) )</span>
+<span id="cb15-218"><a href="#cb15-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-219"><a href="#cb15-219" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">sin</span>(xx) ) <span class="co"># 报错信息和上面的类似</span></span>
+<span id="cb15-220"><a href="#cb15-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-221"><a href="#cb15-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-222"><a href="#cb15-222" aria-hidden="true" tabindex="-1"></a><span class="co"># eval()可以允许我们提供一个list来计算给定的表达式，从而可以不需要创建一个变量x</span></span>
+<span id="cb15-223"><a href="#cb15-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-224"><a href="#cb15-224" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(call_2 ,<span class="fu">list</span>(<span class="at">xx =</span><span class="dv">1</span>))</span>
+<span id="cb15-225"><a href="#cb15-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-226"><a href="#cb15-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.2 eval 函数的用法</span></span>
+<span id="cb15-228"><a href="#cb15-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-229"><a href="#cb15-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-230"><a href="#cb15-230" aria-hidden="true" tabindex="-1"></a><span class="in">eval(expr, envir = parent.frame(),</span></span>
+<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a><span class="in">           enclos = if(is.list(envir) || is.pairlist(envir))</span></span>
+<span id="cb15-232"><a href="#cb15-232" aria-hidden="true" tabindex="-1"></a><span class="in">                       parent.frame() else baseenv())</span></span>
+<span id="cb15-233"><a href="#cb15-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-234"><a href="#cb15-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-235"><a href="#cb15-235" aria-hidden="true" tabindex="-1"></a><span class="in">`expr`</span> :  要计算的表达式，如果只提供这一个参数，即在当前环境中对表达式求值</span>
+<span id="cb15-236"><a href="#cb15-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-237"><a href="#cb15-237" aria-hidden="true" tabindex="-1"></a><span class="in">`envir`</span>： 是一个用于计算<span class="in">`expr`</span>的环境，数据框或者列表。</span>
+<span id="cb15-238"><a href="#cb15-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-239"><a href="#cb15-239" aria-hidden="true" tabindex="-1"></a><span class="in">`encols`</span>： 如果在<span class="in">`envir`</span>中找不到相应的变量，它会在<span class="in">`encols`</span>参数中找，然后在<span class="in">`encols`</span>参数的父环境中查找。如果能在<span class="in">`envir`</span>参数中找到，则<span class="in">`encols`</span>会被忽略。</span>
+<span id="cb15-240"><a href="#cb15-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-241"><a href="#cb15-241" aria-hidden="true" tabindex="-1"></a>以下有是哪个便捷函数：(其实本质上都可以用eval来实现)</span>
+<span id="cb15-242"><a href="#cb15-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-243"><a href="#cb15-243" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`evalq(expr, envir, enclos)`</span>     等价于 <span class="in">` eval(quote(expr),…)`</span>  ，在当前环境中计算表达式。</span>
+<span id="cb15-244"><a href="#cb15-244" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`eval.parent(expr, n = 1) `</span>         等价于 <span class="in">`eval(expr,parent.frame(n))`</span>，在父环境中计算表达式。</span>
+<span id="cb15-245"><a href="#cb15-245" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`local(expr, envir = new.env())`</span> 等价于 <span class="in">`eval(quote(expr),environment = new.nev())`</span>，在新环境中计算表达式。</span>
+<span id="cb15-246"><a href="#cb15-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-249"><a href="#cb15-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-250"><a href="#cb15-250" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list  =</span> <span class="fu">ls</span>() )</span>
+<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a><span class="do">## 参考《R语言编程指南》</span></span>
+<span id="cb15-252"><a href="#cb15-252" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb15-253"><a href="#cb15-253" aria-hidden="true" tabindex="-1"></a>qs <span class="ot">=</span> <span class="cf">function</span>(x,range){</span>
+<span id="cb15-254"><a href="#cb15-254" aria-hidden="true" tabindex="-1"></a>  range <span class="ot">=</span> <span class="fu">substitute</span>(range)</span>
+<span id="cb15-255"><a href="#cb15-255" aria-hidden="true" tabindex="-1"></a>  selector <span class="ot">=</span> <span class="fu">eval</span>(range,<span class="fu">list</span>(<span class="at">. =</span> <span class="fu">length</span>(x)), <span class="fu">parent.frame</span>())</span>
+<span id="cb15-256"><a href="#cb15-256" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parent.frame()指的是eval()的调用环境，也就是qs()的执行环境。</span></span>
+<span id="cb15-257"><a href="#cb15-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( x[selector])</span>
+<span id="cb15-258"><a href="#cb15-258" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-259"><a href="#cb15-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-260"><a href="#cb15-260" aria-hidden="true" tabindex="-1"></a><span class="co"># trim_margin删除向量x的前n个元素和后n个元素，保留中间的元素</span></span>
+<span id="cb15-261"><a href="#cb15-261" aria-hidden="true" tabindex="-1"></a>trim_margin <span class="ot">=</span> <span class="cf">function</span>(x,n){</span>
+<span id="cb15-262"><a href="#cb15-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qs</span>(x,(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(.<span class="sc">-</span>n<span class="dv">-1</span>))</span>
+<span id="cb15-263"><a href="#cb15-263" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-264"><a href="#cb15-264" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb15-265"><a href="#cb15-265" aria-hidden="true" tabindex="-1"></a><span class="fu">trim_margin</span>(x,<span class="dv">3</span>)</span>
+<span id="cb15-266"><a href="#cb15-266" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-267"><a href="#cb15-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-268"><a href="#cb15-268" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2 .3 .表达式与字符串相互转变 </span></span>
+<span id="cb15-269"><a href="#cb15-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-270"><a href="#cb15-270" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`deparse()`</span>: 将表达式转变为字符串.</span>
+<span id="cb15-271"><a href="#cb15-271" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`parse()`</span>: 将字符串转变成表达式.由于parse的主要用途是将代码文件解析到硬盘，所以第一个参数是文件路径。注意如果代码是字符向量，那么需要使用text参数。</span>
+<span id="cb15-272"><a href="#cb15-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-273"><a href="#cb15-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-274"><a href="#cb15-274" aria-hidden="true" tabindex="-1"></a><span class="in">parse(file = "", n = NULL, text = NULL, prompt = "?",</span></span>
+<span id="cb15-275"><a href="#cb15-275" aria-hidden="true" tabindex="-1"></a><span class="in">      keep.source = getOption("keep.source"), srcfile,</span></span>
+<span id="cb15-276"><a href="#cb15-276" aria-hidden="true" tabindex="-1"></a><span class="in">      encoding = "unknown")</span></span>
+<span id="cb15-277"><a href="#cb15-277" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb15-278"><a href="#cb15-278" aria-hidden="true" tabindex="-1"></a><span class="in">deparse(expr, width.cutoff = 60L,</span></span>
+<span id="cb15-279"><a href="#cb15-279" aria-hidden="true" tabindex="-1"></a><span class="in">        backtick = mode(expr) %in% c("call", "expression", "(", "function"),</span></span>
+<span id="cb15-280"><a href="#cb15-280" aria-hidden="true" tabindex="-1"></a><span class="in">        control = c("keepNA", "keepInteger", "niceNames", "showAttributes"),</span></span>
+<span id="cb15-281"><a href="#cb15-281" aria-hidden="true" tabindex="-1"></a><span class="in">        nlines = -1L)</span></span>
+<span id="cb15-282"><a href="#cb15-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-283"><a href="#cb15-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-284"><a href="#cb15-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-285"><a href="#cb15-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-288"><a href="#cb15-288" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-289"><a href="#cb15-289" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb15-290"><a href="#cb15-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-291"><a href="#cb15-291" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">quote</span>(y <span class="ot">&lt;-</span> x<span class="sc">*</span><span class="dv">10</span>) <span class="co"># 表达式里面用 &lt;- ,等号为出错</span></span>
+<span id="cb15-292"><a href="#cb15-292" aria-hidden="true" tabindex="-1"></a><span class="fu">deparse</span>(z)</span>
+<span id="cb15-293"><a href="#cb15-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-294"><a href="#cb15-294" aria-hidden="true" tabindex="-1"></a><span class="fu">parse</span>(<span class="at">text =</span> <span class="fu">deparse</span>(z))</span>
+<span id="cb15-295"><a href="#cb15-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-296"><a href="#cb15-296" aria-hidden="true" tabindex="-1"></a><span class="do">## 把代码写入一个文件中</span></span>
+<span id="cb15-297"><a href="#cb15-297" aria-hidden="true" tabindex="-1"></a><span class="co"># cat("x &lt;- c(1, 4)\n  x ^ 3 -10 ; outer(1:7, 5:9)\n", file = 'aa.txt')</span></span>
+<span id="cb15-298"><a href="#cb15-298" aria-hidden="true" tabindex="-1"></a><span class="co"># parse(file = 'a.txt', n = 3)# 把文件中的代码转变为表达式</span></span>
+<span id="cb15-299"><a href="#cb15-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-300"><a href="#cb15-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-303"><a href="#cb15-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-304"><a href="#cb15-304" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb15-305"><a href="#cb15-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-306"><a href="#cb15-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-307"><a href="#cb15-307" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考</span></span>
+<span id="cb15-308"><a href="#cb15-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-309"><a href="#cb15-309" aria-hidden="true" tabindex="-1"></a>《高级R语言编程》</span>
+<span id="cb15-310"><a href="#cb15-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-311"><a href="#cb15-311" aria-hidden="true" tabindex="-1"></a>《R语言编程指南》</span>
+<span id="cb15-312"><a href="#cb15-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-313"><a href="#cb15-313" aria-hidden="true" tabindex="-1"></a>《R语言核心编程技巧第二版》</span>
+</code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="zsc">
+
+<title>快乐的一天 - Armadillo + Rcpp VS MATLAB/octave</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - Armadillo + Rcpp VS MATLAB/octave">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Armadillo + Rcpp VS MATLAB/octave</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Armadillo + Rcpp VS MATLAB/octave</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">matlab</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2019年11月14日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#armadillo-rcpp-vs-matlaboctave" id="toc-armadillo-rcpp-vs-matlaboctave" class="nav-link active" data-scroll-target="#armadillo-rcpp-vs-matlaboctave">*<strong>Armadillo + Rcpp VS MATLAB/octave</strong></a>
+  <ul class="collapse">
+  <li><a href="#armadillo-vs-matlab" id="toc-armadillo-vs-matlab" class="nav-link" data-scroll-target="#armadillo-vs-matlab">1. Armadillo VS matlab</a></li>
+  <li><a href="#r-数据类型对照表" id="toc-r-数据类型对照表" class="nav-link" data-scroll-target="#r-数据类型对照表">2. R 数据类型对照表</a></li>
+  <li><a href="#rcpp-语法糖" id="toc-rcpp-语法糖" class="nav-link" data-scroll-target="#rcpp-语法糖">3. Rcpp 语法糖</a></li>
+  <li><a href="#迭代器" id="toc-迭代器" class="nav-link" data-scroll-target="#迭代器">4. 迭代器</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="armadillo-rcpp-vs-matlaboctave" class="level1">
+<h1>*<strong>Armadillo + Rcpp VS MATLAB/octave</strong></h1>
+<ul>
+<li>http://arma.sourceforge.net/docs.html</li>
+</ul>
+<section id="armadillo-vs-matlab" class="level2">
+<h2 class="anchored" data-anchor-id="armadillo-vs-matlab">1. Armadillo VS matlab</h2>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 39%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Matlab/Octave</strong></th>
+<th><strong>Armadillo</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A,B,C代表矩阵<br>a,b,c 代表向量</td>
+<td>vec x(10);<br>vec y = zeros<vec>(10);<br>rowvec x(10); <br>rowvec y = zeros<rowvec>(10); <br>rowvec a = {1,2,3,4};<br>vec b = {1,2,3,4};<br>mat A = randu<mat>(10,10);</mat></rowvec></vec></td>
+<td>C++中要声明向量类型<br>(这里都是 double 类型)<br>vec 默认 colvec(等价),是列向量</td>
+</tr>
+<tr class="even">
+<td>A(1,1)</td>
+<td>A(0,0)</td>
+<td>C++ 索引从 0 开始</td>
+</tr>
+<tr class="odd">
+<td>A(k,k)</td>
+<td>A(k-1,k-1)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>size(A,1)</td>
+<td>A.n_rows</td>
+<td>C++ 中直接利用对象的属性</td>
+</tr>
+<tr class="even">
+<td>size(A,2)</td>
+<td>A.n_cols</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>size(Q,3)</td>
+<td>Q.n_slices</td>
+<td>这里 Q 是一个三维数组</td>
+</tr>
+<tr class="even">
+<td>numel(A)<br>length(A(:))</td>
+<td>A.n_elem</td>
+<td>矩阵 A 中所有元素的个数,行数<span class="math inline">\(\times\)</span> 列数</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A(:, k)</td>
+<td>A.col(k)</td>
+<td>注意这里的索引问题,为了方便 这里不做转换</td>
+</tr>
+<tr class="odd">
+<td>A(k, :)</td>
+<td>A.row(k)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A(:, p:q)</td>
+<td>A.cols(p,q)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>A(p:q, :)</td>
+<td>A.rows(p,q)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A(p:q, r:s)</td>
+<td>A( span(p,q), span(r,s) ) <br>A.submat(p, r, q, s)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Q(:, :, k)</td>
+<td>Q.slice(k)</td>
+<td>Q 是一个三维数组</td>
+</tr>
+<tr class="odd">
+<td>Q(:, :, t:u)</td>
+<td>Q.slices(t, u)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Q(p:q, r:s, t:u)</td>
+<td>Q( span(p,q), span(r,s), span(t,u) )</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A’</td>
+<td>A.t() <br>trans(A)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>A^(-1)</td>
+<td>inv(A)</td>
+<td>求 A 的逆<br>R 中是: solve(A)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>A = zeros(size(A))</td>
+<td>A.zeros()</td>
+<td>把矩阵 A复制为 0 矩阵</td>
+</tr>
+<tr class="even">
+<td>A = ones(size(A))</td>
+<td>A.ones()</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>A = zeros(k)</td>
+<td>A = zeros<mat>(k,k)</mat></td>
+<td>创建一个<span class="math inline">\(k \times k\)</span> 的 0 矩阵,并赋值给 A</td>
+</tr>
+<tr class="even">
+<td>A = ones(k)</td>
+<td>A = ones<mat>(k,k)</mat></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A + B</td>
+<td>A + B</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>A - B</td>
+<td>A - B</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A .* B</td>
+<td>A % B</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>A ./ B</td>
+<td>A / B</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A*B</td>
+<td>A*B</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>A &nbsp;B</td>
+<td>solve(A,B)<br>inv(A)*B</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A / B</td>
+<td>无<br>A*inv(B)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A ./ a</td>
+<td>A.each_row() / a</td>
+<td>a为行向量 ,C++中不能是列除以行<br>注意和 MATLAB 的区别</td>
+</tr>
+<tr class="odd">
+<td>A ./ b</td>
+<td>A.each_col() /b</td>
+<td>b为列向量,</td>
+</tr>
+<tr class="even">
+<td>A .* a</td>
+<td>A.each_row() % a</td>
+<td>a 为行向量</td>
+</tr>
+<tr class="odd">
+<td>A .* b</td>
+<td>A.each_col % b</td>
+<td>b为列向量</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>sqrt(A)</td>
+<td>sqrt(A)</td>
+<td>求数组元素的开方</td>
+</tr>
+<tr class="even">
+<td>A .^ p</td>
+<td>pow(A,p)</td>
+<td>求数组元素的次方</td>
+</tr>
+<tr class="odd">
+<td>exp(A)</td>
+<td>exp(A)</td>
+<td>以自然常数为底数的指数</td>
+</tr>
+<tr class="even">
+<td>log(A)</td>
+<td>log(A)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>log2(A)</td>
+<td>log2(A)</td>
+<td>这里都是以数组形式运算</td>
+</tr>
+<tr class="even">
+<td>log10(A)</td>
+<td>log10(A)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>sign(A)</td>
+<td>sign(A)</td>
+<td>符号函数</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>向量的^ 也可以用 pow计算</td>
+<td>注意,Rcpp 并不提供^运算, <br>支持向量的 <code>+</code> <code>-</code> <code>*</code> <code>/</code> <br>以及 <code>==</code> <code>! =</code> <code>&lt;</code> <code>&gt;</code> <code>&gt; =</code> <code>&lt;=</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>x = A(:)</td>
+<td>vec x = vectorise(A)</td>
+<td>把矩阵转变为列向量(即按内存排序), <br>C++ 中不能是行向量</td>
+</tr>
+<tr class="odd">
+<td>X = [ A B ]</td>
+<td>X = join_horiz(A,B)</td>
+<td>矩阵的拼接</td>
+</tr>
+<tr class="even">
+<td>X = [ A; B ]</td>
+<td>X = join_vert(A,B)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A = randn(2,4);</td>
+<td>mat A = randn(2,4);</td>
+<td>产生维度为 2*4 的标准正太分布数据</td>
+</tr>
+<tr class="odd">
+<td>A = randi(2,4)</td>
+<td>mat A = randi(2,4)<br>mat A = randi(2,4,distr_param(3,8))</td>
+<td>以$2 $的随机整数,0 到正无穷<br>产生 <span class="math inline">\(2 \times 4\)</span> 的随机矩阵,范围 [3,8]之间的整数</td>
+</tr>
+<tr class="even">
+<td>A = randu(2,4)</td>
+<td>mat A = randu(2,4)</td>
+<td>产生维度为 2*4 的标准均匀分布数据</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>a * b</td>
+<td>a % b <br>A.row(i)%A.row(i)<br>A.col(i) %A.col(i)</td>
+<td>a ,b 为列向量 , 向量对应元素相乘</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>sum(A,1)<br>sum(A)</td>
+<td>rowvec a = sum(A, 0)<br>rowvec a = sum(A)</td>
+<td>C++. 中 0 代表列 ,1 代表行</td>
+</tr>
+<tr class="odd">
+<td>sum(A,2)</td>
+<td>colvec a = sum(A,1)</td>
+<td>MATLAB 中 1 代表列, 2 代表行</td>
+</tr>
+<tr class="even">
+<td>sum(A(:))</td>
+<td>double y = aucc(A)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>mean(A)</td>
+<td>mean(A)</td>
+<td>与 sum 函数类似</td>
+</tr>
+<tr class="even">
+<td>max(A)<br>max(A,1)<br>max(A,2)</td>
+<td>rowvec a = max(M);<br>rowvec b = max(M,0);<br>colvec c = max(M,1);</td>
+<td>与 sum 函数类似(还有 min 之类的)</td>
+</tr>
+<tr class="odd">
+<td>min(A)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="r-数据类型对照表" class="level2">
+<h2 class="anchored" data-anchor-id="r-数据类型对照表">2. R 数据类型对照表</h2>
+<table class="table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 32%">
+<col style="width: 32%">
+<col style="width: 9%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Value</th>
+<th>R vector</th>
+<th>Rcpp vector</th>
+<th>Rcpp matrix</th>
+<th>Rcpp scalar</th>
+<th>C++ scalar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logical</td>
+<td><code>logical</code></td>
+<td><code>LogicalVector</code></td>
+<td><code>LogicalMatrix</code></td>
+<td>-</td>
+<td><code>bool</code></td>
+</tr>
+<tr class="even">
+<td>Integer</td>
+<td><code>integer</code></td>
+<td><code>IntegerVector</code></td>
+<td><code>IntegerMatrix</code></td>
+<td>-</td>
+<td><code>int</code></td>
+</tr>
+<tr class="odd">
+<td>Real</td>
+<td><code>numeric</code></td>
+<td><code>NumericVector</code></td>
+<td><code>NumericMatrix</code></td>
+<td>-</td>
+<td><code>double</code></td>
+</tr>
+<tr class="even">
+<td>Complex</td>
+<td><code>complex</code></td>
+<td><code>ComplexVector</code></td>
+<td><code>ComplexMatrix</code></td>
+<td><code>Rcomplex</code></td>
+<td><code>complex</code></td>
+</tr>
+<tr class="odd">
+<td>String</td>
+<td><code>character</code></td>
+<td><code>CharacterVector</code><br>(<code>StringVector</code>)</td>
+<td><code>CharacterMatrix</code><br>(<code>StringMatrix</code>)</td>
+<td><code>String</code></td>
+<td><code>string</code></td>
+</tr>
+<tr class="even">
+<td>Date</td>
+<td><code>Date</code></td>
+<td><code>DateVector</code></td>
+<td>-</td>
+<td><code>Date</code></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Datetime</td>
+<td><code>POSIXct</code></td>
+<td><code>DatetimeVector</code></td>
+<td>-</td>
+<td><code>Datetime</code></td>
+<td><code>time_t</code></td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<thead>
+<tr class="header">
+<th>R</th>
+<th>Rcpp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>data.frame</code></td>
+<td><code>DataFrame</code></td>
+</tr>
+<tr class="even">
+<td><code>list</code></td>
+<td><code>List</code></td>
+</tr>
+<tr class="odd">
+<td>S3 class</td>
+<td><code>List</code></td>
+</tr>
+<tr class="even">
+<td>S4 class</td>
+<td><code>S4</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rcpp-语法糖" class="level2">
+<h2 class="anchored" data-anchor-id="rcpp-语法糖">3. Rcpp 语法糖</h2>
+<p>即 Rcpp 中提供了基础 R 中的的一些基本函数,几乎和 基础 R 一样,支持向量运算.</p>
+<p>https://teuder.github.io/rcpp4everyone_en/</p>
+<p>http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/rcpp-sugar.html</p>
+<table class="table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 53%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rcpp</th>
+<th>C++</th>
+<th>Matlab</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rcout</td>
+<td>std::cout</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Rcerr</td>
+<td>std::cerr</td>
+<td></td>
+<td>注意这里的四个函数都只能<br>打印一些信息并输出到屏幕,<br>并不能中止程序</td>
+</tr>
+<tr class="odd">
+<td>Rprintf( format, variables)</td>
+<td>std::printf()</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>REprintf()</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>stop(“范围提示信息”)</td>
+<td></td>
+<td>error(‘信息’)</td>
+<td>这要遇到这种情况,后面的程序不再运行<br>直接打印错误信息</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="迭代器" class="level2">
+<h2 class="anchored" data-anchor-id="迭代器">4. 迭代器</h2>
+<p>RCPP 提供的迭代器</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>NumericVector<span class="sc">::</span>iterator</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>IntegerVector<span class="sc">::</span>iterator</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>LogicalVector<span class="sc">::</span>iterator</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>CharacterVector<span class="sc">::</span>iterator</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>DataFrame<span class="sc">::</span>iterator</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>List<span class="sc">::</span>iterator</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> rcpp_sum<span class="op">(</span>NumericVector x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span>NumericVector<span class="op">::</span>iterator i <span class="op">=</span> x<span class="op">.</span>begin<span class="op">();</span> i <span class="op">!=</span> x<span class="op">.</span>end<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    total <span class="op">+=</span> <span class="op">*</span>i<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> total<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>i = v.begin()</code> : 迭代器 <code>i</code>指向<code>v</code>的第一个元素</li>
+<li><code>++i</code> : Updates <code>i</code> to the state pointing to the next element.</li>
+<li><code>--i</code> : Updates <code>i</code> to the state pointing to the previous element.</li>
+<li><code>i + 1</code> : Represents an iterator pointing to the element 1 elements behind of <code>i</code>.</li>
+<li><code>i - 1</code> : Represents an iterator pointing to the element 1 elements ahead of <code>i</code>.</li>
+<li><code>*i</code> : 表示指针<code>i</code> 指向的元素的值</li>
+<li><code>v.end()</code> : 表示<code>v</code>的最后一个元素</li>
+<li><code>*(v.begin()+k)</code> : Represents the value of the <code>k</code>-th element of <code>v</code> ( 即 <code>v[k]</code>).</li>
+<li><code>v[k] = *(v.begin() + k)</code></li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Armadillo + Rcpp  VS  MATLAB/octave</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2019-11-14'</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - matlab</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># ***Armadillo + Rcpp  VS  MATLAB/octave** </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>http://arma.sourceforge.net/docs.html</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Armadillo VS  matlab</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>| **Matlab/Octave**               | **Armadillo**                                                | **Notes**                                                    |</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>| ------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>| A,B,C代表矩阵<span class="kw">&lt;br&gt;</span>a,b,c 代表向量 | vec x(10);<span class="kw">&lt;br&gt;</span>vec y = zeros<span class="kw">&lt;vec&gt;</span>(10);<span class="kw">&lt;br&gt;</span>rowvec x(10); <span class="kw">&lt;br&gt;</span>rowvec y = zeros<span class="kw">&lt;rowvec&gt;</span>(10); <span class="kw">&lt;br&gt;</span>rowvec a = {1,2,3,4};<span class="kw">&lt;br/&gt;</span>vec b = {1,2,3,4};<span class="kw">&lt;br&gt;</span>mat    A = randu<span class="kw">&lt;mat&gt;</span>(10,10); | C++中要声明向量类型<span class="kw">&lt;br&gt;</span>(这里都是 double 类型)<span class="kw">&lt;br&gt;</span>vec 默认 colvec(等价),是列向量 |</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>| A(1,1)                          | A(0,0)                                                       | C++ 索引从 0 开始                                            |</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>| A(k,k)                          | A(k-1,k-1)                                                   |                                                              |</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>| size(A,1)                       | A.n_rows                                                     | C++ 中直接利用对象的属性                                     |</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>| size(A,2)                       | A.n_cols                                                     |                                                              |</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>| size(Q,3)                       | Q.n_slices                                                   | 这里 Q 是一个三维数组                                        |</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>| numel(A)<span class="kw">&lt;br&gt;</span>length(A(:))        | A.n_elem                                                     | 矩阵 A 中所有元素的个数,行数$\times$ 列数                    |</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>| A(:, k)                         | A.col(k)                                                     | 注意这里的索引问题,为了方便 这里不做转换                     |</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>| A(k, :)                         | A.row(k)                                                     |                                                              |</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>| A(:, p:q)                       | A.cols(p,q)                                                  |                                                              |</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>| A(p:q, :)                       | A.rows(p,q)                                                  |                                                              |</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>| A(p:q, r:s)                     | A( span(p,q), span(r,s) ) <span class="kw">&lt;br&gt;</span>A.submat(p, r, q, s)           |                                                              |</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>| Q(:, :, k)                      | Q.slice(k)                                                   | Q 是一个三维数组                                             |</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>| Q(:, :, t:u)                    | Q.slices(t, u)                                               |                                                              |</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>| Q(p:q, r:s, t:u)                | Q( span(p,q), span(r,s), span(t,u) )                         |                                                              |</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>| A'                              | A.t() <span class="kw">&lt;br&gt;</span>trans(A)                                           |                                                              |</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>| A^(-1)                          | inv(A)                                                       | 求 A 的逆<span class="kw">&lt;br&gt;</span>R 中是: solve(A)                                |</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>| A = zeros(size(A))              | A.zeros()                                                    | 把矩阵 A复制为 0 矩阵                                        |</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>| A = ones(size(A))               | A.ones()                                                     |                                                              |</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>| A = zeros(k)                    | A = zeros<span class="kw">&lt;mat&gt;</span>(k,k)                                          | 创建一个$k \times k$ 的 0 矩阵,并赋值给 A                    |</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>| A = ones(k)                     | A = ones<span class="kw">&lt;mat&gt;</span>(k,k)                                           |                                                              |</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>| A + B                           | A + B                                                        |                                                              |</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>| A - B                           | A - B                                                        |                                                              |</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>| A .* B                          | A % B                                                        |                                                              |</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>| A ./ B                          | A / B                                                        |                                                              |</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>| A*B                             | A*B                                                          |                                                              |</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>| A \ B                           | solve(A,B)<span class="kw">&lt;br&gt;</span>inv(A)*B                                       |                                                              |</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>| A / B                           | 无<span class="kw">&lt;br&gt;</span>A*inv(B)                                               |                                                              |</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>| A ./ a                          | A.each_row() / a                                             | a为行向量 ,C++中不能是列除以行<span class="kw">&lt;br&gt;</span>注意和 MATLAB 的区别       |</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>| A ./ b                          | A.each_col() /b                                              | b为列向量,                                                   |</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>| A .* a                          | A.each_row() % a                                             | a 为行向量                                                   |</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>| A .* b                          | A.each_col  % b                                              | b为列向量                                                    |</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>| sqrt(A)                         | sqrt(A)                                                      | 求数组元素的开方                                             |</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>| A .^ p                          | pow(A,p)                                                     | 求数组元素的次方                                             |</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>| exp(A)                          | exp(A)                                                       | 以自然常数为底数的指数                                       |</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>| log(A)                          | log(A)                                                       |                                                              |</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>| log2(A)                         | log2(A)                                                      | 这里都是以数组形式运算                                       |</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>| log10(A)                        | log10(A)                                                     |                                                              |</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>| sign(A)                         | sign(A)                                                      | 符号函数                                                     |</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>|                                 | 向量的^ 也可以用 pow计算                                     | 注意,Rcpp 并不提供^运算, <span class="kw">&lt;br&gt;</span>支持向量的 <span class="in">`+`</span> <span class="in">`-`</span> <span class="in">`*`</span> <span class="in">`/`</span> <span class="kw">&lt;br&gt;</span>以及 <span class="in">`==`</span> <span class="in">`! =`</span> <span class="in">`&lt;`</span> <span class="in">`&gt;`</span> <span class="in">`&gt; =`</span> <span class="in">`&lt;=`</span> |</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>| x = A(:)                        | vec  x = vectorise(A)                                        | 把矩阵转变为列向量(即按内存排序), <span class="kw">&lt;br&gt;</span>C++ 中不能是行向量     |</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>| X = <span class="co">[</span><span class="ot"> A  B </span><span class="co">]</span>                    | X = join_horiz(A,B)                                          | 矩阵的拼接                                                   |</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>| X = <span class="co">[</span><span class="ot"> A; B </span><span class="co">]</span>                    | X = join_vert(A,B)                                           |                                                              |</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>| A = randn(2,4);                 | mat A = randn(2,4);                                          | 产生维度为 2*4 的标准正太分布数据                            |</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>| A = randi(2,4)                  | mat A = randi(2,4)<span class="kw">&lt;br&gt;</span>mat A = randi(2,4,distr_param(3,8))    | 以$2\times 4 $的随机整数,0 到正无穷<span class="kw">&lt;br&gt;</span>产生 $2 \times 4$ 的随机矩阵,范围 <span class="co">[</span><span class="ot">3,8</span><span class="co">]</span>之间的整数 |</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>| A = randu(2,4)                  | mat A = randu(2,4)                                           | 产生维度为 2*4 的标准均匀分布数据                            |</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>| a *  b                          | a % b <span class="kw">&lt;br&gt;</span>A.row(i)%A.row(i)<span class="kw">&lt;br&gt;</span>A.col(i) %A.col(i)            | a ,b 为列向量 , 向量对应元素相乘                             |</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>| sum(A,1)<span class="kw">&lt;br&gt;</span>sum(A)              | rowvec a = sum(A, 0)<span class="kw">&lt;br&gt;</span>rowvec a = sum(A)                    | C++. 中 0 代表列 ,1 代表行                                   |</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>| sum(A,2)                        | colvec  a = sum(A,1)                                         | MATLAB 中 1 代表列, 2 代表行                                 |</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>| sum(A(:))                       | double y = aucc(A)                                           |                                                              |</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>| mean(A)                         | mean(A)                                                      | 与 sum 函数类似                                              |</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>| max(A)<span class="kw">&lt;br&gt;</span>max(A,1)<span class="kw">&lt;br&gt;</span>max(A,2)  | rowvec a = max(M);<span class="kw">&lt;br&gt;</span>rowvec b = max(M,0);<span class="kw">&lt;br&gt;</span>colvec c = max(M,1); | 与 sum 函数类似(还有 min 之类的)                             |</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>| min(A)                          |                                                              |                                                              |</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>|                                 |                                                              |                                                              |</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. R 数据类型对照表</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>| Value    | R vector    | Rcpp vector                           | Rcpp matrix                           | Rcpp scalar | C++ scalar |</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>| -------- | ----------- | ------------------------------------- | ------------------------------------- | ----------- | ---------- |</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>| Logical  | <span class="in">`logical`</span>   | <span class="in">`LogicalVector`</span>                       | <span class="in">`LogicalMatrix`</span>                       | -           | <span class="in">`bool`</span>     |</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>| Integer  | <span class="in">`integer`</span>   | <span class="in">`IntegerVector`</span>                       | <span class="in">`IntegerMatrix`</span>                       | -           | <span class="in">`int`</span>      |</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>| Real     | <span class="in">`numeric`</span>   | <span class="in">`NumericVector`</span>                       | <span class="in">`NumericMatrix`</span>                       | -           | <span class="in">`double`</span>   |</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>| Complex  | <span class="in">`complex`</span>   | <span class="in">`ComplexVector`</span>                       | <span class="in">`ComplexMatrix`</span>                       | <span class="in">`Rcomplex`</span>  | <span class="in">`complex`</span>  |</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>| String   | <span class="in">`character`</span> | <span class="in">`CharacterVector`</span><span class="kw">&lt;br&gt;</span>(<span class="in">`StringVector`</span>) | <span class="in">`CharacterMatrix`</span><span class="kw">&lt;br&gt;</span>(<span class="in">`StringMatrix`</span>) | <span class="in">`String`</span>    | <span class="in">`string`</span>   |</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>| Date     | <span class="in">`Date`</span>      | <span class="in">`DateVector`</span>                          | -                                     | <span class="in">`Date`</span>      | -          |</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>| Datetime | <span class="in">`POSIXct`</span>   | <span class="in">`DatetimeVector`</span>                      | -                                     | <span class="in">`Datetime`</span>  | <span class="in">`time_t`</span>   |</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>| R            | Rcpp        |</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>| ------------ | ----------- |</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>| <span class="in">`data.frame`</span> | <span class="in">`DataFrame`</span> |</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>| <span class="in">`list`</span>       | <span class="in">`List`</span>      |</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>| S3 class     | <span class="in">`List`</span>      |</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>| S4 class     | <span class="in">`S4`</span>        |</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Rcpp 语法糖</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>即 Rcpp 中提供了基础 R 中的的一些基本函数,几乎和 基础 R 一样,支持向量运算.</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>https://teuder.github.io/rcpp4everyone_en/</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/rcpp-sugar.html</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>| Rcpp                        | C++           | Matlab        | Note                                                         |</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>| --------------------------- | ------------- | ------------- | ------------------------------------------------------------ |</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>| Rcout                       | std::cout     |               |                                                              |</span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>| Rcerr                       | std::cerr     |               | 注意这里的四个函数都只能<span class="kw">&lt;br&gt;</span>打印一些信息并输出到屏幕,<span class="kw">&lt;br&gt;</span>并不能中止程序 |</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>| Rprintf( format, variables) | std::printf() |               |                                                              |</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>| REprintf()                  |               |               |                                                              |</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>| stop("范围提示信息")        |               | error('信息') | 这要遇到这种情况,后面的程序不再运行<span class="kw">&lt;br&gt;</span>直接打印错误信息      |</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>|                             |               |               |                                                              |</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. 迭代器</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>RCPP 提供的迭代器</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>NumericVector<span class="sc">::</span>iterator</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>IntegerVector<span class="sc">::</span>iterator</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>LogicalVector<span class="sc">::</span>iterator</span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>CharacterVector<span class="sc">::</span>iterator</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>DataFrame<span class="sc">::</span>iterator</span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>List<span class="sc">::</span>iterator</span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="in">```c++</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> rcpp_sum<span class="op">(</span>NumericVector x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span>NumericVector<span class="op">::</span>iterator i <span class="op">=</span> x<span class="op">.</span>begin<span class="op">();</span> i <span class="op">!=</span> x<span class="op">.</span>end<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>    total <span class="op">+=</span> <span class="op">*</span>i<span class="op">;</span></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> total<span class="op">;</span></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`i = v.begin()`</span> : 迭代器 <span class="in">`i`</span>指向<span class="in">`v`</span>的第一个元素</span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`++i`</span> : Updates <span class="in">`i`</span> to the state pointing to the next element.</span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`--i`</span> : Updates <span class="in">`i`</span> to the state pointing to the previous element.</span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`i + 1`</span> : Represents an iterator pointing to the element 1 elements behind of <span class="in">`i`</span>.</span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`i - 1`</span> : Represents an iterator pointing to the element 1 elements ahead of <span class="in">`i`</span>.</span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`*i`</span> : 表示指针<span class="in">`i`</span> 指向的元素的值</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`v.end()`</span> : 表示<span class="in">`v`</span>的最后一个元素</span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`*(v.begin()+k)`</span> : Represents the value of the <span class="in">`k`</span>-th element of <span class="in">`v`</span> ( 即 <span class="in">`v[k]`</span>).</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`v[k] = *(v.begin() + k)`</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

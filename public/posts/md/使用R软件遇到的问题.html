@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="zsc">
+
+<title>快乐的一天 - R软件常见问题</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - R软件常见问题">
+<meta property="og:description" content="由于用Rstudio设置了保存的编码都用UTF-8，所以在保存文件时（特别是csv文件），经常遇到乱码的现象，比如使用data.table:::fwrite()、自带的write.csv()、readr:::write_csv()都乱码">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">R软件常见问题</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">R软件常见问题</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">hugo</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2018年1月7日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#读取数据编码问题" id="toc-读取数据编码问题" class="nav-link active" data-scroll-target="#读取数据编码问题">1、读取数据编码问题</a></li>
+  <li><a href="#保存数据编码问题win中" id="toc-保存数据编码问题win中" class="nav-link" data-scroll-target="#保存数据编码问题win中">2、保存数据编码问题(win中)</a></li>
+  <li><a href="#加载java问题" id="toc-加载java问题" class="nav-link" data-scroll-target="#加载java问题">3、加载java问题</a></li>
+  <li><a href="#ggplot2作图标题无法居中" id="toc-ggplot2作图标题无法居中" class="nav-link" data-scroll-target="#ggplot2作图标题无法居中">4、ggplot2作图标题无法居中</a></li>
+  <li><a href="#r更新" id="toc-r更新" class="nav-link" data-scroll-target="#r更新">5、R更新</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="读取数据编码问题" class="level2">
+<h2 class="anchored" data-anchor-id="读取数据编码问题">1、读取数据编码问题</h2>
+<ul>
+<li><p>读取csv文件出现中文乱码方案，增加编码格式参数</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(trainPath,<span class="at">header=</span><span class="cn">TRUE</span>,<span class="at">stringsAsFactors=</span><span class="cn">TRUE</span>,<span class="at">encoding =</span> <span class="st">"UTF-8"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>保存csv文件中出现乱码，编码格式参数</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(outp, <span class="at">file =</span> path, <span class="at">quote =</span> F, <span class="at">fileEncoding =</span> <span class="st">"UTF-8"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#存储utf-8也乱码，我的电脑有时会发疯，有时又不会</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>source 加载R脚本中文乱码</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"core.R"</span>,<span class="at">encoding=</span><span class="st">"utf-8"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>RStudio中脚本中文乱码，编码格式设置：tools -&gt; global option…., 设置为UTF-8，最后，在打开文件的时候，选择File -&gt; Reopen with encoding菜单，选择我们使用UTF-8编码打开文件，这样子就可以正确地显示中文了。</p></li>
+<li><p>R语言环境的显示问题</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getlocale</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">category =</span> <span class="st">"LC_ALL"</span>,<span class="at">local=</span><span class="st">"us"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">category =</span> <span class="st">"LC_ALL"</span>,<span class="at">local=</span><span class="st">"chinese"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="保存数据编码问题win中" class="level2">
+<h2 class="anchored" data-anchor-id="保存数据编码问题win中">2、保存数据编码问题(win中)</h2>
+<p>由于用Rstudio设置了保存的编码都用UTF-8，所以在保存文件时（特别是csv文件），经常遇到乱码的现象，比如使用data.table:::fwrite()、自带的write.csv()、readr:::write_csv()都乱码</p>
+<p>产生的原因：</p>
+<p>因为excel打开文件时默认使用unicode的编码方式（还有的网友说是默认以ANSI编码方式打开，待考）。在Unicode基本多文种平面定义的字符（无论是拉丁字母、汉字或其他文字或符号），一律使用2字节储存。恰恰utf-8是1字节的存储方式，所以excel直接打开时会出现乱码。</p>
+<p>解决办法：</p>
+<ul>
+<li><p><strong>方法1、数据导入–</strong>不建议</p>
+<p>打开 Excel，执行“数据”-&gt;“自文本”，选择 CSV 文件，出现文本导入向导，选择“分隔符号”，下一步，勾选“逗号”，去掉“ Tab 键”，下一步，完成，在“导入数据”对话框里，直接点确定。导入之后，所有汉字显示正常，乱码问题解决。</p>
+<p>万一这个文本里面的有逗号，巧好分割时候是逗号（csv文件是以逗号进行存储的）,这就会对不齐了，产生新的问题</p></li>
+<li><p><strong>方法2、先另存再打开</strong></p>
+<p>使用记事本打开CSV文件，“文件”-&gt;“另存为”，编码方式选择ANSI，保存完毕后，用EXCEL打开这个文件就不会出现乱码的情况。</p>
+<p>不会乱码以后选择另存为excel</p></li>
+<li><p><strong>方法3、用readr:::write_excel_csv()函数解决</strong></p>
+<p>直接用write_excel_csv()这个函数就可以解决上述问题</p></li>
+</ul>
+</section>
+<section id="加载java问题" class="level2">
+<h2 class="anchored" data-anchor-id="加载java问题">3、加载java问题</h2>
+<ol type="1">
+<li><p>首先下载java ，把java加入环境变量，测试是否安装成功，在cmd命名下输入: java -version,返回</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">C:\Users\zsc</span><span class="op">&gt;</span>java <span class="at">-version</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> version <span class="st">"1.8.0_151"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Java</span><span class="er">(</span><span class="ex">TM</span><span class="kw">)</span> <span class="ex">SE</span> Runtime Environment <span class="er">(</span><span class="ex">build</span> 1.8.0_151-b12<span class="kw">)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Java</span> HotSpot<span class="er">(</span><span class="ex">TM</span><span class="kw">)</span> <span class="ex">64-Bit</span> Server VM <span class="er">(</span><span class="ex">build</span> 25.151-b12, mixed mode<span class="kw">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>如果上述都没问题，在R中运行rjava还是报错怎么办？比如，导入包library(xlsx)的时候，出错：</p></li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">library</span>(xlsx)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>载入需要的程辑包：rJava</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Error<span class="sc">:</span> package or namespace load failed <span class="cf">for</span> ‘rJava’<span class="sc">:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">loadNamespace</span>()里算<span class="st">'rJava'</span>时.onLoad失败了，详细内容：</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  调用<span class="sc">:</span> <span class="fu">inDL</span>(x, <span class="fu">as.logical</span>(local), <span class="fu">as.logical</span>(now), ...)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  错误<span class="sc">:</span> unable to load shared object <span class="st">'D:/Program Files (x86)/R/R-3.4.2/library/rJava/libs/x64/rJava.dll'</span><span class="sc">:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  LoadLibrary failure<span class="sc">:</span>  找不到指定的模块。</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>Error<span class="sc">:</span> 无法载入程辑包‘rJava’</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>解决方法：因为在运行R的过程中，通常会需要调用rJava.dll来运行虚拟环境。这种情况，一般是系统中装了JAVA环境后安装其他软件的时候再次装了JAVA的类库rJava.dll，R的运行环境无法调用确认项。找到自己安装的JAVA环境，去配置R的系统环境中的rJava.dll：</p>
+<p>​ <code>Sys.setenv(JAVA_HOME='D:/Program Files (x86)/Java/jdk1.8.0_144/jre')</code></p>
+<p>再次运行library(xlsx),就可以了！(不过每次都要设置，可以在R的配置文件中更改哦！)</p>
+</section>
+<section id="ggplot2作图标题无法居中" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot2作图标题无法居中">4、ggplot2作图标题无法居中</h2>
+<p>好像新版的ggplot2包标题默认居左，只需要在作图函数后面加上</p>
+<p>​ <code>theme(plot.title = element_text(hjust = 0.5))</code></p>
+<p>这行就好了</p>
+</section>
+<section id="r更新" class="level2">
+<h2 class="anchored" data-anchor-id="r更新">5、R更新</h2>
+<p>Windows系统中使⽤installr 套件的方式来更新R。建议在R终端机（termianl）中操作。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"installr"</span>) <span class="co"># 安装installr</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>installr<span class="sc">::</span><span class="fu">updateR</span>() <span class="co"># 未来要更新的R的时候，只要执行这行即可​</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<pre class="markdown" data-shortcodes="false"><code>---
+title: R软件常见问题
+date: '2018-01-07'
+categories:
+  - r
+  - hugo
+---
+
+
+## 1、读取数据编码问题
+
+- 读取csv文件出现中文乱码方案，增加编码格式参数
+
+  ```R
+  read.csv(trainPath,header=TRUE,stringsAsFactors=TRUE,encoding = "UTF-8")
+  ```
+
+- 保存csv文件中出现乱码，编码格式参数
+
+  ```R
+  write.csv(outp, file = path, quote = F, fileEncoding = "UTF-8")
+  #存储utf-8也乱码，我的电脑有时会发疯，有时又不会
+  ```
+
+- source 加载R脚本中文乱码
+
+  ```R
+  source("core.R",encoding="utf-8")
+  ```
+
+
+- RStudio中脚本中文乱码，编码格式设置：tools -&gt; global option...., 设置为UTF-8，最后，在打开文件的时候，选择File -&gt; Reopen with encoding菜单，选择我们使用UTF-8编码打开文件，这样子就可以正确地显示中文了。
+
+- R语言环境的显示问题
+
+  ```R
+  sessionInfo()
+  Sys.getlocale()
+  Sys.setlocale(category = "LC_ALL",local="us")
+  Sys.setlocale(category = "LC_ALL",local="chinese")
+  ```
+
+## 2、保存数据编码问题(win中)
+
+由于用Rstudio设置了保存的编码都用UTF-8，所以在保存文件时（特别是csv文件），经常遇到乱码的现象，比如使用data.table:::fwrite()、自带的write.csv()、readr:::write_csv()都乱码
+
+ 产生的原因：
+
+因为excel打开文件时默认使用unicode的编码方式（还有的网友说是默认以ANSI编码方式打开，待考）。在Unicode基本多文种平面定义的字符（无论是拉丁字母、汉字或其他文字或符号），一律使用2字节储存。恰恰utf-8是1字节的存储方式，所以excel直接打开时会出现乱码。
+
+解决办法：
+
+- **方法1、数据导入--**不建议
+
+  打开 Excel，执行“数据”-&gt;“自文本”，选择 CSV 文件，出现文本导入向导，选择“分隔符号”，下一步，勾选“逗号”，去掉“ Tab 键”，下一步，完成，在“导入数据”对话框里，直接点确定。导入之后，所有汉字显示正常，乱码问题解决。
+
+  万一这个文本里面的有逗号，巧好分割时候是逗号（csv文件是以逗号进行存储的）,这就会对不齐了，产生新的问题
+
+- **方法2、先另存再打开**
+
+  使用记事本打开CSV文件，“文件”-&gt;“另存为”，编码方式选择ANSI，保存完毕后，用EXCEL打开这个文件就不会出现乱码的情况。
+
+  不会乱码以后选择另存为excel
+
+- **方法3、用readr:::write_excel_csv()函数解决**
+
+  直接用write_excel_csv()这个函数就可以解决上述问题
+
+
+
+## 3、加载java问题
+
+1. 首先下载java ，把java加入环境变量，测试是否安装成功，在cmd命名下输入: java -version,返回
+
+   ```bash
+   C:\Users\zsc&gt;java -version
+   java version "1.8.0_151"
+   Java(TM) SE Runtime Environment (build 1.8.0_151-b12)
+   Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode)
+   ```
+
+   
+
+2. 如果上述都没问题，在R中运行rjava还是报错怎么办？比如，导入包library(xlsx)的时候，出错：
+
+```R
+&gt; library(xlsx)
+载入需要的程辑包：rJava
+Error: package or namespace load failed for ‘rJava’:
+ loadNamespace()里算'rJava'时.onLoad失败了，详细内容：
+  调用: inDL(x, as.logical(local), as.logical(now), ...)
+  错误: unable to load shared object 'D:/Program Files (x86)/R/R-3.4.2/library/rJava/libs/x64/rJava.dll':
+  LoadLibrary failure:  找不到指定的模块。
+Error: 无法载入程辑包‘rJava’
+```
+
+解决方法：因为在运行R的过程中，通常会需要调用rJava.dll来运行虚拟环境。这种情况，一般是系统中装了JAVA环境后安装其他软件的时候再次装了JAVA的类库rJava.dll，R的运行环境无法调用确认项。找到自己安装的JAVA环境，去配置R的系统环境中的rJava.dll：
+
+​           `Sys.setenv(JAVA_HOME='D:/Program Files (x86)/Java/jdk1.8.0_144/jre')` 
+
+再次运行library(xlsx),就可以了！(不过每次都要设置，可以在R的配置文件中更改哦！)
+
+## 4、ggplot2作图标题无法居中
+
+好像新版的ggplot2包标题默认居左，只需要在作图函数后面加上        
+
+​                         `theme(plot.title = element_text(hjust = 0.5))  ` 
+
+这行就好了
+
+## 5、R更新
+
+Windows系统中使⽤installr 套件的方式来更新R。建议在R终端机（termianl）中操作。
+
+```R
+install.packages("installr") # 安装installr
+installr::updateR() # 未来要更新的R的时候，只要执行这行即可​
+```
+</code></pre>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

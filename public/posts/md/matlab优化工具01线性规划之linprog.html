@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="zsc">
+
+<title>快乐的一天 - matlab优化工具01线性规划之linprog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - matlab优化工具01线性规划之linprog">
+<meta property="og:description" content="常用这些函数， 写个笔记">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">matlab优化工具01线性规划之linprog</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">matlab优化工具01线性规划之linprog</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">matlab</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2021年5月16日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#matlab优化工具01线性规划之linprog" id="toc-matlab优化工具01线性规划之linprog" class="nav-link active" data-scroll-target="#matlab优化工具01线性规划之linprog">matlab优化工具01线性规划之linprog</a>
+  <ul class="collapse">
+  <li><a href="#matlab-优化工具箱函数" id="toc-matlab-优化工具箱函数" class="nav-link" data-scroll-target="#matlab-优化工具箱函数">matlab 优化工具箱函数</a>
+  <ul class="collapse">
+  <li><a href="#基本函数" id="toc-基本函数" class="nav-link" data-scroll-target="#基本函数">基本函数</a></li>
+  <li><a href="#全局优化函数" id="toc-全局优化函数" class="nav-link" data-scroll-target="#全局优化函数">全局优化函数</a></li>
+  </ul></li>
+  <li><a href="#基本选项参数" id="toc-基本选项参数" class="nav-link" data-scroll-target="#基本选项参数">基本选项参数</a></li>
+  <li><a href="#线性规划的标准型" id="toc-线性规划的标准型" class="nav-link" data-scroll-target="#线性规划的标准型">线性规划的标准型</a>
+  <ul class="collapse">
+  <li><a href="#matlab-实现线性规划-linprog" id="toc-matlab-实现线性规划-linprog" class="nav-link" data-scroll-target="#matlab-实现线性规划-linprog">matlab 实现线性规划 — linprog</a></li>
+  <li><a href="#例1-线性规划" id="toc-例1-线性规划" class="nav-link" data-scroll-target="#例1-线性规划">例1 线性规划</a></li>
+  <li><a href="#双下标的线性规划问题-运输问题" id="toc-双下标的线性规划问题-运输问题" class="nav-link" data-scroll-target="#双下标的线性规划问题-运输问题">双下标的线性规划问题 — 运输问题</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="matlab优化工具01线性规划之linprog" class="level1">
+<h1>matlab优化工具01线性规划之linprog</h1>
+<p>常用这些函数， 写个笔记</p>
+<section id="matlab-优化工具箱函数" class="level2">
+<h2 class="anchored" data-anchor-id="matlab-优化工具箱函数">matlab 优化工具箱函数</h2>
+<section id="基本函数" class="level3">
+<h3 class="anchored" data-anchor-id="基本函数">基本函数</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/uPic/202105160936image-20210516093622862.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image-20210516093622862</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="全局优化函数" class="level3">
+<h3 class="anchored" data-anchor-id="全局优化函数">全局优化函数</h3>
+<ul>
+<li>遗传算法 ga() , 推荐, 可以处理带有约束问题的优化, 还可以求解混合整数规划</li>
+<li>模式搜索算法 patternsearch()</li>
+<li>模拟退火求解 simulannealbnd()</li>
+<li>粒子群算法 particleswarm</li>
+</ul>
+</section>
+</section>
+<section id="基本选项参数" class="level2">
+<h2 class="anchored" data-anchor-id="基本选项参数">基本选项参数</h2>
+<ul>
+<li>optimset 函数用于获取 MATLAB 优化工具箱所有的属性设置选项</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% 函数用法与解释</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span>(<span class="ss">'paraml'</span><span class="op">,</span><span class="va">vaJuel</span><span class="op">,</span><span class="ss">'param2'</span><span class="op">,</span><span class="va">value2</span><span class="op">,...</span>)  <span class="co">% 如果选择用系统的默认值，则只需将参数的值设为 \[\].</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">optimset</span><span class="op">:</span> 列出一个完整的优化参数列表及相应的可选值。</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span> <span class="op">:</span> 创建一个名为 <span class="va">optoptionslOns</span> 的优化参数结构体，其成员参数的取值为系统的默认值。</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span>(<span class="va">optimfun</span>)<span class="op">:</span> 创建一个名为 <span class="va">options</span> 的优化参数结构体，其所有参数名及值为优化函数 <span class="va">optimfun</span> 的默认值。</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">options</span><span class="op">=</span><span class="va">optimset</span>(<span class="va">oldopts</span><span class="op">,</span> <span class="ss">'paraml'</span> <span class="op">,</span><span class="va">valuel</span> <span class="op">,...</span>) <span class="op">:</span>将优化参数结构体 <span class="va">oldopts中的参数</span> <span class="va">paraml</span> 改为 <span class="va">valuel</span> 并将更改后的优化参数结构体命名为 <span class="va">options</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span>(<span class="va">oldopts</span>，<span class="va">newopts</span>)<span class="op">:</span> 将已有的优化参数结构体 <span class="va">oldopts</span> 与新的 优化参数结构体 <span class="va">newopts</span> 合井， <span class="va">newopts</span> 中的任意非空参数值将覆盖 <span class="va">oldopts</span> 中的相应参数值。</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">%% eg: 列出所有的优化参数列表</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">optimset</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">%% 结果省略</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>optimget 函数: 想查看某个优化参数的值</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">val</span><span class="op">=</span> <span class="va">optimget</span>(<span class="va">options</span><span class="op">,</span> <span class="ss">'param'</span> ) <span class="op">:</span> 获取优化参数结构体 <span class="va">options</span> 中参数 <span class="va">param</span> 的值。</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">val</span> <span class="op">=</span> <span class="va">optimget</span>(<span class="va">options</span><span class="op">,</span> <span class="ss">'param'</span>， <span class="va">default</span>)<span class="op">:</span> 如果参数 <span class="va">param</span> 在 <span class="va">options</span> 中没有定义，则返回其默认值</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">%% eg: 查看某个优化参数的值</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">clc</span><span class="op">,</span><span class="va">clear</span> <span class="va">all</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span>(<span class="ss">'fmincon'</span>) <span class="co">% 省略结果</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span><span class="va">optimset</span>(<span class="va">options</span><span class="op">,</span> <span class="ss">'Display'</span> <span class="op">,</span> <span class="ss">'iter'</span>) <span class="co">%修改 Display 属性值为iter</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="va">val</span> <span class="op">=</span> <span class="va">optimget</span>(<span class="va">options</span><span class="op">,</span><span class="ss">'Display'</span>) <span class="co">% 重新获取fmincon 函数的 Display属性值</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/uPic/202105161025image-20210516102520466.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image-20210516102520466</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="线性规划的标准型" class="level2">
+<h2 class="anchored" data-anchor-id="线性规划的标准型">线性规划的标准型</h2>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \min \quad   f^T x \\
+&amp; \text {s.t.} \begin{cases}
+\textbf{A} \cdot x \leq b \\
+\textbf{Aeq} \cdot x=beq \\
+lb \leq x \leq ub
+\end{cases}
+\end{aligned}
+\]</span> 其中 <span class="math inline">\(f^T, x, b, beq\)</span> 是向量, <span class="math inline">\(\textbf{A}, \textbf{Aeq}\)</span>是矩阵,<span class="math inline">\(\textbf{A}\)</span> 线性不等式, <span class="math inline">\(\textbf{Aeq}\)</span> 线性等式,</p>
+<section id="matlab-实现线性规划-linprog" class="level3">
+<h3 class="anchored" data-anchor-id="matlab-实现线性规划-linprog">matlab 实现线性规划 — linprog</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">% 语法</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">linprog</span>(<span class="va">f</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">b</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq</span><span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span><span class="op">,</span><span class="va">options</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">linprog</span>(<span class="va">problem</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">fval</span><span class="op">,</span><span class="va">exitflag</span><span class="op">,</span><span class="va">output</span><span class="op">,</span><span class="va">lambda</span>] <span class="op">=</span> <span class="va">linprog</span>(___)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">%% 如果不存在某个约束或变量,设置为空即可</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="例1-线性规划" class="level3">
+<h3 class="anchored" data-anchor-id="例1-线性规划">例1 线性规划</h3>
+<p><span class="math display">\[
+\begin{aligned}
+min \quad f(x) = -5x_1 - 4x_2 - 6x_3 \\
+s.t. \begin{cases}
+x_1 - x_2 + x_3 \leq 20\\
+3x_1 + 2x_2+4x_3 \leq 42\\
+3x_1+2x_2 \leq 30\\
+x_1,x_2,x_3 \geq 0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% matlab 实现 --- 方法一</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">clc</span><span class="op">,</span> <span class="va">clear</span> <span class="va">all</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span> [<span class="op">-</span><span class="fl">5</span><span class="op">;</span> <span class="op">-</span><span class="fl">4</span><span class="op">;</span> <span class="op">-</span><span class="fl">6</span>]<span class="op">;</span> <span class="co">% 列向量</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="va">A</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,-</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3</span><span class="op">,</span><span class="fl">2</span><span class="op">,</span><span class="fl">4</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3</span><span class="op">,</span><span class="fl">2</span><span class="op">,</span><span class="fl">0</span>]<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="va">b</span> <span class="op">=</span> [<span class="fl">20</span><span class="op">;</span><span class="fl">42</span><span class="op">;</span><span class="fl">30</span>]<span class="op">;</span> <span class="co">% 列向量</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="va">lb</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="fl">1</span><span class="op">,</span><span class="fl">3</span>)<span class="op">;</span> <span class="co">% 行向量</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="va">ub</span> <span class="op">=</span> []<span class="op">;</span> <span class="co">% 为空,则表示无上限,即正无穷</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimoptions</span>(<span class="ss">'linprog'</span><span class="op">,</span><span class="ss">'Algorithm'</span><span class="op">,</span><span class="ss">'dual-simplex'</span><span class="op">,</span><span class="ss">'Display'</span><span class="op">,</span><span class="ss">'iter'</span>)<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">fval</span><span class="op">,</span><span class="va">exitflag</span><span class="op">,</span><span class="va">output</span><span class="op">,</span><span class="va">lambda</span>]  <span class="op">=</span> <span class="va">linprog</span>(<span class="va">f</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">b</span><span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span><span class="op">,</span><span class="va">options</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">% ------------------ 结果 ------------------</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>   <span class="fl">15.0000</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.0000</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="va">fval</span> <span class="op">=</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>   <span class="op">-</span><span class="fl">78</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="va">exitflag</span> <span class="op">=</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% 方法二: 以结构体方式创建 </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">%%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">% optimproblem('ObjectiveSense','max')  % 最优化问题的创建,  ObjectiveSense属性求最大值(默认最小值)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">%%  optimvar 决策变量的定义,n,m,k 设置决策变量的维度,不设置k则变量维度为n*m</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">% x = optimvar('x',n,m,k,'LowerBound',lb,'UpperBound',ub)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span> <span class="op">=</span> <span class="va">optimproblem</span>(<span class="ss">'ObjectiveSense'</span><span class="op">,</span><span class="ss">'min'</span>)<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">optimvar</span>(<span class="ss">'x'</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="ss">'LowerBound'</span><span class="op">,</span>[<span class="fl">0</span><span class="op">;</span><span class="fl">0</span><span class="op">;</span><span class="fl">0</span>])<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span>.<span class="va">Objective</span> <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">*</span><span class="va">x</span>(<span class="fl">1</span>) <span class="op">-</span> <span class="fl">4</span><span class="op">*</span><span class="va">x</span>(<span class="fl">2</span>) <span class="op">-</span><span class="fl">6</span><span class="op">*</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">;</span> </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span>.<span class="va">Constraints</span>.<span class="va">c1</span> <span class="op">=</span> <span class="va">x</span>(<span class="fl">1</span>) <span class="op">-</span> <span class="va">x</span>(<span class="fl">2</span>) <span class="op">+</span> <span class="va">x</span>(<span class="fl">3</span>) <span class="op">&lt;=</span> <span class="fl">20</span><span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span>.<span class="va">Constraints</span>.<span class="va">c2</span> <span class="op">=</span> <span class="fl">3</span><span class="op">*</span><span class="va">x</span>(<span class="fl">1</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span>(<span class="fl">2</span>) <span class="op">+</span> <span class="fl">4</span><span class="op">*</span><span class="va">x</span>(<span class="fl">3</span>) <span class="op">&lt;=</span> <span class="fl">42</span><span class="op">;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span>.<span class="va">Constraints</span>.<span class="va">c3</span> <span class="op">=</span> <span class="fl">3</span><span class="op">*</span><span class="va">x</span>(<span class="fl">1</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span>(<span class="fl">2</span>) <span class="op">&lt;=</span> <span class="fl">30</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="va">sols</span> <span class="op">=</span> <span class="va">solve</span>(<span class="va">prob</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span> <span class="va">sols</span>.<span class="va">x</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">% ------------------ 结果 ------------------</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>   <span class="fl">15.0000</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.0000</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="双下标的线性规划问题-运输问题" class="level3">
+<h3 class="anchored" data-anchor-id="双下标的线性规划问题-运输问题">双下标的线性规划问题 — 运输问题</h3>
+<ul>
+<li><p>如果目标函数以及约束条件中的变量是以矩阵描述,则按照一一对应规则变成向量的形式即可求解</p></li>
+<li><p>有些时候书写比较麻烦,比如运输问题, 则可以编写函数使其自动化</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/uPic/202105161058image-20210516105838325.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image-20210516105838325</figcaption><p></p>
+</figure>
+</div></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> [<span class="va">x</span><span class="op">,</span><span class="va">f0</span><span class="op">,</span> <span class="va">flag</span>] <span class="op">=</span> <span class="va">transport_linprog</span>(<span class="va">C</span><span class="op">,</span><span class="va">s</span><span class="op">,</span><span class="va">d</span><span class="op">,</span><span class="va">indkey</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>[<span class="va">m</span><span class="op">,</span><span class="va">n</span>] <span class="op">=</span> <span class="va">size</span>(<span class="va">C</span>)<span class="op">;</span> <span class="va">A</span><span class="op">=</span>[]<span class="op">;</span> <span class="va">B</span> <span class="op">=</span>[]<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">Aeq</span>(<span class="va">i</span><span class="op">,</span>(<span class="va">i</span><span class="op">-</span><span class="fl">1</span>)<span class="op">*</span><span class="va">m</span><span class="op">+</span><span class="fl">1</span><span class="op">:</span><span class="va">i</span><span class="op">*</span><span class="va">m</span>) <span class="op">=</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">m</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">Aeq</span>(<span class="va">n</span><span class="op">+</span><span class="va">i</span><span class="op">,</span><span class="va">i</span><span class="op">:</span><span class="va">m</span><span class="op">:</span><span class="va">n</span><span class="op">*</span><span class="va">m</span>) <span class="op">=</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="va">xm</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span><span class="op">*</span><span class="va">m</span>)<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="va">f</span><span class="op">=</span> <span class="va">C</span>(<span class="op">:</span>)<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="va">Beq</span><span class="op">=</span>[<span class="va">s</span>(<span class="op">:</span>)<span class="op">;</span><span class="va">d</span>(<span class="op">:</span>)]<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> <span class="va">nargin</span> <span class="op">==</span> <span class="fl">3</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    [<span class="va">x</span><span class="op">,</span><span class="va">f0</span><span class="op">,</span><span class="va">flag</span>] <span class="op">=</span> <span class="va">linprog</span>(<span class="va">f</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">B</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">Beq</span><span class="op">,</span><span class="va">xm</span>)<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    [<span class="va">x</span><span class="op">,</span><span class="va">f0</span><span class="op">,</span><span class="va">flag</span>] <span class="op">=</span> <span class="va">intlinprog</span>(<span class="va">f</span><span class="op">,</span><span class="va">indkey</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">B</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">Beq</span><span class="op">,</span><span class="va">xm</span>)<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="va">x</span> <span class="op">=</span> <span class="va">round</span>(<span class="va">x</span>)<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">reshape</span>(<span class="va">x</span><span class="op">,</span><span class="va">m</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span> <span class="co">%将向量解还原为矩阵所需的形式</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% 例题</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">C</span> <span class="op">=</span> [<span class="fl">464</span><span class="op">,</span><span class="fl">513</span><span class="op">,</span><span class="fl">654</span><span class="op">,</span><span class="fl">867</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">352</span><span class="op">,</span><span class="fl">416</span><span class="op">,</span><span class="fl">690</span><span class="op">,</span><span class="fl">791</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">995</span><span class="op">,</span><span class="fl">682</span><span class="op">,</span><span class="fl">388</span><span class="op">,</span><span class="fl">685</span>]<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> [<span class="fl">80</span><span class="op">,</span><span class="fl">65</span><span class="op">,</span><span class="fl">70</span><span class="op">,</span><span class="fl">85</span>]<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="va">d</span><span class="op">=</span>[<span class="fl">75</span><span class="op">;</span><span class="fl">125</span><span class="op">;</span><span class="fl">100</span>]<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>[<span class="va">x0</span><span class="op">,</span><span class="va">f0</span>] <span class="op">=</span> <span class="va">transport_linprog</span>(<span class="va">C</span><span class="op">,</span><span class="va">s</span><span class="op">,</span><span class="va">d</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">% ------------------ 结果 ------------------</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="va">Optimal</span> <span class="va">solution</span> <span class="va">found</span>.</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>    <span class="fl">20</span>     <span class="fl">0</span>    <span class="fl">55</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="fl">80</span>    <span class="fl">45</span>     <span class="fl">0</span>     <span class="fl">0</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">0</span>    <span class="fl">70</span>    <span class="fl">30</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="va">f0</span> <span class="op">=</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      <span class="fl">152535</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="特殊的运输问题-指派问题" class="level4">
+<h4 class="anchored" data-anchor-id="特殊的运输问题-指派问题">特殊的运输问题 — 指派问题</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/uPic/202105161110image-20210516111020291.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image-20210516111020291</figcaption><p></p>
+</figure>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">C</span><span class="op">=</span> [<span class="fl">15</span><span class="op">,</span><span class="fl">18</span><span class="op">,</span><span class="fl">21</span><span class="op">,</span><span class="fl">24</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fl">19</span><span class="op">,</span><span class="fl">23</span><span class="op">,</span><span class="fl">22</span><span class="op">,</span><span class="fl">18</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">26</span><span class="op">,</span><span class="fl">17</span><span class="op">,</span><span class="fl">16</span><span class="op">,</span><span class="fl">19</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">19</span><span class="op">,</span><span class="fl">21</span><span class="op">,</span><span class="fl">23</span><span class="op">,</span><span class="fl">17</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>]<span class="op">;</span><span class="co">% s和d向量可以是列向量也可以是行向量</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="va">d</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>]<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>[<span class="va">n</span><span class="op">,</span><span class="va">m</span>] <span class="op">=</span> <span class="va">size</span>(<span class="va">C</span>)<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>[<span class="va">x0</span><span class="op">,</span><span class="va">f0</span>] <span class="op">=</span> <span class="va">transport_linprog</span>(<span class="va">C</span><span class="op">,</span><span class="va">s</span><span class="op">,</span><span class="va">d</span><span class="op">,</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">*</span><span class="va">m</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">% ------------------ 结果 ------------------</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">1</span>     <span class="fl">0</span>     <span class="fl">0</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">0</span>     <span class="fl">0</span>     <span class="fl">0</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">0</span>     <span class="fl">1</span>     <span class="fl">0</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">0</span>     <span class="fl">0</span>     <span class="fl">1</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="va">f0</span> <span class="op">=</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="fl">70</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>参考:</p>
+<ul>
+<li><p>matlab函数官网</p></li>
+<li><p>&lt;&lt;薛定宇教授大讲堂卷5  MATLAB最优化计算&gt;&gt;_含目录py.pdf</p></li>
+<li><p>&lt;&lt;MATLAB R2015b最优化计算—李娅&gt;&gt;_含目录</p></li>
+<li><p>&lt;&lt;MATLAB优化算法_张岩，吴水根著_北京：清华大学出版社&gt;&gt;</p></li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> matlab优化工具01线性规划之linprog</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2021-05-16'</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> matlab</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># matlab优化工具01线性规划之linprog</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>常用这些函数， 写个笔记</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## matlab 优化工具箱函数</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">### 基本函数</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="al">![image-20210516093622862](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/uPic/202105160936image-20210516093622862.png)</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### 全局优化函数</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>遗传算法 ga() , 推荐, 可以处理带有约束问题的优化, 还可以求解混合整数规划</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>模式搜索算法 patternsearch()</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>模拟退火求解 simulannealbnd()</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>粒子群算法 particleswarm</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## 基本选项参数</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>optimset 函数用于获取 MATLAB 优化工具箱所有的属性设置选项</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="in">``` matlab</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">%% 函数用法与解释</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span>(<span class="ss">'paraml'</span><span class="op">,</span><span class="va">vaJuel</span><span class="op">,</span><span class="ss">'param2'</span><span class="op">,</span><span class="va">value2</span><span class="op">,...</span>)  <span class="co">% 如果选择用系统的默认值，则只需将参数的值设为 \[\].</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="va">optimset</span><span class="op">:</span> 列出一个完整的优化参数列表及相应的可选值。</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span> <span class="op">:</span> 创建一个名为 <span class="va">optoptionslOns</span> 的优化参数结构体，其成员参数的取值为系统的默认值。</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span>(<span class="va">optimfun</span>)<span class="op">:</span> 创建一个名为 <span class="va">options</span> 的优化参数结构体，其所有参数名及值为优化函数 <span class="va">optimfun</span> 的默认值。</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="va">options</span><span class="op">=</span><span class="va">optimset</span>(<span class="va">oldopts</span><span class="op">,</span> <span class="ss">'paraml'</span> <span class="op">,</span><span class="va">valuel</span> <span class="op">,...</span>) <span class="op">:</span>将优化参数结构体 <span class="va">oldopts中的参数</span> <span class="va">paraml</span> 改为 <span class="va">valuel</span> 并将更改后的优化参数结构体命名为 <span class="va">options</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span>(<span class="va">oldopts</span>，<span class="va">newopts</span>)<span class="op">:</span> 将已有的优化参数结构体 <span class="va">oldopts</span> 与新的 优化参数结构体 <span class="va">newopts</span> 合井， <span class="va">newopts</span> 中的任意非空参数值将覆盖 <span class="va">oldopts</span> 中的相应参数值。</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">%% eg: 列出所有的优化参数列表</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">optimset</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">%% 结果省略</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>optimget 函数: 想查看某个优化参数的值</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="in">``` matlab</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">%%</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="va">val</span><span class="op">=</span> <span class="va">optimget</span>(<span class="va">options</span><span class="op">,</span> <span class="ss">'param'</span> ) <span class="op">:</span> 获取优化参数结构体 <span class="va">options</span> 中参数 <span class="va">param</span> 的值。</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="va">val</span> <span class="op">=</span> <span class="va">optimget</span>(<span class="va">options</span><span class="op">,</span> <span class="ss">'param'</span>， <span class="va">default</span>)<span class="op">:</span> 如果参数 <span class="va">param</span> 在 <span class="va">options</span> 中没有定义，则返回其默认值</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">%% eg: 查看某个优化参数的值</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="va">clc</span><span class="op">,</span><span class="va">clear</span> <span class="va">all</span><span class="op">;</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimset</span>(<span class="ss">'fmincon'</span>) <span class="co">% 省略结果</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span><span class="va">optimset</span>(<span class="va">options</span><span class="op">,</span> <span class="ss">'Display'</span> <span class="op">,</span> <span class="ss">'iter'</span>) <span class="co">%修改 Display 属性值为iter</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="va">val</span> <span class="op">=</span> <span class="va">optimget</span>(<span class="va">options</span><span class="op">,</span><span class="ss">'Display'</span>) <span class="co">% 重新获取fmincon 函数的 Display属性值</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="al">![image-20210516102520466](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/uPic/202105161025image-20210516102520466.png)</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 线性规划的标准型</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>&amp; \min \quad   f^T x <span class="sc">\\</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>&amp; \text {s.t.} \begin{cases}</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>\textbf{A} \cdot x \leq b <span class="sc">\\</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>\textbf{Aeq} \cdot x=beq <span class="sc">\\</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>lb \leq x \leq ub</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>其中 $f^T, x, b, beq$ 是向量, $\textbf{A}, \textbf{Aeq}$是矩阵,$\textbf{A}$ 线性不等式, $\textbf{Aeq}$ 线性等式,</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### matlab 实现线性规划 --- linprog</span></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="in">``` matlab</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co">% 语法</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">linprog</span>(<span class="va">f</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">b</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq</span><span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span><span class="op">,</span><span class="va">options</span>)</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">linprog</span>(<span class="va">problem</span>)</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">fval</span><span class="op">,</span><span class="va">exitflag</span><span class="op">,</span><span class="va">output</span><span class="op">,</span><span class="va">lambda</span>] <span class="op">=</span> <span class="va">linprog</span>(___)</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="co">%% 如果不存在某个约束或变量,设置为空即可</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="fu">### 例1 线性规划</span></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>min \quad f(x) = -5x_1 - 4x_2 - 6x_3 <span class="sc">\\</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>s.t. \begin{cases}</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>x_1 - x_2 + x_3 \leq 20<span class="sc">\\</span></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>3x_1 + 2x_2+4x_3 \leq 42<span class="sc">\\</span></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>3x_1+2x_2 \leq 30<span class="sc">\\</span></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>x_1,x_2,x_3 \geq 0</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="in">``` matlab</span></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="co">%% matlab 实现 --- 方法一</span></span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="va">clc</span><span class="op">,</span> <span class="va">clear</span> <span class="va">all</span><span class="op">;</span></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span> [<span class="op">-</span><span class="fl">5</span><span class="op">;</span> <span class="op">-</span><span class="fl">4</span><span class="op">;</span> <span class="op">-</span><span class="fl">6</span>]<span class="op">;</span> <span class="co">% 列向量</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="va">A</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,-</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3</span><span class="op">,</span><span class="fl">2</span><span class="op">,</span><span class="fl">4</span><span class="op">;</span></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3</span><span class="op">,</span><span class="fl">2</span><span class="op">,</span><span class="fl">0</span>]<span class="op">;</span></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="va">b</span> <span class="op">=</span> [<span class="fl">20</span><span class="op">;</span><span class="fl">42</span><span class="op">;</span><span class="fl">30</span>]<span class="op">;</span> <span class="co">% 列向量</span></span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="va">lb</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="fl">1</span><span class="op">,</span><span class="fl">3</span>)<span class="op">;</span> <span class="co">% 行向量</span></span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a><span class="va">ub</span> <span class="op">=</span> []<span class="op">;</span> <span class="co">% 为空,则表示无上限,即正无穷</span></span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a><span class="va">options</span> <span class="op">=</span> <span class="va">optimoptions</span>(<span class="ss">'linprog'</span><span class="op">,</span><span class="ss">'Algorithm'</span><span class="op">,</span><span class="ss">'dual-simplex'</span><span class="op">,</span><span class="ss">'Display'</span><span class="op">,</span><span class="ss">'iter'</span>)<span class="op">;</span></span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">fval</span><span class="op">,</span><span class="va">exitflag</span><span class="op">,</span><span class="va">output</span><span class="op">,</span><span class="va">lambda</span>]  <span class="op">=</span> <span class="va">linprog</span>(<span class="va">f</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">b</span><span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span><span class="op">,</span><span class="va">options</span>)</span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a><span class="co">% ------------------ 结果 ------------------</span></span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span></span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0</span></span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>   <span class="fl">15.0000</span></span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.0000</span></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a><span class="va">fval</span> <span class="op">=</span></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>   <span class="op">-</span><span class="fl">78</span></span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a><span class="va">exitflag</span> <span class="op">=</span></span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span></span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>``` <span class="va">matlab</span></span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a><span class="co">%% 方法二: 以结构体方式创建 </span></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a><span class="co">%%</span></span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="co">% optimproblem('ObjectiveSense','max')  % 最优化问题的创建,  ObjectiveSense属性求最大值(默认最小值)</span></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="co">%%  optimvar 决策变量的定义,n,m,k 设置决策变量的维度,不设置k则变量维度为n*m</span></span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a><span class="co">% x = optimvar('x',n,m,k,'LowerBound',lb,'UpperBound',ub)</span></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span> <span class="op">=</span> <span class="va">optimproblem</span>(<span class="ss">'ObjectiveSense'</span><span class="op">,</span><span class="ss">'min'</span>)<span class="op">;</span></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">optimvar</span>(<span class="ss">'x'</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="ss">'LowerBound'</span><span class="op">,</span>[<span class="fl">0</span><span class="op">;</span><span class="fl">0</span><span class="op">;</span><span class="fl">0</span>])<span class="op">;</span></span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span>.<span class="va">Objective</span> <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">*</span><span class="va">x</span>(<span class="fl">1</span>) <span class="op">-</span> <span class="fl">4</span><span class="op">*</span><span class="va">x</span>(<span class="fl">2</span>) <span class="op">-</span><span class="fl">6</span><span class="op">*</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">;</span> </span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span>.<span class="va">Constraints</span>.<span class="va">c1</span> <span class="op">=</span> <span class="va">x</span>(<span class="fl">1</span>) <span class="op">-</span> <span class="va">x</span>(<span class="fl">2</span>) <span class="op">+</span> <span class="va">x</span>(<span class="fl">3</span>) <span class="op">&lt;=</span> <span class="fl">20</span><span class="op">;</span></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span>.<span class="va">Constraints</span>.<span class="va">c2</span> <span class="op">=</span> <span class="fl">3</span><span class="op">*</span><span class="va">x</span>(<span class="fl">1</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span>(<span class="fl">2</span>) <span class="op">+</span> <span class="fl">4</span><span class="op">*</span><span class="va">x</span>(<span class="fl">3</span>) <span class="op">&lt;=</span> <span class="fl">42</span><span class="op">;</span></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a><span class="va">prob</span>.<span class="va">Constraints</span>.<span class="va">c3</span> <span class="op">=</span> <span class="fl">3</span><span class="op">*</span><span class="va">x</span>(<span class="fl">1</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span>(<span class="fl">2</span>) <span class="op">&lt;=</span> <span class="fl">30</span></span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a><span class="va">sols</span> <span class="op">=</span> <span class="va">solve</span>(<span class="va">prob</span>)</span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span> <span class="va">sols</span>.<span class="va">x</span></span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a><span class="co">% ------------------ 结果 ------------------</span></span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span></span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0</span></span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>   <span class="fl">15.0000</span></span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.0000</span></span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a>### 双下标的线性规划问题  <span class="op">---</span> 运输问题</span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>   如果目标函数以及约束条件中的变量是以矩阵描述<span class="op">,</span>则按照一一对应规则变成向量的形式即可求解</span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>   有些时候书写比较麻烦<span class="op">,</span>比如运输问题<span class="op">,</span> 则可以编写函数使其自动化</span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a>    <span class="bn">![image-20210516105838325](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/uPic/202105161058image-20210516105838325.png)</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a>``` <span class="va">matlab</span></span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> [<span class="va">x</span><span class="op">,</span><span class="va">f0</span><span class="op">,</span> <span class="va">flag</span>] <span class="op">=</span> <span class="va">transport_linprog</span>(<span class="va">C</span><span class="op">,</span><span class="va">s</span><span class="op">,</span><span class="va">d</span><span class="op">,</span><span class="va">indkey</span>)</span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a>[<span class="va">m</span><span class="op">,</span><span class="va">n</span>] <span class="op">=</span> <span class="va">size</span>(<span class="va">C</span>)<span class="op">;</span> <span class="va">A</span><span class="op">=</span>[]<span class="op">;</span> <span class="va">B</span> <span class="op">=</span>[]<span class="op">;</span></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>    <span class="va">Aeq</span>(<span class="va">i</span><span class="op">,</span>(<span class="va">i</span><span class="op">-</span><span class="fl">1</span>)<span class="op">*</span><span class="va">m</span><span class="op">+</span><span class="fl">1</span><span class="op">:</span><span class="va">i</span><span class="op">*</span><span class="va">m</span>) <span class="op">=</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">m</span></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>    <span class="va">Aeq</span>(<span class="va">n</span><span class="op">+</span><span class="va">i</span><span class="op">,</span><span class="va">i</span><span class="op">:</span><span class="va">m</span><span class="op">:</span><span class="va">n</span><span class="op">*</span><span class="va">m</span>) <span class="op">=</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a><span class="va">xm</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span><span class="op">*</span><span class="va">m</span>)<span class="op">;</span></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a><span class="va">f</span><span class="op">=</span> <span class="va">C</span>(<span class="op">:</span>)<span class="op">;</span></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a><span class="va">Beq</span><span class="op">=</span>[<span class="va">s</span>(<span class="op">:</span>)<span class="op">;</span><span class="va">d</span>(<span class="op">:</span>)]<span class="op">;</span></span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> <span class="va">nargin</span> <span class="op">==</span> <span class="fl">3</span></span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>    [<span class="va">x</span><span class="op">,</span><span class="va">f0</span><span class="op">,</span><span class="va">flag</span>] <span class="op">=</span> <span class="va">linprog</span>(<span class="va">f</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">B</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">Beq</span><span class="op">,</span><span class="va">xm</span>)<span class="op">;</span></span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span></span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a>    [<span class="va">x</span><span class="op">,</span><span class="va">f0</span><span class="op">,</span><span class="va">flag</span>] <span class="op">=</span> <span class="va">intlinprog</span>(<span class="va">f</span><span class="op">,</span><span class="va">indkey</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">B</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">Beq</span><span class="op">,</span><span class="va">xm</span>)<span class="op">;</span></span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>    <span class="va">x</span> <span class="op">=</span> <span class="va">round</span>(<span class="va">x</span>)<span class="op">;</span></span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a><span class="va">x</span> <span class="op">=</span> <span class="va">reshape</span>(<span class="va">x</span><span class="op">,</span><span class="va">m</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span> <span class="co">%将向量解还原为矩阵所需的形式</span></span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>``` <span class="va">matlab</span></span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a><span class="co">%% 例题</span></span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a><span class="va">C</span> <span class="op">=</span> [<span class="fl">464</span><span class="op">,</span><span class="fl">513</span><span class="op">,</span><span class="fl">654</span><span class="op">,</span><span class="fl">867</span><span class="op">;</span></span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a>    <span class="fl">352</span><span class="op">,</span><span class="fl">416</span><span class="op">,</span><span class="fl">690</span><span class="op">,</span><span class="fl">791</span><span class="op">;</span></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a>    <span class="fl">995</span><span class="op">,</span><span class="fl">682</span><span class="op">,</span><span class="fl">388</span><span class="op">,</span><span class="fl">685</span>]<span class="op">;</span></span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> [<span class="fl">80</span><span class="op">,</span><span class="fl">65</span><span class="op">,</span><span class="fl">70</span><span class="op">,</span><span class="fl">85</span>]<span class="op">;</span></span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a><span class="va">d</span><span class="op">=</span>[<span class="fl">75</span><span class="op">;</span><span class="fl">125</span><span class="op">;</span><span class="fl">100</span>]<span class="op">;</span></span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a>[<span class="va">x0</span><span class="op">,</span><span class="va">f0</span>] <span class="op">=</span> <span class="va">transport_linprog</span>(<span class="va">C</span><span class="op">,</span><span class="va">s</span><span class="op">,</span><span class="va">d</span>)</span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a><span class="co">% ------------------ 结果 ------------------</span></span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a><span class="va">Optimal</span> <span class="va">solution</span> <span class="va">found</span>.</span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span></span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>    <span class="fl">20</span>     <span class="fl">0</span>    <span class="fl">55</span></span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>    <span class="fl">80</span>    <span class="fl">45</span>     <span class="fl">0</span>     <span class="fl">0</span></span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">0</span>    <span class="fl">70</span>    <span class="fl">30</span></span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a><span class="va">f0</span> <span class="op">=</span></span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a>      <span class="fl">152535</span></span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a>#### 特殊的运输问题  <span class="op">---</span> 指派问题</span>
+<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a><span class="bn">![image-20210516111020291](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/uPic/202105161110image-20210516111020291.png)</span></span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a>``` <span class="va">matlab</span></span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a><span class="va">C</span><span class="op">=</span> [<span class="fl">15</span><span class="op">,</span><span class="fl">18</span><span class="op">,</span><span class="fl">21</span><span class="op">,</span><span class="fl">24</span><span class="op">;</span></span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a>    <span class="fl">19</span><span class="op">,</span><span class="fl">23</span><span class="op">,</span><span class="fl">22</span><span class="op">,</span><span class="fl">18</span><span class="op">;</span></span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a>    <span class="fl">26</span><span class="op">,</span><span class="fl">17</span><span class="op">,</span><span class="fl">16</span><span class="op">,</span><span class="fl">19</span><span class="op">;</span></span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a>    <span class="fl">19</span><span class="op">,</span><span class="fl">21</span><span class="op">,</span><span class="fl">23</span><span class="op">,</span><span class="fl">17</span>]</span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>]<span class="op">;</span><span class="co">% s和d向量可以是列向量也可以是行向量</span></span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a><span class="va">d</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>]<span class="op">;</span></span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a>[<span class="va">n</span><span class="op">,</span><span class="va">m</span>] <span class="op">=</span> <span class="va">size</span>(<span class="va">C</span>)<span class="op">;</span></span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a>[<span class="va">x0</span><span class="op">,</span><span class="va">f0</span>] <span class="op">=</span> <span class="va">transport_linprog</span>(<span class="va">C</span><span class="op">,</span><span class="va">s</span><span class="op">,</span><span class="va">d</span><span class="op">,</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">*</span><span class="va">m</span>)</span>
+<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a><span class="co">% ------------------ 结果 ------------------</span></span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span></span>
+<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">1</span>     <span class="fl">0</span>     <span class="fl">0</span></span>
+<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">0</span>     <span class="fl">0</span>     <span class="fl">0</span></span>
+<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">0</span>     <span class="fl">1</span>     <span class="fl">0</span></span>
+<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">0</span>     <span class="fl">0</span>     <span class="fl">1</span></span>
+<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a><span class="va">f0</span> <span class="op">=</span></span>
+<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a>    <span class="fl">70</span></span>
+<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a>参考<span class="op">:</span></span>
+<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>   <span class="va">matlab函数官网</span></span>
+<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>   <span class="op">\&lt;&lt;</span>薛定宇教授大讲堂卷<span class="fl">5</span>  <span class="va">MATLAB最优化计算</span><span class="op">&gt;\&gt;\</span>_含目录<span class="va">py</span>.<span class="va">pdf</span></span>
+<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>   <span class="op">\&lt;\&lt;</span><span class="va">MATLAB</span> <span class="va">R2015b最优化计算</span><span class="op">---</span>李娅<span class="op">\&gt;\&gt;\</span>_含目录</span>
+<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>   <span class="op">\&lt;\&lt;</span><span class="va">MATLAB优化算法_张岩</span>，吴水根著_北京：清华大学出版社<span class="op">\&gt;\&gt;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

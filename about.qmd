@@ -1,0 +1,24 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/zoushucai/myblog
+
+---
+
+About this blog
+
+
+自动迁移
+
+
+
+学习笔记
+
+
+
+

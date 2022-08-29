@@ -1,0 +1,63 @@
+project:
+  type: website
+  output-dir: public
+  pre-render: "static/prepare.R"
+  resources: 
+    - "static/"
+
+website:
+  title: "快乐的一天"
+  image: profile.jpg
+  open-graph: true
+  navbar:
+    background: primary
+    search: true
+    right:
+      - text: "mac"
+        href:  mac.qmd
+      - text: "matlab"
+        href:  matlab.qmd
+      - text: "uncertain"
+        href:  uncertain.qmd
+      - text:  About
+        href:  about.qmd
+      - icon:  github
+        href:  https://github.com/zoushucai/myblog
+  sidebar:
+    style: "docked"
+    search: true
+    
+format:
+  html:
+    lang: zh
+    smooth-scroll: true 
+    link-external-icon: false
+    link-external-newwindow: false
+    link-external-filter: '^(?:http:|https:)\/\/d\.zsccy\.top\/'
+    code-copy: true
+    code-fold: true
+    code-tools:
+      source: true
+      toggle: true
+      caption: none
+    code-summary: "Show the code"
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    code-link: true
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css  
+  gfm:
+    html-math-method: webtex
+    
+editor: source
+
+
+
+
+
+
+
+
+

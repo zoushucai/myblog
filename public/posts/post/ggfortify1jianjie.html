@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="zsc">
+<title>快乐的一天 - ggfortify包简介</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - ggfortify包简介">
+<meta property="og:description" content="ggfortify 是一个简单易用的R软件包，它可以仅仅使用一行代码来对许多受欢迎的R软件包结果进行二维可视化，这让统计学家以及数据科学家省去了许多繁琐和重复的过程，不用对结果进行任何处理就能以 ggplot 的风格画出好看的图，大大地提高了工作的效率。">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+<div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">ggfortify包简介</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">ggfortify包简介</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i></button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">查看源代码</a></li></ul></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2017年2月12日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+<li><a href="#pca-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90" id="toc-pca-主成分分析" class="nav-link active" data-scroll-target="#pca-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90">1、PCA (主成分分析)</a></li>
+  <li><a href="#%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90" id="toc-因子分析" class="nav-link" data-scroll-target="#%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90">2、因子分析</a></li>
+  <li>
+<a href="#%E8%81%9A%E7%B1%BB" id="toc-聚类" class="nav-link" data-scroll-target="#%E8%81%9A%E7%B1%BB">3、聚类</a>
+  <ul class="collapse">
+<li><a href="#lfdafisher%E5%B1%80%E9%83%A8%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90" id="toc-lfdafisher局部判别分析" class="nav-link" data-scroll-target="#lfdafisher%E5%B1%80%E9%83%A8%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90">3.3、lfda(Fisher局部判别分析)</a></li>
+  </ul>
+</li>
+  <li><a href="#%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96" id="toc-时间序列的可视化" class="nav-link" data-scroll-target="#%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96">4、时间序列的可视化</a></li>
+  <li><a href="#ts%E5%AF%B9%E8%B1%A1" id="toc-ts对象" class="nav-link" data-scroll-target="#ts%E5%AF%B9%E8%B1%A1">4.1、ts对象</a></li>
+  <li><a href="#%E9%9D%A2%E6%9D%BF%E8%AE%BE%E8%AE%A1" id="toc-面板设计" class="nav-link" data-scroll-target="#%E9%9D%A2%E6%9D%BF%E8%AE%BE%E8%AE%A1">5、面板设计</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>message<span class="op">=</span><span class="cn">FALSE</span>, warning<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>ggfortify 是一个简单易用的R软件包，它可以仅仅使用一行代码来对许多受欢迎的R软件包结果进行二维可视化，这让统计学家以及数据科学家省去了许多繁琐和重复的过程，不用对结果进行任何处理就能以 ggplot 的风格画出好看的图，大大地提高了工作的效率。</p>
+<p>接下来我将简单介绍一下怎么用 ggplot2 和 ggfortify 来很快地对PCA、聚类以及LFDA的结果进行可视化，然后将简单介绍用 ggfortify 来对时间序列进行快速可视化的方法。一下都是个人理解，</p>
+<section id="pca-主成分分析" class="level2"><h2 class="anchored" data-anchor-id="pca-主成分分析">1、PCA (主成分分析)</h2>
+<p><strong>其实本包，大多数画图都是采用主成分（不包括因子分析）降维得到两个主成分，在进一步使其主成分为坐标，对应与每个点给出相应的颜色和类别</strong></p>
+<p>ggfortify 使 ggplot2 知道怎么诠释PCA对象。加载好 ggfortify 包之后, 你可以对stats::prcomp 和stats::princomp对象使用 ggplot2::autoplot。</p>
+<p>autoplot()函数是ggplot2中的，不过ggfortify包里面有泛函s3类的autoplot解释这个函数</p>
+<p>ggbiplot()函数中的参数就是autoplot()函数中的参数</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">autoplot(object, data = NULL, scale = 1, x = 1, y = 2, ...)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">object                          </span><span class="kw">:</span><span class="at">  对象</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data                            </span><span class="kw">:</span><span class="at">  对应的数据框</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colour = 'Species'              </span><span class="kw">:</span><span class="at">  若有分类因子变量，可以对不同的类别添加颜色,当为连续值时为逐渐变色</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">shape = FALSE                   ： 调整点的形状，可以让所有的点消失，只留下标识（可以为具体的数字，就是形状类型）</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">main    、xlab   、ylab            ： 标题</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">label = TRUE </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">label.size = 3            </span><span class="kw">:</span><span class="at">  可以给每个点加上标识（以rownames为标准），也可以调整标识的大小.（默认为FALSE）</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">label.label               </span><span class="kw">:</span><span class="at">  标识标签（默认rownames）</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">label.colour              </span><span class="kw">:</span><span class="at">  文本标签的颜色</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">      label.alpha               ： 透明度</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">      label.angle               ： 旋转的角度</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">label.family              </span><span class="kw">:</span><span class="at">  字体</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">      label.fontface</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">      label.lineheight</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">      label.hjust</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">      label.vjust</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">      label.repel</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">loadings = TRUE                 ： 可以很快地画出特征向量</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">      loadings.colour = 'blue'  ： 特征向量的颜色</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="at">      loadings.label = TRUE     ：  特征向量的标识(默认为特征向量的名字)</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.size = 3   ：  特征向量的大小</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">loadings.label.label      </span><span class="kw">:</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.colour</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.alpha</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.angle</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.family</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.fontface</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.lineheight</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.hjust</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.vjust</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="at">          loadings.label.repel</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="at">          </span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="at">frame = TRUE                    ： 可以把每个类圈出来。图中没有分类则看成一类，全部圈出来（支持 stats::kmeans 和 cluster::* 等等）</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">frame.colour = 'Species'   </span><span class="kw">:</span><span class="at">  对分类变量进行颜色标注，并把它们类别圈出来（类似colour = 'Species'  ）</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="at">      frame.type = 't'          ： 选择圈的类型(默认多边形)</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="at">      frame.level</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="at">      frame.alpha</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="co">#等价autoplot(prcomp(iris[-5]), data = iris)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>你还可以选择数据中的一列来给画出的点按类别自动分颜色。输入help(autoplot.prcomp) 可以了解到更多的其他选择。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span>, colour <span class="op">=</span> <span class="st">'Species'</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>比如说给定label = TRUE 可以给每个点加上标识（以rownames为标准），也可以调整标识的大小。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span>, colour <span class="op">=</span> <span class="st">'Species'</span>, label <span class="op">=</span> <span class="cn">TRUE</span>,label.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>给定 shape = FALSE 可以让所有的点消失，只留下标识，这样可以让图更清晰，辨识度更大。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span>, colour <span class="op">=</span> <span class="st">'Species'</span>, shape <span class="op">=</span><span class="fl">14</span>,label.size <span class="op">=</span> <span class="fl">3</span>,label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>给定 loadings = TRUE 可以很快地画出特征向量。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span>, colour <span class="op">=</span> <span class="st">'Species'</span>, loadings <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>同样的，你也可以显示特征向量的标识以及调整他们的大小，更多选择请参考帮助文件。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span>, colour <span class="op">=</span> <span class="st">'Species'</span>,</span>
+<span>         loadings <span class="op">=</span> <span class="cn">TRUE</span>, loadings.colour <span class="op">=</span> <span class="st">'blue'</span>,</span>
+<span>         loadings.label <span class="op">=</span> <span class="cn">TRUE</span>, loadings.label.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="因子分析" class="level2"><h2 class="anchored" data-anchor-id="因子分析">2、因子分析</h2>
+<p>和PCA类似，ggfortify 也支持 stats::factanal 对象。可调的选择也很广泛。以下给出了简单的例子： 注意 当你使用 factanal 来计算分数的话，你必须给定 scores 的值。 下面都是建立在因子分析模型上，但是几乎参数和主成分分析一样。。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#因子分析 ，记住3个因子和2个因子画出来的图是不一样的</span></span>
+<span></span>
+<span><span class="op">(</span><span class="va">d.factanal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/factanal.html">factanal</a></span><span class="op">(</span><span class="va">state.x77</span>, factors <span class="op">=</span> <span class="fl">3</span>, scores <span class="op">=</span> <span class="st">'regression'</span><span class="op">)</span><span class="op">)</span><span class="co">#因子分析,</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+factanal(x = state.x77, factors = 3, scores = "regression")
+
+Uniquenesses:
+Population     Income Illiteracy   Life Exp     Murder    HS Grad      Frost 
+     0.813      0.474      0.266      0.240      0.050      0.167      0.005 
+      Area 
+     0.613 
+
+Loadings:
+           Factor1 Factor2 Factor3
+Population -0.156   0.361   0.181 
+Income      0.316           0.651 
+Illiteracy -0.576   0.543  -0.328 
+Life Exp    0.856  -0.128   0.103 
+Murder     -0.854   0.459   0.103 
+HS Grad     0.576  -0.149   0.692 
+Frost       0.137  -0.966   0.209 
+Area       -0.184           0.593 
+
+               Factor1 Factor2 Factor3
+SS loadings      2.301   1.612   1.459
+Proportion Var   0.288   0.201   0.182
+Cumulative Var   0.288   0.489   0.671
+
+Test of the hypothesis that 3 factors are sufficient.
+The chi square statistic is 20.47 on 7 degrees of freedom.
+The p-value is 0.00464 </code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#图的坐标应该和因子有关系，但是因子为3个的时候，图中有时怎么表达的呢？</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">d.factanal</span>, data <span class="op">=</span> <span class="va">state.x77</span>, colour <span class="op">=</span> <span class="st">'Income'</span><span class="op">)</span><span class="co"># colour为连续值(data、和colour只是纯粹的添加颜色而已)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">d.factanal</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, label.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>         loadings <span class="op">=</span> <span class="cn">TRUE</span>, loadings.label <span class="op">=</span> <span class="cn">TRUE</span>, loadings.label.size  <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="co">#把特征向量画出来</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="聚类" class="level2"><h2 class="anchored" data-anchor-id="聚类">3、聚类</h2>
+<p>3.1K-均值聚类—–若是聚类的话（自带类别，会自动画出颜色分类）</p>
+<p>和因子分析、主成分类似</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="co">#坐标用的是主成分的坐标</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, label.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="其他聚类" class="level4"><h4 class="anchored" data-anchor-id="其他聚类">3.2其他聚类</h4>
+<p><code>ggfortify</code> 也支持 <code><a href="https://rdrr.io/pkg/cluster/man/clara.html">cluster::clara</a></code>, <code><a href="https://rdrr.io/pkg/cluster/man/fanny.html">cluster::fanny</a></code>, <code><a href="https://rdrr.io/pkg/cluster/man/pam.html">cluster::pam</a></code>。</p>
+<p><strong>其实本包，大多数画图都是采用主成分（不包括因子分析）降维得到两个主成分，在进一步使其主成分为坐标，对应与每个点给出相应的颜色和类别</strong></p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/cluster/">cluster</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/cluster/man/clara.html">clara</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/cluster/man/fanny.html">fanny</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>, frame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="co">#给定 frame = TRUE，可以把stats::kmeans 和 cluster::* 的每个集群圈出来。</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/cluster/man/pam.html">pam</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>, frame <span class="op">=</span> <span class="cn">TRUE</span>, frame.type <span class="op">=</span> <span class="st">'norm'</span><span class="op">)</span><span class="co">#你也可以通过 frame.type 来选择圈的类型。更多选择请参照ggplot2::stat_ellipse里面的frame.type的type关键词。</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="lfdafisher局部判别分析" class="level3"><h3 class="anchored" data-anchor-id="lfdafisher局部判别分析">3.3、lfda(Fisher局部判别分析)</h3>
+<p><a href="https://cran.r-project.org/package=lfda"><code>lfda</code></a>包支持一系列的Fisher局部判别分析方法，包括半监督lfda，非线性lfda。你也可以使用<a href="https://github.com/sinhrks/ggfortify">ggfortify</a>来对他们的结果进行可视化。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/terrytangyuan/lfda">lfda</a></span><span class="op">)</span></span>
+<span><span class="co"># Fisher局部判别分析 (LFDA)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lfda/man/lfda.html">lfda</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span><span class="op">]</span>, <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, <span class="fl">4</span>, metric<span class="op">=</span><span class="st">"plain"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">iris</span>, frame <span class="op">=</span> <span class="cn">TRUE</span>, frame.colour <span class="op">=</span> <span class="st">'Species'</span><span class="op">)</span><span class="co">#给定 frame = TRUE，可以把 stats::kmeans 和 cluster::* 中的每个类圈出来。</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 半监督Fisher局部判别分析 (SELF)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lfda/man/self.html">self</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span><span class="op">]</span>, <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, beta <span class="op">=</span> <span class="fl">0.1</span>, r <span class="op">=</span> <span class="fl">3</span>, metric<span class="op">=</span><span class="st">"plain"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">iris</span>, frame <span class="op">=</span> <span class="cn">TRUE</span>, frame.colour <span class="op">=</span> <span class="st">'Species'</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="时间序列的可视化" class="level2"><h2 class="anchored" data-anchor-id="时间序列的可视化">4、时间序列的可视化</h2>
+<p>用 <a href="https://github.com/sinhrks/ggfortify">ggfortify</a> 使时间序列的可视化变得及其简单。接下来我将给出一些简单的例子。</p>
+<ul>
+<li>
+<code>autoplot</code>可支持的R包有：
+<ul>
+<li>基本stats:: ts对象</li>
+<li>zoo::zooreg</li>
+<li>xts::xts</li>
+<li>timeSeries::timSeries</li>
+<li>tseries::irts</li>
+</ul>
+</li>
+</ul></section><section id="ts对象" class="level2"><h2 class="anchored" data-anchor-id="ts对象">4.1、ts对象</h2>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span><span class="co">#时间序列的对象为ts</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "ts"</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">AirPassengers</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>     Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+1949 112 118 132 129 121 135 148 148 136 119 104 118
+1950 115 126 141 135 125 149 170 170 158 133 114 140
+1951 145 150 178 163 172 178 199 199 184 162 146 166
+1952 171 180 193 181 183 218 230 242 209 191 172 194
+1953 196 196 236 235 229 243 264 272 237 211 180 201
+1954 204 188 235 227 234 264 302 293 259 229 203 229
+1955 242 233 267 269 270 315 364 347 312 274 237 278
+1956 284 277 317 313 318 374 413 405 355 306 271 306
+1957 315 301 356 348 355 422 465 467 404 347 305 336
+1958 340 318 362 348 363 435 491 505 404 359 310 337
+1959 360 342 406 396 420 472 548 559 463 407 362 405
+1960 417 391 419 461 472 535 622 606 508 461 390 432</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#可以使用 ts.colour 和 ts.linetype来改变线的颜色和形状。更多的选择请参考 help(autoplot.ts)。</span></span>
+<span><span class="co"># 也可以像ggplot函数那样设置样式，比如</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">AirPassengers</span>, ts.colour <span class="op">=</span> <span class="st">'red'</span>, ts.linetype <span class="op">=</span> <span class="st">'dashed'</span>,xlab <span class="op">=</span> <span class="st">"时间"</span>,ylab <span class="op">=</span> <span class="st">"飞机乘客数量"</span>,main<span class="op">=</span> <span class="st">"飞机乘客人数的变化"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#等价</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">AirPassengers</span>, ts.colour <span class="op">=</span> <span class="st">'red'</span>, ts.linetype <span class="op">=</span> <span class="st">'dashed'</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"时间"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"飞机乘客数量"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span> <span class="st">"飞机乘客人数的变化"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="多变量时间序列" class="level5"><h5 class="anchored" data-anchor-id="多变量时间序列">4.1.1、多变量时间序列</h5>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Canada</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Canada</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "mts" "ts" </code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Canada</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>               e     prod       rw     U
+1980 Q1 929.6105 405.3665 386.1361  7.53
+1980 Q2 929.8040 404.6398 388.1358  7.70
+1980 Q3 930.3184 403.8149 390.5401  7.47
+1980 Q4 931.4277 404.2158 393.9638  7.27
+1981 Q1 932.6620 405.0467 396.7647  7.37
+1981 Q2 933.5509 404.4167 400.0217  7.13
+1981 Q3 933.5315 402.8191 400.7515  7.40
+1981 Q4 933.0769 401.9773 405.7335  8.33
+1982 Q1 932.1238 402.0897 409.0504  8.83
+1982 Q2 930.6359 401.3067 411.3984 10.43
+1982 Q3 929.0971 401.6302 413.0194 12.20
+1982 Q4 928.5633 401.5638 415.1670 12.77
+1983 Q1 929.0694 402.8157 414.6621 12.43
+1983 Q2 930.2655 403.1421 415.7319 12.23
+1983 Q3 931.6770 403.0786 416.2315 11.70
+1983 Q4 932.1390 403.7188 418.1439 11.20
+1984 Q1 932.2767 404.8668 419.7352 11.27
+1984 Q2 932.8328 405.6362 420.4842 11.47
+1984 Q3 933.7334 405.1363 420.9309 11.30
+1984 Q4 934.1772 406.0246 422.1124 11.17
+1985 Q1 934.5928 406.4123 423.6278 11.00
+1985 Q2 935.6067 406.3009 423.9887 10.63
+1985 Q3 936.5111 406.3354 424.1902 10.27
+1985 Q4 937.4201 406.7737 426.1270 10.20
+1986 Q1 938.4159 405.1525 426.8578  9.67
+1986 Q2 938.9992 404.9298 426.7457  9.60
+1986 Q3 939.2354 404.5765 426.8858  9.60
+1986 Q4 939.6795 404.1995 428.8403  9.50
+1987 Q1 940.2497 405.9499 430.1223  9.50
+1987 Q2 941.4358 405.8221 430.2307  9.03
+1987 Q3 942.2981 406.4463 430.3930  8.70
+1987 Q4 943.5322 407.0512 432.0284  8.13
+1988 Q1 944.3490 407.9460 433.3886  7.87
+1988 Q2 944.8215 408.1796 433.9641  7.67
+1988 Q3 945.0671 408.5998 434.4844  7.80
+1988 Q4 945.8067 409.0906 436.1569  7.73
+1989 Q1 946.8697 408.7042 438.2651  7.57
+1989 Q2 946.8766 408.9803 438.7636  7.57
+1989 Q3 947.2497 408.3287 439.9498  7.33
+1989 Q4 947.6513 407.8857 441.8359  7.57
+1990 Q1 948.1840 407.2605 443.1769  7.63
+1990 Q2 948.3492 406.7752 444.3592  7.60
+1990 Q3 948.0322 406.1794 444.5236  8.17
+1990 Q4 947.1065 405.4398 446.9694  9.20
+1991 Q1 946.0796 403.2800 450.1586 10.17
+1991 Q2 946.1838 403.3649 451.5464 10.33
+1991 Q3 946.2258 403.3807 452.2984 10.40
+1991 Q4 945.9978 404.0032 453.1201 10.37
+1992 Q1 945.5183 404.4774 453.9991 10.60
+1992 Q2 945.3514 404.7868 454.9552 11.00
+1992 Q3 945.2918 405.2710 455.4824 11.40
+1992 Q4 945.4008 405.3830 456.1009 11.73
+1993 Q1 945.9058 405.1564 457.2027 11.07
+1993 Q2 945.9035 406.4700 457.3886 11.67
+1993 Q3 946.3190 406.2293 457.7799 11.47
+1993 Q4 946.5796 406.7265 457.5535 11.30
+1994 Q1 946.7800 408.5785 458.8024 10.97
+1994 Q2 947.6283 409.6767 459.0564 10.63
+1994 Q3 948.6221 410.3858 459.1578 10.10
+1994 Q4 949.3992 410.5395 459.7037  9.67
+1995 Q1 949.9481 410.4453 459.7037  9.53
+1995 Q2 949.7945 410.6256 460.0258  9.47
+1995 Q3 949.9534 410.8672 461.0257  9.50
+1995 Q4 950.2502 411.2359 461.3039  9.27
+1996 Q1 950.5380 410.6637 461.4031  9.50
+1996 Q2 950.7871 410.8085 462.9277  9.43
+1996 Q3 950.8695 412.1160 464.6888  9.70
+1996 Q4 950.9281 412.9994 465.0717  9.90
+1997 Q1 951.8457 412.9551 464.2851  9.43
+1997 Q2 952.6005 412.8241 464.0344  9.30
+1997 Q3 953.5976 413.0489 463.4535  8.87
+1997 Q4 954.1434 413.6110 465.0717  8.77
+1998 Q1 954.5426 413.6048 466.0889  8.60
+1998 Q2 955.2631 412.9684 466.6171  8.33
+1998 Q3 956.0561 412.2659 465.7478  8.17
+1998 Q4 956.7966 412.9106 465.8995  8.03
+1999 Q1 957.3865 413.8294 466.4099  7.90
+1999 Q2 958.0634 414.2242 466.9552  7.87
+1999 Q3 958.7166 415.1678 467.6281  7.53
+1999 Q4 959.4881 415.7016 467.7026  6.93
+2000 Q1 960.3625 416.8674 469.1348  6.80
+2000 Q2 960.7834 417.6104 469.3364  6.70
+2000 Q3 961.0290 418.0030 470.0117  6.93
+2000 Q4 961.7657 417.2667 469.6472  6.87</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">Canada</span><span class="op">)</span><span class="co">## 需要用到的数据集，包含e、prod、rw和U四个变量，自动把全部变量添加到图中，</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#也可以指定相应变量，画前面3列</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">Canada</span><span class="op">[</span>,<span class="op">-</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#使用 facets = FALSE 可以把所有变量画在一条轴上。</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">Canada</span>, facets <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="xts对象" class="level4"><h4 class="anchored" data-anchor-id="xts对象">4.2 xts对象</h4>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/xts">xts</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/xts/man/as.xts.html">as.xts</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>,ts.colour <span class="op">=</span> <span class="st">'green'</span><span class="op">)</span><span class="co">#好像出问题</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="timseries对象" class="level4"><h4 class="anchored" data-anchor-id="timseries对象">4.3 timSeries对象</h4>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/scm/viewvc.php/pkg/timeSeries/?root=rmetrics">timeSeries</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/timeSeries/man/methods-as.html">as.timeSeries</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>, ts.colour <span class="op">=</span> <span class="op">(</span><span class="st">'dodgerblue3'</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="面板设计" class="level2"><h2 class="anchored" data-anchor-id="面板设计">5、面板设计</h2>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span><span class="op">]</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">res</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span><span class="op">]</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="ggfortify1jianjie_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>R version 4.2.1 (2022-06-23)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.5.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] purrr_0.3.4         timeSeries_4021.104 timeDate_4021.104  
+ [4] vars_1.5-6          lmtest_0.9-40       urca_1.3-0         
+ [7] strucchange_1.5-3   sandwich_3.0-2      zoo_1.8-10         
+[10] MASS_7.3-58.1       lfda_1.1.3          cluster_2.1.4      
+[13] ggfortify_0.4.14    ggplot2_3.3.6      
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.1.2  xfun_0.32         lattice_0.20-45   colorspace_2.0-3 
+ [5] vctrs_0.4.1       generics_0.1.3    htmltools_0.5.3   yaml_2.3.5       
+ [9] utf8_1.2.2        rlang_1.0.4       pillar_1.8.1      glue_1.6.2       
+[13] withr_2.5.0       DBI_1.1.3         lifecycle_1.0.1   stringr_1.4.1    
+[17] munsell_0.5.0     gtable_0.3.0      htmlwidgets_1.5.4 evaluate_0.16    
+[21] labeling_0.4.2    knitr_1.40        fastmap_1.1.0     fansi_1.0.3      
+[25] rARPACK_0.11-0    Rcpp_1.0.9        scales_1.2.1      jsonlite_1.8.0   
+[29] farver_2.1.1      RSpectra_0.16-1   gridExtra_2.3     digest_0.6.29    
+[33] stringi_1.7.8     dplyr_1.0.9       grid_4.2.1        cli_3.3.0        
+[37] tools_4.2.1       magrittr_2.0.3    tibble_3.1.8      crayon_1.5.1     
+[41] tidyr_1.2.0       pkgconfig_2.0.3   ellipsis_0.3.2    Matrix_1.4-1     
+[45] assertthat_0.2.1  rmarkdown_2.16.1  rstudioapi_0.14   R6_2.5.1         
+[49] nlme_3.1-159      compiler_4.2.1   </code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb39" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> ggfortify包简介</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2017-02-12'</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> r</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=TRUE}</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>ggfortify 是一个简单易用的R软件包，它可以仅仅使用一行代码来对许多受欢迎的R软件包结果进行二维可视化，这让统计学家以及数据科学家省去了许多繁琐和重复的过程，不用对结果进行任何处理就能以 ggplot 的风格画出好看的图，大大地提高了工作的效率。</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>接下来我将简单介绍一下怎么用 ggplot2 和 ggfortify 来很快地对PCA、聚类以及LFDA的结果进行可视化，然后将简单介绍用 ggfortify 来对时间序列进行快速可视化的方法。一下都是个人理解，</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1、PCA (主成分分析)</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>**其实本包，大多数画图都是采用主成分（不包括因子分析）降维得到两个主成分，在进一步使其主成分为坐标，对应与每个点给出相应的颜色和类别**</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>ggfortify 使 ggplot2 知道怎么诠释PCA对象。加载好 ggfortify 包之后, 你可以对stats::prcomp 和stats::princomp对象使用 ggplot2::autoplot。</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>autoplot()函数是ggplot2中的，不过ggfortify包里面有泛函s3类的autoplot解释这个函数</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>ggbiplot()函数中的参数就是autoplot()函数中的参数</span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>autoplot(object,<span class="at"> </span>data<span class="at"> </span>=<span class="at"> </span>NULL,<span class="at"> </span>scale<span class="at"> </span>=<span class="at"> </span>1,<span class="at"> </span>x<span class="at"> </span>=<span class="at"> </span>1,<span class="at"> </span>y<span class="at"> </span>=<span class="at"> </span>2,<span class="at"> </span>...)</span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="fu">object                          </span><span class="kw">:</span><span class="at">  对象</span></span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a><span class="fu">data                            </span><span class="kw">:</span><span class="at">  对应的数据框</span></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a><span class="fu">colour = 'Species'              </span><span class="kw">:</span><span class="at">  若有分类因子变量，可以对不同的类别添加颜色,当为连续值时为逐渐变色</span></span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>shape<span class="at"> </span>=<span class="at"> </span>FALSE<span class="at">                   </span>：<span class="at"> </span>调整点的形状，可以让所有的点消失，只留下标识（可以为具体的数字，就是形状类型）</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>main<span class="at">    </span>、xlab<span class="at">   </span>、ylab<span class="at">            </span>：<span class="at"> </span>标题</span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>label<span class="at"> </span>=<span class="at"> </span>TRUE<span class="at"> </span></span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">label.size = 3            </span><span class="kw">:</span><span class="at">  可以给每个点加上标识（以rownames为标准），也可以调整标识的大小.（默认为FALSE）</span></span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">label.label               </span><span class="kw">:</span><span class="at">  标识标签（默认rownames）</span></span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">label.colour              </span><span class="kw">:</span><span class="at">  文本标签的颜色</span></span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>label.alpha<span class="at">               </span>：<span class="at"> </span>透明度</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>label.angle<span class="at">               </span>：<span class="at"> </span>旋转的角度</span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">label.family              </span><span class="kw">:</span><span class="at">  字体</span></span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>label.fontface</span>
+<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>label.lineheight</span>
+<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>label.hjust</span>
+<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>label.vjust</span>
+<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>label.repel</span>
+<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a>loadings<span class="at"> </span>=<span class="at"> </span>TRUE<span class="at">                 </span>：<span class="at"> </span>可以很快地画出特征向量</span>
+<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>loadings.colour<span class="at"> </span>=<span class="at"> </span>'blue'<span class="at">  </span>：<span class="at"> </span>特征向量的颜色</span>
+<span id="cb39-50"><a href="#cb39-50" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>loadings.label<span class="at"> </span>=<span class="at"> </span>TRUE<span class="at">     </span>：<span class="at">  </span>特征向量的标识(默认为特征向量的名字)</span>
+<span id="cb39-51"><a href="#cb39-51" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.size<span class="at"> </span>=<span class="at"> </span>3<span class="at">   </span>：<span class="at">  </span>特征向量的大小</span>
+<span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">loadings.label.label      </span><span class="kw">:</span></span>
+<span id="cb39-53"><a href="#cb39-53" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.colour</span>
+<span id="cb39-54"><a href="#cb39-54" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.alpha</span>
+<span id="cb39-55"><a href="#cb39-55" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.angle</span>
+<span id="cb39-56"><a href="#cb39-56" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.family</span>
+<span id="cb39-57"><a href="#cb39-57" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.fontface</span>
+<span id="cb39-58"><a href="#cb39-58" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.lineheight</span>
+<span id="cb39-59"><a href="#cb39-59" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.hjust</span>
+<span id="cb39-60"><a href="#cb39-60" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.vjust</span>
+<span id="cb39-61"><a href="#cb39-61" aria-hidden="true" tabindex="-1"></a><span class="at">          </span>loadings.label.repel</span>
+<span id="cb39-62"><a href="#cb39-62" aria-hidden="true" tabindex="-1"></a><span class="at">          </span></span>
+<span id="cb39-63"><a href="#cb39-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-64"><a href="#cb39-64" aria-hidden="true" tabindex="-1"></a>frame<span class="at"> </span>=<span class="at"> </span>TRUE<span class="at">                    </span>：<span class="at"> </span>可以把每个类圈出来。图中没有分类则看成一类，全部圈出来（支持<span class="at"> </span>stats::kmeans<span class="at"> </span>和<span class="at"> </span>cluster::*<span class="at"> </span>等等）</span>
+<span id="cb39-65"><a href="#cb39-65" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">frame.colour = 'Species'   </span><span class="kw">:</span><span class="at">  对分类变量进行颜色标注，并把它们类别圈出来（类似colour = 'Species'  ）</span></span>
+<span id="cb39-66"><a href="#cb39-66" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>frame.type<span class="at"> </span>=<span class="at"> </span>'t'<span class="at">          </span>：<span class="at"> </span>选择圈的类型(默认多边形)</span>
+<span id="cb39-67"><a href="#cb39-67" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>frame.level</span>
+<span id="cb39-68"><a href="#cb39-68" aria-hidden="true" tabindex="-1"></a><span class="at">      </span>frame.alpha</span>
+<span id="cb39-69"><a href="#cb39-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-70"><a href="#cb39-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-71"><a href="#cb39-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-72"><a href="#cb39-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-73"><a href="#cb39-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-74"><a href="#cb39-74" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb39-75"><a href="#cb39-75" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> iris[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)]</span>
+<span id="cb39-76"><a href="#cb39-76" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">prcomp</span>(df))<span class="co">#等价autoplot(prcomp(iris[-5]), data = iris)</span></span>
+<span id="cb39-77"><a href="#cb39-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-78"><a href="#cb39-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-79"><a href="#cb39-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-80"><a href="#cb39-80" aria-hidden="true" tabindex="-1"></a>你还可以选择数据中的一列来给画出的点按类别自动分颜色。输入help(autoplot.prcomp) 可以了解到更多的其他选择。</span>
+<span id="cb39-81"><a href="#cb39-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-82"><a href="#cb39-82" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">prcomp</span>(df), <span class="at">data =</span> iris, <span class="at">colour =</span> <span class="st">'Species'</span>)</span>
+<span id="cb39-83"><a href="#cb39-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-84"><a href="#cb39-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-85"><a href="#cb39-85" aria-hidden="true" tabindex="-1"></a>比如说给定label = TRUE 可以给每个点加上标识（以rownames为标准），也可以调整标识的大小。</span>
+<span id="cb39-86"><a href="#cb39-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-87"><a href="#cb39-87" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">prcomp</span>(df), <span class="at">data =</span> iris, <span class="at">colour =</span> <span class="st">'Species'</span>, <span class="at">label =</span> <span class="cn">TRUE</span>,<span class="at">label.size =</span> <span class="dv">3</span>)</span>
+<span id="cb39-88"><a href="#cb39-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-89"><a href="#cb39-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-90"><a href="#cb39-90" aria-hidden="true" tabindex="-1"></a>给定 shape = FALSE 可以让所有的点消失，只留下标识，这样可以让图更清晰，辨识度更大。</span>
+<span id="cb39-91"><a href="#cb39-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-92"><a href="#cb39-92" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">prcomp</span>(df), <span class="at">data =</span> iris, <span class="at">colour =</span> <span class="st">'Species'</span>, <span class="at">shape =</span><span class="dv">14</span>,<span class="at">label.size =</span> <span class="dv">3</span>,<span class="at">label =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb39-93"><a href="#cb39-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-94"><a href="#cb39-94" aria-hidden="true" tabindex="-1"></a>给定 loadings = TRUE 可以很快地画出特征向量。</span>
+<span id="cb39-95"><a href="#cb39-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-96"><a href="#cb39-96" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">prcomp</span>(df), <span class="at">data =</span> iris, <span class="at">colour =</span> <span class="st">'Species'</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb39-97"><a href="#cb39-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-98"><a href="#cb39-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-99"><a href="#cb39-99" aria-hidden="true" tabindex="-1"></a>同样的，你也可以显示特征向量的标识以及调整他们的大小，更多选择请参考帮助文件。</span>
+<span id="cb39-100"><a href="#cb39-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-101"><a href="#cb39-101" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">prcomp</span>(df), <span class="at">data =</span> iris, <span class="at">colour =</span> <span class="st">'Species'</span>,</span>
+<span id="cb39-102"><a href="#cb39-102" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">'blue'</span>,</span>
+<span id="cb39-103"><a href="#cb39-103" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size =</span> <span class="dv">3</span>)</span>
+<span id="cb39-104"><a href="#cb39-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-105"><a href="#cb39-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-106"><a href="#cb39-106" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2、因子分析</span></span>
+<span id="cb39-107"><a href="#cb39-107" aria-hidden="true" tabindex="-1"></a>和PCA类似，ggfortify 也支持 stats::factanal 对象。可调的选择也很广泛。以下给出了简单的例子：</span>
+<span id="cb39-108"><a href="#cb39-108" aria-hidden="true" tabindex="-1"></a>注意 当你使用 factanal 来计算分数的话，你必须给定 scores 的值。</span>
+<span id="cb39-109"><a href="#cb39-109" aria-hidden="true" tabindex="-1"></a>下面都是建立在因子分析模型上，但是几乎参数和主成分分析一样。。</span>
+<span id="cb39-110"><a href="#cb39-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-111"><a href="#cb39-111" aria-hidden="true" tabindex="-1"></a><span class="co">#因子分析 ，记住3个因子和2个因子画出来的图是不一样的</span></span>
+<span id="cb39-112"><a href="#cb39-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-113"><a href="#cb39-113" aria-hidden="true" tabindex="-1"></a>(d.factanal <span class="ot">&lt;-</span> <span class="fu">factanal</span>(state.x77, <span class="at">factors =</span> <span class="dv">3</span>, <span class="at">scores =</span> <span class="st">'regression'</span>))<span class="co">#因子分析,</span></span>
+<span id="cb39-114"><a href="#cb39-114" aria-hidden="true" tabindex="-1"></a><span class="co">#图的坐标应该和因子有关系，但是因子为3个的时候，图中有时怎么表达的呢？</span></span>
+<span id="cb39-115"><a href="#cb39-115" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(d.factanal, <span class="at">data =</span> state.x77, <span class="at">colour =</span> <span class="st">'Income'</span>)<span class="co"># colour为连续值(data、和colour只是纯粹的添加颜色而已)</span></span>
+<span id="cb39-116"><a href="#cb39-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-117"><a href="#cb39-117" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(d.factanal, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">label.size =</span> <span class="dv">3</span>,</span>
+<span id="cb39-118"><a href="#cb39-118" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size  =</span> <span class="dv">3</span>)<span class="co">#把特征向量画出来</span></span>
+<span id="cb39-119"><a href="#cb39-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-120"><a href="#cb39-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-121"><a href="#cb39-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3、聚类</span></span>
+<span id="cb39-122"><a href="#cb39-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-123"><a href="#cb39-123" aria-hidden="true" tabindex="-1"></a>3.1K-均值聚类-----若是聚类的话（自带类别，会自动画出颜色分类）</span>
+<span id="cb39-124"><a href="#cb39-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-125"><a href="#cb39-125" aria-hidden="true" tabindex="-1"></a>  和因子分析、主成分类似</span>
+<span id="cb39-126"><a href="#cb39-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb39-127"><a href="#cb39-127" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">kmeans</span>(iris[,<span class="sc">-</span><span class="dv">5</span>], <span class="dv">3</span>), <span class="at">data =</span> iris)<span class="co">#坐标用的是主成分的坐标</span></span>
+<span id="cb39-128"><a href="#cb39-128" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">kmeans</span>(iris[,<span class="sc">-</span><span class="dv">5</span>], <span class="dv">3</span>), <span class="at">data =</span> iris, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span>
+<span id="cb39-129"><a href="#cb39-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-130"><a href="#cb39-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-131"><a href="#cb39-131" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 3.2其他聚类</span></span>
+<span id="cb39-132"><a href="#cb39-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-133"><a href="#cb39-133" aria-hidden="true" tabindex="-1"></a><span class="in">`ggfortify`</span> 也支持 <span class="in">`cluster::clara`</span>, <span class="in">`cluster::fanny`</span>, <span class="in">`cluster::pam`</span>。</span>
+<span id="cb39-134"><a href="#cb39-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-135"><a href="#cb39-135" aria-hidden="true" tabindex="-1"></a>**其实本包，大多数画图都是采用主成分（不包括因子分析）降维得到两个主成分，在进一步使其主成分为坐标，对应与每个点给出相应的颜色和类别**</span>
+<span id="cb39-136"><a href="#cb39-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-137"><a href="#cb39-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-138"><a href="#cb39-138" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
+<span id="cb39-139"><a href="#cb39-139" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">clara</span>(iris[<span class="sc">-</span><span class="dv">5</span>], <span class="dv">3</span>))</span>
+<span id="cb39-140"><a href="#cb39-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-141"><a href="#cb39-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-142"><a href="#cb39-142" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">fanny</span>(iris[<span class="sc">-</span><span class="dv">5</span>], <span class="dv">3</span>), <span class="at">frame =</span> <span class="cn">TRUE</span>)<span class="co">#给定 frame = TRUE，可以把stats::kmeans 和 cluster::* 的每个集群圈出来。</span></span>
+<span id="cb39-143"><a href="#cb39-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-144"><a href="#cb39-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-145"><a href="#cb39-145" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">pam</span>(iris[<span class="sc">-</span><span class="dv">5</span>], <span class="dv">3</span>), <span class="at">frame =</span> <span class="cn">TRUE</span>, <span class="at">frame.type =</span> <span class="st">'norm'</span>)<span class="co">#你也可以通过 frame.type 来选择圈的类型。更多选择请参照ggplot2::stat_ellipse里面的frame.type的type关键词。</span></span>
+<span id="cb39-146"><a href="#cb39-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-147"><a href="#cb39-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-148"><a href="#cb39-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-149"><a href="#cb39-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-150"><a href="#cb39-150" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.3、lfda(Fisher局部判别分析)</span></span>
+<span id="cb39-151"><a href="#cb39-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-152"><a href="#cb39-152" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">`lfda`</span><span class="co">](https://cran.r-project.org/package=lfda)</span>包支持一系列的Fisher局部判别分析方法，包括半监督lfda，非线性lfda。你也可以使用<span class="in">`{ggfortify}`</span>来对他们的结果进行可视化。</span>
+<span id="cb39-153"><a href="#cb39-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-154"><a href="#cb39-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-155"><a href="#cb39-155" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lfda)</span>
+<span id="cb39-156"><a href="#cb39-156" aria-hidden="true" tabindex="-1"></a><span class="co"># Fisher局部判别分析 (LFDA)</span></span>
+<span id="cb39-157"><a href="#cb39-157" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lfda</span>(iris[<span class="sc">-</span><span class="dv">5</span>], iris[, <span class="dv">5</span>], <span class="dv">4</span>, <span class="at">metric=</span><span class="st">"plain"</span>)</span>
+<span id="cb39-158"><a href="#cb39-158" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(model, <span class="at">data =</span> iris, <span class="at">frame =</span> <span class="cn">TRUE</span>, <span class="at">frame.colour =</span> <span class="st">'Species'</span>)<span class="co">#给定 frame = TRUE，可以把 stats::kmeans 和 cluster::* 中的每个类圈出来。</span></span>
+<span id="cb39-159"><a href="#cb39-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-160"><a href="#cb39-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-161"><a href="#cb39-161" aria-hidden="true" tabindex="-1"></a><span class="co"># 半监督Fisher局部判别分析 (SELF)</span></span>
+<span id="cb39-162"><a href="#cb39-162" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">self</span>(iris[<span class="sc">-</span><span class="dv">5</span>], iris[, <span class="dv">5</span>], <span class="at">beta =</span> <span class="fl">0.1</span>, <span class="at">r =</span> <span class="dv">3</span>, <span class="at">metric=</span><span class="st">"plain"</span>)</span>
+<span id="cb39-163"><a href="#cb39-163" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(model, <span class="at">data =</span> iris, <span class="at">frame =</span> <span class="cn">TRUE</span>, <span class="at">frame.colour =</span> <span class="st">'Species'</span>)</span>
+<span id="cb39-164"><a href="#cb39-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-165"><a href="#cb39-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-166"><a href="#cb39-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-167"><a href="#cb39-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-168"><a href="#cb39-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4、时间序列的可视化</span></span>
+<span id="cb39-169"><a href="#cb39-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-170"><a href="#cb39-170" aria-hidden="true" tabindex="-1"></a>用 <span class="in">`{ggfortify}`</span> 使时间序列的可视化变得及其简单。接下来我将给出一些简单的例子。</span>
+<span id="cb39-171"><a href="#cb39-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-172"><a href="#cb39-172" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`autoplot `</span>可支持的R包有：</span>
+<span id="cb39-173"><a href="#cb39-173" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>基本stats:: ts对象</span>
+<span id="cb39-174"><a href="#cb39-174" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>zoo::zooreg</span>
+<span id="cb39-175"><a href="#cb39-175" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>xts::xts</span>
+<span id="cb39-176"><a href="#cb39-176" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>timeSeries::timSeries</span>
+<span id="cb39-177"><a href="#cb39-177" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>tseries::irts</span>
+<span id="cb39-178"><a href="#cb39-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-179"><a href="#cb39-179" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4.1、ts对象</span></span>
+<span id="cb39-180"><a href="#cb39-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-181"><a href="#cb39-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-182"><a href="#cb39-182" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb39-183"><a href="#cb39-183" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(AirPassengers)<span class="co">#时间序列的对象为ts</span></span>
+<span id="cb39-184"><a href="#cb39-184" aria-hidden="true" tabindex="-1"></a>AirPassengers</span>
+<span id="cb39-185"><a href="#cb39-185" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(AirPassengers)</span>
+<span id="cb39-186"><a href="#cb39-186" aria-hidden="true" tabindex="-1"></a><span class="co">#可以使用 ts.colour 和 ts.linetype来改变线的颜色和形状。更多的选择请参考 help(autoplot.ts)。</span></span>
+<span id="cb39-187"><a href="#cb39-187" aria-hidden="true" tabindex="-1"></a><span class="co"># 也可以像ggplot函数那样设置样式，比如</span></span>
+<span id="cb39-188"><a href="#cb39-188" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(AirPassengers, <span class="at">ts.colour =</span> <span class="st">'red'</span>, <span class="at">ts.linetype =</span> <span class="st">'dashed'</span>,<span class="at">xlab =</span> <span class="st">"时间"</span>,<span class="at">ylab =</span> <span class="st">"飞机乘客数量"</span>,<span class="at">main=</span> <span class="st">"飞机乘客人数的变化"</span>)</span>
+<span id="cb39-189"><a href="#cb39-189" aria-hidden="true" tabindex="-1"></a><span class="co">#等价</span></span>
+<span id="cb39-190"><a href="#cb39-190" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(AirPassengers, <span class="at">ts.colour =</span> <span class="st">'red'</span>, <span class="at">ts.linetype =</span> <span class="st">'dashed'</span>)<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">"时间"</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">"飞机乘客数量"</span>)<span class="sc">+</span><span class="fu">ggtitle</span>( <span class="st">"飞机乘客人数的变化"</span>)</span>
+<span id="cb39-191"><a href="#cb39-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-192"><a href="#cb39-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-193"><a href="#cb39-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-194"><a href="#cb39-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-195"><a href="#cb39-195" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 4.1.1、多变量时间序列</span></span>
+<span id="cb39-196"><a href="#cb39-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-197"><a href="#cb39-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-198"><a href="#cb39-198" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vars)</span>
+<span id="cb39-199"><a href="#cb39-199" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Canada)</span>
+<span id="cb39-200"><a href="#cb39-200" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Canada)</span>
+<span id="cb39-201"><a href="#cb39-201" aria-hidden="true" tabindex="-1"></a>Canada</span>
+<span id="cb39-202"><a href="#cb39-202" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(Canada)<span class="do">## 需要用到的数据集，包含e、prod、rw和U四个变量，自动把全部变量添加到图中，</span></span>
+<span id="cb39-203"><a href="#cb39-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-204"><a href="#cb39-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-205"><a href="#cb39-205" aria-hidden="true" tabindex="-1"></a><span class="co">#也可以指定相应变量，画前面3列</span></span>
+<span id="cb39-206"><a href="#cb39-206" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(Canada[,<span class="sc">-</span><span class="dv">4</span>])</span>
+<span id="cb39-207"><a href="#cb39-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-208"><a href="#cb39-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-209"><a href="#cb39-209" aria-hidden="true" tabindex="-1"></a><span class="co">#使用 facets = FALSE 可以把所有变量画在一条轴上。</span></span>
+<span id="cb39-210"><a href="#cb39-210" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(Canada, <span class="at">facets =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb39-211"><a href="#cb39-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-212"><a href="#cb39-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-213"><a href="#cb39-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-214"><a href="#cb39-214" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 4.2 xts对象</span></span>
+<span id="cb39-215"><a href="#cb39-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-216"><a href="#cb39-216" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb39-217"><a href="#cb39-217" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xts)</span>
+<span id="cb39-218"><a href="#cb39-218" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">as.xts</span>(AirPassengers),<span class="at">ts.colour =</span> <span class="st">'green'</span>)<span class="co">#好像出问题</span></span>
+<span id="cb39-219"><a href="#cb39-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-220"><a href="#cb39-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-221"><a href="#cb39-221" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 4.3 timSeries对象</span></span>
+<span id="cb39-222"><a href="#cb39-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-223"><a href="#cb39-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-224"><a href="#cb39-224" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(timeSeries)</span>
+<span id="cb39-225"><a href="#cb39-225" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">as.timeSeries</span>(AirPassengers), <span class="at">ts.colour =</span> (<span class="st">'dodgerblue3'</span>))</span>
+<span id="cb39-226"><a href="#cb39-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-227"><a href="#cb39-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-228"><a href="#cb39-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-229"><a href="#cb39-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-230"><a href="#cb39-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-231"><a href="#cb39-231" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5、面板设计</span></span>
+<span id="cb39-232"><a href="#cb39-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-233"><a href="#cb39-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.width=10, message=FALSE,warning=FALSE}</span></span>
+<span id="cb39-234"><a href="#cb39-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-235"><a href="#cb39-235" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb39-236"><a href="#cb39-236" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="sc">~</span> <span class="fu">kmeans</span>(iris[<span class="sc">-</span><span class="dv">5</span>], .))</span>
+<span id="cb39-237"><a href="#cb39-237" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(res, <span class="at">data =</span> iris[<span class="sc">-</span><span class="dv">5</span>], <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb39-238"><a href="#cb39-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-239"><a href="#cb39-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-240"><a href="#cb39-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-241"><a href="#cb39-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-244"><a href="#cb39-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb39-245"><a href="#cb39-245" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb39-246"><a href="#cb39-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-247"><a href="#cb39-247" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

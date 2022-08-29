@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="zsc">
+
+<title>快乐的一天 - 用c语言设置定时关机</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - 用c语言设置定时关机">
+<meta property="og:description" content="编译运行后，找到对应得exe文件 ,把其放在开始启动目录中即可（C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp）">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">用c语言设置定时关机</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">用c语言设置定时关机</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2018年11月20日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#c代码" id="toc-c代码" class="nav-link active" data-scroll-target="#c代码">C代码</a>
+  <ul class="collapse">
+  <li><a href="#创建定时任务" id="toc-创建定时任务" class="nav-link" data-scroll-target="#创建定时任务">创建定时任务</a></li>
+  </ul></li>
+  <li><a href="#编译运行后" id="toc-编译运行后" class="nav-link" data-scroll-target="#编译运行后">编译运行后</a>
+  <ul class="collapse">
+  <li><a href="#直接注入关机命令" id="toc-直接注入关机命令" class="nav-link" data-scroll-target="#直接注入关机命令">直接注入关机命令</a></li>
+  <li><a href="#结合定时任务关机" id="toc-结合定时任务关机" class="nav-link" data-scroll-target="#结合定时任务关机">结合定时任务关机</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="c代码" class="level1">
+<h1>C代码</h1>
+<section id="创建定时任务" class="level2">
+<h2 class="anchored" data-anchor-id="创建定时任务">创建定时任务</h2>
+<p>发现代码，win有自动防范木马的可能，于是要手动去在定时任务勾选某些指标，所以不可行。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># include</span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;windows.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">//如果存在任务名为myTaskName2 则强制删除，若没有则报错，但不终止该程序的运行</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName2 /f"</span><span class="op">);</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 创建一个任务名为myTaskName2的任务,/tr 后面是 要执行的命令， 双引号要转义，/st 后面接的是触发时间</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName2  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 22:35:00"</span><span class="op">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName4 /f"</span><span class="op">);</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName4  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 22:42:00"</span><span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName3 /f"</span><span class="op">);</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName3  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 22:52:00"</span><span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName5 /f"</span><span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName6 /f"</span><span class="op">);</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName7 /f"</span><span class="op">);</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName5  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:00:00"</span><span class="op">);</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName6  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:15:00"</span><span class="op">);</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName7  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:27:00"</span><span class="op">);</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName8 /f"</span><span class="op">);</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName9 /f"</span><span class="op">);</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName8  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:43:00"</span><span class="op">);</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName9  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:58:00"</span><span class="op">);</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="编译运行后" class="level1">
+<h1>编译运行后</h1>
+<p>编译运行后，找到对应得exe文件 ,把其放在开始启动目录中即可（<code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code>）</p>
+<p>或者 写一个bat命令，放在开始启动目录，eg： <code>start "" "E:\TIM\xin\Bin\TIM.exe" &amp; ping localhost -n 5</code></p>
+<p>命令中的<code>&amp;</code> <code>&amp;&amp;</code> <code>||</code> 分别的含义：<br>
+其中： - &amp; : 用来分隔一个命令行中的多个命令,即运行第一个命令，然后运行第二个命令。 - &amp;&amp; ： 只有在符号 &amp;&amp; 前面的命令成功时，才用于运行该符号后面的命令 - || : 只有在符号 || 前面的命令失败时，才用于运行符号 || 后面的命令。</p>
+<section id="直接注入关机命令" class="level2">
+<h2 class="anchored" data-anchor-id="直接注入关机命令">直接注入关机命令</h2>
+<p>这样感觉，电脑右下角一直有一个图标， 于是再次改进</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># include</span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;windows.h&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop_shut<span class="op">(){</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        system<span class="op">(</span><span class="st">"shutdown -s -f -t 5"</span><span class="op">);</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        Sleep<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> str1<span class="op">[</span><span class="dv">100</span><span class="op">]=</span><span class="st">"shutdown -s -f -t "</span><span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> str2<span class="op">[</span><span class="dv">32</span><span class="op">];</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>str3<span class="op">;</span> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> now_hour<span class="op">=</span><span class="dv">0</span><span class="op">,</span>now_min<span class="op">=</span><span class="dv">0</span><span class="op">,</span>now_second<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> tm <span class="op">*</span> tmpointer<span class="op">;</span>  <span class="co">//申明tm结构体指针</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> secs<span class="op">;</span>  <span class="co">//申明time_t类型变量</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    time<span class="op">(&amp;</span>secs<span class="op">);</span> <span class="co">//获取当前系统日期与时间</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    tmpointer <span class="op">=</span> localtime<span class="op">(&amp;</span>secs<span class="op">);</span> <span class="co">//获取tm结构的日期时间,获取当地日期与时间</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"\Now: %d-%d-%d %d:%d:%d</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_mon<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_mday<span class="op">,</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    tmpointer<span class="op">-&gt;</span>tm_year<span class="op">+</span><span class="dv">1900</span><span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_hour<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_min<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_sec<span class="op">);</span> </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">//获取当前系统时间 </span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    now_hour <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_hour<span class="op">;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    now_min <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_min<span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    now_second <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_sec<span class="op">;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">当前时间:%d:%d:%d"</span><span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_hour<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_min<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_sec<span class="op">);</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">//设置关机时间</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> close_hour <span class="op">=</span> <span class="dv">22</span><span class="op">,</span>close_min <span class="op">=</span><span class="dv">30</span><span class="op">,</span>close_sec <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">关机时间:%d:%d:%d</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>close_hour<span class="op">,</span>close_min<span class="op">,</span>close_sec<span class="op">);</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">,</span>j<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> diff_hour <span class="op">,</span>diff_min<span class="op">;</span><span class="co">//时间差</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> left_time <span class="op">;</span><span class="co">//离关机时间还剩多少秒 (单位:秒)</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    diff_hour <span class="op">=</span> now_hour <span class="op">-</span> close_hour<span class="op">;</span> <span class="co">//离关机时间还剩多少个小时 </span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    diff_min <span class="op">=</span> now_min <span class="op">-</span>close_min<span class="op">;</span><span class="co">// 离关机时间还剩多少个分钟 </span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"时间差: 小时:%d  分钟:%d </span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>diff_hour<span class="op">,</span>diff_min<span class="op">);</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">//时间在 关机时间后 </span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>diff_hour <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 当前小时在关机时间之后  </span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"正在关机1</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        system<span class="op">(</span><span class="st">"shutdown -s -f -t 10"</span><span class="op">);</span><span class="co">//立即关机 </span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        loop_shut<span class="op">();</span> </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>diff_hour <span class="op">==</span><span class="dv">0</span><span class="op">){</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        <span class="co">//当前小时 正在关机时间处 </span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>diff_min <span class="op">&lt;</span><span class="dv">0</span><span class="op">){</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>            <span class="co">//没超过关机时间 </span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"正在关机2</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            diff_min <span class="op">=(-</span><span class="dv">1</span><span class="op">)</span> <span class="op">*</span> diff_min<span class="op">;</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> diff_min<span class="op">*</span><span class="dv">60</span><span class="op">;</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"还剩%d秒==%d分钟</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>i<span class="op">,</span>diff_min<span class="op">);</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>            itoa<span class="op">(</span>i<span class="op">,</span>str2<span class="op">,</span><span class="dv">10</span><span class="op">);</span><span class="co">//把数字转变为字符串 ，后面的10 为10进制 </span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>            strcat<span class="op">(</span>str1<span class="op">,</span>str2<span class="op">);</span>  <span class="co">//拼接字符串 </span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>            system<span class="op">(</span>str1<span class="op">);</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span><span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>diff_min <span class="op">==</span><span class="dv">0</span><span class="op">){</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"正在关机3</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>            system<span class="op">(</span><span class="st">"shutdown -s -f -t 20"</span><span class="op">);</span><span class="co">//立即关机 </span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>            loop_shut<span class="op">();</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span><span class="cf">else</span><span class="op">{</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>            <span class="co">//超过关机时间 </span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"正在关机4</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>            system<span class="op">(</span><span class="st">"shutdown -s -f -t 20"</span><span class="op">);</span><span class="co">//立即关机 </span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>            loop_shut<span class="op">();</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="cf">else</span><span class="op">{</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>        <span class="co">//当前小时 在关机时间之前 </span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"正在关机5</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        left_time <span class="op">=</span> diff_hour<span class="op">*(-</span><span class="dv">1</span><span class="op">)*</span><span class="dv">60</span> <span class="op">+</span> diff_min<span class="op">*(-</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> left_time<span class="op">*</span><span class="dv">60</span><span class="op">;</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"还剩%d秒==%d分钟</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>i<span class="op">,</span>left_time<span class="op">);</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>        itoa<span class="op">(</span>i<span class="op">,</span>str2<span class="op">,</span><span class="dv">10</span><span class="op">);</span><span class="co">//把数字转变为字符串 ，后面的10 为10进制 </span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        strcat<span class="op">(</span>str1<span class="op">,</span>str2<span class="op">);</span>  <span class="co">//拼接字符串 </span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        system<span class="op">(</span>str1<span class="op">);</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="结合定时任务关机" class="level2">
+<h2 class="anchored" data-anchor-id="结合定时任务关机">结合定时任务关机</h2>
+<p>到某个时间以后，如果在重启，就会直接关机（除非你手速快）,并把生成的exe文件设置为开机启动。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;windows.h&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop_shut<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        system<span class="op">(</span><span class="st">"shutdown -s -f -t 5"</span><span class="op">);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        Sleep<span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">//设置关机时间</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> close_hour <span class="op">=</span> <span class="dv">22</span><span class="op">,</span>close_min <span class="op">=</span><span class="dv">35</span><span class="op">,</span>close_sec <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> diff_hour <span class="op">,</span>diff_min<span class="op">;</span><span class="co">//声明变量用来存储时间差</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> temp<span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">//声明变量获取时间结构</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> now_hour<span class="op">=</span><span class="dv">0</span><span class="op">,</span>now_min<span class="op">=</span><span class="dv">0</span><span class="op">,</span>now_second<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> tm <span class="op">*</span> tmpointer<span class="op">;</span>  <span class="co">//申明tm结构体指针</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> secs<span class="op">;</span>  <span class="co">//申明time_t类型变量</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    time<span class="op">(&amp;</span>secs<span class="op">);</span> <span class="co">//获取当前系统日期与时间</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    tmpointer <span class="op">=</span> localtime<span class="op">(&amp;</span>secs<span class="op">);</span> <span class="co">//获取tm结构的日期时间,获取当地日期与时间</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">//获取当前系统时间</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    now_hour <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_hour<span class="op">;</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    now_min <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_min<span class="op">;</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    now_second <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_sec<span class="op">;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">//时间差</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    diff_hour <span class="op">=</span> now_hour <span class="op">-</span> close_hour<span class="op">;</span> <span class="co">//离关机时间还剩多少个小时</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    diff_min <span class="op">=</span> now_min <span class="op">-</span>close_min<span class="op">;</span><span class="co">// 离关机时间还剩多少个分钟</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">//关机程序，时间在22:30分以后 以及早上7点之前</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="op">(</span> diff_hour <span class="op">&gt;</span><span class="dv">0</span> <span class="op">||(</span>diff_hour <span class="op">==</span><span class="dv">0</span> <span class="op">&amp;&amp;</span> diff_min<span class="op">&gt;=</span><span class="dv">0</span><span class="op">)</span> <span class="op">)</span> <span class="op">||</span> <span class="op">(</span>now_hour <span class="op">&lt;</span><span class="dv">7</span><span class="op">);</span> </span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>temp<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 已过关机时间之后</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"正在关机1</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        <span class="co">//system("shutdown -s -f -t 5");//立即关机 ,有时候需要保存一点重要资料</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        loop_shut<span class="op">();</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"不关机!"</span><span class="op">);</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>同时在win的程序计划任务中自己添加几个任务，到点自动关机，注意第一个留一点时间，保存文件，后面一个直接关机.并设置选项，不然不会自动运行 如下:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/img/guanji01.png" class="img-fluid"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/img/guanji02.png" class="img-fluid"></p>
+<p>亲试，根本还没有看到桌面，就显示关机了.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 用c语言设置定时关机</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2018-11-20'</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> r</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># C代码</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 创建定时任务</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>发现代码，win有自动防范木马的可能，于是要手动去在定时任务勾选某些指标，所以不可行。</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="in">```c</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="pp"># include</span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;windows.h&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">//如果存在任务名为myTaskName2 则强制删除，若没有则报错，但不终止该程序的运行</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName2 /f"</span><span class="op">);</span> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 创建一个任务名为myTaskName2的任务,/tr 后面是 要执行的命令， 双引号要转义，/st 后面接的是触发时间</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName2  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 22:35:00"</span><span class="op">);</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName4 /f"</span><span class="op">);</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName4  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 22:42:00"</span><span class="op">);</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName3 /f"</span><span class="op">);</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName3  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 22:52:00"</span><span class="op">);</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName5 /f"</span><span class="op">);</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName6 /f"</span><span class="op">);</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName7 /f"</span><span class="op">);</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName5  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:00:00"</span><span class="op">);</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName6  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:15:00"</span><span class="op">);</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName7  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:27:00"</span><span class="op">);</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName8 /f"</span><span class="op">);</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /delete /tn myTaskName9 /f"</span><span class="op">);</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName8  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:43:00"</span><span class="op">);</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    system<span class="op">(</span><span class="st">"schtasks /create /tn myTaskName9  /f /tr </span><span class="sc">\"</span><span class="st">shutdown -s -f -t 10</span><span class="sc">\"</span><span class="st"> /sc once /st 23:58:00"</span><span class="op">);</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="fu"># 编译运行后</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>编译运行后，找到对应得exe文件 ,把其放在开始启动目录中即可（<span class="in">`C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`</span>）</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>或者 写一个bat命令，放在开始启动目录，eg：</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="in">`start "" "E:\TIM\xin\Bin\TIM.exe" &amp; ping localhost -n 5`</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>命令中的<span class="in">`&amp;`</span> <span class="in">`&amp;&amp;`</span> <span class="in">`||`</span> 分别的含义：  </span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>其中： </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>&amp; : 用来分隔一个命令行中的多个命令,即运行第一个命令，然后运行第二个命令。</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>&amp;&amp; ： 只有在符号 &amp;&amp; 前面的命令成功时，才用于运行该符号后面的命令</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>|| : 只有在符号 || 前面的命令失败时，才用于运行符号 || 后面的命令。</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## 直接注入关机命令</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>这样感觉，电脑右下角一直有一个图标，</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>于是再次改进</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="in">```c</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="pp"># include</span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;windows.h&gt;</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop_shut<span class="op">(){</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>        system<span class="op">(</span><span class="st">"shutdown -s -f -t 5"</span><span class="op">);</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>        Sleep<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> str1<span class="op">[</span><span class="dv">100</span><span class="op">]=</span><span class="st">"shutdown -s -f -t "</span><span class="op">;</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> str2<span class="op">[</span><span class="dv">32</span><span class="op">];</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>str3<span class="op">;</span> </span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> now_hour<span class="op">=</span><span class="dv">0</span><span class="op">,</span>now_min<span class="op">=</span><span class="dv">0</span><span class="op">,</span>now_second<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> tm <span class="op">*</span> tmpointer<span class="op">;</span>  <span class="co">//申明tm结构体指针</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> secs<span class="op">;</span>  <span class="co">//申明time_t类型变量</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>    time<span class="op">(&amp;</span>secs<span class="op">);</span> <span class="co">//获取当前系统日期与时间</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>    tmpointer <span class="op">=</span> localtime<span class="op">(&amp;</span>secs<span class="op">);</span> <span class="co">//获取tm结构的日期时间,获取当地日期与时间</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"\Now: %d-%d-%d %d:%d:%d</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_mon<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_mday<span class="op">,</span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>    tmpointer<span class="op">-&gt;</span>tm_year<span class="op">+</span><span class="dv">1900</span><span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_hour<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_min<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_sec<span class="op">);</span> </span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>    <span class="co">//获取当前系统时间 </span></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>    now_hour <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_hour<span class="op">;</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>    now_min <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_min<span class="op">;</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>    now_second <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_sec<span class="op">;</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">当前时间:%d:%d:%d"</span><span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_hour<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_min<span class="op">,</span>tmpointer<span class="op">-&gt;</span>tm_sec<span class="op">);</span></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>    <span class="co">//设置关机时间</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> close_hour <span class="op">=</span> <span class="dv">22</span><span class="op">,</span>close_min <span class="op">=</span><span class="dv">30</span><span class="op">,</span>close_sec <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">关机时间:%d:%d:%d</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>close_hour<span class="op">,</span>close_min<span class="op">,</span>close_sec<span class="op">);</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">,</span>j<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> diff_hour <span class="op">,</span>diff_min<span class="op">;</span><span class="co">//时间差</span></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> left_time <span class="op">;</span><span class="co">//离关机时间还剩多少秒 (单位:秒)</span></span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>    diff_hour <span class="op">=</span> now_hour <span class="op">-</span> close_hour<span class="op">;</span> <span class="co">//离关机时间还剩多少个小时 </span></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>    diff_min <span class="op">=</span> now_min <span class="op">-</span>close_min<span class="op">;</span><span class="co">// 离关机时间还剩多少个分钟 </span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"时间差: 小时:%d  分钟:%d </span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>diff_hour<span class="op">,</span>diff_min<span class="op">);</span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>    <span class="co">//时间在 关机时间后 </span></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>diff_hour <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 当前小时在关机时间之后  </span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"正在关机1</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>        system<span class="op">(</span><span class="st">"shutdown -s -f -t 10"</span><span class="op">);</span><span class="co">//立即关机 </span></span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>        loop_shut<span class="op">();</span> </span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>diff_hour <span class="op">==</span><span class="dv">0</span><span class="op">){</span></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>        <span class="co">//当前小时 正在关机时间处 </span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>diff_min <span class="op">&lt;</span><span class="dv">0</span><span class="op">){</span></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>            <span class="co">//没超过关机时间 </span></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"正在关机2</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>            diff_min <span class="op">=(-</span><span class="dv">1</span><span class="op">)</span> <span class="op">*</span> diff_min<span class="op">;</span></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> diff_min<span class="op">*</span><span class="dv">60</span><span class="op">;</span></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"还剩%d秒==%d分钟</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>i<span class="op">,</span>diff_min<span class="op">);</span></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>            itoa<span class="op">(</span>i<span class="op">,</span>str2<span class="op">,</span><span class="dv">10</span><span class="op">);</span><span class="co">//把数字转变为字符串 ，后面的10 为10进制 </span></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>            strcat<span class="op">(</span>str1<span class="op">,</span>str2<span class="op">);</span>  <span class="co">//拼接字符串 </span></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>            system<span class="op">(</span>str1<span class="op">);</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span><span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>diff_min <span class="op">==</span><span class="dv">0</span><span class="op">){</span></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"正在关机3</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>            system<span class="op">(</span><span class="st">"shutdown -s -f -t 20"</span><span class="op">);</span><span class="co">//立即关机 </span></span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>            loop_shut<span class="op">();</span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span><span class="cf">else</span><span class="op">{</span></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>            <span class="co">//超过关机时间 </span></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"正在关机4</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>            system<span class="op">(</span><span class="st">"shutdown -s -f -t 20"</span><span class="op">);</span><span class="co">//立即关机 </span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>            loop_shut<span class="op">();</span></span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="cf">else</span><span class="op">{</span></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>        <span class="co">//当前小时 在关机时间之前 </span></span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"正在关机5</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>        left_time <span class="op">=</span> diff_hour<span class="op">*(-</span><span class="dv">1</span><span class="op">)*</span><span class="dv">60</span> <span class="op">+</span> diff_min<span class="op">*(-</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> left_time<span class="op">*</span><span class="dv">60</span><span class="op">;</span></span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"还剩%d秒==%d分钟</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>i<span class="op">,</span>left_time<span class="op">);</span></span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>        itoa<span class="op">(</span>i<span class="op">,</span>str2<span class="op">,</span><span class="dv">10</span><span class="op">);</span><span class="co">//把数字转变为字符串 ，后面的10 为10进制 </span></span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>        strcat<span class="op">(</span>str1<span class="op">,</span>str2<span class="op">);</span>  <span class="co">//拼接字符串 </span></span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>        system<span class="op">(</span>str1<span class="op">);</span></span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## 结合定时任务关机</span></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>到某个时间以后，如果在重启，就会直接关机（除非你手速快）,并把生成的exe文件设置为开机启动。</span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a><span class="in">```c</span></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a><span class="pp"># include </span><span class="im">&lt;windows.h&gt;</span></span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop_shut<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>        system<span class="op">(</span><span class="st">"shutdown -s -f -t 5"</span><span class="op">);</span></span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>        Sleep<span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>    <span class="co">//设置关机时间</span></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> close_hour <span class="op">=</span> <span class="dv">22</span><span class="op">,</span>close_min <span class="op">=</span><span class="dv">35</span><span class="op">,</span>close_sec <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> diff_hour <span class="op">,</span>diff_min<span class="op">;</span><span class="co">//声明变量用来存储时间差</span></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> temp<span class="op">;</span></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>    <span class="co">//声明变量获取时间结构</span></span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> now_hour<span class="op">=</span><span class="dv">0</span><span class="op">,</span>now_min<span class="op">=</span><span class="dv">0</span><span class="op">,</span>now_second<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> tm <span class="op">*</span> tmpointer<span class="op">;</span>  <span class="co">//申明tm结构体指针</span></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> secs<span class="op">;</span>  <span class="co">//申明time_t类型变量</span></span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>    time<span class="op">(&amp;</span>secs<span class="op">);</span> <span class="co">//获取当前系统日期与时间</span></span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>    tmpointer <span class="op">=</span> localtime<span class="op">(&amp;</span>secs<span class="op">);</span> <span class="co">//获取tm结构的日期时间,获取当地日期与时间</span></span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a>    <span class="co">//获取当前系统时间</span></span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>    now_hour <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_hour<span class="op">;</span></span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a>    now_min <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_min<span class="op">;</span></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>    now_second <span class="op">=</span> tmpointer<span class="op">-&gt;</span>tm_sec<span class="op">;</span></span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>    <span class="co">//时间差</span></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>    diff_hour <span class="op">=</span> now_hour <span class="op">-</span> close_hour<span class="op">;</span> <span class="co">//离关机时间还剩多少个小时</span></span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>    diff_min <span class="op">=</span> now_min <span class="op">-</span>close_min<span class="op">;</span><span class="co">// 离关机时间还剩多少个分钟</span></span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a>    <span class="co">//关机程序，时间在22:30分以后 以及早上7点之前</span></span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="op">(</span> diff_hour <span class="op">&gt;</span><span class="dv">0</span> <span class="op">||(</span>diff_hour <span class="op">==</span><span class="dv">0</span> <span class="op">&amp;&amp;</span> diff_min<span class="op">&gt;=</span><span class="dv">0</span><span class="op">)</span> <span class="op">)</span> <span class="op">||</span> <span class="op">(</span>now_hour <span class="op">&lt;</span><span class="dv">7</span><span class="op">);</span> </span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>temp<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 已过关机时间之后</span></span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"正在关机1</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a>        <span class="co">//system("shutdown -s -f -t 5");//立即关机 ,有时候需要保存一点重要资料</span></span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a>        loop_shut<span class="op">();</span></span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"不关机!"</span><span class="op">);</span></span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a>同时在win的程序计划任务中自己添加几个任务，到点自动关机，注意第一个留一点时间，保存文件，后面一个直接关机.并设置选项，不然不会自动运行</span>
+<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a>如下:</span>
+<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/img/guanji01.png)</span></span>
+<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/img/guanji02.png)</span></span>
+<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a>亲试，根本还没有看到桌面，就显示关机了.</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

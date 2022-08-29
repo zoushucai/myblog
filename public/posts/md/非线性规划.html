@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="zsc">
+
+<title>快乐的一天 - 非线性规划2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - 非线性规划2">
+<meta property="og:description" content="非线性规划问题">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">非线性规划2</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">非线性规划2</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">matlab</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2019年6月25日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#rsolnp" id="toc-rsolnp" class="nav-link active" data-scroll-target="#rsolnp">Rsolnp</a></li>
+  <li><a href="#rdonlp2" id="toc-rdonlp2" class="nav-link" data-scroll-target="#rdonlp2">Rdonlp2</a></li>
+  <li><a href="#matlab-fmincon" id="toc-matlab-fmincon" class="nav-link" data-scroll-target="#matlab-fmincon">Matlab:: fmincon</a></li>
+  <li><a href="#常用非线性规划模型我" id="toc-常用非线性规划模型我" class="nav-link" data-scroll-target="#常用非线性规划模型我">常用非线性规划模型(我)</a>
+  <ul class="collapse">
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
+  <li><a href="#matlab" id="toc-matlab" class="nav-link" data-scroll-target="#matlab">Matlab</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="rsolnp" class="level2">
+<h2 class="anchored" data-anchor-id="rsolnp">Rsolnp</h2>
+<p>非线性规划问题</p>
+<p><span class="math display">\[
+\begin{aligned}
+\min \quad &amp; f(x)\\
+\text { s.t. } &amp; \begin{cases}
+{g(x)=0} \\{l_{h} \leq h(x) \leq u_{h}} \\ {l_{x} \leq x \leq u_{x}}
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>其中, <span class="math inline">\(f(x),g(x),h(x)\)</span> 都是光滑函数,</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">solnp</span>(pars, fun, <span class="at">eqfun =</span> <span class="cn">NULL</span>, <span class="at">eqB =</span> <span class="cn">NULL</span>, <span class="at">ineqfun =</span> <span class="cn">NULL</span>, <span class="at">ineqLB =</span> <span class="cn">NULL</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ineqUB =</span> <span class="cn">NULL</span>, <span class="at">LB =</span> <span class="cn">NULL</span>, <span class="at">UB =</span> <span class="cn">NULL</span>, <span class="at">control =</span> <span class="fu">list</span>(), ...)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 参数解释</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  pars  <span class="sc">:</span>  初始值(向量), </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  fun   <span class="sc">:</span>  最小化的目标函数值，输入为pars参数，输出为一个单一值,等价上述问题的<span class="fu">f</span>(x)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  eqfun <span class="sc">:</span>  (可选) 等式约束(左边) ，等价与上述问题的 <span class="fu">g</span>(x)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  egB <span class="sc">:</span> (可选) 等式约束右边值，等价上述问题<span class="fu">g</span>(x) <span class="ot">=</span> <span class="dv">0</span> 的0 </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  ineqfun <span class="sc">:</span> (可选) 不等式约束，等价上述问题的 <span class="fu">h</span>(x)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ineqLB <span class="sc">:</span>(可选) 不等式约束的下限 ，等价于上述问题的 lh</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  ineqUB <span class="sc">:</span>(可选) 不等式约束的上限 ，等价于上述问题的 uh</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  LB <span class="sc">:</span>(可选) 参变量的下限 ，等价于上述问题的lx</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  UB<span class="sc">:</span> (可选) 参变量的上限 ，等价于上述问题的ux </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  control <span class="sc">:</span>(可选) 优化参数控制表。</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>例子： <span class="math display">\[
+\begin{aligned}
+\min  &amp; \quad exp({\prod_{i=1}^{5}x_i}) \\
+\text {s.t.} &amp; \begin{cases}
+&amp; x_1^2 +x_2^2 +x_3^2+x_4^2+x_5^2 = 10 \\
+&amp; x_2x_3-5x_4x_5 = 0 \\
+&amp; x_1^3 +x_2^3 = -1
+\end{cases}
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># POWELL Problem</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rsolnp)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fn1<span class="ot">=</span><span class="cf">function</span>(x){</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">3</span>]<span class="sc">*</span>x[<span class="dv">4</span>]<span class="sc">*</span>x[<span class="dv">5</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>eqn1<span class="ot">=</span><span class="cf">function</span>(x){</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    z1<span class="ot">=</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">+</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">3</span>]<span class="sc">*</span>x[<span class="dv">3</span>]<span class="sc">+</span>x[<span class="dv">4</span>]<span class="sc">*</span>x[<span class="dv">4</span>]<span class="sc">+</span>x[<span class="dv">5</span>]<span class="sc">*</span>x[<span class="dv">5</span>]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    z2<span class="ot">=</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">3</span>]<span class="sc">-</span><span class="dv">5</span><span class="sc">*</span>x[<span class="dv">4</span>]<span class="sc">*</span>x[<span class="dv">5</span>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    z3<span class="ot">=</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">+</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">2</span>]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">c</span>(z1,z2,z3))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>powell<span class="ot">=</span><span class="fu">solnp</span>(x0, <span class="at">fun =</span> fn1, <span class="at">eqfun =</span> eqn1, <span class="at">eqB =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>具体参考:https://cran.r-project.org/web/packages/Rsolnp/index.html</p>
+</section>
+<section id="rdonlp2" class="level2">
+<h2 class="anchored" data-anchor-id="rdonlp2">Rdonlp2</h2>
+<p>这个包有一定的问题，我在运行的时候第一次几乎都正常，能得到正确结果，第二次直接系统崩溃。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">'Rdonlp2'</span>)) <span class="fu">install.packages</span>(<span class="st">"Rdonlp2"</span>, <span class="at">repos=</span><span class="st">"http://R-Forge.R-project.org"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>模型格式如下： <span class="math display">\[
+\begin{array}{l}{\min z=f(\mathbf{x})} \\ {\qquad \begin{array}{l}{\mathrm{x}_{1} \leqslant \mathrm{x} \leqslant \mathrm{x}_{\mathrm{u}}} \\ {\mathrm{b}_{1} \leqslant \mathrm{Ax} \leqslant \mathrm{b}_{\mathrm{u}}} \\ {\mathrm{c}_{1} \leqslant \mathrm{c}(\mathrm{x}) \leqslant \mathrm{c}_{\mathrm{u}}}\end{array}}\end{array}
+\]</span> 具体可参考: (R软件在最优化中的应用)[]</p>
+</section>
+<section id="matlab-fmincon" class="level2">
+<h2 class="anchored" data-anchor-id="matlab-fmincon">Matlab:: fmincon</h2>
+<p>可参考 官网函数解释https://www.mathworks.com/help/optim/ug/fmincon.html</p>
+<p>https://wenku.baidu.com/view/6bcb651d0b4e767f5acfce97.html?sxts=1561344526517</p>
+<p>https://blog.csdn.net/qq_38784454/article/details/80329021</p>
+<p>《MATLAB数学建模》李昕——清华大学出版</p>
+<section id="example" class="level4">
+<h4 class="anchored" data-anchor-id="example">example</h4>
+<p><span class="math display">\[
+\begin{array}{l}
+\min f(x) \\
+\text {s.t.}\left\{\begin{array}{l}
+A \cdot x \leq b \\
+\text {Aeq} \cdot x=beq \\
+c(x) \leq 0 \\
+\operatorname{ceq}(x)=0 \\
+l b \leq x \leq u b
+\end{array}\right.
+\end{array}
+\]</span> 其中 <span class="math inline">\(f(x)\)</span>是目标函数, <span class="math inline">\(x, b, beq\)</span>是向量, <span class="math inline">\(A, Aeq\)</span>是矩阵, <span class="math inline">\(c(x)\)</span> 和 <span class="math inline">\(ceq(x)\)</span> 是向量函數</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% 2.基本语法</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">fval</span>]<span class="op">=</span><span class="va">fmincon</span>(<span class="va">fun</span><span class="op">,</span><span class="va">x0</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">b</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq</span><span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span><span class="op">,</span><span class="va">nonlcon</span><span class="op">,</span><span class="va">options</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">% 参数解释</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="va">x的返回值是决策向量x的取值</span>，<span class="va">fval的返回值是目标函数f</span>(<span class="va">x</span>)的取值</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">fun是用M文件定义的函数f</span>(<span class="va">x</span>)<span class="op">,</span>代表了(非)线性目标函数</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="va">x0是x的初始值</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="va">A</span><span class="op">,</span><span class="va">b</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq定义了线性约束</span> <span class="op">,</span>如果没有线性约束，则<span class="va">A</span><span class="op">=</span>[]<span class="op">,</span><span class="va">b</span><span class="op">=</span>[]<span class="op">,</span><span class="va">Aeq</span><span class="op">=</span>[]<span class="op">,</span><span class="va">beq</span><span class="op">=</span>[]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="va">lb和ub是变量x的下界和上界</span>，如果下界和上界没有约束，则<span class="va">lb</span><span class="op">=</span>[]<span class="op">,</span><span class="va">ub</span><span class="op">=</span>[]<span class="op">,</span>也可以写成<span class="va">lb的各分量都为</span> <span class="op">-</span><span class="va">inf</span><span class="op">,</span><span class="va">ub的各分量都为inf</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="va">nonlcon是用M文件定义的非线性向量函数约束</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="va">options定义了优化参数</span>，不填写表示使用<span class="va">Matlab默认的参数设置</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="例" class="level4">
+<h4 class="anchored" data-anchor-id="例">例</h4>
+<p><span class="math display">\[
+\begin{aligned}
+\min f(x) = x_{1}^{2}+x_{2}^{2}+x_{3}^{2}+8 \\
+\text { s. t. }\left\{\begin{array}{l}
+x_{1}^{2}-x_{2}+x_{3}^{2} \geq 0 \\
+x_{1}+x_{2}^{2}+x_{3}^{2} \leq 20 \\
+-x_{1}-x_{2}^{2}+2=0 \\
+x_{2}+2 x_{3}^{2}=3 \\
+x_{1}, x_{2}, x_{3} \geq 0
+\end{array}\right.
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">clc</span><span class="op">,</span><span class="va">clear</span> <span class="va">all</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span> <span class="va">rand</span>(<span class="fl">3</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span>  <span class="co">% 初始值</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">Aeq</span> <span class="op">=</span> []<span class="op">;</span>               <span class="co">% 线性等式约束的系数（左边的系数）</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">beq</span> <span class="op">=</span> []<span class="op">;</span>                <span class="co">% 线性等式约束的值 （右边的值）</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">%A = [];                % 线性不等式约束的系数</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">%b = [];                % 线性等式约束的值</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="va">ub</span> <span class="op">=</span> []<span class="op">;</span>      <span class="co">% 变量的上限（取等号）</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="va">lb</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">0</span><span class="op">,</span><span class="fl">3</span>)<span class="op">;</span>      <span class="co">% 变量的下限（取等号）</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">y</span>]<span class="op">=</span><span class="va">fmincon</span>(<span class="op">@</span><span class="va">myobjfun</span><span class="op">,</span><span class="va">x0</span><span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq</span><span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span><span class="op">,@</span><span class="va">constrain</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">f</span> <span class="op">=</span> <span class="va">myobjfun</span>(<span class="va">x</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="va">f</span><span class="op">=</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">8</span><span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> [<span class="va">g</span><span class="op">,</span><span class="va">h</span>]<span class="op">=</span><span class="va">constrain</span>(<span class="va">x</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="va">g</span><span class="op">=</span>[<span class="op">-</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">-</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">x</span>(<span class="fl">1</span>)<span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">3</span><span class="op">-</span><span class="fl">20</span>]<span class="op">;</span> <span class="co">% 不等式</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="va">h</span><span class="op">=</span>[<span class="op">-</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">-</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">2</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="va">x</span>(<span class="fl">2</span>)<span class="op">+</span><span class="fl">2</span><span class="op">*</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">-</span><span class="fl">3</span>]<span class="op">;</span> <span class="co">% 等式约束</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>也可以这样写</p>
+<p>(1)编写M函数myobjfun.m 定义目标函数：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">f</span><span class="op">=</span><span class="va">myobjfun</span>(<span class="va">x</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">f</span><span class="op">=</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">8</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(2)编写M函数constrain.m定义非线性约束条件:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> [<span class="va">g</span><span class="op">,</span><span class="va">h</span>]<span class="op">=</span><span class="va">constrain</span>(<span class="va">x</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">g</span><span class="op">=</span>[<span class="op">-</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">-</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">x</span>(<span class="fl">1</span>)<span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">3</span><span class="op">-</span><span class="fl">20</span>]<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">h</span><span class="op">=</span>[<span class="op">-</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">-</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">2</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">x</span>(<span class="fl">2</span>)<span class="op">+</span><span class="fl">2</span><span class="op">*</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">-</span><span class="fl">3</span>]<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(3)编写主程序函数</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">y</span>]<span class="op">=</span><span class="va">fmincon</span>(<span class="ss">'fun1'</span><span class="op">,</span><span class="va">rand</span>(<span class="fl">3</span><span class="op">,</span><span class="fl">1</span>)<span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span><span class="va">zeros</span>(<span class="fl">3</span><span class="op">,</span><span class="fl">1</span>)<span class="op">,</span>[]<span class="op">,</span><span class="ss">'fun2'</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>运行即可得到结果</p>
+<p>参考 : https://www.cnblogs.com/goodtwo/p/11146540.html</p>
+</section>
+</section>
+<section id="常用非线性规划模型我" class="level2">
+<h2 class="anchored" data-anchor-id="常用非线性规划模型我">常用非线性规划模型(我)</h2>
+<p><span class="math display">\[
+\begin{aligned}
+Min \quad &amp; \sum_{i=1}^{n} \sum_{j=1}^{n}\left(\omega_{i}-a_{i j} \omega_{j}\right)^{2}\\  
+s.t \quad &amp; \sum_{i=1}^{n} \omega_{i}=1,\\
+&amp; 1\geq \omega_{i} \geq 0, \quad i=1,2, \ldots, n
+\end{aligned}
+\]</span></p>
+<p>于是自己写了几个函数模板:</p>
+<section id="r" class="level3">
+<h3 class="anchored" data-anchor-id="r">R</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rsolnp)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 最小化的目标函数</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>obj<span class="ot">=</span><span class="cf">function</span>(x){</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  A1 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>,<span class="dv">1</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,<span class="dv">1</span>),<span class="at">ncol =</span> <span class="dv">6</span>,<span class="at">nrow =</span> <span class="dv">6</span>,<span class="at">byrow =</span> T)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(A1)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>      s<span class="ot">=</span> s<span class="sc">+</span> (x[i]<span class="sc">-</span> A1[i,j]<span class="sc">*</span>x[j])<span class="sc">^</span><span class="dv">2</span>;</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(s)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 编写解上述非线性规划的函数</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>fmin <span class="ot">=</span> <span class="cf">function</span>(f,n){<span class="co"># n代表参数的个数</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  eqn1<span class="ot">=</span><span class="cf">function</span>(x){</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(x)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  } <span class="co"># 等式约束的左边  ，eqB 为等式约束的右边，如果有多个则用向量</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  powell<span class="ot">=</span><span class="fu">solnp</span>(<span class="at">pars=</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span>n,n), <span class="at">fun =</span> f, <span class="at">eqfun =</span> eqn1, <span class="at">eqB =</span> <span class="dv">1</span>,<span class="at">LB=</span> <span class="fu">rep</span>(<span class="dv">0</span>,n) ,<span class="at">UB =</span> <span class="fu">rep</span>(<span class="dv">1</span>,n))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  fx <span class="ot">=</span> powell<span class="sc">$</span>values</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> powell<span class="sc">$</span>pars</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(  <span class="fu">list</span>(<span class="st">'x'</span> <span class="ot">=</span> x, <span class="st">'fx'</span> <span class="ot">=</span> fx[<span class="fu">length</span>(fx)]) )</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">fmin</span>(obj,<span class="at">n =</span> <span class="dv">6</span>) <span class="co">#调用即可，n代表参数的个数</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="do">########################################</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rdonlp2)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>objFun <span class="ot">=</span> <span class="cf">function</span>(x){</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  A1 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>,<span class="dv">1</span>,</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>,</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>,<span class="dv">1</span>),<span class="at">ncol =</span> <span class="dv">6</span>,<span class="at">nrow =</span> <span class="dv">6</span>,<span class="at">byrow =</span> T)</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(A1)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>      s<span class="ot">=</span> s<span class="sc">+</span> (x[i]<span class="sc">-</span> A1[i,j]<span class="sc">*</span>x[j])<span class="sc">^</span><span class="dv">2</span>;</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(s)</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>fmin <span class="ot">=</span> <span class="cf">function</span>(objFun,n){ <span class="co"># 这里n为未知参数的个数.</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  x0 <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span>n,n)</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>  lb <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>,n) <span class="co"># 自变量的下限</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>  ub <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>,n) <span class="co"># 自变量的上限</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>  Aeq <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>,n),<span class="dv">1</span>,n) </span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>  lbeq <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>  ubeq <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>  ret <span class="ot">=</span> <span class="fu">donlp2</span>(x0,objFun,<span class="at">par.lower =</span> lb , <span class="at">par.upper =</span> ub,<span class="at">A =</span> Aeq,<span class="at">lin.lower =</span> lbeq,<span class="at">lin.upper =</span> ubeq)</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">'x'</span> <span class="ot">=</span> ret<span class="sc">$</span>par,<span class="st">'objvalue'</span> <span class="ot">=</span> ret<span class="sc">$</span>fx)</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="fu">fmin</span>(objFun,<span class="at">n =</span> <span class="dv">6</span>)<span class="co"># 只需要改写objFun 就可以了</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="matlab" class="level3">
+<h3 class="anchored" data-anchor-id="matlab">Matlab</h3>
+<p>把上述文件存储为<code>fmin.m</code>，以后只需要更改目标函数<code>myobjfun(x,AA)</code>即可,其中x代表未知数, AA 代表目标函数的系数，</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">x</span> <span class="op">=</span> <span class="va">fmin</span>(<span class="va">AA</span>) <span class="co">% 调用函数接口</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="va">n</span> <span class="op">=</span> <span class="va">size</span>(<span class="va">AA</span><span class="op">,</span><span class="fl">1</span>) <span class="op">;</span> <span class="co">% 未知数x的长度 </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span>    <span class="co">% 初始迭代位置</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="va">Aeq</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span>     <span class="co">% 线性等式约束的系数（左边的系数）</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="va">beq</span> <span class="op">=</span> <span class="fl">1</span><span class="op">;</span>                <span class="co">% 线性等式约束的值 （右边的值）</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">%A = [];                % 线性不等式约束的系数</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">%b = [];                % 线性等式约束的值</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="va">ub</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span>      <span class="co">% 变量的上限（取等号）</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="va">lb</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">0</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span>      <span class="co">% 变量的下限（取等号）</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">fval</span>] <span class="op">=</span> <span class="va">fmincon</span>(<span class="op">@</span>(<span class="va">x</span>)<span class="va">myobjfun</span>(<span class="va">x</span><span class="op">,</span><span class="va">AA</span>)<span class="op">,</span><span class="va">x0</span><span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq</span><span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span>)<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">%[x,fval] = fmincon(@myobjfun,x0,[],[],Aeq,beq,lb,ub,[],[],options,A);</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">% 目标函数</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">s</span> <span class="op">=</span> <span class="va">myobjfun</span>(<span class="va">x</span><span class="op">,</span><span class="va">AA</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="va">n</span> <span class="op">=</span> <span class="va">size</span>(<span class="va">AA</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span><span class="fl">0</span><span class="op">;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> <span class="va">j</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">s</span><span class="op">=</span> <span class="va">s</span><span class="op">+</span> (<span class="va">x</span>(<span class="va">i</span>)<span class="op">-</span> <span class="va">AA</span>(<span class="va">i</span><span class="op">,</span><span class="va">j</span>)<span class="op">*</span><span class="va">x</span>(<span class="va">j</span>))<span class="op">^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 非线性规划2</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2019-06-25'</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - matlab</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Rsolnp</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>非线性规划问题</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>\min \quad &amp; f(x)<span class="sc">\\</span> </span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>\text { s.t. } &amp; \begin{cases}</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>{g(x)=0} <span class="sc">\\</span>{l_{h} \leq h(x) \leq u_{h}} <span class="sc">\\</span> {l_{x} \leq x \leq u_{x}}</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>其中, $f(x),g(x),h(x)$ 都是光滑函数,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">solnp</span>(pars, fun, <span class="at">eqfun =</span> <span class="cn">NULL</span>, <span class="at">eqB =</span> <span class="cn">NULL</span>, <span class="at">ineqfun =</span> <span class="cn">NULL</span>, <span class="at">ineqLB =</span> <span class="cn">NULL</span>, </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">ineqUB =</span> <span class="cn">NULL</span>, <span class="at">LB =</span> <span class="cn">NULL</span>, <span class="at">UB =</span> <span class="cn">NULL</span>, <span class="at">control =</span> <span class="fu">list</span>(), ...)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 参数解释</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  pars  <span class="sc">:</span>  初始值(向量), </span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  fun   <span class="sc">:</span>  最小化的目标函数值，输入为pars参数，输出为一个单一值,等价上述问题的<span class="fu">f</span>(x)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  eqfun <span class="sc">:</span>  (可选) 等式约束(左边) ，等价与上述问题的 <span class="fu">g</span>(x)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  egB <span class="sc">:</span> (可选) 等式约束右边值，等价上述问题<span class="fu">g</span>(x) <span class="ot">=</span> <span class="dv">0</span> 的0 </span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  ineqfun <span class="sc">:</span> (可选) 不等式约束，等价上述问题的 <span class="fu">h</span>(x)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  ineqLB <span class="sc">:</span>(可选) 不等式约束的下限 ，等价于上述问题的 lh</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  ineqUB <span class="sc">:</span>(可选) 不等式约束的上限 ，等价于上述问题的 uh</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  LB <span class="sc">:</span>(可选) 参变量的下限 ，等价于上述问题的lx</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  UB<span class="sc">:</span> (可选) 参变量的上限 ，等价于上述问题的ux </span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  control <span class="sc">:</span>(可选) 优化参数控制表。</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>例子： </span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>\min  &amp; \quad exp({\prod_{i=1}^{5}x_i}) <span class="sc">\\</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>\text {s.t.} &amp; \begin{cases}</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a> &amp; x_1^2 +x_2^2 +x_3^2+x_4^2+x_5^2 = 10 <span class="sc">\\</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>&amp; x_2x_3-5x_4x_5 = 0 <span class="sc">\\</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>&amp; x_1^3 +x_2^3 = -1</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="co"># POWELL Problem</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rsolnp)</span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>fn1<span class="ot">=</span><span class="cf">function</span>(x){</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">3</span>]<span class="sc">*</span>x[<span class="dv">4</span>]<span class="sc">*</span>x[<span class="dv">5</span>])</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>eqn1<span class="ot">=</span><span class="cf">function</span>(x){</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>    z1<span class="ot">=</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">+</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">+</span>x[<span class="dv">3</span>]<span class="sc">*</span>x[<span class="dv">3</span>]<span class="sc">+</span>x[<span class="dv">4</span>]<span class="sc">*</span>x[<span class="dv">4</span>]<span class="sc">+</span>x[<span class="dv">5</span>]<span class="sc">*</span>x[<span class="dv">5</span>]</span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>    z2<span class="ot">=</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">3</span>]<span class="sc">-</span><span class="dv">5</span><span class="sc">*</span>x[<span class="dv">4</span>]<span class="sc">*</span>x[<span class="dv">5</span>]</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>    z3<span class="ot">=</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">+</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">2</span>]</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">c</span>(z1,z2,z3))</span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>powell<span class="ot">=</span><span class="fu">solnp</span>(x0, <span class="at">fun =</span> fn1, <span class="at">eqfun =</span> eqn1, <span class="at">eqB =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>具体参考:https://cran.r-project.org/web/packages/Rsolnp/index.html</span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Rdonlp2</span></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>这个包有一定的问题，我在运行的时候第一次几乎都正常，能得到正确结果，第二次直接系统崩溃。</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">'Rdonlp2'</span>)) <span class="fu">install.packages</span>(<span class="st">"Rdonlp2"</span>, <span class="at">repos=</span><span class="st">"http://R-Forge.R-project.org"</span>)</span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>模型格式如下：</span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>\begin{array}{l}{\min z=f(\mathbf{x})} <span class="sc">\\</span> {\qquad \begin{array}{l}{\mathrm{x}_{1} \leqslant \mathrm{x} \leqslant \mathrm{x}_{\mathrm{u}}} \\ {\mathrm{b}_{1} \leqslant \mathrm{Ax} \leqslant \mathrm{b}_{\mathrm{u}}} \\ {\mathrm{c}_{1} \leqslant \mathrm{c}(\mathrm{x}) \leqslant \mathrm{c}_{\mathrm{u}}}\end{array}}\end{array}</span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>具体可参考: (R软件在最优化中的应用)[]</span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matlab:: fmincon</span></span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>可参考 官网函数解释https://www.mathworks.com/help/optim/ug/fmincon.html</span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>https://wenku.baidu.com/view/6bcb651d0b4e767f5acfce97.html?sxts=1561344526517</span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>https://blog.csdn.net/qq_38784454/article/details/80329021</span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a>《MATLAB数学建模》李昕——清华大学出版</span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a><span class="fu">#### example</span></span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a>\begin{array}{l}</span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>\min f(x) <span class="sc">\\</span></span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>\text {s.t.}\left<span class="sc">\{</span>\begin{array}{l}</span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a>A \cdot x \leq b <span class="sc">\\</span></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a>\text {Aeq} \cdot x=beq <span class="sc">\\</span></span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a>c(x) \leq 0 <span class="sc">\\</span></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a>\operatorname{ceq}(x)=0 <span class="sc">\\</span></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a>l b \leq x \leq u b</span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>\end{array}\right.</span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a>\end{array}</span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a>其中 $f(x)$是目标函数, $x, b, beq$是向量,  $A, Aeq$是矩阵, $c(x)$ 和 $ceq(x)$ 是向量函數</span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="in">```MATLAB</span></span>
+<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="co">% 2.基本语法</span></span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">fval</span>]<span class="op">=</span><span class="va">fmincon</span>(<span class="va">fun</span><span class="op">,</span><span class="va">x0</span><span class="op">,</span><span class="va">A</span><span class="op">,</span><span class="va">b</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq</span><span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span><span class="op">,</span><span class="va">nonlcon</span><span class="op">,</span><span class="va">options</span>)</span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="co">% 参数解释</span></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="va">x的返回值是决策向量x的取值</span>，<span class="va">fval的返回值是目标函数f</span>(<span class="va">x</span>)的取值</span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="va">fun是用M文件定义的函数f</span>(<span class="va">x</span>)<span class="op">,</span>代表了(非)线性目标函数</span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="va">x0是x的初始值</span></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="va">A</span><span class="op">,</span><span class="va">b</span><span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq定义了线性约束</span> <span class="op">,</span>如果没有线性约束，则<span class="va">A</span><span class="op">=</span>[]<span class="op">,</span><span class="va">b</span><span class="op">=</span>[]<span class="op">,</span><span class="va">Aeq</span><span class="op">=</span>[]<span class="op">,</span><span class="va">beq</span><span class="op">=</span>[]</span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="va">lb和ub是变量x的下界和上界</span>，如果下界和上界没有约束，则<span class="va">lb</span><span class="op">=</span>[]<span class="op">,</span><span class="va">ub</span><span class="op">=</span>[]<span class="op">,</span>也可以写成<span class="va">lb的各分量都为</span> <span class="op">-</span><span class="va">inf</span><span class="op">,</span><span class="va">ub的各分量都为inf</span></span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="va">nonlcon是用M文件定义的非线性向量函数约束</span></span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a><span class="va">options定义了优化参数</span>，不填写表示使用<span class="va">Matlab默认的参数设置</span></span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 例</span></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a>\min f(x) = x_{1}^{2}+x_{2}^{2}+x_{3}^{2}+8 <span class="sc">\\</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a>\text { s. t. }\left<span class="sc">\{</span>\begin{array}{l}</span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a>x_{1}^{2}-x_{2}+x_{3}^{2} \geq 0 <span class="sc">\\</span></span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a>x_{1}+x_{2}^{2}+x_{3}^{2} \leq 20 <span class="sc">\\</span></span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a>-x_{1}-x_{2}^{2}+2=0 <span class="sc">\\</span></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a>x_{2}+2 x_{3}^{2}=3 <span class="sc">\\</span></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a>x_{1}, x_{2}, x_{3} \geq 0</span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a>\end{array}\right.</span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="in">```matlab</span></span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="va">clc</span><span class="op">,</span><span class="va">clear</span> <span class="va">all</span></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span> <span class="va">rand</span>(<span class="fl">3</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span>  <span class="co">% 初始值</span></span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="va">Aeq</span> <span class="op">=</span> []<span class="op">;</span>               <span class="co">% 线性等式约束的系数（左边的系数）</span></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="va">beq</span> <span class="op">=</span> []<span class="op">;</span>                <span class="co">% 线性等式约束的值 （右边的值）</span></span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a><span class="co">%A = [];                % 线性不等式约束的系数</span></span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="co">%b = [];                % 线性等式约束的值</span></span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="va">ub</span> <span class="op">=</span> []<span class="op">;</span>      <span class="co">% 变量的上限（取等号）</span></span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="va">lb</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">0</span><span class="op">,</span><span class="fl">3</span>)<span class="op">;</span>      <span class="co">% 变量的下限（取等号）</span></span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">y</span>]<span class="op">=</span><span class="va">fmincon</span>(<span class="op">@</span><span class="va">myobjfun</span><span class="op">,</span><span class="va">x0</span><span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq</span><span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span><span class="op">,@</span><span class="va">constrain</span>)</span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">f</span> <span class="op">=</span> <span class="va">myobjfun</span>(<span class="va">x</span>)</span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="va">f</span><span class="op">=</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">8</span><span class="op">;</span></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> [<span class="va">g</span><span class="op">,</span><span class="va">h</span>]<span class="op">=</span><span class="va">constrain</span>(<span class="va">x</span>)</span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a><span class="va">g</span><span class="op">=</span>[<span class="op">-</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">-</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span></span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a>    <span class="va">x</span>(<span class="fl">1</span>)<span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">3</span><span class="op">-</span><span class="fl">20</span>]<span class="op">;</span> <span class="co">% 不等式</span></span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="va">h</span><span class="op">=</span>[<span class="op">-</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">-</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">2</span></span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a>    <span class="va">x</span>(<span class="fl">2</span>)<span class="op">+</span><span class="fl">2</span><span class="op">*</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">-</span><span class="fl">3</span>]<span class="op">;</span> <span class="co">% 等式约束</span></span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a>也可以这样写</span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a>(<span class="fl">1</span>)编写<span class="va">M函数myobjfun</span>.<span class="va">m</span> 定义目标函数：</span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a>```<span class="va">matlab</span></span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">f</span><span class="op">=</span><span class="va">myobjfun</span>(<span class="va">x</span>)</span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a>    <span class="va">f</span><span class="op">=</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">8</span><span class="op">;</span></span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a>(<span class="fl">2</span>)编写<span class="va">M函数constrain</span>.<span class="va">m定义非线性约束条件</span><span class="op">:</span></span>
+<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a>```<span class="va">matlab</span></span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> [<span class="va">g</span><span class="op">,</span><span class="va">h</span>]<span class="op">=</span><span class="va">constrain</span>(<span class="va">x</span>)</span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a>  <span class="va">g</span><span class="op">=</span>[<span class="op">-</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">-</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span></span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a>      <span class="va">x</span>(<span class="fl">1</span>)<span class="op">+</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">3</span><span class="op">-</span><span class="fl">20</span>]<span class="op">;</span></span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a>  <span class="va">h</span><span class="op">=</span>[<span class="op">-</span><span class="va">x</span>(<span class="fl">1</span>)<span class="op">-</span><span class="va">x</span>(<span class="fl">2</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">2</span></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a>      <span class="va">x</span>(<span class="fl">2</span>)<span class="op">+</span><span class="fl">2</span><span class="op">*</span><span class="va">x</span>(<span class="fl">3</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">-</span><span class="fl">3</span>]<span class="op">;</span></span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a>(<span class="fl">3</span>)编写主程序函数</span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a>```<span class="va">matlab</span></span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">y</span>]<span class="op">=</span><span class="va">fmincon</span>(<span class="ss">'fun1'</span><span class="op">,</span><span class="va">rand</span>(<span class="fl">3</span><span class="op">,</span><span class="fl">1</span>)<span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span><span class="va">zeros</span>(<span class="fl">3</span><span class="op">,</span><span class="fl">1</span>)<span class="op">,</span>[]<span class="op">,</span><span class="ss">'fun2'</span>)</span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a>运行即可得到结果</span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a>参考 <span class="op">:</span> <span class="va">https</span><span class="op">://</span><span class="va">www</span>.<span class="va">cnblogs</span>.<span class="va">com</span><span class="op">/</span><span class="va">goodtwo</span><span class="op">/</span><span class="va">p</span><span class="op">/</span><span class="fl">11146540</span>.<span class="va">html</span> </span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a>## 常用非线性规划模型(我)</span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a><span class="op">\</span><span class="va">begin</span>{<span class="va">aligned</span>}</span>
+<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a><span class="va">Min</span> <span class="op">\</span><span class="va">quad</span> <span class="op">&amp;</span> <span class="op">\</span><span class="va">sum_</span>{<span class="va">i</span><span class="op">=</span><span class="fl">1</span>}<span class="op">^</span>{<span class="va">n</span>} <span class="op">\</span><span class="va">sum_</span>{<span class="va">j</span><span class="op">=</span><span class="fl">1</span>}<span class="op">^</span>{<span class="va">n</span>}<span class="op">\</span><span class="va">left</span>(<span class="op">\</span><span class="va">omega_</span>{<span class="va">i</span>}<span class="op">-</span><span class="va">a_</span>{<span class="va">i</span> <span class="va">j</span>} <span class="op">\</span><span class="va">omega_</span>{<span class="va">j</span>}<span class="op">\</span><span class="va">right</span>)<span class="op">^</span>{<span class="fl">2</span>}<span class="op">\\</span>  </span>
+<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a><span class="va">s</span>.<span class="va">t</span> <span class="op">\</span><span class="va">quad</span> <span class="op">&amp;</span> <span class="op">\</span><span class="va">sum_</span>{<span class="va">i</span><span class="op">=</span><span class="fl">1</span>}<span class="op">^</span>{<span class="va">n</span>} <span class="op">\</span><span class="va">omega_</span>{<span class="va">i</span>}<span class="op">=</span><span class="fl">1</span><span class="op">,\\</span></span>
+<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a><span class="op">&amp;</span> <span class="fl">1</span><span class="op">\</span><span class="va">geq</span> <span class="op">\</span><span class="va">omega_</span>{<span class="va">i</span>} <span class="op">\</span><span class="va">geq</span> <span class="fl">0</span><span class="op">,</span> <span class="op">\</span><span class="va">quad</span> <span class="va">i</span><span class="op">=</span><span class="fl">1</span><span class="op">,</span><span class="fl">2</span><span class="op">,</span> <span class="op">\</span><span class="va">ldots</span><span class="op">,</span> <span class="va">n</span></span>
+<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a><span class="op">\</span><span class="kw">end</span>{<span class="va">aligned</span>}</span>
+<span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a>于是自己写了几个函数模板<span class="op">:</span></span>
+<span id="cb11-215"><a href="#cb11-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-216"><a href="#cb11-216" aria-hidden="true" tabindex="-1"></a>### <span class="va">R</span></span>
+<span id="cb11-217"><a href="#cb11-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-218"><a href="#cb11-218" aria-hidden="true" tabindex="-1"></a>```<span class="va">R</span></span>
+<span id="cb11-219"><a href="#cb11-219" aria-hidden="true" tabindex="-1"></a><span class="va">library</span>(<span class="va">Rsolnp</span>)</span>
+<span id="cb11-220"><a href="#cb11-220" aria-hidden="true" tabindex="-1"></a>## 最小化的目标函数</span>
+<span id="cb11-221"><a href="#cb11-221" aria-hidden="true" tabindex="-1"></a><span class="va">obj</span><span class="op">=</span><span class="kw">function</span>(<span class="va">x</span>){</span>
+<span id="cb11-222"><a href="#cb11-222" aria-hidden="true" tabindex="-1"></a>  <span class="va">A1</span> <span class="op">=</span> <span class="va">matrix</span>(<span class="va">c</span>(<span class="fl">1</span><span class="op">,</span><span class="fl">4</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">4</span><span class="op">,</span></span>
+<span id="cb11-223"><a href="#cb11-223" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">/</span><span class="fl">4</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">7</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span></span>
+<span id="cb11-224"><a href="#cb11-224" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">7</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">6</span><span class="op">,</span></span>
+<span id="cb11-225"><a href="#cb11-225" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span></span>
+<span id="cb11-226"><a href="#cb11-226" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span><span class="fl">5</span><span class="op">,</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span></span>
+<span id="cb11-227"><a href="#cb11-227" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">/</span><span class="fl">4</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">6</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">ncol</span> <span class="op">=</span> <span class="fl">6</span><span class="op">,</span><span class="va">nrow</span> <span class="op">=</span> <span class="fl">6</span><span class="op">,</span><span class="va">byrow</span> <span class="op">=</span> <span class="va">T</span>)</span>
+<span id="cb11-228"><a href="#cb11-228" aria-hidden="true" tabindex="-1"></a>  <span class="va">s</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb11-229"><a href="#cb11-229" aria-hidden="true" tabindex="-1"></a>  <span class="va">n</span> <span class="op">=</span> <span class="va">nrow</span>(<span class="va">A1</span>)</span>
+<span id="cb11-230"><a href="#cb11-230" aria-hidden="true" tabindex="-1"></a>  <span class="kw">for</span>(<span class="va">i</span> <span class="va">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span>){</span>
+<span id="cb11-231"><a href="#cb11-231" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span>(<span class="va">j</span> <span class="va">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span>){</span>
+<span id="cb11-232"><a href="#cb11-232" aria-hidden="true" tabindex="-1"></a>      <span class="va">s</span><span class="op">=</span> <span class="va">s</span><span class="op">+</span> (<span class="va">x</span>[<span class="va">i</span>]<span class="op">-</span> <span class="va">A1</span>[<span class="va">i</span><span class="op">,</span><span class="va">j</span>]<span class="op">*</span><span class="va">x</span>[<span class="va">j</span>])<span class="op">^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb11-233"><a href="#cb11-233" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-234"><a href="#cb11-234" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-235"><a href="#cb11-235" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span>(<span class="va">s</span>)</span>
+<span id="cb11-236"><a href="#cb11-236" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-237"><a href="#cb11-237" aria-hidden="true" tabindex="-1"></a>## 编写解上述非线性规划的函数</span>
+<span id="cb11-238"><a href="#cb11-238" aria-hidden="true" tabindex="-1"></a><span class="va">fmin</span> <span class="op">=</span> <span class="kw">function</span>(<span class="va">f</span><span class="op">,</span><span class="va">n</span>){# <span class="va">n代表参数的个数</span></span>
+<span id="cb11-239"><a href="#cb11-239" aria-hidden="true" tabindex="-1"></a>  <span class="va">eqn1</span><span class="op">=</span><span class="kw">function</span>(<span class="va">x</span>){</span>
+<span id="cb11-240"><a href="#cb11-240" aria-hidden="true" tabindex="-1"></a>    <span class="va">sum</span>(<span class="va">x</span>)</span>
+<span id="cb11-241"><a href="#cb11-241" aria-hidden="true" tabindex="-1"></a>  } # 等式约束的左边  ，<span class="va">eqB</span> 为等式约束的右边，如果有多个则用向量</span>
+<span id="cb11-242"><a href="#cb11-242" aria-hidden="true" tabindex="-1"></a>  <span class="va">powell</span><span class="op">=</span><span class="va">solnp</span>(<span class="va">pars</span><span class="op">=</span> <span class="va">rep</span>(<span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">,</span><span class="va">n</span>)<span class="op">,</span> <span class="va">fun</span> <span class="op">=</span> <span class="va">f</span><span class="op">,</span> <span class="va">eqfun</span> <span class="op">=</span> <span class="va">eqn1</span><span class="op">,</span> <span class="va">eqB</span> <span class="op">=</span> <span class="fl">1</span><span class="op">,</span><span class="va">LB</span><span class="op">=</span> <span class="va">rep</span>(<span class="fl">0</span><span class="op">,</span><span class="va">n</span>) <span class="op">,</span><span class="va">UB</span> <span class="op">=</span> <span class="va">rep</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span>))</span>
+<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a>  <span class="va">fx</span> <span class="op">=</span> <span class="va">powell</span>$<span class="va">values</span></span>
+<span id="cb11-244"><a href="#cb11-244" aria-hidden="true" tabindex="-1"></a>  <span class="va">x</span> <span class="op">=</span> <span class="va">powell</span>$<span class="va">pars</span></span>
+<span id="cb11-245"><a href="#cb11-245" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span>(  <span class="va">list</span>(<span class="ss">'x'</span> <span class="op">=</span> <span class="va">x</span><span class="op">,</span> <span class="ss">'fx'</span> <span class="op">=</span> <span class="va">fx</span>[<span class="va">length</span>(<span class="va">fx</span>)]) )</span>
+<span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a><span class="va">fmin</span>(<span class="va">obj</span><span class="op">,</span><span class="va">n</span> <span class="op">=</span> <span class="fl">6</span>) #调用即可，<span class="va">n代表参数的个数</span></span>
+<span id="cb11-248"><a href="#cb11-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-249"><a href="#cb11-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a>########################################</span>
+<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a><span class="va">library</span>(<span class="va">Rdonlp2</span>)</span>
+<span id="cb11-253"><a href="#cb11-253" aria-hidden="true" tabindex="-1"></a><span class="va">objFun</span> <span class="op">=</span> <span class="kw">function</span>(<span class="va">x</span>){</span>
+<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a>  <span class="va">A1</span> <span class="op">=</span> <span class="va">matrix</span>(<span class="va">c</span>(<span class="fl">1</span><span class="op">,</span><span class="fl">4</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">4</span><span class="op">,</span></span>
+<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">/</span><span class="fl">4</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">7</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span></span>
+<span id="cb11-256"><a href="#cb11-256" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">7</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">6</span><span class="op">,</span></span>
+<span id="cb11-257"><a href="#cb11-257" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span></span>
+<span id="cb11-258"><a href="#cb11-258" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span><span class="fl">5</span><span class="op">,</span><span class="fl">5</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span></span>
+<span id="cb11-259"><a href="#cb11-259" aria-hidden="true" tabindex="-1"></a>                <span class="fl">1</span><span class="op">/</span><span class="fl">4</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">6</span><span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">ncol</span> <span class="op">=</span> <span class="fl">6</span><span class="op">,</span><span class="va">nrow</span> <span class="op">=</span> <span class="fl">6</span><span class="op">,</span><span class="va">byrow</span> <span class="op">=</span> <span class="va">T</span>)</span>
+<span id="cb11-260"><a href="#cb11-260" aria-hidden="true" tabindex="-1"></a>  <span class="va">s</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb11-261"><a href="#cb11-261" aria-hidden="true" tabindex="-1"></a>  <span class="va">n</span> <span class="op">=</span> <span class="va">nrow</span>(<span class="va">A1</span>)</span>
+<span id="cb11-262"><a href="#cb11-262" aria-hidden="true" tabindex="-1"></a>  <span class="kw">for</span>(<span class="va">i</span> <span class="va">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span>){</span>
+<span id="cb11-263"><a href="#cb11-263" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span>(<span class="va">j</span> <span class="va">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span>){</span>
+<span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a>      <span class="va">s</span><span class="op">=</span> <span class="va">s</span><span class="op">+</span> (<span class="va">x</span>[<span class="va">i</span>]<span class="op">-</span> <span class="va">A1</span>[<span class="va">i</span><span class="op">,</span><span class="va">j</span>]<span class="op">*</span><span class="va">x</span>[<span class="va">j</span>])<span class="op">^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb11-265"><a href="#cb11-265" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-266"><a href="#cb11-266" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-267"><a href="#cb11-267" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span>(<span class="va">s</span>)</span>
+<span id="cb11-268"><a href="#cb11-268" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-269"><a href="#cb11-269" aria-hidden="true" tabindex="-1"></a><span class="va">fmin</span> <span class="op">=</span> <span class="kw">function</span>(<span class="va">objFun</span><span class="op">,</span><span class="va">n</span>){ # 这里<span class="va">n为未知参数的个数</span>.</span>
+<span id="cb11-270"><a href="#cb11-270" aria-hidden="true" tabindex="-1"></a>  <span class="va">x0</span> <span class="op">=</span> <span class="va">rep</span>(<span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">,</span><span class="va">n</span>)</span>
+<span id="cb11-271"><a href="#cb11-271" aria-hidden="true" tabindex="-1"></a>  <span class="va">lb</span> <span class="op">=</span> <span class="va">rep</span>(<span class="fl">0</span><span class="op">,</span><span class="va">n</span>) # 自变量的下限</span>
+<span id="cb11-272"><a href="#cb11-272" aria-hidden="true" tabindex="-1"></a>  <span class="va">ub</span> <span class="op">=</span> <span class="va">rep</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span>) # 自变量的上限</span>
+<span id="cb11-273"><a href="#cb11-273" aria-hidden="true" tabindex="-1"></a>  <span class="va">Aeq</span> <span class="op">=</span> <span class="va">matrix</span>(<span class="va">rep</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span>)<span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="va">n</span>) </span>
+<span id="cb11-274"><a href="#cb11-274" aria-hidden="true" tabindex="-1"></a>  <span class="va">lbeq</span> <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb11-275"><a href="#cb11-275" aria-hidden="true" tabindex="-1"></a>  <span class="va">ubeq</span> <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb11-276"><a href="#cb11-276" aria-hidden="true" tabindex="-1"></a>  <span class="va">ret</span> <span class="op">=</span> <span class="va">donlp2</span>(<span class="va">x0</span><span class="op">,</span><span class="va">objFun</span><span class="op">,</span><span class="va">par</span>.<span class="va">lower</span> <span class="op">=</span> <span class="va">lb</span> <span class="op">,</span> <span class="va">par</span>.<span class="va">upper</span> <span class="op">=</span> <span class="va">ub</span><span class="op">,</span><span class="va">A</span> <span class="op">=</span> <span class="va">Aeq</span><span class="op">,</span><span class="va">lin</span>.<span class="va">lower</span> <span class="op">=</span> <span class="va">lbeq</span><span class="op">,</span><span class="va">lin</span>.<span class="va">upper</span> <span class="op">=</span> <span class="va">ubeq</span>)</span>
+<span id="cb11-277"><a href="#cb11-277" aria-hidden="true" tabindex="-1"></a>  <span class="va">list</span>(<span class="ss">'x'</span> <span class="op">=</span> <span class="va">ret</span>$<span class="va">par</span><span class="op">,</span><span class="ss">'objvalue'</span> <span class="op">=</span> <span class="va">ret</span>$<span class="va">fx</span>)</span>
+<span id="cb11-278"><a href="#cb11-278" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-279"><a href="#cb11-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-280"><a href="#cb11-280" aria-hidden="true" tabindex="-1"></a><span class="va">fmin</span>(<span class="va">objFun</span><span class="op">,</span><span class="va">n</span> <span class="op">=</span> <span class="fl">6</span>)# 只需要改写<span class="va">objFun</span> 就可以了</span>
+<span id="cb11-281"><a href="#cb11-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a>### <span class="va">Matlab</span> </span>
+<span id="cb11-285"><a href="#cb11-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a>把上述文件存储为`<span class="va">fmin</span>.<span class="va">m</span>`，以后只需要更改目标函数`<span class="va">myobjfun</span>(<span class="va">x</span><span class="op">,</span><span class="va">AA</span>)`即可<span class="op">,</span>其中<span class="va">x代表未知数</span><span class="op">,</span> <span class="va">AA</span> 代表目标函数的系数，</span>
+<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-288"><a href="#cb11-288" aria-hidden="true" tabindex="-1"></a>```<span class="va">matlab</span></span>
+<span id="cb11-289"><a href="#cb11-289" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">x</span> <span class="op">=</span> <span class="va">fmin</span>(<span class="va">AA</span>) <span class="co">% 调用函数接口</span></span>
+<span id="cb11-290"><a href="#cb11-290" aria-hidden="true" tabindex="-1"></a><span class="va">n</span> <span class="op">=</span> <span class="va">size</span>(<span class="va">AA</span><span class="op">,</span><span class="fl">1</span>) <span class="op">;</span> <span class="co">% 未知数x的长度 </span></span>
+<span id="cb11-291"><a href="#cb11-291" aria-hidden="true" tabindex="-1"></a><span class="va">x0</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span>    <span class="co">% 初始迭代位置</span></span>
+<span id="cb11-292"><a href="#cb11-292" aria-hidden="true" tabindex="-1"></a><span class="va">Aeq</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span>     <span class="co">% 线性等式约束的系数（左边的系数）</span></span>
+<span id="cb11-293"><a href="#cb11-293" aria-hidden="true" tabindex="-1"></a><span class="va">beq</span> <span class="op">=</span> <span class="fl">1</span><span class="op">;</span>                <span class="co">% 线性等式约束的值 （右边的值）</span></span>
+<span id="cb11-294"><a href="#cb11-294" aria-hidden="true" tabindex="-1"></a><span class="co">%A = [];                % 线性不等式约束的系数</span></span>
+<span id="cb11-295"><a href="#cb11-295" aria-hidden="true" tabindex="-1"></a><span class="co">%b = [];                % 线性等式约束的值</span></span>
+<span id="cb11-296"><a href="#cb11-296" aria-hidden="true" tabindex="-1"></a><span class="va">ub</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">1</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span>      <span class="co">% 变量的上限（取等号）</span></span>
+<span id="cb11-297"><a href="#cb11-297" aria-hidden="true" tabindex="-1"></a><span class="va">lb</span> <span class="op">=</span> <span class="va">repelem</span>(<span class="fl">0</span><span class="op">,</span><span class="va">n</span>)<span class="op">;</span>      <span class="co">% 变量的下限（取等号）</span></span>
+<span id="cb11-298"><a href="#cb11-298" aria-hidden="true" tabindex="-1"></a>[<span class="va">x</span><span class="op">,</span><span class="va">fval</span>] <span class="op">=</span> <span class="va">fmincon</span>(<span class="op">@</span>(<span class="va">x</span>)<span class="va">myobjfun</span>(<span class="va">x</span><span class="op">,</span><span class="va">AA</span>)<span class="op">,</span><span class="va">x0</span><span class="op">,</span>[]<span class="op">,</span>[]<span class="op">,</span><span class="va">Aeq</span><span class="op">,</span><span class="va">beq</span><span class="op">,</span><span class="va">lb</span><span class="op">,</span><span class="va">ub</span>)<span class="op">;</span></span>
+<span id="cb11-299"><a href="#cb11-299" aria-hidden="true" tabindex="-1"></a><span class="co">%[x,fval] = fmincon(@myobjfun,x0,[],[],Aeq,beq,lb,ub,[],[],options,A);</span></span>
+<span id="cb11-300"><a href="#cb11-300" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-301"><a href="#cb11-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-302"><a href="#cb11-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-303"><a href="#cb11-303" aria-hidden="true" tabindex="-1"></a><span class="co">% 目标函数</span></span>
+<span id="cb11-304"><a href="#cb11-304" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">s</span> <span class="op">=</span> <span class="va">myobjfun</span>(<span class="va">x</span><span class="op">,</span><span class="va">AA</span>)</span>
+<span id="cb11-305"><a href="#cb11-305" aria-hidden="true" tabindex="-1"></a><span class="va">n</span> <span class="op">=</span> <span class="va">size</span>(<span class="va">AA</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb11-306"><a href="#cb11-306" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span><span class="fl">0</span><span class="op">;</span></span>
+<span id="cb11-307"><a href="#cb11-307" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span id="cb11-308"><a href="#cb11-308" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> <span class="va">j</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span id="cb11-309"><a href="#cb11-309" aria-hidden="true" tabindex="-1"></a>        <span class="va">s</span><span class="op">=</span> <span class="va">s</span><span class="op">+</span> (<span class="va">x</span>(<span class="va">i</span>)<span class="op">-</span> <span class="va">AA</span>(<span class="va">i</span><span class="op">,</span><span class="va">j</span>)<span class="op">*</span><span class="va">x</span>(<span class="va">j</span>))<span class="op">^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb11-310"><a href="#cb11-310" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb11-311"><a href="#cb11-311" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-312"><a href="#cb11-312" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-313"><a href="#cb11-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-314"><a href="#cb11-314" aria-hidden="true" tabindex="-1"></a>```</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="zsc">
+
+<title>快乐的一天 - data.table – 2基本概念</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - data.table – 2基本概念">
+<meta property="og:description" content="set* 函数族 会改变原有的数据，没有返回值，在data.table里，操作符&quot;:=&quot;和所有的以set开头函数（比如setkey,setorder,setname等）一样，它们都会更新输入的原数据。">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">data.table – 2基本概念</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">data.table – 2基本概念</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">data.table</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2018年1月17日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#data.table基本概念和其余函数还需要修改" id="toc-data.table基本概念和其余函数还需要修改" class="nav-link active" data-scroll-target="#data.table基本概念和其余函数还需要修改">data.table基本概念和其余函数—还需要修改</a>
+  <ul class="collapse">
+  <li><a href="#键主键的概念" id="toc-键主键的概念" class="nav-link" data-scroll-target="#键主键的概念">1、键（主键）的概念</a></li>
+  <li><a href="#二级索引" id="toc-二级索引" class="nav-link" data-scroll-target="#二级索引">2 、二级索引</a></li>
+  <li><a href="#参数mult和nomatch" id="toc-参数mult和nomatch" class="nav-link" data-scroll-target="#参数mult和nomatch">3、参数mult和nomatch</a></li>
+  <li><a href="#数据融合" id="toc-数据融合" class="nav-link" data-scroll-target="#数据融合">4、数据融合</a></li>
+  <li><a href="#by的其他参数技巧" id="toc-by的其他参数技巧" class="nav-link" data-scroll-target="#by的其他参数技巧">5、by的其他参数技巧</a></li>
+  <li><a href="#其他操作" id="toc-其他操作" class="nav-link" data-scroll-target="#其他操作">6、其他操作</a>
+  <ul class="collapse">
+  <li><a href="#between-与-inrange-的区别" id="toc-between-与-inrange-的区别" class="nav-link" data-scroll-target="#between-与-inrange-的区别">6.1 <code>%between%</code> 与 <code>inrange()</code> 的区别</a></li>
+  <li><a href="#shift-把向量x向前移动或者向后移动n个数字" id="toc-shift-把向量x向前移动或者向后移动n个数字" class="nav-link" data-scroll-target="#shift-把向量x向前移动或者向后移动n个数字">6.2 <code>shift()</code> 把向量x向前移动或者向后移动n个数字</a></li>
+  <li><a href="#i-返回匹配的行号" id="toc-i-返回匹配的行号" class="nav-link" data-scroll-target="#i-返回匹配的行号">6.3 <code>.I()</code> 返回匹配的行号</a></li>
+  <li><a href="#sd-是经过i-和by-处理之后剩下的那部分数据集" id="toc-sd-是经过i-和by-处理之后剩下的那部分数据集" class="nav-link" data-scroll-target="#sd-是经过i-和by-处理之后剩下的那部分数据集">6.4 <code>.SD</code> 是经过<code>i</code>&nbsp;和<code>by</code>&nbsp;处理之后剩下的那部分数据集</a></li>
+  </ul></li>
+  <li><a href="#set-函数可以加快循环" id="toc-set-函数可以加快循环" class="nav-link" data-scroll-target="#set-函数可以加快循环">7 set() 函数可以加快循环</a></li>
+  <li><a href="#options设置" id="toc-options设置" class="nav-link" data-scroll-target="#options设置">8、options设置</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="data.table基本概念和其余函数还需要修改" class="level1">
+<h1>data.table基本概念和其余函数—还需要修改</h1>
+<p><code>set*</code> 函数族 会改变原有的数据，没有返回值，在<code>data.table</code>里，操作符<code>":="</code>和所有的以<code>set</code>开头函数（比如<code>setkey</code>,<code>setorder</code>,<code>setname</code>等）一样，它们都会更新输入的原数据。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>iris_dt <span class="ot">=</span> <span class="fu">data.table</span>(iris)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># setnames(DT,oldnames,newnames) # 改变DT的列名oldnames,newnames为向量即变量</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#改变列的顺序</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>col_names <span class="ot">=</span> <span class="fu">colnames</span>(iris_dt)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">setcolorder</span>(iris_dt,col_names[<span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>])</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 更改某行某列的值,即更新元素的值</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set</span>(iris_dt,<span class="dv">1</span>,<span class="dv">1</span>,<span class="cn">NA</span>)<span class="co"># 更改1行1列的值为NA</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="键主键的概念" class="level2">
+<h2 class="anchored" data-anchor-id="键主键的概念">1、键（主键）的概念</h2>
+<ol type="1">
+<li><code>data.table</code>从来不使用行名。<code>data.table</code>类似有行名的形式为<code>1:，2: , ...</code></li>
+<li><strong>主键会对筛选的列进行重排序</strong></li>
+<li>我们把data.table数据中的行名叫做键（或主键），他类似于python的字典，使用键值对类型查找数据，键要求唯一，每一行有且只有一个键。但是R中的键可以用多个甚至可以重复，键就相当于索引，通过键进行数据的查找</li>
+<li><code>setkey()</code> 和 <code>setkeyv()</code>可以直接更新输入的data.table，就和上一讲中的操作符”:=“一样。它们没有返回值。</li>
+<li>这个主键和其它语言不一样，例如python的键，唯一，在r中任意列都能使用setkey()来设置主键</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)  <span class="co"># 可以看出mtcars数据集中的行名没有了，替而代之为1: ，2:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 若想保留行名，设置keep.rownames = T，当keep.rowname＝"new"时，列名改为new即可</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars,<span class="at">keep.rownames =</span> T)<span class="co">#默认创建一个叫做 rn的列，并且将行名赋值给这一列。</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>mtcars_dt</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="设置获取使用主键" class="level4">
+<h4 class="anchored" data-anchor-id="设置获取使用主键">1.2、设置／获取／使用主键</h4>
+<p>怎么将数据中的某一列设置为主键呢？—setkey()函数</p>
+<ul>
+<li><code>setkey(DT, key)</code>将DT中的key列设置为主键，但是类行名 1:，2:,…,不会发生改变,</li>
+<li>上面等价<code>setkeyv(DT, "key")</code> ，也将DT中的key列设置为主键</li>
+<li>一旦将某一列设置成data.table的主键，就可以在参数i里指定 <code>.()</code>来subset那些主键了(就可以进行行筛选了)。我们还是用mtcars数据集，我们增加一个新列new</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mtcars_dt[,new<span class="sc">:</span><span class="er">=</span><span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>] <span class="co">#增加一列new，内容为时间</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(mtcars_dt,new)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mtcars_dt   <span class="co"># 类似行名并没有发生改变，</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span>)]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">key</span>(mtcars_dt)    <span class="co">#查询设置主键的列名</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 也可以在r中任意列都能使用setkey()来设置主键</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(mtcars_dt,cyl,vs)    <span class="co">#会把先前设置的new主键给覆盖掉</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="dv">4</span>,<span class="dv">1</span>)]   <span class="co">#如果主键是字符型的列，那么可以省略 .()</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">key</span>(mtcars_dt)  <span class="co">#查询设置主键的列名</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">haskey</span>(mtcars_dt) <span class="co"># 返回TF值，检查是否有Key</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="二级索引" class="level2">
+<h2 class="anchored" data-anchor-id="二级索引">2 、二级索引</h2>
+<p>二级索引和data.table的主键类似（<strong>二级索引不重排序，主键会重排序</strong>），但有以下两点不同：</p>
+<ul>
+<li>它不会再内存里将整个data.table重新排序（<code>setkey</code>会）。它只会计算某列的顺序，将这个顺序向量保存在一个额外的，叫做index的属性里面。</li>
+<li>一个data.table可以有多个二级索引，我们把主键与二级索引提取行方法进行对比</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置主键的过程</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mtcars_dt[,new<span class="sc">:</span><span class="er">=</span><span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>] <span class="co">#增加一列new，内容为时间</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(mtcars_dt,cyl,vs)    <span class="co">#设置主键</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="dv">4</span>,<span class="dv">1</span>)]   <span class="co">#提取cyl==4,vs==1的所有行</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  设置二级索引的过程--方法1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mtcars_dt[,new<span class="sc">:</span><span class="er">=</span><span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>] <span class="co">#增加一列new，内容为时间</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">setindex</span>(mtcars_dt,cyl,vs)<span class="co"># 把cyl,vs两列都设置二级索引的过程--方法1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>mtcars_dt   <span class="co"># 等价 setindexv(mtcars_dt,"cyl","vs")</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#注意mtcars_dt实际上没有按照cyl列的升序重新排列。还记得吗？setkey()会重新排序！</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># setindex(mtcars_dt,NULL)  会删除所有的二级索引。</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">indices</span>(mtcars_dt,<span class="at">vectors =</span> <span class="cn">FALSE</span>)<span class="co">#  获取数据的二级索引,  默认为FALSE</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">setindex</span>(mtcars_dt,new) <span class="co">#再次建立一个二级索引</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">indices</span>(mtcars_dt)<span class="co"># 查看二级索引，可以发现在原有的二级索引上追加了新的索引，不会覆盖，还记得setkey(mtcars_dt,cyl,vs)会把先前设置的new主键给覆盖掉</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>参数on能自动创建并重用二级索引－－等价setindex() 函数</li>
+<li>通过创建索引进行subset。每次都能节省setindex()的时间。</li>
+<li>通过检查属性，可以简单地重用已经存在的二级索引。</li>
+<li>语法简单。</li>
+<li>在参数i里面指定取值，在参数on里面指定列名。参数on必须是一个字符型的向量。</li>
+<li>注意参数on也可以用来指定主键。事实上，为了更佳的可读性，我们鼓励在参数on里面指定主键。</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  设置二级索引的过程--方法2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mtcars_dt[,new<span class="sc">:</span><span class="er">=</span><span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>] <span class="co">#增加一列new，内容为时间</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="dv">6</span>),on<span class="ot">=</span><span class="st">"cyl"</span>]<span class="co">#当为字符时，可以省略.()</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="dv">6</span>,<span class="dv">3</span>),on<span class="ot">=</span><span class="fu">c</span>(<span class="st">"cyl"</span>,<span class="st">"gear"</span>)]<span class="co">#同时满足cyl=6,gear=3的行</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>主键与索引用来提取行，对参数i处理的一个变形，可以结合j，by参数进行处理</strong></p>
+</section>
+<section id="参数mult和nomatch" class="level2">
+<h2 class="anchored" data-anchor-id="参数mult和nomatch">3、参数mult和nomatch</h2>
+<section id="a-参数mult默认为all" class="level5">
+<h5 class="anchored" data-anchor-id="a-参数mult默认为all">a) 参数mult，默认为“all”</h5>
+<p>对于每次查询指定所有符合条件的行都被返回，若只返回第一行／最后一行设置为“first”或“last”。</p>
+</section>
+<section id="b参数nomatch-默认为na" class="level5">
+<h5 class="anchored" data-anchor-id="b参数nomatch-默认为na">b)参数nomatch 默认为NA</h5>
+<p>指定在没有找到符合条件的数据的情况下，是返回NA。设置 nomatch = 0L 跳过哪些不存在的数据</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>iris_dt <span class="ot">=</span> <span class="fu">data.table</span>(iris) </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>iris_dt[.(<span class="fl">5.1</span>), on<span class="ot">=</span><span class="st">'Sepal.Length'</span>] <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>iris_dt[.(<span class="dv">100</span>), on<span class="ot">=</span><span class="st">'Sepal.Length'</span>] <span class="co"># 没有找到Sepal.Length==100 的行,则返回NA</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>iris_dt[.(<span class="dv">100</span>), on<span class="ot">=</span><span class="st">'Sepal.Length'</span>, nomatch <span class="ot">=</span> <span class="dv">0</span>]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="数据融合" class="level2">
+<h2 class="anchored" data-anchor-id="数据融合">4、数据融合</h2>
+<section id="a-函数melt拆数据" class="level4">
+<h4 class="anchored" data-anchor-id="a-函数melt拆数据">a) 函数melt－－拆数据</h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">melt</span>(data, id.vars, measure.vars, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable.name =</span> <span class="st">"variable"</span>, <span class="at">value.name =</span> <span class="st">"value"</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    ..., <span class="at">na.rm =</span> <span class="cn">FALSE</span>, <span class="at">variable.factor =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">value.factor =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="fu">getOption</span>(<span class="st">"datatable.verbose"</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>参数 measure.vars 指定了想要拆分（或合并）的列。我们也可以指定索引而不是列名。</li>
+<li>默认variable列是 factor类型的。如果你想返回一个字符型的向量，可以将参数 variable.factor 设为 FALSE。参数 variable.factor 是data.table的函数melt() 里独有的，增强包reshape2 里面没有这个参数。</li>
+<li>variable.name = “variable”, value.name = “value”, 会把转化后的列被自动命名为 variable 和 value（默认值）。</li>
+<li>在结果里，函数melt() 保持了原来列的属性。</li>
+</ul>
+</section>
+<section id="b-函数dcast和数据" class="level4">
+<h4 class="anchored" data-anchor-id="b-函数dcast和数据">b) 函数dcast－－和数据</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dcast</span>(data, formula, <span class="at">fun.aggregate =</span> <span class="cn">NULL</span>, <span class="at">sep =</span> <span class="st">"_"</span>, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    ..., <span class="at">margins =</span> <span class="cn">NULL</span>, <span class="at">subset =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="cn">NULL</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">drop =</span> <span class="cn">TRUE</span>, <span class="at">value.var =</span> <span class="fu">guess</span>(data),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="fu">getOption</span>(<span class="st">"datatable.verbose"</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>函数 dcast() 使用了操作符“~”，左边是作为 id.vars 的列，右边是作为 measure.vars 的列。</li>
+<li>参数 value.var 指定了需要被分拆扩张的列。</li>
+<li>函数 dcast() 也会在结果中尽量保持原来的属性</li>
+<li>可以给参数 fun.aggregate 传递一个函数。当操作符“~”不方便指定列名的时候，这个功能特别有用。</li>
+</ul>
+</section>
+</section>
+<section id="by的其他参数技巧" class="level2">
+<h2 class="anchored" data-anchor-id="by的其他参数技巧">5、by的其他参数技巧</h2>
+<ul>
+<li><strong>rleid</strong> —- 计算某向量的游程数（游程数：每次连续作为一组）（可以结合by参数使用）</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">grp=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>)), <span class="at">value=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>DT</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rleid</span>(DT<span class="sc">$</span>grp) <span class="co"># 获取DT$grp的游程数，返回一个和原向量等长的向量</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rleidv</span>(DT, <span class="st">"grp"</span>) <span class="co"># 与上面等价</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rleid</span>(DT<span class="sc">$</span>grp, <span class="at">prefix=</span><span class="st">"grp"</span>) <span class="co"># 在游程数前面加"grp"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 也可以按游程数进行分组，并计算其游程数的个数等操作</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>DT[, .N, by<span class="ot">=</span>.(<span class="fu">rleid</span>(grp))]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>rowid</strong> —–某个值在向量中出现的次数，出现第几次就显示为几</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">20</span>), <span class="at">y=</span><span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"b"</span>, <span class="st">"b"</span>), <span class="at">z=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>DT</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rowid</span>(DT<span class="sc">$</span>x) <span class="co"># 1,1,2,1,2,2</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rowidv</span>(DT, <span class="at">cols=</span><span class="st">"x"</span>) <span class="co"># 和上面等价</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rowid</span>(DT<span class="sc">$</span>x, <span class="at">prefix=</span><span class="st">"group"</span>) <span class="co"># 数字前面加"group"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 多列组合,看每一行的所有元素是否相同，相同则计数+1</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rowid</span>(DT<span class="sc">$</span>x, DT<span class="sc">$</span>y)<span class="co">#等价rowidv(DT, cols=c("x","y")) </span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>DT[, .(<span class="at">N=</span><span class="fu">seq_len</span>(.N)), by<span class="ot">=</span>.(x,y)]<span class="sc">$</span>N <span class="co"># 上面相当于做了这样的事</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 应用</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dcast</span>(DT, x <span class="sc">~</span> <span class="fu">rowid</span>(x, <span class="at">prefix=</span><span class="st">"group"</span>), <span class="at">value.var=</span><span class="st">"z"</span>) <span class="co">#</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>tstrsplit</strong> —字符串拆分函数，类似<code>strsplit</code>函数,只不过结果和<code>strsplit</code>进行了转置</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2016-3-4"</span>,<span class="st">"2016-3-14"</span>,<span class="st">"2016-3-24"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.table</span>(name,dates)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>nd</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit</span>(dates,<span class="st">"-"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tstrsplit</span>(dates,<span class="st">"-"</span>) </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>nd[,<span class="fu">c</span>(<span class="st">"year"</span>,<span class="st">"month"</span>,<span class="st">"day"</span>)<span class="sc">:</span><span class="er">=</span><span class="fu">tstrsplit</span>(dates,<span class="st">"-"</span>)] <span class="co"># 实现拆分</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>nd</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="其他操作" class="level2">
+<h2 class="anchored" data-anchor-id="其他操作">6、其他操作</h2>
+<table class="table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>%between%</code></td>
+<td>快速查找某一区间：<br><code>mtcars_dt[disp %between% c(150,200)]# 150&lt;= disp &lt;= 200之间</code><br><code>DT[c %between% list(a,b)]#a列 &lt;= c &lt;=b 列之间(向量版本)</code></td>
+</tr>
+<tr class="even">
+<td><code>%chin%</code></td>
+<td>快速匹配 （%in% 的加速版）： x %chin% table</td>
+</tr>
+<tr class="odd">
+<td><code>%inrange%</code></td>
+<td>快速查找某一区间：<br> <code>dft[V1 %inrange% c(50,60)]</code> 即选择<code>50 &lt;= V1 &lt;=60</code>所有的行<br><code>dft[V1 %inrange% list(V2,V3)]</code> 即选择 <code>V2 &lt;= V1 &lt;= V3</code>的所有行</td>
+</tr>
+<tr class="even">
+<td><code>A %like% B</code></td>
+<td><strong>匹配字符串A中含有B的字符</strong></td>
+</tr>
+<tr class="odd">
+<td><code>.I</code></td>
+<td>表示（分组后）每一行在原数据框中是第几行 dft[,.I[2],by=accept]<br>.I是一个整数向量，等于seq_len(nrow(x)), While grouping, it holds for each item in the group, its row location in x. This is useful to subset in j; <br>e.g.<code>DT[, .I[which.max(somecol)], by=grp].</code> 结合by,提取子集时,非常有用</td>
+</tr>
+<tr class="even">
+<td><code>.N</code></td>
+<td>.N 代表行的数量，用by参数分组时则是每一组的行数量</td>
+</tr>
+<tr class="odd">
+<td><code>.SD</code></td>
+<td>是经过<code>i</code> 和<code>by</code> 处理之后剩下的那部分数据集,本质是一个<code>data.table</code></td>
+</tr>
+<tr class="even">
+<td><strong><code>.SDcols</code></strong></td>
+<td>.SDcols 指定.SD 代表的数据框包括哪些列</td>
+</tr>
+<tr class="odd">
+<td><code>setDF(DT)</code></td>
+<td>将data.table转化为data.frame</td>
+</tr>
+<tr class="even">
+<td><code>setDT(df)</code></td>
+<td>将data.frame转化为data.table</td>
+</tr>
+<tr class="odd">
+<td><code>setnames(DT,old,new)</code></td>
+<td>修改列名 也可以通过重新赋值操作 colnames(DT)</td>
+</tr>
+<tr class="even">
+<td><code>fsort</code></td>
+<td>排序</td>
+</tr>
+<tr class="odd">
+<td><code>frank</code></td>
+<td>求秩, 类似rank</td>
+</tr>
+<tr class="even">
+<td><code>fintersect(x, y, all = FALSE)</code></td>
+<td>x与y的交集,相比于基础函数(默认为FALSE)， 增加了all参数，控制重复值</td>
+</tr>
+<tr class="odd">
+<td><code>fsetdiff(x, y, all = FALSE)</code></td>
+<td>x与y的差集，即x-y</td>
+</tr>
+<tr class="even">
+<td><code>funion(x, y, all = FALSE)</code></td>
+<td>x与y的并集</td>
+</tr>
+<tr class="odd">
+<td><code>fsetequal(x, y)</code></td>
+<td>检验x与y二者是否完全相等,返回逻辑值</td>
+</tr>
+<tr class="even">
+<td><code>shift(x,n=1L,...)</code></td>
+<td>把向量x向前移动或者向后移动n个数字</td>
+</tr>
+</tbody>
+</table>
+<section id="between-与-inrange-的区别" class="level3">
+<h3 class="anchored" data-anchor-id="between-与-inrange-的区别">6.1 <code>%between%</code> 与 <code>inrange()</code> 的区别</h3>
+<p>两者都是选择某列的值在一个范围内的所有行,即 <span class="math inline">\(a \leq c \leq b\)</span></p>
+<p><code>DT[c %between% list(a,b)]</code> 这里的a,b 一定是DT自身的列名</p>
+<p><code>DT[c %inrange% list(a,b)]</code> 这里的a,b 不是DT自身的列名,可以是外部的变量</p>
+</section>
+<section id="shift-把向量x向前移动或者向后移动n个数字" class="level3">
+<h3 class="anchored" data-anchor-id="shift-把向量x向前移动或者向后移动n个数字">6.2 <code>shift()</code> 把向量x向前移动或者向后移动n个数字</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">A=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>DT[ , X <span class="sc">:</span><span class="er">=</span> <span class="fu">shift</span>(A, <span class="dv">1</span>, <span class="at">type=</span><span class="st">"lag"</span>)]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>DT[ , Y <span class="sc">:</span><span class="er">=</span> <span class="fu">shift</span>(A, <span class="dv">1</span>, <span class="at">type=</span><span class="st">"lead"</span>)]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>DT[ , Y1 <span class="sc">:</span><span class="er">=</span> <span class="fu">shift</span>(A, <span class="dv">2</span>, <span class="at">type=</span><span class="st">"lead"</span>)]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>DT</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="i-返回匹配的行号" class="level3">
+<h3 class="anchored" data-anchor-id="i-返回匹配的行号">6.3 <code>.I()</code> 返回匹配的行号</h3>
+<p>由于data.table 没有行号,因此<code>.I()</code>一般不单独使用</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars) </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mtcars_dt[, .I[cyl<span class="sc">==</span><span class="dv">6</span>]] <span class="co"># 返回 cyl ==6 所在的行号</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 等价于</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>mtcars_dt[, <span class="fu">which</span>(cyl<span class="sc">==</span><span class="dv">6</span>)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sd-是经过i-和by-处理之后剩下的那部分数据集" class="level3">
+<h3 class="anchored" data-anchor-id="sd-是经过i-和by-处理之后剩下的那部分数据集">6.4 <code>.SD</code> 是经过<code>i</code>&nbsp;和<code>by</code>&nbsp;处理之后剩下的那部分数据集</h3>
+<p><strong><code>.SD</code>代表行经过<code>i</code> 筛选后, 列除了<code>by</code>参数指定的列以外的所有列组成的新的data.table, 是原数据的子集</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">=</span> data.table<span class="sc">::</span><span class="fu">as.data.table</span>(mtcars)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>mtcars_dt[, .SD, by<span class="ot">=</span>cyl]</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> mtcars_dt[, <span class="fu">lapply</span>(.SD[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">with=</span>F], mean), by<span class="ot">=</span>cyl]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="set-函数可以加快循环" class="level2">
+<h2 class="anchored" data-anchor-id="set-函数可以加快循环">7 set() 函数可以加快循环</h2>
+<p><code>set(x, i = NULL, j, value)</code></p>
+<p>作用: 将value 值快速分配给i行j列元素, <code>i</code> , <code>j</code> 使用整数<code>10L</code> 而不是<code>10</code>, j参数不能省</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span>,<span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">as.data.table</span>(m)    </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set</span>(DT,3L,1L,<span class="dv">10</span>)<span class="co"># 第3行第1列元素改为10</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set</span>(DT,,2L,<span class="dv">20</span>) <span class="co"># 第2列的所有元素都改为20</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>DT</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span>,<span class="at">nrow=</span><span class="dv">100000</span>,<span class="at">ncol=</span><span class="dv">100</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>DF <span class="ot">=</span> <span class="fu">as.data.frame</span>(m)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">as.data.table</span>(m)  </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>DT2 <span class="ot">=</span> <span class="fu">copy</span>(DT)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) DF[i,<span class="dv">1</span>] <span class="ot">&lt;-</span> i)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) DT[i,<span class="at">V1:=</span>i])</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="fu">set</span>(DT2,i,1L,i<span class="sc">*</span><span class="dv">10</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="options设置" class="level2">
+<h2 class="anchored" data-anchor-id="options设置">8、options设置</h2>
+<p>在控制台中输入options()会打印出一个list，这是当前的options设置值，比如显示保留几位小数等。加载data.table包之后，这里新增了一些data.table专用的参数，可以用下面的命令查看</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ops <span class="ot">&lt;-</span> <span class="fu">options</span>() <span class="co"># ops就是一个list，参数和值的一一对应</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 由于data.table专用参数都是以datatable为前缀，使用我们输入时可以这样</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ops<span class="sc">$</span>datatable.print.nrows <span class="co"># 返回100，设置打印的最大行数，超过了则简单打印</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">"datatable.print.topn"</span>) <span class="co">#返回5，简单打印设置，前后各5行，其余行省略</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> data.table -- 2基本概念</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2018-01-17'</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - data.table</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># data.table基本概念和其余函数---还需要修改</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="in">`set*  `</span> 函数族 会改变原有的数据，没有返回值，在<span class="in">`data.table`</span>里，操作符<span class="in">`":="`</span>和所有的以<span class="in">`set`</span>开头函数（比如<span class="in">`setkey`</span>,<span class="in">`setorder`</span>,<span class="in">`setname`</span>等）一样，它们都会更新输入的原数据。</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>iris_dt <span class="ot">=</span> <span class="fu">data.table</span>(iris)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co"># setnames(DT,oldnames,newnames) # 改变DT的列名oldnames,newnames为向量即变量</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#改变列的顺序</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>col_names <span class="ot">=</span> <span class="fu">colnames</span>(iris_dt)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="fu">setcolorder</span>(iris_dt,col_names[<span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>])</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 更改某行某列的值,即更新元素的值</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="fu">set</span>(iris_dt,<span class="dv">1</span>,<span class="dv">1</span>,<span class="cn">NA</span>)<span class="co"># 更改1行1列的值为NA</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1、键（主键）的概念</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`data.table`</span>从来不使用行名。<span class="in">`data.table`</span>类似有行名的形式为<span class="in">`1:，2: , ...`</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**主键会对筛选的列进行重排序**</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>我们把data.table数据中的行名叫做键（或主键），他类似于python的字典，使用键值对类型查找数据，键要求唯一，每一行有且只有一个键。但是R中的键可以用多个甚至可以重复，键就相当于索引，通过键进行数据的查找</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="in">`setkey()`</span> 和 <span class="in">`setkeyv()`</span>可以直接更新输入的data.table，就和上一讲中的操作符":="一样。它们没有返回值。</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>这个主键和其它语言不一样，例如python的键，唯一，在r中任意列都能使用setkey()来设置主键</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)  <span class="co"># 可以看出mtcars数据集中的行名没有了，替而代之为1: ，2:</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 若想保留行名，设置keep.rownames = T，当keep.rowname＝"new"时，列名改为new即可</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars,<span class="at">keep.rownames =</span> T)<span class="co">#默认创建一个叫做 rn的列，并且将行名赋值给这一列。</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>mtcars_dt</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1.2、设置／获取／使用主键</span></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>怎么将数据中的某一列设置为主键呢？---setkey()函数</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="ss">  -  </span><span class="in">`setkey(DT, key) `</span>将DT中的key列设置为主键，但是类行名 1:，2:,...,不会发生改变, </span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="ss">  -  </span>上面等价<span class="in">`  setkeyv(DT, "key")`</span> ，也将DT中的key列设置为主键</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a><span class="ss">  -  </span>一旦将某一列设置成data.table的主键，就可以在参数i里指定 <span class="in">`.()`</span>来subset那些主键了(就可以进行行筛选了)。我们还是用mtcars数据集，我们增加一个新列new</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>mtcars_dt[,new<span class="sc">:</span><span class="er">=</span><span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>] <span class="co">#增加一列new，内容为时间</span></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(mtcars_dt,new)</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>mtcars_dt   <span class="co"># 类似行名并没有发生改变，</span></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span>)]</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a><span class="fu">key</span>(mtcars_dt)    <span class="co">#查询设置主键的列名</span></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 也可以在r中任意列都能使用setkey()来设置主键</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(mtcars_dt,cyl,vs)    <span class="co">#会把先前设置的new主键给覆盖掉</span></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="dv">4</span>,<span class="dv">1</span>)]   <span class="co">#如果主键是字符型的列，那么可以省略 .()</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a><span class="fu">key</span>(mtcars_dt)  <span class="co">#查询设置主键的列名</span></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="fu">haskey</span>(mtcars_dt) <span class="co"># 返回TF值，检查是否有Key</span></span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2 、二级索引</span></span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a>二级索引和data.table的主键类似（**二级索引不重排序，主键会重排序**），但有以下两点不同：</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>它不会再内存里将整个data.table重新排序（<span class="in">`setkey`</span>会）。它只会计算某列的顺序，将这个顺序向量保存在一个额外的，叫做index的属性里面。</span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>一个data.table可以有多个二级索引，我们把主键与二级索引提取行方法进行对比</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置主键的过程</span></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)</span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a>mtcars_dt[,new<span class="sc">:</span><span class="er">=</span><span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>] <span class="co">#增加一列new，内容为时间</span></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(mtcars_dt,cyl,vs)    <span class="co">#设置主键</span></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="dv">4</span>,<span class="dv">1</span>)]   <span class="co">#提取cyl==4,vs==1的所有行</span></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a><span class="co">#  设置二级索引的过程--方法1</span></span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)</span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>mtcars_dt[,new<span class="sc">:</span><span class="er">=</span><span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>] <span class="co">#增加一列new，内容为时间</span></span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a><span class="fu">setindex</span>(mtcars_dt,cyl,vs)<span class="co"># 把cyl,vs两列都设置二级索引的过程--方法1</span></span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>mtcars_dt   <span class="co"># 等价 setindexv(mtcars_dt,"cyl","vs")</span></span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a><span class="co">#注意mtcars_dt实际上没有按照cyl列的升序重新排列。还记得吗？setkey()会重新排序！</span></span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a><span class="co"># setindex(mtcars_dt,NULL)  会删除所有的二级索引。</span></span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a><span class="fu">indices</span>(mtcars_dt,<span class="at">vectors =</span> <span class="cn">FALSE</span>)<span class="co">#  获取数据的二级索引,  默认为FALSE</span></span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a><span class="fu">setindex</span>(mtcars_dt,new) <span class="co">#再次建立一个二级索引</span></span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="fu">indices</span>(mtcars_dt)<span class="co"># 查看二级索引，可以发现在原有的二级索引上追加了新的索引，不会覆盖，还记得setkey(mtcars_dt,cyl,vs)会把先前设置的new主键给覆盖掉</span></span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>参数on能自动创建并重用二级索引－－等价setindex() 函数</span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>通过创建索引进行subset。每次都能节省setindex()的时间。</span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>通过检查属性，可以简单地重用已经存在的二级索引。</span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>语法简单。</span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>在参数i里面指定取值，在参数on里面指定列名。参数on必须是一个字符型的向量。</span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>注意参数on也可以用来指定主键。事实上，为了更佳的可读性，我们鼓励在参数on里面指定主键。</span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a><span class="co">#  设置二级索引的过程--方法2</span></span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars)</span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>mtcars_dt[,new<span class="sc">:</span><span class="er">=</span><span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>] <span class="co">#增加一列new，内容为时间</span></span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="dv">6</span>),on<span class="ot">=</span><span class="st">"cyl"</span>]<span class="co">#当为字符时，可以省略.()</span></span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>mtcars_dt[.(<span class="dv">6</span>,<span class="dv">3</span>),on<span class="ot">=</span><span class="fu">c</span>(<span class="st">"cyl"</span>,<span class="st">"gear"</span>)]<span class="co">#同时满足cyl=6,gear=3的行</span></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>**主键与索引用来提取行，对参数i处理的一个变形，可以结合j，by参数进行处理**</span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3、参数mult和nomatch</span></span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a><span class="fu">##### a) 参数mult，默认为“all”</span></span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>对于每次查询指定所有符合条件的行都被返回，若只返回第一行／最后一行设置为“first”或“last”。</span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a><span class="fu">##### b)参数nomatch 默认为NA</span></span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>指定在没有找到符合条件的数据的情况下，是返回NA。设置 nomatch = 0L 跳过哪些不存在的数据</span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>iris_dt <span class="ot">=</span> <span class="fu">data.table</span>(iris) </span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>iris_dt[.(<span class="fl">5.1</span>), on<span class="ot">=</span><span class="st">'Sepal.Length'</span>] <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>iris_dt[.(<span class="dv">100</span>), on<span class="ot">=</span><span class="st">'Sepal.Length'</span>] <span class="co"># 没有找到Sepal.Length==100 的行,则返回NA</span></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>iris_dt[.(<span class="dv">100</span>), on<span class="ot">=</span><span class="st">'Sepal.Length'</span>, nomatch <span class="ot">=</span> <span class="dv">0</span>]</span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4、数据融合</span></span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a><span class="fu">#### a) 函数melt－－拆数据</span></span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a><span class="fu">melt</span>(data, id.vars, measure.vars, </span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable.name =</span> <span class="st">"variable"</span>, <span class="at">value.name =</span> <span class="st">"value"</span>, </span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>    ..., <span class="at">na.rm =</span> <span class="cn">FALSE</span>, <span class="at">variable.factor =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>    <span class="at">value.factor =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="fu">getOption</span>(<span class="st">"datatable.verbose"</span>))</span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>参数 measure.vars 指定了想要拆分（或合并）的列。我们也可以指定索引而不是列名。</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>默认variable列是 factor类型的。如果你想返回一个字符型的向量，可以将参数 variable.factor 设为 FALSE。参数 variable.factor 是data.table的函数melt() 里独有的，增强包reshape2 里面没有这个参数。</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>variable.name = "variable", value.name = "value", 会把转化后的列被自动命名为 variable 和 value（默认值）。</span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在结果里，函数melt() 保持了原来列的属性。</span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a><span class="fu">#### b) 函数dcast－－和数据</span></span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a><span class="fu">dcast</span>(data, formula, <span class="at">fun.aggregate =</span> <span class="cn">NULL</span>, <span class="at">sep =</span> <span class="st">"_"</span>, </span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>    ..., <span class="at">margins =</span> <span class="cn">NULL</span>, <span class="at">subset =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="cn">NULL</span>, </span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>    <span class="at">drop =</span> <span class="cn">TRUE</span>, <span class="at">value.var =</span> <span class="fu">guess</span>(data),</span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="fu">getOption</span>(<span class="st">"datatable.verbose"</span>))</span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>函数 dcast() 使用了操作符“~”，左边是作为 id.vars 的列，右边是作为 measure.vars 的列。</span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>参数 value.var 指定了需要被分拆扩张的列。</span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>函数 dcast() 也会在结果中尽量保持原来的属性</span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>可以给参数 fun.aggregate 传递一个函数。当操作符“~”不方便指定列名的时候，这个功能特别有用。</span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5、by的其他参数技巧</span></span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>**rleid**   ---- 计算某向量的游程数（游程数：每次连续作为一组）（可以结合by参数使用）</span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">grp=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>)), <span class="at">value=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>DT</span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a><span class="fu">rleid</span>(DT<span class="sc">$</span>grp) <span class="co"># 获取DT$grp的游程数，返回一个和原向量等长的向量</span></span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a><span class="fu">rleidv</span>(DT, <span class="st">"grp"</span>) <span class="co"># 与上面等价</span></span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a><span class="fu">rleid</span>(DT<span class="sc">$</span>grp, <span class="at">prefix=</span><span class="st">"grp"</span>) <span class="co"># 在游程数前面加"grp"</span></span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a><span class="co"># 也可以按游程数进行分组，并计算其游程数的个数等操作</span></span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>DT[, .N, by<span class="ot">=</span>.(<span class="fu">rleid</span>(grp))]</span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>**rowid**  -----某个值在向量中出现的次数，出现第几次就显示为几</span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">20</span>), <span class="at">y=</span><span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"b"</span>, <span class="st">"b"</span>), <span class="at">z=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a>DT</span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a><span class="fu">rowid</span>(DT<span class="sc">$</span>x) <span class="co"># 1,1,2,1,2,2</span></span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a><span class="fu">rowidv</span>(DT, <span class="at">cols=</span><span class="st">"x"</span>) <span class="co"># 和上面等价</span></span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a><span class="fu">rowid</span>(DT<span class="sc">$</span>x, <span class="at">prefix=</span><span class="st">"group"</span>) <span class="co"># 数字前面加"group"</span></span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a><span class="co"># 多列组合,看每一行的所有元素是否相同，相同则计数+1</span></span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a><span class="fu">rowid</span>(DT<span class="sc">$</span>x, DT<span class="sc">$</span>y)<span class="co">#等价rowidv(DT, cols=c("x","y")) </span></span>
+<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a>DT[, .(<span class="at">N=</span><span class="fu">seq_len</span>(.N)), by<span class="ot">=</span>.(x,y)]<span class="sc">$</span>N <span class="co"># 上面相当于做了这样的事</span></span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a><span class="co"># 应用</span></span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="fu">dcast</span>(DT, x <span class="sc">~</span> <span class="fu">rowid</span>(x, <span class="at">prefix=</span><span class="st">"group"</span>), <span class="at">value.var=</span><span class="st">"z"</span>) <span class="co">#</span></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>**tstrsplit**      ---字符串拆分函数，类似<span class="in">`strsplit`</span>函数,只不过结果和<span class="in">`strsplit`</span>进行了转置</span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2016-3-4"</span>,<span class="st">"2016-3-14"</span>,<span class="st">"2016-3-24"</span>)</span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.table</span>(name,dates)</span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a>nd</span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit</span>(dates,<span class="st">"-"</span>)</span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="fu">tstrsplit</span>(dates,<span class="st">"-"</span>) </span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>nd[,<span class="fu">c</span>(<span class="st">"year"</span>,<span class="st">"month"</span>,<span class="st">"day"</span>)<span class="sc">:</span><span class="er">=</span><span class="fu">tstrsplit</span>(dates,<span class="st">"-"</span>)] <span class="co"># 实现拆分</span></span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>nd</span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6、其他操作</span></span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a>| 函数                            | 功能                                                         |</span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a>| ------------------------------- | ------------------------------------------------------------ |</span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a>| <span class="in">`%between%`</span>                     | 快速查找某一区间：<span class="kw">&lt;br&gt;</span><span class="in">` mtcars_dt[disp %between% c(150,200)]# 150&lt;= disp &lt;= 200之间`</span><span class="kw">&lt;br&gt;</span><span class="in">` DT[c %between% list(a,b)]#a列 &lt;= c &lt;=b 列之间(向量版本)`</span> |</span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a>| <span class="in">`%chin%`</span>                        | 快速匹配 （%in% 的加速版）：  x %chin% table                 |</span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a>| <span class="in">`%inrange%`</span>                     | 快速查找某一区间：<span class="kw">&lt;br&gt;</span> <span class="in">`dft[V1 %inrange% c(50,60)]`</span>  即选择<span class="in">`50 &lt;= V1 &lt;=60`</span>所有的行<span class="kw">&lt;br&gt;</span><span class="in">`dft[V1 %inrange% list(V2,V3)]`</span> 即选择 <span class="in">`V2 &lt;= V1 &lt;= V3`</span>的所有行 |</span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a>| <span class="in">`A %like% B`</span>                    | **匹配字符串A中含有B的字符**                                 |</span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a>| <span class="in">`.I`</span>                            | 表示（分组后）每一行在原数据框中是第几行  dft<span class="co">[</span><span class="ot">,.I[2],by=accept</span><span class="co">]</span><span class="kw">&lt;br&gt;</span>.I是一个整数向量，等于seq_len(nrow(x)), While grouping, it holds for each item in the group, its row location in x. This is useful to subset in j; <span class="kw">&lt;br&gt;</span>e.g.<span class="in">` DT[, .I[which.max(somecol)], by=grp].`</span>  结合by,提取子集时,非常有用 |</span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a>| <span class="in">`.N`</span>                            | .N 代表行的数量，用by参数分组时则是每一组的行数量            |</span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a>| <span class="in">`.SD`</span>                           | 是经过<span class="in">`i`</span> 和<span class="in">`by`</span> 处理之后剩下的那部分数据集,本质是一个<span class="in">`data.table`</span> |</span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>| **`.SDcols`**                   | .SDcols 指定.SD 代表的数据框包括哪些列                       |</span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a>| <span class="in">`setDF(DT)`</span>                     | 将data.table转化为data.frame                                 |</span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a>| <span class="in">`setDT(df)`</span>                     | 将data.frame转化为data.table                                 |</span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a>| <span class="in">`setnames(DT,old,new)`</span>          | 修改列名 也可以通过重新赋值操作 colnames(DT)                 |</span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a>| <span class="in">`fsort`</span>                         | 排序                                                         |</span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a>| <span class="in">`frank`</span>                         | 求秩, 类似rank                                               |</span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>| <span class="in">`fintersect(x, y, all = FALSE)`</span> | x与y的交集,相比于基础函数(默认为FALSE)， 增加了all参数，控制重复值 |</span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>| <span class="in">`fsetdiff(x, y, all = FALSE)`</span>   | x与y的差集，即x-y                                            |</span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a>| <span class="in">`funion(x, y, all = FALSE)`</span>     | x与y的并集                                                   |</span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a>| <span class="in">`fsetequal(x, y)`</span>               | 检验x与y二者是否完全相等,返回逻辑值                          |</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>| <span class="in">`shift(x,n=1L,...)`</span>             | 把向量x向前移动或者向后移动n个数字                           |</span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.1  `%between%`   与 `inrange()` 的区别</span></span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a>两者都是选择某列的值在一个范围内的所有行,即 $a \leq c \leq b$</span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="in">`DT[c %between% list(a,b)]`</span> 这里的a,b 一定是DT自身的列名</span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a><span class="in">`DT[c %inrange% list(a,b)]`</span>  这里的a,b 不是DT自身的列名,可以是外部的变量</span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.2 `shift()` 把向量x向前移动或者向后移动n个数字</span></span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">A=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a>DT[ , X <span class="sc">:</span><span class="er">=</span> <span class="fu">shift</span>(A, <span class="dv">1</span>, <span class="at">type=</span><span class="st">"lag"</span>)]</span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>DT[ , Y <span class="sc">:</span><span class="er">=</span> <span class="fu">shift</span>(A, <span class="dv">1</span>, <span class="at">type=</span><span class="st">"lead"</span>)]</span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>DT[ , Y1 <span class="sc">:</span><span class="er">=</span> <span class="fu">shift</span>(A, <span class="dv">2</span>, <span class="at">type=</span><span class="st">"lead"</span>)]</span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>DT</span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.3  `.I()`  返回匹配的行号</span></span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>由于data.table 没有行号,因此<span class="in">`.I()`</span>一般不单独使用</span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(mtcars) </span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>mtcars_dt[, .I[cyl<span class="sc">==</span><span class="dv">6</span>]] <span class="co"># 返回 cyl ==6 所在的行号</span></span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a><span class="do">## 等价于</span></span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>mtcars_dt[, <span class="fu">which</span>(cyl<span class="sc">==</span><span class="dv">6</span>)]</span>
+<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.4 `.SD ` 是经过`i`&nbsp;和`by`&nbsp;处理之后剩下的那部分数据集</span></span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>**`.SD`代表行经过`i` 筛选后, 列除了`by`参数指定的列以外的所有列组成的新的data.table, 是原数据的子集**</span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a>mtcars_dt <span class="ot">=</span> data.table<span class="sc">::</span><span class="fu">as.data.table</span>(mtcars)</span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a>mtcars_dt[, .SD, by<span class="ot">=</span>cyl]</span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> mtcars_dt[, <span class="fu">lapply</span>(.SD[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">with=</span>F], mean), by<span class="ot">=</span>cyl]</span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>output</span>
+<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7  set() 函数可以加快循环</span></span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a><span class="in">`set(x, i = NULL, j, value)`</span></span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>作用:  将value 值快速分配给i行j列元素, <span class="in">`i`</span> , <span class="in">`j`</span> 使用整数<span class="in">`10L`</span> 而不是<span class="in">`10`</span>, j参数不能省</span>
+<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span>,<span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">as.data.table</span>(m)    </span>
+<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a><span class="fu">set</span>(DT,3L,1L,<span class="dv">10</span>)<span class="co"># 第3行第1列元素改为10</span></span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a><span class="fu">set</span>(DT,,2L,<span class="dv">20</span>) <span class="co"># 第2列的所有元素都改为20</span></span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>DT</span>
+<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span>,<span class="at">nrow=</span><span class="dv">100000</span>,<span class="at">ncol=</span><span class="dv">100</span>)</span>
+<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>DF <span class="ot">=</span> <span class="fu">as.data.frame</span>(m)</span>
+<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">as.data.table</span>(m)  </span>
+<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>DT2 <span class="ot">=</span> <span class="fu">copy</span>(DT)</span>
+<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) DF[i,<span class="dv">1</span>] <span class="ot">&lt;-</span> i)</span>
+<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) DT[i,<span class="at">V1:=</span>i])</span>
+<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="fu">set</span>(DT2,i,1L,i<span class="sc">*</span><span class="dv">10</span>))</span>
+<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a><span class="fu">## 8、options设置</span></span>
+<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a>在控制台中输入options()会打印出一个list，这是当前的options设置值，比如显示保留几位小数等。加载data.table包之后，这里新增了一些data.table专用的参数，可以用下面的命令查看</span>
+<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a>ops <span class="ot">&lt;-</span> <span class="fu">options</span>() <span class="co"># ops就是一个list，参数和值的一一对应</span></span>
+<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a><span class="co"># 由于data.table专用参数都是以datatable为前缀，使用我们输入时可以这样</span></span>
+<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a>ops<span class="sc">$</span>datatable.print.nrows <span class="co"># 返回100，设置打印的最大行数，超过了则简单打印</span></span>
+<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">"datatable.print.topn"</span>) <span class="co">#返回5，简单打印设置，前后各5行，其余行省略</span></span>
+<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
