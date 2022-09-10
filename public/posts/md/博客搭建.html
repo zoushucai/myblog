@@ -587,83 +587,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> r</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="an">tags:</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - blogdown</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - hugo</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="an">series:</span><span class="co"> 不确定多属性决策方法---徐泽水</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> 测试rmd和md的效果</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> 测试rmd和md的效果</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1、下载安装、配置好R与Rstudio</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1、下载安装、配置好R与Rstudio</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2、打开Rstudio----下载blogdown包</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2、打开Rstudio----下载blogdown包</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(devtools)) <span class="fu">install.packages</span>(<span class="st">'devtools'</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'rstudio/blogdown'</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(devtools)) <span class="fu">install.packages</span>(<span class="st">'devtools'</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'rstudio/blogdown'</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>等待安装，缺什么安装什么，</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>等待安装，缺什么安装什么，</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 3、在rstudio中安装hugo软件,只需运行下面函数即可</span></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 3、在rstudio中安装hugo软件,只需运行下面函数即可</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">install_hugo</span>()</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>blogdown<span class="sc">::</span><span class="fu">install_hugo</span>()</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>注意：他会自动安装hugo软件，不过很小，10m一下，找到下载的hugo.exe文件路径，把他添加到电脑的环境变量中，不然后面会出错，软件可以随便放位置，切记加入环境变量中</span>
 <span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>注意：他会自动安装hugo软件，不过很小，10m一下，找到下载的hugo.exe文件路径，把他添加到电脑的环境变量中，不然后面会出错，软件可以随便放位置，切记加入环境变量中</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 4、创建测试网站</span></span>
 <span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 4、创建测试网站</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>可用命令blogdown::new_site(),</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>在rstudio中的左上角点击【file】--【New Project】---【Website using blogdown】</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>可用命令blogdown::new_site(),</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>在rstudio中的左上角点击【file】--【New Project】---【Website using blogdown】</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="al">![NewProject](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/img/NewProject-20200527143419483.png)</span></span>
 <span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="al">![NewProject](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/img/NewProject-20200527143419483.png)</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>适当选择自己的要求即可，点击【Create Project】创建完成，此时已经自动创建好了博客，</span>
 <span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>适当选择自己的要求即可，点击【Create Project】创建完成，此时已经自动创建好了博客，</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 5、创建完成</span></span>
 <span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 5、创建完成</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>在刚刚所在目录【E:\test_blog】下面有很多文件，其他的可以不用管，可以找到一个config.tom配置文件，更改与你相关的信息，添加<span class="in">`relativeurls =true`</span>保存(意思是引用想对路径)，也可以不用暂时不用管这个，毕竟我们只是了解创建博客步骤，但是还是请你留意两个文件<span class="in">`content\`</span> 和<span class="in">`public\`</span> ，<span class="in">`content\`</span> 用来写文章的文件，暂时还没有<span class="in">`public\`</span>文件夹,这个是把<span class="in">`content\`</span> 文件夹下面的文章转变为html博客文章</span>
 <span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>在刚刚所在目录【E:\test_blog】下面有很多文件，其他的可以不用管，可以找到一个config.tom配置文件，更改与你相关的信息，添加<span class="in">`relativeurls =true`</span>保存(意思是引用想对路径)，也可以不用暂时不用管这个，毕竟我们只是了解创建博客步骤，但是还是请你留意两个文件<span class="in">`content\`</span> 和<span class="in">`public\`</span> ，<span class="in">`content\`</span> 用来写文章的文件，暂时还没有<span class="in">`public\`</span>文件夹,这个是把<span class="in">`content\`</span> 文件夹下面的文章转变为html博客文章</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 6、运行`blogdown:::serve_site()` 博客创建完成.  </span></span>
 <span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 6、运行`blogdown:::serve_site()` 博客创建完成.  </span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>也可以点击【adds】--【serve_site】，rstudio右边会有本地浏览</span>
 <span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>也可以点击【adds】--【serve_site】，rstudio右边会有本地浏览</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 7、**发布到网上**   </span></span>
 <span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 7、**发布到网上**   </span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>创建github和netlify网站的账号，下载git客服端，以及github客服端，可能有相关配置，配置好即可</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>打开github客服端，点击【file】--【Create a new repository】添加仓库地址即我们刚刚的创建博客的地址，选择<span class="in">`E\test_blog`</span> ，选择子目录和父目录都不可以，只能选择他，填写相关Name 和 Description完成即可，可以勾选 .....a README,创建完成</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>初次可以看到History里面有我们刚刚的文件 ，点击Publish repository，弹出对话框，有一个Name，这个是要上传给github仓库的名字，它自动创建为test_blog,也有描述内容，注意他勾选了一个<span class="in">`Keep this code private`</span> ，这个要点取消，最后一步点击【Publish repository】,等待完成</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>上github官网，查看你的仓库，已经有一个test_blog仓库</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>进入<span class="co">[</span><span class="ot">netlify官网</span><span class="co">](https://app.netlify.com/)</span> ,点击【New site from Git】---【github】（取消勾选下面的LImit Github........）--选择刚刚的test_blog仓库---在显示Publish directory 的地方如数public---最后点击部署，等待完成</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>找到部署完成以后会有个绿色的网站，我的是：https://thirsty-hawking-274891.netlify.com,点击进入，就是我们部署的博客了，</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>网站名太难记，可以改名，改为自己喜欢的民资，只能改netlify的前面的地方,我改为：qaz.netlify.com  </span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>创建github和netlify网站的账号，下载git客服端，以及github客服端，可能有相关配置，配置好即可</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>打开github客服端，点击【file】--【Create a new repository】添加仓库地址即我们刚刚的创建博客的地址，选择<span class="in">`E\test_blog`</span> ，选择子目录和父目录都不可以，只能选择他，填写相关Name 和 Description完成即可，可以勾选 .....a README,创建完成</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>初次可以看到History里面有我们刚刚的文件 ，点击Publish repository，弹出对话框，有一个Name，这个是要上传给github仓库的名字，它自动创建为test_blog,也有描述内容，注意他勾选了一个<span class="in">`Keep this code private`</span> ，这个要点取消，最后一步点击【Publish repository】,等待完成</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>上github官网，查看你的仓库，已经有一个test_blog仓库</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>进入<span class="co">[</span><span class="ot">netlify官网</span><span class="co">](https://app.netlify.com/)</span> ,点击【New site from Git】---【github】（取消勾选下面的LImit Github........）--选择刚刚的test_blog仓库---在显示Publish directory 的地方如数public---最后点击部署，等待完成</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>找到部署完成以后会有个绿色的网站，我的是：https://thirsty-hawking-274891.netlify.com,点击进入，就是我们部署的博客了，</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>网站名太难记，可以改名，改为自己喜欢的民资，只能改netlify的前面的地方,我改为：qaz.netlify.com  </span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 8、发布新帖  </span></span>
 <span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 8、发布新帖  </span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>方法一：将原有的<span class="in">`.md`</span>或 <span class="in">`.Rmd`</span>拷贝粘贴，改一下标题和内容即可；</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>方法二：在RSudio代码窗口点击 Addins- New Post， 按提示填写即可。</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="ss">   + </span>写完以后，保存，运行建站函数<span class="in">`blogdown::build_site()`</span> 。这样文件发生变化，github客服端自动检测，只需要你填写【Change】下面的summary和Description，点击提交给master，再次同步到github（点击Fetch origin） 完成，netlify自动同步github的内容 进入你的博客网站可以看到有了新变化  </span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>方法一：将原有的<span class="in">`.md`</span>或 <span class="in">`.Rmd`</span>拷贝粘贴，改一下标题和内容即可；</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>方法二：在RSudio代码窗口点击 Addins- New Post， 按提示填写即可。</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="ss">   + </span>写完以后，保存，运行建站函数<span class="in">`blogdown::build_site()`</span> 。这样文件发生变化，github客服端自动检测，只需要你填写【Change】下面的summary和Description，点击提交给master，再次同步到github（点击Fetch origin） 完成，netlify自动同步github的内容 进入你的博客网站可以看到有了新变化  </span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 9、添加disqus评论功能(科学上网)    </span></span>
 <span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 9、添加disqus评论功能(科学上网)    </span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>注册登录<span class="co">[</span><span class="ot">disqus</span><span class="co">](https://disqus.com/)</span> ,点击头像 --settings ---Add Disqus To site--<span class="co">[</span><span class="ot">GET STARTED</span><span class="co">]</span>-----I want to install Disqus on my site ------输入刚刚的网站 ：qaz.netlify.com</span>
 <span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>注册登录<span class="co">[</span><span class="ot">disqus</span><span class="co">](https://disqus.com/)</span> ,点击头像 --settings ---Add Disqus To site--<span class="co">[</span><span class="ot">GET STARTED</span><span class="co">]</span>-----I want to install Disqus on my site ------输入刚刚的网站 ：qaz.netlify.com</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="ss">2.   </span>找到安装disqus，有很多图标，但是没有hugo，因此选择 下面I don't see my platform listed, install manually with **Universal Code** 即可--不用管 直接configure----配置网站地址，点击下一步到最后</span>
 <span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="ss">2.   </span>找到安装disqus，有很多图标，但是没有hugo，因此选择 下面I don't see my platform listed, install manually with **Universal Code** 即可--不用管 直接configure----配置网站地址，点击下一步到最后</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>注意：一定要找对 shortname ，在网显示为：     Your website shortname is <span class="in">`********`</span></span>
 <span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>注意：一定要找对 shortname ，在网显示为：     Your website shortname is <span class="in">`********`</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>在rstudio，刚刚的博客配置config.toml中有一个disqusShortname填上你的名字 </span>
 <span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>在rstudio，刚刚的博客配置config.toml中有一个disqusShortname填上你的名字 </span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>     以及添加：<span class="in">`baseurl = "http://qaz.netlify.com"`</span></span>
 <span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>     以及添加：<span class="in">`baseurl = "http://qaz.netlify.com"`</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>     运行建站函数：<span class="in">`blogdown::build_site(local=FALSE)`</span>再次同步     </span>
 <span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>     运行建站函数：<span class="in">`blogdown::build_site(local=FALSE)`</span>再次同步     </span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 10 、大功告成 一个带有评论的博客，如需要自己的模板，折腾吧 </span></span>
 <span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 10 、大功告成 一个带有评论的博客，如需要自己的模板，折腾吧 </span></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

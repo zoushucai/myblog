@@ -2,7 +2,7 @@
 title: hugo-blogdown搭建网页过程中的小问题
 date: '2017-12-28'
 categories:
-  - rmarkdown
+  - r
   - hugo
 description: 一个页面的描述
 ---

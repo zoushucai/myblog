@@ -1,7 +1,7 @@
 ---
 title: 运筹学与最优化matlab
 date: '2018-11-18'
-categories: r
+categories: matlab
 ---
 
 

@@ -3,7 +3,6 @@ title: R软件常见问题
 date: '2018-01-07'
 categories:
   - r
-  - hugo
 ---
 
 

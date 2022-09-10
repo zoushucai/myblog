@@ -1,7 +1,7 @@
 ---
 title: GitHubDesktop权限问题解决办法
 date: '2018-11-06'
-categories: other
+categories: git
 ---
 
 

@@ -227,9 +227,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/nycflights13">nycflights13</a></span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>函数<code><a href="https://rdrr.io/pkg/tibble/man/as_tibble.html">tibble::as_tibble()</a></code>将过长过大的数据集转换为显示更友好的<code>tbl_df</code> 类型:</p>
+<p>函数<code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">tibble::as_tibble()</a></code>将过长过大的数据集转换为显示更友好的<code>tbl_df</code> 类型:</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">flights</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tibble/man/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span></span>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">flights</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span> <span class="co">#有336,776 x 19</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 19
@@ -1058,6 +1058,106 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb54-166"><a href="#cb54-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb54-167"><a href="#cb54-167" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
 <span id="cb54-168"><a href="#cb54-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-169"><a href="#cb54-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-170"><a href="#cb54-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-171"><a href="#cb54-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-172"><a href="#cb54-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb54-173"><a href="#cb54-173" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
+<span id="cb54-174"><a href="#cb54-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-175"><a href="#cb54-175" aria-hidden="true" tabindex="-1"></a>记录是一行,字段是一列</span>
+<span id="cb54-176"><a href="#cb54-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-177"><a href="#cb54-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-178"><a href="#cb54-178" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1、转换与合并</span></span>
+<span id="cb54-179"><a href="#cb54-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-180"><a href="#cb54-180" aria-hidden="true" tabindex="-1"></a>left_join(a, b, by = "x1")： 向数据集a中加入匹配的数据集b记录（行）。 </span>
+<span id="cb54-181"><a href="#cb54-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-182"><a href="#cb54-182" aria-hidden="true" tabindex="-1"></a>right_join(a, b, by = "x1")：    向数据集b中加入匹配的数据集a记录。</span>
+<span id="cb54-183"><a href="#cb54-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-184"><a href="#cb54-184" aria-hidden="true" tabindex="-1"></a>inner_join(a, b, by = "x1")：    合并数据。仅保留匹配的记录。</span>
+<span id="cb54-185"><a href="#cb54-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-186"><a href="#cb54-186" aria-hidden="true" tabindex="-1"></a>full_join(a, b, by = "x1")：     合并数据。保留所有记录，所有行。没有的用NA填充</span>
+<span id="cb54-187"><a href="#cb54-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-188"><a href="#cb54-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb54-189"><a href="#cb54-189" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb54-190"><a href="#cb54-190" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">data.frame</span>(<span class="at">x1=</span><span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>),<span class="at">x2=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb54-191"><a href="#cb54-191" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">data.frame</span>(<span class="at">x1=</span><span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"D"</span>),<span class="at">x3=</span><span class="fu">c</span>(<span class="st">"T"</span>,<span class="st">"F"</span>,<span class="st">"T"</span>))</span>
+<span id="cb54-192"><a href="#cb54-192" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb54-193"><a href="#cb54-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-194"><a href="#cb54-194" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b)</span>
+<span id="cb54-195"><a href="#cb54-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-196"><a href="#cb54-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-197"><a href="#cb54-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb54-198"><a href="#cb54-198" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(a, b, <span class="at">by =</span> <span class="st">"x1"</span>)<span class="co"># 向数据集a中加入匹配的数据集b记录。</span></span>
+<span id="cb54-199"><a href="#cb54-199" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(a, b, <span class="at">by =</span> <span class="st">"x1"</span>)<span class="co">#    向数据集b中加入匹配的数据集a记录。</span></span>
+<span id="cb54-200"><a href="#cb54-200" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(a, b, <span class="at">by =</span> <span class="st">"x1"</span>)<span class="co">#    合并数据。仅保留匹配的记录。</span></span>
+<span id="cb54-201"><a href="#cb54-201" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(a, b, <span class="at">by =</span> <span class="st">"x1"</span>)<span class="co"># 合并数据。保留所有记录，所有行，没有的用NA填充</span></span>
+<span id="cb54-202"><a href="#cb54-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-203"><a href="#cb54-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-204"><a href="#cb54-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-205"><a href="#cb54-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2、筛选与合并</span></span>
+<span id="cb54-206"><a href="#cb54-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-207"><a href="#cb54-207" aria-hidden="true" tabindex="-1"></a>semi_join(a, b, by = "x1")：     数据集a中能与数据集b匹配的记录。</span>
+<span id="cb54-208"><a href="#cb54-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-209"><a href="#cb54-209" aria-hidden="true" tabindex="-1"></a>anti_join(a, b, by = "x1")： 数据集a中与数据集b不匹配的记录</span>
+<span id="cb54-210"><a href="#cb54-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-211"><a href="#cb54-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3、集合操作</span></span>
+<span id="cb54-212"><a href="#cb54-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-213"><a href="#cb54-213" aria-hidden="true" tabindex="-1"></a>intersect(x, y)：    均出现在数据集x和y中的记录。xy交集</span>
+<span id="cb54-214"><a href="#cb54-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-215"><a href="#cb54-215" aria-hidden="true" tabindex="-1"></a>union(x, y)：    出现在数据集x或y中的记录。 xy并集</span>
+<span id="cb54-216"><a href="#cb54-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-217"><a href="#cb54-217" aria-hidden="true" tabindex="-1"></a>setdiff(x, y)：  仅出现在数据集x而不在y中的记录。x与y的差集</span>
+<span id="cb54-218"><a href="#cb54-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-219"><a href="#cb54-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-220"><a href="#cb54-220" aria-hidden="true" tabindex="-1"></a>bind_rows(x, y)：    把数据集y作为新的⾏行添加到x中。</span>
+<span id="cb54-221"><a href="#cb54-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-222"><a href="#cb54-222" aria-hidden="true" tabindex="-1"></a>bind_cols(x, y)：    把数据集y作为新的列添加到x中。</span>
+<span id="cb54-223"><a href="#cb54-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-224"><a href="#cb54-224" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>注意：数据按所在位置匹配。</span>
+<span id="cb54-225"><a href="#cb54-225" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>和rbind（） 与cbind（）不一样的是，rbind（）/cbind（）对数据合并有严格的要求</span>
+<span id="cb54-226"><a href="#cb54-226" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-227"><a href="#cb54-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb54-228"><a href="#cb54-228" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">data.frame</span>(<span class="at">A=</span><span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>),<span class="at">B=</span><span class="fu">c</span>(<span class="st">"t"</span>,<span class="st">"u"</span>,<span class="st">"v"</span>),<span class="at">C=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb54-229"><a href="#cb54-229" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">data.frame</span>(<span class="at">A=</span><span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"d"</span>),<span class="at">B=</span><span class="fu">c</span>(<span class="st">"t"</span>,<span class="st">"u"</span>,<span class="st">"v"</span>),<span class="at">D=</span><span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb54-230"><a href="#cb54-230" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span>
+<span id="cb54-231"><a href="#cb54-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-232"><a href="#cb54-232" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span>
+<span id="cb54-233"><a href="#cb54-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-234"><a href="#cb54-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-235"><a href="#cb54-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb54-236"><a href="#cb54-236" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(x, y) <span class="co">#行合并，列全部显示，没有的用NA填充 ，选择.id="name"参数，多增加一列，列名name</span></span>
+<span id="cb54-237"><a href="#cb54-237" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(x, y, <span class="at">.id=</span><span class="st">"name"</span>)<span class="co"># 为了区别数据是分别来自于两个其他数据库，可以用id进行区别</span></span>
+<span id="cb54-238"><a href="#cb54-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-239"><a href="#cb54-239" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(x, y) <span class="co">#列合并，</span></span>
+<span id="cb54-240"><a href="#cb54-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-241"><a href="#cb54-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-242"><a href="#cb54-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-243"><a href="#cb54-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-244"><a href="#cb54-244" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4、数据排序</span></span>
+<span id="cb54-245"><a href="#cb54-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-246"><a href="#cb54-246" aria-hidden="true" tabindex="-1"></a><span class="in">arrange(.data, ..., .by_group = FALSE) :根据变量进行排序</span></span>
+<span id="cb54-247"><a href="#cb54-247" aria-hidden="true" tabindex="-1"></a><span class="in">  + 默认升序，在变量前面添加desc()则变为降序</span></span>
+<span id="cb54-248"><a href="#cb54-248" aria-hidden="true" tabindex="-1"></a><span class="in">  + .by_group = FALSE 默认忽视对组的升序排序,设置为TRUE则把组进行升序排序以后再按比变量进行排序</span></span>
+<span id="cb54-249"><a href="#cb54-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-250"><a href="#cb54-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-253"><a href="#cb54-253" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb54-254"><a href="#cb54-254" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(mtcars, cyl, <span class="fu">desc</span>(disp))  <span class="co">#根据变量进行排序</span></span>
+<span id="cb54-255"><a href="#cb54-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-256"><a href="#cb54-256" aria-hidden="true" tabindex="-1"></a>by_cyl <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cyl)</span>
+<span id="cb54-257"><a href="#cb54-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-258"><a href="#cb54-258" aria-hidden="true" tabindex="-1"></a>by_cyl <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(wt), <span class="at">.by_group =</span> <span class="cn">TRUE</span>) <span class="co">#默认忽视对组的升序排序,设置为TRUE则把组进行升序排序以后再按比变量进行排序</span></span>
+<span id="cb54-259"><a href="#cb54-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-260"><a href="#cb54-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-261"><a href="#cb54-261" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5、 运行环境</span></span>
+<span id="cb54-262"><a href="#cb54-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-263"><a href="#cb54-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-264"><a href="#cb54-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-267"><a href="#cb54-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb54-268"><a href="#cb54-268" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb54-269"><a href="#cb54-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb54-270"><a href="#cb54-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-271"><a href="#cb54-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-272"><a href="#cb54-272" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

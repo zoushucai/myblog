@@ -189,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="quarto-title column-body">
       <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">学术论文写作工具</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
                                 <div class="quarto-categories">
-                <div class="quarto-category">r</div>
+                <div class="quarto-category">latex</div>
               </div>
                   </div>
   </div>
@@ -568,77 +568,78 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 学术论文写作工具</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2019-04-26'</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> r</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - latex</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 基础配置</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>1、必备： <span class="co">[</span><span class="ot">CTEX套装</span><span class="co">](http://www.ctex.org/HomePag)</span> 或者  <span class="co">[</span><span class="ot">TexLive (推荐)</span><span class="co">](&lt;http://tug.org/texlive/&gt;)</span>,安装Texlive时候，推荐搭配<span class="co">[</span><span class="ot">Texstudio</span><span class="co">](http://texstudio.sourceforge.net/)</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>2、有没有发现写公式很麻烦：<span class="co">[</span><span class="ot">mathpix</span><span class="co">](https://mathpix.com/)</span> 工具可以直接截图，把截图的公式转变为Latex 代码，太复杂的可能识别不了，但是已经很好了</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>3、<span class="co">[</span><span class="ot">AxMath</span><span class="co">](&lt;http://www.amyxun.com/&gt;)</span> 可以像mathtpye那样输入公式，更重要的一点是可以直接转变为latex代码，</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>4、LaTeX代码转为Word公式:</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>​   可以参考这篇文章： <span class="ot">&lt;http://www.latexstudio.net/archives/4650.html&gt;</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>​   如果在word里面直接输入LaTex代码转word公式,eg:  输入<span class="in">`$x^2 + y^2$`</span> ,然后选中其按 <span class="in">`alt + \ `</span>即可转换，不过有点慢，耐心等待</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>5、 <span class="co">[</span><span class="ot">Typora</span><span class="co">](&lt;https://www.typora.io/&gt;)</span>  工具，写markdown的，可以写md文件，然后转出latex文件，不过转出的导言区一般是有问题的，我们直接要正文部分，向导言区的头文件之类，要根据文件适当自己添加，这是由于公式的问题，公式之间不能用空行。</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">\documentclass{article}</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage{ctex} % 中文包,如果含有公式也适用</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[colorlinks,linkcolor=red]{hyperref} % 超链接</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{document}</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="in">。。。正文。。。。。x</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="in">\end{document}</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>6、推荐写公式时，不用空白行。</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 表格to latex </span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>方法一：<span class="co">[</span><span class="ot">http://www.tablesgenerator.com/latex_tables</span><span class="co">](http://www.tablesgenerator.com/latex_tables)</span> :这个网站不错，就是打开有点慢（推荐）。              以及这个网站https://tableconvert.com/</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>方法二： 可以安装Excel2latex 插件，自己百度</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>方法三：在<span class="in">`rstudio`</span>中使用<span class="in">`stargazer`</span>包 (三线头表格,头是双线）</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>方法四： 在<span class="in">`rstudio`</span>中使用<span class="in">`xtable`</span>包( 三线头表格，头是单线)</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="do">#####  方法三：#####</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xlsx) </span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 推荐使用这个包，因为不会发生小数点精度的问题，但是列名可能会发生改变</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 原本的列名是 3，4，....,9 读入后变成了X3,X4,....,X9.</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.xlsx</span>(<span class="at">file =</span><span class="st">"工作簿1.xlsx"</span>,<span class="at">sheetIndex =</span> <span class="dv">1</span>,</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>                 <span class="at">header =</span> T,<span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>data</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(data,<span class="at">summary =</span> F,<span class="at">rownames =</span> F)</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 基础配置</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>1、必备： <span class="co">[</span><span class="ot">CTEX套装</span><span class="co">](http://www.ctex.org/HomePag)</span> 或者  <span class="co">[</span><span class="ot">TexLive (推荐)</span><span class="co">](&lt;http://tug.org/texlive/&gt;)</span>,安装Texlive时候，推荐搭配<span class="co">[</span><span class="ot">Texstudio</span><span class="co">](http://texstudio.sourceforge.net/)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>2、有没有发现写公式很麻烦：<span class="co">[</span><span class="ot">mathpix</span><span class="co">](https://mathpix.com/)</span> 工具可以直接截图，把截图的公式转变为Latex 代码，太复杂的可能识别不了，但是已经很好了</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>3、<span class="co">[</span><span class="ot">AxMath</span><span class="co">](&lt;http://www.amyxun.com/&gt;)</span> 可以像mathtpye那样输入公式，更重要的一点是可以直接转变为latex代码，</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>4、LaTeX代码转为Word公式:</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>​   可以参考这篇文章： <span class="ot">&lt;http://www.latexstudio.net/archives/4650.html&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>​   如果在word里面直接输入LaTex代码转word公式,eg:  输入<span class="in">`$x^2 + y^2$`</span> ,然后选中其按 <span class="in">`alt + \ `</span>即可转换，不过有点慢，耐心等待</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>5、 <span class="co">[</span><span class="ot">Typora</span><span class="co">](&lt;https://www.typora.io/&gt;)</span>  工具，写markdown的，可以写md文件，然后转出latex文件，不过转出的导言区一般是有问题的，我们直接要正文部分，向导言区的头文件之类，要根据文件适当自己添加，这是由于公式的问题，公式之间不能用空行。</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="in">\documentclass{article}</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage{ctex} % 中文包,如果含有公式也适用</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[colorlinks,linkcolor=red]{hyperref} % 超链接</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{document}</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="in">。。。正文。。。。。x</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="in">\end{document}</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>6、推荐写公式时，不用空白行。</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 表格to latex </span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>方法一：<span class="co">[</span><span class="ot">http://www.tablesgenerator.com/latex_tables</span><span class="co">](http://www.tablesgenerator.com/latex_tables)</span> :这个网站不错，就是打开有点慢（推荐）。              以及这个网站https://tableconvert.com/</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>方法二： 可以安装Excel2latex 插件，自己百度</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>方法三：在<span class="in">`rstudio`</span>中使用<span class="in">`stargazer`</span>包 (三线头表格,头是双线）</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>方法四： 在<span class="in">`rstudio`</span>中使用<span class="in">`xtable`</span>包( 三线头表格，头是单线)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="do">#####  方法三：#####</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xlsx) </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 推荐使用这个包，因为不会发生小数点精度的问题，但是列名可能会发生改变</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 原本的列名是 3，4，....,9 读入后变成了X3,X4,....,X9.</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.xlsx</span>(<span class="at">file =</span><span class="st">"工作簿1.xlsx"</span>,<span class="at">sheetIndex =</span> <span class="dv">1</span>,</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>                 <span class="at">header =</span> T,<span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>data</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(data,<span class="at">summary =</span> F,<span class="at">rownames =</span> F)</span>
 <span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="do">##### 方法四： #####</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>xtable<span class="sc">::</span><span class="fu">xtable</span>(<span class="fu">head</span>(iris),<span class="at">digits=</span><span class="dv">3</span>,<span class="at">caption=</span><span class="st">"Head of Iris Data"</span>)</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co"># 其中函数中的digits=3控制输出精度，caption就是表格的标题。</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>注意看下图： 把代码粘贴到latex编译器中，上图为**方法三**画的(**一般学术论文，表的标题在上方，图的标题在下方**) ，下图为**方法四**画的。</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="al">![2019042601](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/img/2019042601.png)</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="do">##### 方法四： #####</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>xtable<span class="sc">::</span><span class="fu">xtable</span>(<span class="fu">head</span>(iris),<span class="at">digits=</span><span class="dv">3</span>,<span class="at">caption=</span><span class="st">"Head of Iris Data"</span>)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co"># 其中函数中的digits=3控制输出精度，caption就是表格的标题。</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>注意看下图： 把代码粘贴到latex编译器中，上图为**方法三**画的(**一般学术论文，表的标题在上方，图的标题在下方**) ，下图为**方法四**画的。</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="al">![2019042601](https://cdn.jsdelivr.net/gh/zscmmm/imgs2208save@master/img/2019042601.png)</span></span>
 <span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. 引用图片格式</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{figure}</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="in">    \centering</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="in">    \includegraphics[height=8cm,width=10cm]{cci01.jpeg} % []是设置图片大小，{}是名称</span></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="in">    \caption{22.086 percentile} % 图片标题</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="in">    \label{fig1} % 交叉引用的名称</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="in">\end{figure}</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. 引用图片格式</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{figure}</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="in">    \centering</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="in">    \includegraphics[height=8cm,width=10cm]{cci01.jpeg} % []是设置图片大小，{}是名称</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="in">    \caption{22.086 percentile} % 图片标题</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="in">    \label{fig1} % 交叉引用的名称</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="in">\end{figure}</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

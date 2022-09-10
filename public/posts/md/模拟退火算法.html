@@ -189,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="quarto-title column-body">
       <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">模拟退火算法（待完善）</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
                                 <div class="quarto-categories">
-                <div class="quarto-category">智能算法</div>
+                <div class="quarto-category">matlab</div>
               </div>
                   </div>
   </div>
@@ -263,12 +263,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>等温下热平衡过程可用Metropolis准则（即以概率接受新状态）进行模拟。</p>
 <p>Metropolis准则：</p>
 <p>假设当前状态为 <span class="math inline">\(x(n)\)</span> ,&nbsp;系统受到一定扰动，状态变为 <span class="math inline">\(x(n+1)\)</span>,相应的系统能量由 <span class="math inline">\(E(n)\)</span> 变为 <span class="math inline">\(E(n+1)\)</span> ,定义状态 <span class="math inline">\(x(n)\)</span> 变为 <span class="math inline">\(x(n+1)\)</span> 的接受概率为 <span class="math inline">\(p\)</span> :</p>
-<p><span class="math display">\[p=  \begin{cases}
+<p><span class="math display">\[
+p=  \begin{cases}
 1   &amp;, E(n+1) &lt; E(n) \\
-\\
-\\
 e^{\left(-\frac{E(n+1)-E(n)}{T}\right)}  &amp;,E(n+1) \geq E(n) \\
-\end{cases}\]</span></p>
+\end{cases}
+\]</span></p>
 <p>当状态转移之后，如果能量减小了（即 <span class="math inline">\(E(n+1) &lt; E(n)\)</span> ），那么这种转移就被接受了（以概率1发生）</p>
 <p>当状态转移之后，如果能量增大了(即 <span class="math inline">\(E(n+1) \geq E(n)\)</span> ），那么这种转移按照概率 <span class="math inline">\(p= e^{\left(-\frac{E(n+1)-E(n)}{T}\right)}\)</span> 去接受，具体操作： 首先在区间[0,1]产生一个均匀分布的随机数<span class="math inline">\(\xi\)</span>，如果 $&lt; p（此时p= e^{(-)} ） $,则这种转移被接受，否则被拒绝。</p>
 <p>（3）冷却过程，液体粒子的热运动逐渐减弱，随着温度的徐徐降低（即系统能量逐渐下降），粒子运动逐渐有序，当温度减到足够小时，液体凝固成按一定形状排列，高密度，低能量的有规则晶体（下图右图）。</p>
@@ -644,7 +644,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 模拟退火算法（待完善）</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2019-02-19'</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> 智能算法</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> matlab</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
@@ -669,12 +669,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>假设当前状态为 $x(n)$ ,&nbsp;系统受到一定扰动，状态变为 $x(n+1)$,相应的系统能量由 $E(n)$ 变为 $E(n+1)$ ,定义状态 $x(n)$ 变为 $x(n+1)$ 的接受概率为 $p$ :</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>$$p=  \begin{cases} </span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>1   &amp;, E(n+1) &lt; E(n) <span class="sc">\\</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="sc">\\</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="sc">\\</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>e^{\left(-\frac{E(n+1)-E(n)}{T}\right)}  &amp;,E(n+1) \geq E(n) <span class="sc">\\</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>\end{cases}$$</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>p=  \begin{cases} </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>1   &amp;, E(n+1) &lt; E(n) <span class="sc">\\</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>e^{\left(-\frac{E(n+1)-E(n)}{T}\right)}  &amp;,E(n+1) \geq E(n) <span class="sc">\\</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>当状态转移之后，如果能量减小了（即 $E(n+1) &lt; E(n)$ ），那么这种转移就被接受了（以概率1发生）</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>

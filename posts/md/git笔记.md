@@ -2,7 +2,6 @@
 title: git 笔记
 date: '2019-11-20'
 categories:
-  - mac
   - git
 ---
 

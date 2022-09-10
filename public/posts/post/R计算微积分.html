@@ -710,158 +710,154 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <div class="sourceCode" id="cb49" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> R计算微积分</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2018-02-10'</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="an">slug:</span><span class="co"> test-toc</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="an">simpletoc:</span><span class="co"> true</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - 符号计算</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - 微积分</span></span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.1差分</span></span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
-<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(x)  <span class="co">#向量差分  后面一个数减去前面一个数</span></span>
-<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>z<span class="ot">=</span><span class="fu">matrix</span>(x,<span class="dv">3</span>,<span class="dv">4</span>)</span>
-<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>z</span>
-<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(z) <span class="co">#矩阵差分 前行减去后行</span></span>
-<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.1差分</span></span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(x)  <span class="co">#向量差分  后面一个数减去前面一个数</span></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>z<span class="ot">=</span><span class="fu">matrix</span>(x,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(z) <span class="co">#矩阵差分 前行减去后行</span></span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.2 符号计算--微分</span></span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.1求一元函数导数---       $\sin{x}$  的一阶导数为： $\cos{x}$</span></span>
 <span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.2 符号计算--微分</span></span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a> 在R里，声明表达式对象使用 expression() 函数, 计算一阶导数用D()函数,格式：D(表达式,对谁求导)</span>
 <span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.1求一元函数导数---       $\sin{x}$  的一阶导数为： $\cos{x}$</span></span>
-<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a> 在R里，声明表达式对象使用 expression() 函数, 计算一阶导数用D()函数,格式：D(表达式,对谁求导)</span>
-<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>fun<span class="ot">=</span><span class="fu">expression</span>(<span class="fu">sin</span>(x))<span class="co"># 声明表达式</span></span>
-<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(fun,<span class="st">"x"</span>)<span class="co">#---方法1</span></span>
-<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a><span class="fu">deriv</span>(fun,<span class="st">"x"</span>)<span class="co">#---方法2  其中.grad[, "x"]为求x的导数表达式</span></span>
-<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a><span class="fu">deriv3</span>(fun,<span class="st">"x"</span>)<span class="co">#---方法3 其中.grad[, "x"]为求x的导数表达式</span></span>
-<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>fun<span class="ot">=</span><span class="fu">expression</span>(<span class="fu">sin</span>(x))<span class="co"># 声明表达式</span></span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(fun,<span class="st">"x"</span>)<span class="co">#---方法1</span></span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a><span class="fu">deriv</span>(fun,<span class="st">"x"</span>)<span class="co">#---方法2  其中.grad[, "x"]为求x的导数表达式</span></span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a><span class="fu">deriv3</span>(fun,<span class="st">"x"</span>)<span class="co">#---方法3 其中.grad[, "x"]为求x的导数表达式</span></span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.2 计算n阶导数</span></span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>计算n阶导数---方法一:    结合一阶导数写递归函数</span>
 <span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.2 计算n阶导数</span></span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a>   函数： $\sin{x}+\cos{2x}+x^2+xy+y^2+2x^3+y^3$  的3阶导数为：$12 + 8\sin{2x} -\cos{x}$</span>
 <span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>计算n阶导数---方法一:    结合一阶导数写递归函数</span>
-<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>   函数： $\sin{x}+\cos{2x}+x^2+xy+y^2+2x^3+y^3$  的3阶导数为：$12 + 8\sin{2x} -\cos{x}$</span>
-<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>   fun<span class="ot">=</span><span class="fu">expression</span>(<span class="fu">sin</span>(x)<span class="sc">+</span><span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">3</span><span class="sc">+</span>y<span class="sc">^</span><span class="dv">3</span>)</span>
-<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>   DD <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, name, <span class="at">order =</span> <span class="dv">1</span>) {</span>
-<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span> (order <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
-<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a>       <span class="fu">stop</span>(<span class="st">"'order' must be &gt;= 1"</span>)</span>
-<span id="cb49-53"><a href="#cb49-53" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span> (order <span class="sc">==</span> <span class="dv">1</span>){</span>
-<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a>       <span class="fu">D</span>(expr, name)</span>
-<span id="cb49-55"><a href="#cb49-55" aria-hidden="true" tabindex="-1"></a>     }<span class="cf">else</span>{</span>
-<span id="cb49-56"><a href="#cb49-56" aria-hidden="true" tabindex="-1"></a>       <span class="fu">DD</span>(<span class="fu">D</span>(expr, name), name, order <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a>     }</span>
-<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a>   }</span>
-<span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a>   <span class="fu">DD</span>(fun,<span class="st">"x"</span>,<span class="dv">3</span>)</span>
-<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-61"><a href="#cb49-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-62"><a href="#cb49-62" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>计算n阶导数---方法二:    Deriv 包中Simplify()化简表达式</span>
-<span id="cb49-63"><a href="#cb49-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-64"><a href="#cb49-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-65"><a href="#cb49-65" aria-hidden="true" tabindex="-1"></a>   <span class="fu">library</span>(Deriv)</span>
-<span id="cb49-66"><a href="#cb49-66" aria-hidden="true" tabindex="-1"></a>   <span class="fu">DD</span>(fun,<span class="st">"x"</span>,<span class="dv">3</span>)</span>
-<span id="cb49-67"><a href="#cb49-67" aria-hidden="true" tabindex="-1"></a>   <span class="fu">Simplify</span>(<span class="fu">DD</span>(fun, <span class="st">"x"</span>, <span class="dv">3</span>))</span>
-<span id="cb49-68"><a href="#cb49-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a>   fun<span class="ot">=</span><span class="fu">expression</span>(<span class="fu">sin</span>(x)<span class="sc">+</span><span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">3</span><span class="sc">+</span>y<span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>   DD <span class="ot">&lt;-</span> <span class="cf">function</span>(expr, name, <span class="at">order =</span> <span class="dv">1</span>) {</span>
+<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span> (order <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>       <span class="fu">stop</span>(<span class="st">"'order' must be &gt;= 1"</span>)</span>
+<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span> (order <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>       <span class="fu">D</span>(expr, name)</span>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>     }<span class="cf">else</span>{</span>
+<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a>       <span class="fu">DD</span>(<span class="fu">D</span>(expr, name), name, order <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb49-53"><a href="#cb49-53" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="cb49-55"><a href="#cb49-55" aria-hidden="true" tabindex="-1"></a>   <span class="fu">DD</span>(fun,<span class="st">"x"</span>,<span class="dv">3</span>)</span>
+<span id="cb49-56"><a href="#cb49-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>计算n阶导数---方法二:    Deriv 包中Simplify()化简表达式</span>
+<span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-61"><a href="#cb49-61" aria-hidden="true" tabindex="-1"></a>   <span class="fu">library</span>(Deriv)</span>
+<span id="cb49-62"><a href="#cb49-62" aria-hidden="true" tabindex="-1"></a>   <span class="fu">DD</span>(fun,<span class="st">"x"</span>,<span class="dv">3</span>)</span>
+<span id="cb49-63"><a href="#cb49-63" aria-hidden="true" tabindex="-1"></a>   <span class="fu">Simplify</span>(<span class="fu">DD</span>(fun, <span class="st">"x"</span>, <span class="dv">3</span>))</span>
+<span id="cb49-64"><a href="#cb49-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-65"><a href="#cb49-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-66"><a href="#cb49-66" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.3 通过函数计算导数</span></span>
+<span id="cb49-67"><a href="#cb49-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-68"><a href="#cb49-68" aria-hidden="true" tabindex="-1"></a>有时候我们有的就是函数，这怎么计算导数呢？---还是用上面的函数</span>
 <span id="cb49-69"><a href="#cb49-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-70"><a href="#cb49-70" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.3 通过函数计算导数</span></span>
-<span id="cb49-71"><a href="#cb49-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-72"><a href="#cb49-72" aria-hidden="true" tabindex="-1"></a>有时候我们有的就是函数，这怎么计算导数呢？---还是用上面的函数</span>
-<span id="cb49-73"><a href="#cb49-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-74"><a href="#cb49-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-75"><a href="#cb49-75" aria-hidden="true" tabindex="-1"></a>f<span class="ot">=</span><span class="cf">function</span>(x,y)<span class="fu">sin</span>(x)<span class="sc">+</span><span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">3</span><span class="sc">+</span>y<span class="sc">^</span><span class="dv">3</span> <span class="co">#这里是函数，而不是表达式</span></span>
-<span id="cb49-76"><a href="#cb49-76" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span>(f)</span>
-<span id="cb49-77"><a href="#cb49-77" aria-hidden="true" tabindex="-1"></a><span class="fu">Simplify</span>(<span class="fu">D</span>(<span class="fu">body</span>(f), <span class="st">"x"</span>))<span class="co"># 注意：函数体有花括号{}会出错</span></span>
-<span id="cb49-78"><a href="#cb49-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-79"><a href="#cb49-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-80"><a href="#cb49-80" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.4 求二元函数偏导数及梯度 </span></span>
-<span id="cb49-81"><a href="#cb49-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-82"><a href="#cb49-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-83"><a href="#cb49-83" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(<span class="fu">expression</span>(x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span>),<span class="st">"x"</span>)<span class="co"># x偏导数</span></span>
-<span id="cb49-84"><a href="#cb49-84" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(<span class="fu">expression</span>(x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span>),<span class="st">"y"</span>)<span class="co"># y偏导数</span></span>
-<span id="cb49-85"><a href="#cb49-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-70"><a href="#cb49-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-71"><a href="#cb49-71" aria-hidden="true" tabindex="-1"></a>f<span class="ot">=</span><span class="cf">function</span>(x,y)<span class="fu">sin</span>(x)<span class="sc">+</span><span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">3</span><span class="sc">+</span>y<span class="sc">^</span><span class="dv">3</span> <span class="co">#这里是函数，而不是表达式</span></span>
+<span id="cb49-72"><a href="#cb49-72" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span>(f)</span>
+<span id="cb49-73"><a href="#cb49-73" aria-hidden="true" tabindex="-1"></a><span class="fu">Simplify</span>(<span class="fu">D</span>(<span class="fu">body</span>(f), <span class="st">"x"</span>))<span class="co"># 注意：函数体有花括号{}会出错</span></span>
+<span id="cb49-74"><a href="#cb49-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-75"><a href="#cb49-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-76"><a href="#cb49-76" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.4 求二元函数偏导数及梯度 </span></span>
+<span id="cb49-77"><a href="#cb49-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-78"><a href="#cb49-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-79"><a href="#cb49-79" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(<span class="fu">expression</span>(x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span>),<span class="st">"x"</span>)<span class="co"># x偏导数</span></span>
+<span id="cb49-80"><a href="#cb49-80" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(<span class="fu">expression</span>(x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span>),<span class="st">"y"</span>)<span class="co"># y偏导数</span></span>
+<span id="cb49-81"><a href="#cb49-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-82"><a href="#cb49-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-83"><a href="#cb49-83" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.5 符号计算扩展包 Ryacas</span></span>
+<span id="cb49-84"><a href="#cb49-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-85"><a href="#cb49-85" aria-hidden="true" tabindex="-1"></a>想要做更多的符号计算内容，如解方程，泰勒展开等，可以借助第三方 R 扩展包 Ryacas </span>
 <span id="cb49-86"><a href="#cb49-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-87"><a href="#cb49-87" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.2.5 符号计算扩展包 Ryacas</span></span>
+<span id="cb49-87"><a href="#cb49-87" aria-hidden="true" tabindex="-1"></a>解方程: $\frac{x}{1+x}=a$   求解$x=\frac{a}{1-a}$  </span>
 <span id="cb49-88"><a href="#cb49-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-89"><a href="#cb49-89" aria-hidden="true" tabindex="-1"></a>想要做更多的符号计算内容，如解方程，泰勒展开等，可以借助第三方 R 扩展包 Ryacas </span>
-<span id="cb49-90"><a href="#cb49-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-91"><a href="#cb49-91" aria-hidden="true" tabindex="-1"></a>解方程: $\frac{x}{1+x}=a$   求解$x=\frac{a}{1-a}$  </span>
-<span id="cb49-92"><a href="#cb49-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-93"><a href="#cb49-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-94"><a href="#cb49-94" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
-<span id="cb49-95"><a href="#cb49-95" aria-hidden="true" tabindex="-1"></a><span class="fu">ysym</span>(<span class="st">"Solve(x/(1+x) == a, x)"</span>) </span>
-<span id="cb49-96"><a href="#cb49-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-97"><a href="#cb49-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-98"><a href="#cb49-98" aria-hidden="true" tabindex="-1"></a>多项式展开：如$(1+x)^3$ 展开</span>
+<span id="cb49-89"><a href="#cb49-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-90"><a href="#cb49-90" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
+<span id="cb49-91"><a href="#cb49-91" aria-hidden="true" tabindex="-1"></a><span class="fu">ysym</span>(<span class="st">"Solve(x/(1+x) == a, x)"</span>) </span>
+<span id="cb49-92"><a href="#cb49-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-93"><a href="#cb49-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-94"><a href="#cb49-94" aria-hidden="true" tabindex="-1"></a>多项式展开：如$(1+x)^3$ 展开</span>
+<span id="cb49-95"><a href="#cb49-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-96"><a href="#cb49-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-97"><a href="#cb49-97" aria-hidden="true" tabindex="-1"></a><span class="fu">ysym</span>(<span class="fu">expression</span>(<span class="fu">Expand</span>((<span class="dv">1</span> <span class="sc">+</span> x)<span class="sc">^</span><span class="dv">3</span>)))<span class="co"># 把(1+x)^3展开</span></span>
+<span id="cb49-98"><a href="#cb49-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-99"><a href="#cb49-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-100"><a href="#cb49-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-101"><a href="#cb49-101" aria-hidden="true" tabindex="-1"></a><span class="fu">ysym</span>(<span class="fu">expression</span>(<span class="fu">Expand</span>((<span class="dv">1</span> <span class="sc">+</span> x)<span class="sc">^</span><span class="dv">3</span>)))<span class="co"># 把(1+x)^3展开</span></span>
-<span id="cb49-102"><a href="#cb49-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-103"><a href="#cb49-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-104"><a href="#cb49-104" aria-hidden="true" tabindex="-1"></a>求解常微分方程：$y''=4y$ </span>
+<span id="cb49-100"><a href="#cb49-100" aria-hidden="true" tabindex="-1"></a>求解常微分方程：$y''=4y$ </span>
+<span id="cb49-101"><a href="#cb49-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-102"><a href="#cb49-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-103"><a href="#cb49-103" aria-hidden="true" tabindex="-1"></a><span class="fu">ysym</span>(<span class="st">"OdeSolve(y''== 4 * y)"</span>)</span>
+<span id="cb49-104"><a href="#cb49-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-105"><a href="#cb49-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-106"><a href="#cb49-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-107"><a href="#cb49-107" aria-hidden="true" tabindex="-1"></a><span class="fu">ysym</span>(<span class="st">"OdeSolve(y''== 4 * y)"</span>)</span>
-<span id="cb49-108"><a href="#cb49-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-109"><a href="#cb49-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-110"><a href="#cb49-110" aria-hidden="true" tabindex="-1"></a>泰勒展开：$\cos{x}=1-\frac{1}{2!}x^2+\frac{1}{4!}x^4+o(x^4)$</span>
+<span id="cb49-106"><a href="#cb49-106" aria-hidden="true" tabindex="-1"></a>泰勒展开：$\cos{x}=1-\frac{1}{2!}x^2+\frac{1}{4!}x^4+o(x^4)$</span>
+<span id="cb49-107"><a href="#cb49-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-108"><a href="#cb49-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-109"><a href="#cb49-109" aria-hidden="true" tabindex="-1"></a><span class="fu">ysym</span>(<span class="st">"Taylor(x, a, 3) cos(x)"</span>) <span class="co"># cos(x)函数在a点的3阶泰勒展开</span></span>
+<span id="cb49-110"><a href="#cb49-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-111"><a href="#cb49-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-112"><a href="#cb49-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-113"><a href="#cb49-113" aria-hidden="true" tabindex="-1"></a><span class="fu">ysym</span>(<span class="st">"Taylor(x, a, 3) cos(x)"</span>) <span class="co"># cos(x)函数在a点的3阶泰勒展开</span></span>
-<span id="cb49-114"><a href="#cb49-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-115"><a href="#cb49-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-116"><a href="#cb49-116" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.3 表达式转为函数值</span></span>
-<span id="cb49-117"><a href="#cb49-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-118"><a href="#cb49-118" aria-hidden="true" tabindex="-1"></a>很多时候我们使用 R 目的是计算，符号计算后希望可以直接代入计算，那么只需要在 deriv 中指定 function.arg 参数为 TRUE。</span>
-<span id="cb49-119"><a href="#cb49-119" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb49-120"><a href="#cb49-120" aria-hidden="true" tabindex="-1"></a>\sin{x}+\cos{2x}+x^2+xy+y^2对x求偏导为：\cos{x}-2sin{2x}+2x+y</span>
-<span id="cb49-121"><a href="#cb49-121" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb49-122"><a href="#cb49-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-123"><a href="#cb49-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-124"><a href="#cb49-124" aria-hidden="true" tabindex="-1"></a>fun<span class="ot">=</span><span class="fu">expression</span>(<span class="fu">sin</span>(x)<span class="sc">+</span><span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb49-125"><a href="#cb49-125" aria-hidden="true" tabindex="-1"></a>dx<span class="ot">=</span><span class="fu">D</span>(fun,<span class="st">"x"</span>) <span class="co">#用D()函数得到符号运算结果，然后代入数值即可得到最后结果</span></span>
-<span id="cb49-126"><a href="#cb49-126" aria-hidden="true" tabindex="-1"></a>dx</span>
-<span id="cb49-127"><a href="#cb49-127" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="dv">0</span>;y<span class="ot">=</span>pi<span class="co"># 对x、y赋值</span></span>
-<span id="cb49-128"><a href="#cb49-128" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(dx)<span class="co">#求出数值解</span></span>
-<span id="cb49-129"><a href="#cb49-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-130"><a href="#cb49-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-131"><a href="#cb49-131" aria-hidden="true" tabindex="-1"></a>Dfun<span class="ot">=</span><span class="fu">deriv</span>(fun,<span class="fu">c</span>(<span class="st">"x"</span>,<span class="st">"y"</span>),<span class="at">function.arg =</span> <span class="cn">TRUE</span>)<span class="co"># 同时对x、y求偏导--D()函数不可以同时求偏导</span></span>
-<span id="cb49-132"><a href="#cb49-132" aria-hidden="true" tabindex="-1"></a><span class="fu">Dfun</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="at">y=</span>pi<span class="sc">/</span><span class="dv">2</span>) <span class="co"># 代值计算，其中attr(,"gradient")的值为导数值 ，另一个为原函数在该处的函数值</span></span>
-<span id="cb49-133"><a href="#cb49-133" aria-hidden="true" tabindex="-1"></a><span class="co">#我们可以作如下简单验证：</span></span>
-<span id="cb49-134"><a href="#cb49-134" aria-hidden="true" tabindex="-1"></a>fun<span class="ot">=</span><span class="cf">function</span>(x,y){<span class="fu">sin</span>(x)<span class="sc">+</span><span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span>}</span>
-<span id="cb49-135"><a href="#cb49-135" aria-hidden="true" tabindex="-1"></a><span class="fu">fun</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="at">y=</span>pi<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb49-136"><a href="#cb49-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-112"><a href="#cb49-112" aria-hidden="true" tabindex="-1"></a><span class="fu">##### 1.3 表达式转为函数值</span></span>
+<span id="cb49-113"><a href="#cb49-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-114"><a href="#cb49-114" aria-hidden="true" tabindex="-1"></a>很多时候我们使用 R 目的是计算，符号计算后希望可以直接代入计算，那么只需要在 deriv 中指定 function.arg 参数为 TRUE。</span>
+<span id="cb49-115"><a href="#cb49-115" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb49-116"><a href="#cb49-116" aria-hidden="true" tabindex="-1"></a>\sin{x}+\cos{2x}+x^2+xy+y^2对x求偏导为：\cos{x}-2sin{2x}+2x+y</span>
+<span id="cb49-117"><a href="#cb49-117" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb49-118"><a href="#cb49-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-119"><a href="#cb49-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-120"><a href="#cb49-120" aria-hidden="true" tabindex="-1"></a>fun<span class="ot">=</span><span class="fu">expression</span>(<span class="fu">sin</span>(x)<span class="sc">+</span><span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb49-121"><a href="#cb49-121" aria-hidden="true" tabindex="-1"></a>dx<span class="ot">=</span><span class="fu">D</span>(fun,<span class="st">"x"</span>) <span class="co">#用D()函数得到符号运算结果，然后代入数值即可得到最后结果</span></span>
+<span id="cb49-122"><a href="#cb49-122" aria-hidden="true" tabindex="-1"></a>dx</span>
+<span id="cb49-123"><a href="#cb49-123" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="dv">0</span>;y<span class="ot">=</span>pi<span class="co"># 对x、y赋值</span></span>
+<span id="cb49-124"><a href="#cb49-124" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(dx)<span class="co">#求出数值解</span></span>
+<span id="cb49-125"><a href="#cb49-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-126"><a href="#cb49-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-127"><a href="#cb49-127" aria-hidden="true" tabindex="-1"></a>Dfun<span class="ot">=</span><span class="fu">deriv</span>(fun,<span class="fu">c</span>(<span class="st">"x"</span>,<span class="st">"y"</span>),<span class="at">function.arg =</span> <span class="cn">TRUE</span>)<span class="co"># 同时对x、y求偏导--D()函数不可以同时求偏导</span></span>
+<span id="cb49-128"><a href="#cb49-128" aria-hidden="true" tabindex="-1"></a><span class="fu">Dfun</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="at">y=</span>pi<span class="sc">/</span><span class="dv">2</span>) <span class="co"># 代值计算，其中attr(,"gradient")的值为导数值 ，另一个为原函数在该处的函数值</span></span>
+<span id="cb49-129"><a href="#cb49-129" aria-hidden="true" tabindex="-1"></a><span class="co">#我们可以作如下简单验证：</span></span>
+<span id="cb49-130"><a href="#cb49-130" aria-hidden="true" tabindex="-1"></a>fun<span class="ot">=</span><span class="cf">function</span>(x,y){<span class="fu">sin</span>(x)<span class="sc">+</span><span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>x<span class="sc">*</span>y<span class="sc">+</span>y<span class="sc">^</span><span class="dv">2</span>}</span>
+<span id="cb49-131"><a href="#cb49-131" aria-hidden="true" tabindex="-1"></a><span class="fu">fun</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="at">y=</span>pi<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb49-132"><a href="#cb49-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-133"><a href="#cb49-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-134"><a href="#cb49-134" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.3、求积分---暂时只找到数值计算的--没找到符号计算的</span></span>
+<span id="cb49-135"><a href="#cb49-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-136"><a href="#cb49-136" aria-hidden="true" tabindex="-1"></a>积分函数： <span class="in">`integrate(fun,a,b)`</span>  fun被积函数，不需要表达式，因为这是数值计算, a,b为上下限</span>
 <span id="cb49-137"><a href="#cb49-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-138"><a href="#cb49-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1.3、求积分---暂时只找到数值计算的--没找到符号计算的</span></span>
-<span id="cb49-139"><a href="#cb49-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-140"><a href="#cb49-140" aria-hidden="true" tabindex="-1"></a>积分函数： <span class="in">`integrate(fun,a,b)`</span>  fun被积函数，不需要表达式，因为这是数值计算, a,b为上下限</span>
-<span id="cb49-141"><a href="#cb49-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-142"><a href="#cb49-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-143"><a href="#cb49-143" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span> (x) <span class="fu">sin</span>(x)</span>
-<span id="cb49-144"><a href="#cb49-144" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(f,<span class="dv">0</span>,pi<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb49-145"><a href="#cb49-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-146"><a href="#cb49-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-147"><a href="#cb49-147" aria-hidden="true" tabindex="-1"></a>有些时候只想要值输入  <span class="in">` integrate(f,0,1)$value`</span></span>
+<span id="cb49-138"><a href="#cb49-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-139"><a href="#cb49-139" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span> (x) <span class="fu">sin</span>(x)</span>
+<span id="cb49-140"><a href="#cb49-140" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(f,<span class="dv">0</span>,pi<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb49-141"><a href="#cb49-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-142"><a href="#cb49-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-143"><a href="#cb49-143" aria-hidden="true" tabindex="-1"></a>有些时候只想要值输入  <span class="in">` integrate(f,0,1)$value`</span></span>
+<span id="cb49-144"><a href="#cb49-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-145"><a href="#cb49-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
+<span id="cb49-146"><a href="#cb49-146" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(f,<span class="dv">0</span>,pi<span class="sc">/</span><span class="dv">2</span>)<span class="sc">$</span>value</span>
+<span id="cb49-147"><a href="#cb49-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-148"><a href="#cb49-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-149"><a href="#cb49-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r message=FALSE, warning=FALSE}</span></span>
-<span id="cb49-150"><a href="#cb49-150" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(f,<span class="dv">0</span>,pi<span class="sc">/</span><span class="dv">2</span>)<span class="sc">$</span>value</span>
-<span id="cb49-151"><a href="#cb49-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-152"><a href="#cb49-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-155"><a href="#cb49-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-156"><a href="#cb49-156" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb49-157"><a href="#cb49-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-151"><a href="#cb49-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-152"><a href="#cb49-152" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb49-153"><a href="#cb49-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

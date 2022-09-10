@@ -3,7 +3,6 @@ title: R语言与可视化
 date: '2017-01-15'
 categories:
   - r
-  - 可视化
 ---
 
 

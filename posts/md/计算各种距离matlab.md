@@ -2,7 +2,6 @@
 title: 计算各种距离 （matlab）
 date: '2019-12-11'
 categories:
-  - 距离
   - matlab
 ---
 

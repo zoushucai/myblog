@@ -1,7 +1,7 @@
 ---
 title: R结合C++
 date: '2019-05-24'
-categories: r
+categories: c
 ---
 
 

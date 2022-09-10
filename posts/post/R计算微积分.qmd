@@ -1,12 +1,8 @@
 ---
 title: R计算微积分
 date: '2018-02-10'
-slug: test-toc
-simpletoc: true
 categories:
   - r
-  - 符号计算
-  - 微积分
 ---
 
 

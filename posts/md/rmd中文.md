@@ -1,7 +1,7 @@
 ---
 title: Windows系统下R Markdown 设置中文pdf完美解决方案
 date: '2018-03-10'
-categories: rmarkdown
+categories: r
 ---
 
 

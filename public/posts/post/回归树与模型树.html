@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="zsc">
+<title>快乐的一天 - 回归树与模型树</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - 回归树与模型树">
+<meta property="og:description" content="决策树可用于聚类（类别变量），也可用于数值预测,但是本节只考虑决策树用于数值预测.">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+<div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">回归树与模型树</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">回归树与模型树</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i></button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">查看源代码</a></li></ul></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2017年2月18日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+<li><a href="#%E7%90%86%E8%A7%A3%E5%9B%9E%E5%BD%92%E6%A0%91%E4%B8%8E%E6%A8%A1%E5%9E%8B%E6%A0%91" id="toc-理解回归树与模型树" class="nav-link active" data-scroll-target="#%E7%90%86%E8%A7%A3%E5%9B%9E%E5%BD%92%E6%A0%91%E4%B8%8E%E6%A8%A1%E5%9E%8B%E6%A0%91">1、理解回归树与模型树</a></li>
+  <li><a href="#%E5%9B%9E%E5%BD%92%E6%A0%91%E4%B8%8E%E6%A8%A1%E5%9E%8B%E6%A0%91%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9" id="toc-回归树与模型树的优缺点" class="nav-link" data-scroll-target="#%E5%9B%9E%E5%BD%92%E6%A0%91%E4%B8%8E%E6%A8%A1%E5%9E%8B%E6%A0%91%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9">2、回归树与模型树的优缺点</a></li>
+  <li><a href="#%E4%BE%8B%E5%AD%90-%E4%BC%B0%E8%AE%A1%E8%91%A1%E8%90%84%E9%85%92%E7%9A%84%E8%B4%A8%E9%87%8F" id="toc-例子-估计葡萄酒的质量" class="nav-link" data-scroll-target="#%E4%BE%8B%E5%AD%90-%E4%BC%B0%E8%AE%A1%E8%91%A1%E8%90%84%E9%85%92%E7%9A%84%E8%B4%A8%E9%87%8F">3、例子——-估计葡萄酒的质量</a></li>
+  <li><a href="#%E6%8F%90%E9%AB%98%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%A7%E8%83%BD-%E6%A8%A1%E5%9E%8B%E6%A0%91%E6%94%B9%E8%BF%9B%E6%A8%A1%E5%9E%8B" id="toc-提高模型的性能-模型树改进模型" class="nav-link" data-scroll-target="#%E6%8F%90%E9%AB%98%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%A7%E8%83%BD-%E6%A8%A1%E5%9E%8B%E6%A0%91%E6%94%B9%E8%BF%9B%E6%A8%A1%E5%9E%8B">3.6提高模型的性能—-模型树（改进模型）</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="理解回归树与模型树" class="level2"><h2 class="anchored" data-anchor-id="理解回归树与模型树">1、理解回归树与模型树</h2>
+<p>决策树可用于聚类（类别变量），也可用于数值预测,但是本节只考虑决策树用于数值预测.</p>
+<p><strong>决策树用于数值预测</strong>可以分为<strong>回归树</strong>和<strong>模型树</strong></p>
+<ol type="1">
+<li><p><strong>回归树</strong>: 回归树中并没用使用线性回归的方法，而是基于到达叶节点的案例的平均值做出预测</p></li>
+<li><p><strong>模型树</strong>: 模型树和回归树以大致相同的方式生长，但是在每个叶节点，根据到达该节点的案例建立多元线性回归模型。根据叶节点的数目，一棵模型树可能会建立几十甚至上百个这样的模型，可能会使模型树比同等的回归树更难解释，但好处也行能提高精确度。</p></li>
+</ol></section><section id="回归树与模型树的优缺点" class="level2"><h2 class="anchored" data-anchor-id="回归树与模型树的优缺点">2、回归树与模型树的优缺点</h2>
+<table class="table">
+<colgroup>
+<col style="width: 56%">
+<col style="width: 43%">
+</colgroup>
+<thead><tr class="header">
+<th>优点</th>
+<th>缺点</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>将决策树的优点对数值型数据建立模型的能力相结合</td>
+<td>不像线性回归那么常用</td>
+</tr>
+<tr class="even">
+<td>能自动选择特征，允许该方法与大量特征一起使用</td>
+<td>需要大量的训练数据</td>
+</tr>
+<tr class="odd">
+<td>不需要使用者事先指定模型</td>
+<td>难以确定单个特征对于结果的总体净影响</td>
+</tr>
+<tr class="even">
+<td>拟合某些类型的数据可能会比线性回归好</td>
+<td>可能比回归模型难以解释</td>
+</tr>
+<tr class="odd">
+<td>不要求用统计的知识来解释模型</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>用于数值预测的决策树的建立方式与用于分类的决策树建立的方式大致相同。从根节点开始，按照特征使用分而治之的决策对数据进行划分，在进行一次分割后，将会导致结果最大化的均匀增长。</p>
+<ol type="1">
+<li>
+<strong>在分类决策树中，一致性(均匀性)是有熵值度量</strong> ，而对于数值型数据是未定义的，</li>
+<li>
+<strong>对于数值型决策，一致性(均匀性)可通过统计量(方差、标准差、平均绝对偏差)来度量</strong>,根据使用的决策树生长算法，度量方法可能用所不同，但基本原理相同.</li>
+</ol>
+<p>常见的一个分割标准成为<strong>标准偏差减少(Standard Deciation Reduction,SDR)</strong>,其公式定义如下<span class="math display">\[SDR=sd(T)\]</span></p>
+</section><section id="例子-估计葡萄酒的质量" class="level2"><h2 class="anchored" data-anchor-id="例子-估计葡萄酒的质量">3、例子——-估计葡萄酒的质量</h2>
+<p>白葡萄酒包含4898个葡萄酒案例的11种化学特征的信息，对于每种葡萄酒，实验室分析测量的特征包括酸性、含糖量、氯化物含量、硫的含量、酒精度、PH值和密度值</p>
+<section id="读入数据" class="level4"><h4 class="anchored" data-anchor-id="读入数据">3.1读入数据</h4>
+<p>其所有特征都是数值型</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">wine</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"whitewines.csv"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>研究一下结果变量的分布,由于是离散的，可用直方图来研究葡萄酒质量的分布：</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">wine</span><span class="op">$</span><span class="va">quality</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="%E5%9B%9E%E5%BD%92%E6%A0%91%E4%B8%8E%E6%A8%A1%E5%9E%8B%E6%A0%91_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>符合正态分布。大约以数值为6为中心(也可用summary()函数发现一些数据的异常值等等)，最后划分训练数据与测试数据(数据是随机排序),75%的训练数据，25%的测试数据</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">wine_train</span> <span class="op">&lt;-</span> <span class="va">wine</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3750</span>, <span class="op">]</span></span>
+<span><span class="va">wine_test</span> <span class="op">&lt;-</span> <span class="va">wine</span><span class="op">[</span><span class="fl">3751</span><span class="op">:</span><span class="fl">4898</span>, <span class="op">]</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="基于数据训练模型-回归树" class="level4"><h4 class="anchored" data-anchor-id="基于数据训练模型-回归树">3.2基于数据训练模型—-回归树</h4>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bethatkinson/rpart">rpart</a></span><span class="op">)</span></span>
+<span><span class="va">m.rpart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart</a></span><span class="op">(</span><span class="va">quality</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">wine_train</span><span class="op">)</span></span>
+<span><span class="va">m.rpart</span><span class="co"># 获取该树的基本信息,#summary(m.rpart)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>n= 3750 
+
+node), split, n, deviance, yval
+      * denotes terminal node
+
+ 1) root 3750 2945.53200 5.870933  
+   2) alcohol&lt; 10.85 2372 1418.86100 5.604975  
+     4) volatile.acidity&gt;=0.2275 1611  821.30730 5.432030  
+       8) volatile.acidity&gt;=0.3025 688  278.97670 5.255814 *
+       9) volatile.acidity&lt; 0.3025 923  505.04230 5.563380 *
+     5) volatile.acidity&lt; 0.2275 761  447.36400 5.971091 *
+   3) alcohol&gt;=10.85 1378 1070.08200 6.328737  
+     6) free.sulfur.dioxide&lt; 10.5 84   95.55952 5.369048 *
+     7) free.sulfur.dioxide&gt;=10.5 1294  892.13600 6.391036  
+      14) alcohol&lt; 11.76667 629  430.11130 6.173291  
+        28) volatile.acidity&gt;=0.465 11   10.72727 4.545455 *
+        29) volatile.acidity&lt; 0.465 618  389.71680 6.202265 *
+      15) alcohol&gt;=11.76667 665  403.99400 6.596992 *</code></pre>
+</div>
+</div>
+<p>对于决策树中的每个节点，到达决策点的案例数量都列出来了，例如：所有的3750个案例从根节点开始，其中</p>
+<ul>
+<li><p>(1)有2372个案例的alcohol&lt; 10.85 2372，</p></li>
+<li><ol start="2" type="1">
+<li>1378个案例的 alcohol&gt;=10.85 。</li>
+</ol></li>
+</ul>
+<p>因为alcohol（酒精）是决策树中第一个使用的变量，所以它是葡萄酒质量中唯一最重要的指标。</p>
+<p>用* 表示的节点是终端或者叶节点，这意味着他们会产生预测(这里作为yavl列出来)。例如节点5有一个5.971091的yval。当该决策树用来预测时，对任意一个葡萄酒案例，如果alcohol&lt; 10.85 2372 且volatile.acidity&lt; 0.2275，那么它的质量值将预测为5.97</p>
+</section><section id="可视化决策时" class="level4"><h4 class="anchored" data-anchor-id="可视化决策时">3.3可视化决策时</h4>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.milbo.org/rpart-plot/index.html">rpart.plot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/rpart.plot/man/rpart.plot.html">rpart.plot</a></span><span class="op">(</span><span class="va">m.rpart</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="co">#基本决策树图</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="%E5%9B%9E%E5%BD%92%E6%A0%91%E4%B8%8E%E6%A8%A1%E5%9E%8B%E6%A0%91_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/rpart.plot/man/rpart.plot.html">rpart.plot</a></span><span class="op">(</span><span class="va">m.rpart</span>, digits <span class="op">=</span> <span class="fl">4</span>, fallen.leaves <span class="op">=</span> <span class="cn">TRUE</span>, type <span class="op">=</span> <span class="fl">3</span>, extra <span class="op">=</span> <span class="fl">101</span><span class="op">)</span><span class="co">#对图表的一些调整</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="%E5%9B%9E%E5%BD%92%E6%A0%91%E4%B8%8E%E6%A8%A1%E5%9E%8B%E6%A0%91_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="评估模型的性能" class="level4"><h4 class="anchored" data-anchor-id="评估模型的性能">3.4评估模型的性能</h4>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p.rpart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m.rpart</span>, <span class="va">wine_test</span><span class="op">)</span></span>
+<span><span class="co">#我们预测的主要统计量表明了一个潜在的问题，预测值与真实值相比落在一个更窄的范围内</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">p.rpart</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  4.545   5.563   5.971   5.893   6.202   6.597 </code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">wine_test</span><span class="op">$</span><span class="va">quality</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.000   5.000   6.000   5.901   6.000   9.000 </code></pre>
+</div>
+</div>
+<p>这一发现表面，该模型不能正确识别极端的情形，尤其是最好的和最差葡萄酒，反过来，另一方面，在第一四分位数和第三四分位数之间，我们可能做的不错。</p>
+</section><section id="用平均绝对误差度量性能" class="level4"><h4 class="anchored" data-anchor-id="用平均绝对误差度量性能">3.5用平均绝对误差度量性能</h4>
+<p><strong>平均绝对误差:</strong>考虑它的预测值离真实值有多远，方程如下：<span class="math display">\[MAE=1/n\]</span></p>
+<p>由于误差是预测值与真实值之间的差值，所以可以简单创建一个MSE()函数，如下：</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">MAE</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">actual</span>, <span class="va">predicted</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">actual</span> <span class="op">-</span> <span class="va">predicted</span><span class="op">)</span><span class="op">)</span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># 预测值和实际值之间的平均绝对误差</span></span>
+<span><span class="fu">MAE</span><span class="op">(</span><span class="va">p.rpart</span>, <span class="va">wine_test</span><span class="op">$</span><span class="va">quality</span><span class="op">)</span><span class="co">#MAS越小越好</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5872652</code></pre>
+</div>
+</div>
+<p>就平均而言，这意味着模型的预测值与真实值的质量分数之间的差值大约为0.59，基于质量的尺度是从0~10，这似乎表面我们的模型做的还可以<br>
+另一反面，大多数的葡萄酒既不是很好也不是很差，通常情况下，质量分数大约为5~6.因此根据这个指标，一个什么都没有做而是仅仅预测了均值的分类器可能同样会做的相当好（意思是直接为均值===相当于这个模型了）<br>
+训练数据中的平均质量等级如下：（用平均值试试）</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># result = 5.87平均值</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">wine_train</span><span class="op">$</span><span class="va">quality</span><span class="op">)</span> </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.870933</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#如果我们对一个葡萄酒案例预测的值为5.87，那么我们将只有大约0.67的平均绝对误差</span></span>
+<span><span class="co">#mean_abserror(5.87, wine_test$quality)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">5.87</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">wine_test</span><span class="op">$</span><span class="va">quality</span><span class="op">)</span><span class="op">)</span><span class="op">-</span><span class="va">wine_test</span><span class="op">$</span><span class="va">quality</span><span class="op">)</span><span class="op">)</span><span class="co">#平均值的MAE为0.67</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6722474</code></pre>
+</div>
+</div>
+<p>回归树(MSE=0.59)比估算的均值(MSE=0.67)平均更接近于真实的质量分数，但相差不大,所以模型需要改进</p>
+</section></section><section id="提高模型的性能-模型树改进模型" class="level2"><h2 class="anchored" data-anchor-id="提高模型的性能-模型树改进模型">3.6提高模型的性能—-模型树（改进模型）</h2>
+<p>模型树算法为M5算法—改进以后为M5’算法 M5‘算法在R中通过Rweka包和M5P()函数可以得到</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RWeka</span><span class="op">)</span><span class="co">#调用的时候需要联网,还要安装该软件</span></span>
+<span><span class="co">##############</span></span>
+<span><span class="co">####  make_Weka_package_loader("lazyBayesianRules") #加载weka相关的包</span></span>
+<span><span class="co">####  list_Weka_interfaces()  #列出weka中可以调用的函数，不够的话可以下载</span></span>
+<span><span class="co">####  WPM("list-packages", "installed")</span></span>
+<span><span class="co">####  WPM("list-packages", "available")</span></span>
+<span><span class="co">######################################</span></span>
+<span><span class="co"># 应该是Rweka中默认没有这个函数，需要自己安装以后调用</span></span>
+<span><span class="co">#好像在这里调用的时候，要安装weka</span></span>
+<span><span class="co">## 调用方法cbind(d,iris[,5])</span></span>
+<span><span class="co">#LBR=make_Weka_classifier("weka/classifiers/lazy/LBR")</span></span>
+<span><span class="co">#a=LBR(Species~., data=iris)</span></span>
+<span><span class="co">#RF &lt;-make_Weka_classifier("weka/classifiers/trees/RandomForest")</span></span>
+<span><span class="co"># a=RF(Species~., data=iris)</span></span>
+<span></span>
+<span><span class="co">###############################</span></span>
+<span><span class="co">####</span></span>
+<span><span class="va">M5P</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RWeka/man/Weka_interfaces.html">make_Weka_classifier</a></span><span class="op">(</span><span class="st">"weka/classifiers/trees/M5P"</span><span class="op">)</span><span class="co">#必须调用</span></span>
+<span><span class="va">m.m5p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RWeka/man/Weka_classifier_trees.html">M5P</a></span><span class="op">(</span><span class="va">quality</span><span class="op">~</span><span class="va">.</span>, data <span class="op">=</span> <span class="va">wine_train</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 画树图</span></span>
+<span><span class="va">m.m5p</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>这里的分割与前面的回归树很相似，然而<strong>关键的区别在于节点不是以一个数值预测终止，而是以一个线性模型终止</strong>（这里表示为LM1和LM2）<br>
+线性模型本身显示在输出后面，例如LM1模型如下，这些值完全可以和多元模型一样解释，每一个数字都是相关特征对于预测的葡萄酒质量的净影响（效应）。对于固定酸度系数0.266意味着每增加一个单位的酸度，葡萄酒的质量预计会增加0.266</p>
+<p>注意的是，估计的影响只适用于到达该节点的葡萄酒案例。在这个模型树中一共建立了36个线性回归模型，每一个模型对于固定的酸度和其他10个特征的影响都有不同的估计</p>
+<p>对于预测数据来说：</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 生成模型的预测</span></span>
+<span><span class="va">p.m5p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m.m5p</span>, <span class="va">wine_test</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 模型树的预测返回比回归树的广</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">p.m5p</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co">#模型的MSE也有改善</span></span>
+<span><span class="fu">MAE</span><span class="op">(</span><span class="va">wine_test</span><span class="op">$</span><span class="va">quality</span>, <span class="va">p.m5p</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>R version 4.2.1 (2022-06-23)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.5.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] rpart.plot_3.1.1 rpart_4.1.16    
+
+loaded via a namespace (and not attached):
+ [1] digest_0.6.29     jsonlite_1.8.0    magrittr_2.0.3    evaluate_0.16    
+ [5] rlang_1.0.4       stringi_1.7.8     cli_3.3.0         rstudioapi_0.14  
+ [9] rmarkdown_2.16.1  tools_4.2.1       stringr_1.4.1     htmlwidgets_1.5.4
+[13] xfun_0.32         yaml_2.3.5        fastmap_1.1.0     compiler_4.2.1   
+[17] htmltools_0.5.3   knitr_1.40       </code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 回归树与模型树</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2017-02-18'</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> r</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1、理解回归树与模型树</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>决策树可用于聚类（类别变量），也可用于数值预测,但是本节只考虑决策树用于数值预测.</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>**决策树用于数值预测**可以分为**回归树**和**模型树**</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**回归树**: 回归树中并没用使用线性回归的方法，而是基于到达叶节点的案例的平均值做出预测</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**模型树**: 模型树和回归树以大致相同的方式生长，但是在每个叶节点，根据到达该节点的案例建立多元线性回归模型。根据叶节点的数目，一棵模型树可能会建立几十甚至上百个这样的模型，可能会使模型树比同等的回归树更难解释，但好处也行能提高精确度。  </span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2、回归树与模型树的优缺点</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>| 优点                      | 缺点                 |</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>| ----------------------- | ------------------ |</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>| 将决策树的优点对数值型数据建立模型的能力相结合 | 不像线性回归那么常用         |</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>| 能自动选择特征，允许该方法与大量特征一起使用  | 需要大量的训练数据          |</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>| 不需要使用者事先指定模型            | 难以确定单个特征对于结果的总体净影响 |</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>| 拟合某些类型的数据可能会比线性回归好      | 可能比回归模型难以解释        |</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>| 不要求用统计的知识来解释模型          |                    |</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>用于数值预测的决策树的建立方式与用于分类的决策树建立的方式大致相同。从根节点开始，按照特征使用分而治之的决策对数据进行划分，在进行一次分割后，将会导致结果最大化的均匀增长。</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**在分类决策树中，一致性(均匀性)是有熵值度量** ，而对于数值型数据是未定义的，</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**对于数值型决策，一致性(均匀性)可通过统计量(方差、标准差、平均绝对偏差)来度量**,根据使用的决策树生长算法，度量方法可能用所不同，但基本原理相同.</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>常见的一个分割标准成为**标准偏差减少(Standard Deciation Reduction,SDR)**,其公式定义如下$$SDR=sd(T)$$</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3、例子-------估计葡萄酒的质量</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>白葡萄酒包含4898个葡萄酒案例的11种化学特征的信息，对于每种葡萄酒，实验室分析测量的特征包括酸性、含糖量、氯化物含量、硫的含量、酒精度、PH值和密度值</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 3.1读入数据</span></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>其所有特征都是数值型</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>wine <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"whitewines.csv"</span>)</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>研究一下结果变量的分布,由于是离散的，可用直方图来研究葡萄酒质量的分布：</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wine<span class="sc">$</span>quality)</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>符合正态分布。大约以数值为6为中心(也可用summary()函数发现一些数据的异常值等等)，最后划分训练数据与测试数据(数据是随机排序),75%的训练数据，25%的测试数据</span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>wine_train <span class="ot">&lt;-</span> wine[<span class="dv">1</span><span class="sc">:</span><span class="dv">3750</span>, ]</span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>wine_test <span class="ot">&lt;-</span> wine[<span class="dv">3751</span><span class="sc">:</span><span class="dv">4898</span>, ]</span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 3.2基于数据训练模型----回归树</span></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>m.rpart <span class="ot">&lt;-</span> <span class="fu">rpart</span>(quality <span class="sc">~</span> ., <span class="at">data =</span> wine_train)</span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>m.rpart<span class="co"># 获取该树的基本信息,#summary(m.rpart)</span></span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a>对于决策树中的每个节点，到达决策点的案例数量都列出来了，例如：所有的3750个案例从根节点开始，其中</span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>(1)有2372个案例的alcohol&lt; 10.85 2372，</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>(2) 1378个案例的 alcohol&gt;=10.85  。</span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a>因为alcohol（酒精）是决策树中第一个使用的变量，所以它是葡萄酒质量中唯一最重要的指标。</span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a>用* 表示的节点是终端或者叶节点，这意味着他们会产生预测(这里作为yavl列出来)。例如节点5有一个5.971091的yval。当该决策树用来预测时，对任意一个葡萄酒案例，如果alcohol&lt; 10.85 2372 且volatile.acidity&lt; 0.2275，那么它的质量值将预测为5.97  </span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a><span class="fu">####  3.3可视化决策时</span></span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(m.rpart, <span class="at">digits =</span> <span class="dv">3</span>)<span class="co">#基本决策树图</span></span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(m.rpart, <span class="at">digits =</span> <span class="dv">4</span>, <span class="at">fallen.leaves =</span> <span class="cn">TRUE</span>, <span class="at">type =</span> <span class="dv">3</span>, <span class="at">extra =</span> <span class="dv">101</span>)<span class="co">#对图表的一些调整</span></span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 3.4评估模型的性能</span></span>
+<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a>p.rpart <span class="ot">&lt;-</span> <span class="fu">predict</span>(m.rpart, wine_test)</span>
+<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a><span class="co">#我们预测的主要统计量表明了一个潜在的问题，预测值与真实值相比落在一个更窄的范围内</span></span>
+<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(p.rpart)</span>
+<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wine_test<span class="sc">$</span>quality)</span>
+<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a>这一发现表面，该模型不能正确识别极端的情形，尤其是最好的和最差葡萄酒，反过来，另一方面，在第一四分位数和第三四分位数之间，我们可能做的不错。</span>
+<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 3.5用平均绝对误差度量性能</span></span>
+<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a>**平均绝对误差:**考虑它的预测值离真实值有多远，方程如下：$$MAE=1/n$$</span>
+<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a>由于误差是预测值与真实值之间的差值，所以可以简单创建一个MSE()函数，如下：</span>
+<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a>MAE <span class="ot">&lt;-</span> <span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">abs</span>(actual <span class="sc">-</span> predicted))  </span>
+<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a><span class="co"># 预测值和实际值之间的平均绝对误差</span></span>
+<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(p.rpart, wine_test<span class="sc">$</span>quality)<span class="co">#MAS越小越好</span></span>
+<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a>就平均而言，这意味着模型的预测值与真实值的质量分数之间的差值大约为0.59，基于质量的尺度是从0~10，这似乎表面我们的模型做的还可以  </span>
+<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a>另一反面，大多数的葡萄酒既不是很好也不是很差，通常情况下，质量分数大约为5~6.因此根据这个指标，一个什么都没有做而是仅仅预测了均值的分类器可能同样会做的相当好（意思是直接为均值===相当于这个模型了）   </span>
+<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a>训练数据中的平均质量等级如下：（用平均值试试）</span>
+<span id="cb22-129"><a href="#cb22-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a><span class="co"># result = 5.87平均值</span></span>
+<span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wine_train<span class="sc">$</span>quality) </span>
+<span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a><span class="co">#如果我们对一个葡萄酒案例预测的值为5.87，那么我们将只有大约0.67的平均绝对误差</span></span>
+<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a><span class="co">#mean_abserror(5.87, wine_test$quality)</span></span>
+<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(<span class="fu">rep</span>(<span class="fl">5.87</span>,<span class="fu">length</span>(wine_test<span class="sc">$</span>quality))<span class="sc">-</span>wine_test<span class="sc">$</span>quality))<span class="co">#平均值的MAE为0.67</span></span>
+<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a>回归树(MSE=0.59)比估算的均值(MSE=0.67)平均更接近于真实的质量分数，但相差不大,所以模型需要改进</span>
+<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.6提高模型的性能----模型树（改进模型）</span></span>
+<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a>模型树算法为M5算法---改进以后为M5’算法</span>
+<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a>M5‘算法在R中通过Rweka包和M5P()函数可以得到</span>
+<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,eval=FALSE}</span></span>
+<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RWeka)<span class="co">#调用的时候需要联网,还要安装该软件</span></span>
+<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a><span class="do">##############</span></span>
+<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a><span class="do">####  make_Weka_package_loader("lazyBayesianRules") #加载weka相关的包</span></span>
+<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a><span class="do">####  list_Weka_interfaces()  #列出weka中可以调用的函数，不够的话可以下载</span></span>
+<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a><span class="do">####  WPM("list-packages", "installed")</span></span>
+<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a><span class="do">####  WPM("list-packages", "available")</span></span>
+<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a><span class="do">######################################</span></span>
+<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a><span class="co"># 应该是Rweka中默认没有这个函数，需要自己安装以后调用</span></span>
+<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a><span class="co">#好像在这里调用的时候，要安装weka</span></span>
+<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a><span class="do">## 调用方法cbind(d,iris[,5])</span></span>
+<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a><span class="co">#LBR=make_Weka_classifier("weka/classifiers/lazy/LBR")</span></span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a><span class="co">#a=LBR(Species~., data=iris)</span></span>
+<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a><span class="co">#RF &lt;-make_Weka_classifier("weka/classifiers/trees/RandomForest")</span></span>
+<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a><span class="co"># a=RF(Species~., data=iris)</span></span>
+<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a><span class="do">###############################</span></span>
+<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a><span class="do">####</span></span>
+<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a>M5P <span class="ot">&lt;-</span> <span class="fu">make_Weka_classifier</span>(<span class="st">"weka/classifiers/trees/M5P"</span>)<span class="co">#必须调用</span></span>
+<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a>m.m5p <span class="ot">&lt;-</span> <span class="fu">M5P</span>(quality<span class="sc">~</span>., <span class="at">data =</span> wine_train)</span>
+<span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a><span class="co"># 画树图</span></span>
+<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a>m.m5p</span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>这里的分割与前面的回归树很相似，然而**关键的区别在于节点不是以一个数值预测终止，而是以一个线性模型终止**（这里表示为LM1和LM2）  </span>
+<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a>线性模型本身显示在输出后面，例如LM1模型如下，这些值完全可以和多元模型一样解释，每一个数字都是相关特征对于预测的葡萄酒质量的净影响（效应）。对于固定酸度系数0.266意味着每增加一个单位的酸度，葡萄酒的质量预计会增加0.266</span>
+<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a>注意的是，估计的影响只适用于到达该节点的葡萄酒案例。在这个模型树中一共建立了36个线性回归模型，每一个模型对于固定的酸度和其他10个特征的影响都有不同的估计</span>
+<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a>对于预测数据来说：</span>
+<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,eval=FALSE}</span></span>
+<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成模型的预测</span></span>
+<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a>p.m5p <span class="ot">&lt;-</span> <span class="fu">predict</span>(m.m5p, wine_test)</span>
+<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a><span class="co"># 模型树的预测返回比回归树的广</span></span>
+<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(p.m5p)</span>
+<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a><span class="co">#模型的MSE也有改善</span></span>
+<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(wine_test<span class="sc">$</span>quality, p.m5p)</span>
+<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

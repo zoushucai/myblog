@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="zsc">
+<title>快乐的一天 - 因子数据类型处理</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="快乐的一天 - 因子数据类型处理">
+<meta property="og:description" content="变量可归结为名义型、有序型或连续型变量，">
+<meta property="og:site-name" content="快乐的一天">
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">快乐的一天</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../mac.html">mac</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matlab.html">matlab</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+<div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">因子数据类型处理</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">因子数据类型处理</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i></button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">查看源代码</a></li></ul></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>zsc </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布日期</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2018年1月14日</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0" id="toc-基础函数" class="nav-link active" data-scroll-target="#%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0">1、基础函数</a></li>
+  <li><a href="#forcats%E5%8C%85%E7%9A%84%E5%A4%84%E7%90%86%E5%9B%A0%E5%AD%90%E5%87%BD%E6%95%B0" id="toc-forcats包的处理因子函数" class="nav-link" data-scroll-target="#forcats%E5%8C%85%E7%9A%84%E5%A4%84%E7%90%86%E5%9B%A0%E5%AD%90%E5%87%BD%E6%95%B0">2、forcats包的处理因子函数</a></li>
+  <li><a href="#%E4%BE%8B%E5%AD%90" id="toc-例子" class="nav-link" data-scroll-target="#%E4%BE%8B%E5%AD%90">3、例子</a></li>
+  <li><a href="#forcats%E5%8C%85%E5%9B%A0%E5%AD%90%E6%80%BB%E7%BB%93" id="toc-forcats包因子总结" class="nav-link" data-scroll-target="#forcats%E5%8C%85%E5%9B%A0%E5%AD%90%E6%80%BB%E7%BB%93">4、forcats包因子总结</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>变量可归结为名义型、有序型或连续型变量，</p>
+<p><strong>类别（名义型）变量</strong>和<strong>有序类别（有序型）变量</strong>在R中称为<strong>因子（factor）</strong> ，如性别、省份、职业。</p>
+<ul>
+<li><p><strong>类别（名义型）变量</strong>是没有顺序之分的类别变量。</p></li>
+<li><p><strong>有序型变量</strong>表示一种顺序关系，代表有序量度，如打分结果，疾病严重程度等。而非数量关系。</p></li>
+</ul>
+<p><strong>连续型变量</strong>可以呈现为某个范围内的任意值，比如年龄</p>
+<section id="基础函数" class="level3"><h3 class="anchored" data-anchor-id="基础函数">1、基础函数</h3>
+<p>针对因子型数据，我们一般需要用到三种变化</p>
+<ul>
+<li>更改level标签名</li>
+<li>更改level顺序</li>
+<li>创建有序因子</li>
+</ul>
+<p>用<code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>函数把字符型向量转换成因子，如</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"男"</span>, <span class="st">"女"</span>, <span class="st">"男"</span>, <span class="st">"男"</span>,  <span class="st">"女"</span><span class="op">)</span></span>
+<span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co">#将此向量存储为(1, 2, 1, 1，2)，并在内部将其关联为1="男"和2="女"（具体赋值根据字母顺序而定）。</span></span>
+<span><span class="va">sex</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 男 女 男 男 女
+Levels: 女 男</code></pre>
+</div>
+</div>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>$levels
+[1] "女" "男"
+
+$class
+[1] "factor"</code></pre>
+</div>
+</div>
+<p>因子有class属性，取值为<code>"factor"</code>， 还有一个<code>levels</code>(水平值)属性， 此属性可以用<code><a href="https://rdrr.io/r/base/levels.html">levels()</a></code>函数访问，如</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span><span class="co">#查看某个因子的标签有哪些</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "女" "男"</code></pre>
+</div>
+</div>
+<p>因子的<code>levels</code>属性可以看成是一个映射， 把整数值1,2,…,映射成这些水平值， 因子在保存时会保存成整数值1,2,等与水平值对应的编号。 这样可以节省存储空间， 在建模计算的程序中也比较有利于进行数学运算。</p>
+<p>要表示<strong>有序型变量</strong>，需要为函数factor()指定参数ordered=TRUE。给定向量：</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">status</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Poor"</span>, <span class="st">"Improved"</span>, <span class="st">"Excellent"</span>, <span class="st">"Poor"</span><span class="op">)</span></span>
+<span><span class="va">status1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">status</span>, ordered<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="co">#会默认关联其值并且按关联的值排序（其实按ascii码表排序），</span></span>
+<span><span class="va">status1</span>  <span class="co"># 明显可以看出这要的排序并不是我们想要的。</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] Poor      Improved  Excellent Poor     
+Levels: Excellent &lt; Improved &lt; Poor</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#可以用选项levels自行指定各水平值, 不指定时由x的不同值来求得。</span></span>
+<span><span class="va">status2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">status</span>, order<span class="op">=</span><span class="cn">TRUE</span>,levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Poor"</span>, <span class="st">"Improved"</span>, <span class="st">"Excellent"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">status2</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] Poor      Improved  Excellent Poor     
+Levels: Poor &lt; Improved &lt; Excellent</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#也可以将数字型变量转为因子变量 ，</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">sex</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="co">#可以看出，因子水平没有任何区分,可以用labels指定标签</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 1 1 2
+Levels: 1 2</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">x</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span><span class="op">)</span> <span class="co">#注意到标签的顺序必须和水平相一致</span></span>
+<span><span class="va">sex</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] Male   Female Male   Male   Female
+Levels: Male Female</code></pre>
+</div>
+</div>
+<p><code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>函数的一般形式为</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">x</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, na.last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="va">labels</span>, exclude <span class="op">=</span> <span class="cn">NA</span>, ordered <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>可以用选项<code>levels</code>自行指定各水平值, 不指定时由x的不同值来求得。 可以用选项<code>labels</code>指定各水平的标签, 不指定时用各水平值的对应字符串。可以用<code>exclude</code>选项指定要转换为缺失值(NA)的元素值集合。 如果指定了<code>levels</code>, 则当自变量<code>x</code>的某个元素等于第个水平值时输出的因子对应元素值取整数, 如果该元素值没有出现在<code>levels</code>中则输出的因子对应元素值取NA。 <code>ordered</code>取真值时表示因子水平是有次序的(按编码次序)。</p>
+<p>事实上，经常处理数据的时候，数据都是给定的，读入数据的时候常用 <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>函数的默认操作会把输入文件的字符型列自动转换成因子， 这对于性别、职业、地名这样的列是合适的， 但是对于姓名、日期、详细地址这样的列则不合适。 所以，在<code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>调用中经常加选项<code>stringsAsFactors=FALSE</code>选项禁止这样的自动转换，还可以用<code>colClasses</code>选项逐个指定每列的类型。</p>
+<p>用<code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>可以把因子转换为纯粹的整数值，如</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 1 1 2</code></pre>
+</div>
+</div>
+<p>因为因子实际保存为整数值， 所以对因子进行一些字符型操作可能导致错误。 用<code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code>可以把因子转换成原来的字符型，如</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "Male"   "Female" "Male"   "Male"   "Female"</code></pre>
+</div>
+</div>
+<p>为了对因子执行字符型操作（如取子串）， 保险的做法是先用<code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code>函数强制转换为字符型。</p>
+<p>因为一个因子的levels属性是该因子独有的， 所以合并两个因子有可能造成错误。如</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">li1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'男'</span>, <span class="st">'女'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">li2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'男'</span>, <span class="st">'男'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">li1</span>, <span class="va">li2</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 男 女 男 男
+Levels: 女 男</code></pre>
+</div>
+</div>
+<p>结果不再是因子。 正确的做法是</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">li1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">li2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="co">#合并因子正确的方法</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 男 女 男 男
+Levels: 女 男</code></pre>
+</div>
+</div>
+<p>即恢复成字符型后合并， 然后再转换为因子。 在合并两个数据框时也存在这样的问题。 当然，如果在定义<code>li1</code>和<code>li2</code> 时都用了<code>levels=c('男', '女')</code>选项， <code>c(li1, li2)</code>也能给出正确结果。</p>
+<section id="table函数" class="level4"><h4 class="anchored" data-anchor-id="table函数">
+<code>table()</code>函数</h4>
+<p>用<code><a href="https://rdrr.io/r/base/table.html">table()</a></code>函数统计因子各水平的出现次数（称为频数或频率）。</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="co">#返回一个特殊的有元素名的向量</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>sex
+  Male Female 
+     3      2 </code></pre>
+</div>
+</div>
+<p>对一个变量用table函数计数的结果是一个特殊的有元素名的向量， 元素名是自变量的不同取值， 结果的元素值是对应的频数。 单个因子或单个向量的频数结果可以用向量的下标访问方法取出单个频数或若干个频数的子集。</p>
+</section></section><section id="forcats包的处理因子函数" class="level3"><h3 class="anchored" data-anchor-id="forcats包的处理因子函数">2、forcats包的处理因子函数</h3>
+<p>在分类变量类数较多时，往往需要对因子水平另外排序、合并等， forcats包提供了一些针对因子的方便函数。</p>
+<p>其中的函数分为如下几类，未特别指明levels和标签一样</p>
+<p><strong>1.修改levels顺序的函数，向量内元素不变</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 65%">
+<col style="width: 34%">
+</colgroup>
+<thead><tr class="header">
+<th>函数</th>
+<th>功能</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>fct_relevel(f, …, after = 0L)</td>
+<td>手动重新排列因子水平</td>
+</tr>
+<tr class="even">
+<td>fct_inorder(f, ordered = NA)</td>
+<td>按照第一次出现的次序排列</td>
+</tr>
+<tr class="odd">
+<td>fct_infreq(f, ordered = NA)</td>
+<td>按照出现的频率排列</td>
+</tr>
+<tr class="even">
+<td>fct_reorder(f, x, fun = median, …, .desc = FALSE)</td>
+<td>通过对另一个变量进行排序来重新排列因子水平</td>
+</tr>
+<tr class="odd">
+<td>fct_reorder2(f, x, y, fun = last2, …, .desc = TRUE)</td>
+<td>同上，作用不一样</td>
+</tr>
+<tr class="even">
+<td>fct_shuffle(f)</td>
+<td>随机排列因子水平</td>
+</tr>
+<tr class="odd">
+<td>fct_rev(f)</td>
+<td>倒序</td>
+</tr>
+<tr class="even">
+<td>fct_shift(f, n = 1L)</td>
+<td>实现前后移动，滚动变化</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.变换levels名称的函数</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead><tr class="header">
+<th>函数</th>
+<th>作用</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>fct_anon(f,prefix=““)</td>
+<td>levels用升序的数字替代，prefix参数表示在数字前面要保留的字符</td>
+</tr>
+<tr class="even">
+<td>fct_collapse(f, …)</td>
+<td>levels更改，主要用于levels的合并</td>
+</tr>
+<tr class="odd">
+<td>fct_recode(f, …)</td>
+<td>手动更改,把指定的标签进行更改</td>
+</tr>
+<tr class="even">
+<td><strong>fct_lump(f, n, prop, other_level = “Other”, ties.method = c(“min”,“average”, “first”, “last”, “random”, “max”))</strong></td>
+<td>将最小/最常见的因子水平（levels）合并为“other”<br>
+</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>若n, prop的值丢失，则将出现次数比较低的标签结合在一起变为other(算法没弄懂，何为比较低)<br>若指定n，表明保留n个最多的level，其余的变为other，指定负数，表明保留最少的<br>若指定prop=0.1 表明保留数量超过10%的level，其余的变为other,同理可以指定负数<br>ties.method可以指定计算方法（同时指定n），若为max,表明次数超过n的保留，低于n的改变为other<br>指定other_level可以更改替换名称</td>
+</tr>
+<tr class="even">
+<td>fct_other(f, keep, drop, other_level = “Other”)</td>
+<td>若指定keep,将指定的 level保留，其余变成”other”,<br>若指定drop,将指定的 level 设置成”other”</td>
+</tr>
+<tr class="odd">
+<td>fct_relabel(f, fun, …)</td>
+<td>在原有基础上进行修改</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.其他函数</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 54%">
+<col style="width: 45%">
+</colgroup>
+<thead><tr class="header">
+<th>函数</th>
+<th>作用</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>fct_c(f1,f2)</td>
+<td>将两个factor结合 或者fct_c(list(f1, f2))</td>
+</tr>
+<tr class="even">
+<td>fct_count(f, sort = FALSE)</td>
+<td>对factor的标签进行统计计数并转化为tibble</td>
+</tr>
+<tr class="odd">
+<td>fct_unique(f)</td>
+<td>对每一个level只有一个，向量中元素按照level的顺序排列</td>
+</tr>
+<tr class="even">
+<td>fct_drop(f)</td>
+<td>默认将没有对应level值去掉</td>
+</tr>
+<tr class="odd">
+<td>fct_explicit_na(f, na_level = “(Missing)”)</td>
+<td>使显式值缺失</td>
+</tr>
+</tbody>
+</table>
+<p>（下面三个更一般的函数，上面这些函数都有着特定的功能，基本上都是调用下面这三个函数实现的）</p>
+<table class="table">
+<thead><tr class="header">
+<th>函数</th>
+<th>作用</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>lvls_reorder(f, idx, ordered = NA)</td>
+<td>更改level顺序</td>
+</tr>
+<tr class="even">
+<td>lvls_revalue(f, new_levels)</td>
+<td>整体更改level名称</td>
+</tr>
+<tr class="odd">
+<td>lvls_expand(f, new_levels)</td>
+<td>增加额外的level值</td>
+</tr>
+</tbody>
+</table></section><section id="例子" class="level3"><h3 class="anchored" data-anchor-id="例子">3、例子</h3>
+<p>1.修改level顺序的函数使用</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="co"># 查看f的levels</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c d
+Levels: a b c d</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">f</span>, <span class="st">"c"</span><span class="op">)</span> <span class="co"># 把水平c移动到第一位</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c d
+Levels: c a b d</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">f</span>, <span class="st">"b"</span>, <span class="st">"a"</span><span class="op">)</span> <span class="co">#把水平b a 移动到前两位</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c d
+Levels: b a c d</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">f</span>, <span class="st">"a"</span>, after <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># 把水平a放在第2位之后，即放在第3位</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c d
+Levels: b c a d</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">f</span>, <span class="st">"a"</span>, after <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span> <span class="co"># 把水平a移动到最后</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c d
+Levels: b c d a</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#########################################</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html">fct_inorder</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="co"># 按照第一次出现的次序排列</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] b b a c c c
+Levels: b a c</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html">fct_infreq</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="co"># 按照出现的频率排列</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] b b a c c c
+Levels: c b a</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#######################</span></span>
+<span><span class="co"># 随机排序</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_shuffle.html">fct_shuffle</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c
+Levels: c a b</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_shuffle.html">fct_shuffle</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c
+Levels: b a c</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">########################</span></span>
+<span><span class="co"># 倒序</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html">fct_rev</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c
+Levels: c b a</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#######################</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_shift.html">fct_shift</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="co"># 第一项放到最后</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c
+Levels: b c a</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_shift.html">fct_shift</a></span><span class="op">(</span><span class="va">f</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># 前两项放在最后</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c
+Levels: c a b</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_shift.html">fct_shift</a></span><span class="op">(</span><span class="va">f</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co"># 最后一项移到最前面</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c
+Levels: c a b</code></pre>
+</div>
+</div>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">######################################################################</span></span>
+<span><span class="co">##fac_reorder()可以根据不同因子水平分成的组中另一数值型变量的统计量值排序##</span></span>
+<span><span class="co">######################################################################</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>,main<span class="op">=</span><span class="st">"因子顺序按默认排序"</span><span class="op">)</span><span class="co">#默认的图,因子顺序按默认排序</span></span>
+<span><span class="co"># 按照分组变量Sepal.Width的均值从小到大排列(默认)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">Species</span>, <span class="va">Sepal.Width</span>, <span class="va">median</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span>,main<span class="op">=</span><span class="st">"按分组变量Sepal.Width的均值升序排列"</span><span class="op">)</span></span>
+<span><span class="co"># 设置.desc=T，则从大到小</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">Species</span>, <span class="va">Sepal.Width</span>, <span class="va">median</span>, .desc<span class="op">=</span><span class="cn">T</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span>,main<span class="op">=</span><span class="st">"按分组变量Sepal.Width的均值降序排列"</span><span class="op">)</span> </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="%E5%9B%A0%E5%AD%90%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bfactor_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="960"></p>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># 按照分组变量time的最后一个值对应的weight的大小顺序排列（升序）</span></span>
+<span><span class="va">chks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">ChickWeight</span>, <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">Chick</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">chks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span><span class="va">chks</span>, Chick <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_shuffle.html">fct_shuffle</a></span><span class="op">(</span><span class="va">Chick</span><span class="op">)</span><span class="op">)</span><span class="co">#fct_shuffle()函数随机排列因子水平</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">chks</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Time</span>, <span class="va">weight</span>, colour <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder2</a></span><span class="op">(</span><span class="va">Chick</span>, <span class="va">Time</span>, <span class="va">weight</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"Chick"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"按照分组变量time的最后一个值对应的weight的大小顺序排列(升序)"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>  <span class="co">#也就加上这一行标题就居中了</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="%E5%9B%A0%E5%AD%90%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8Bfactor_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>2.修改level标签的函数使用</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_anon.html">fct_anon</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>      <span class="co">#levels用升序的数字替代，</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 2 1 3 3 3
+Levels: 1 2 3</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_anon.html">fct_anon</a></span><span class="op">(</span><span class="va">f</span>, <span class="st">"x"</span><span class="op">)</span>     <span class="co"># prefix参数表示在数字前面要保留的字符</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] x3 x3 x1 x2 x2 x2
+Levels: x1 x2 x3</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_collapse.html">fct_collapse</a></span><span class="op">(</span><span class="va">f</span>, <span class="st">"x"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span>, <span class="st">"y"</span><span class="op">=</span><span class="st">"c"</span><span class="op">)</span> <span class="co">#把a。b标签合并成x，c标签替代为y</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] x x x y y y
+Levels: x y</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_collapse.html">fct_collapse</a></span><span class="op">(</span><span class="va">f</span>, <span class="st">"x"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span><span class="op">)</span> <span class="co"># 只改变一部分也可以</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] x x x c c c
+Levels: x c</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">27</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#统计标签的出现的次数</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>.
+ A  B  C  D  E  F  G  H  I 
+40 10  5 27  1  1  1  1  1 </code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#把出现次数比较低值得标签保留，其余的变成other,并统计出现的次数</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>.
+    A     D Other 
+   40    27    20 </code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html">fct_inorder</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>.
+    A Other     D 
+   40    20    27 </code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 将指定的level设置成other</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">27</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_other.html">fct_other</a></span><span class="op">(</span><span class="va">x</span>, keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span> <span class="co"># 保留这两个A、B这两个标签，其余变为other</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code> [1] A     A     A     A     A     A     A     A     A     A     A     A    
+[13] A     A     A     A     A     A     A     A     A     A     A     A    
+[25] A     A     A     A     A     A     A     A     A     A     A     A    
+[37] A     A     A     A     B     B     B     B     B     B     B     B    
+[49] B     B     Other Other Other Other Other Other Other Other Other Other
+[61] Other Other Other Other Other Other Other Other Other Other Other Other
+[73] Other Other Other Other Other Other Other Other Other Other Other Other
+[85] Other Other Other
+Levels: A B Other</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_other.html">fct_other</a></span><span class="op">(</span><span class="va">x</span>, drop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span> <span class="co"># 把A、B这个两个标签变成other</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code> [1] Other Other Other Other Other Other Other Other Other Other Other Other
+[13] Other Other Other Other Other Other Other Other Other Other Other Other
+[25] Other Other Other Other Other Other Other Other Other Other Other Other
+[37] Other Other Other Other Other Other Other Other Other Other Other Other
+[49] Other Other C     C     C     C     C     D     D     D     D     D    
+[61] D     D     D     D     D     D     D     D     D     D     D     D    
+[73] D     D     D     D     D     D     D     D     D     D     E     F    
+[85] G     H     I    
+Levels: C D E F G H I Other</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 手动更改</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"bear"</span>, <span class="st">"banana"</span>, <span class="st">"dear"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span><span class="op">(</span><span class="va">x</span>, fruit <span class="op">=</span> <span class="st">"apple"</span>, <span class="st">"fruit"</span> <span class="op">=</span> <span class="st">"banana"</span><span class="op">)</span><span class="co">#把标签apple替换为friut，banana也替换为friut,双引号可加可不加</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] fruit bear  fruit dear 
+Levels: fruit bear dear</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span><span class="op">(</span><span class="va">x</span>, <span class="cn">NULL</span> <span class="op">=</span> <span class="st">"apple"</span>, fruit <span class="op">=</span> <span class="st">"banana"</span><span class="op">)</span> <span class="co"># 移除apple标签，向量对应位置变成NA</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] &lt;NA&gt;  bear  fruit dear 
+Levels: fruit bear dear</code></pre>
+</div>
+</div>
+<p>3.其他函数</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 对每一个level计数</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_count.html">fct_count</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>   <span class="co"># 对factor的标签进行统计计数并转化为tibble</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  f         n
+  &lt;fct&gt; &lt;int&gt;
+1 a         1
+2 b         2
+3 c         3</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 唯一化</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] b a c
+Levels: a b c</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_unique.html">fct_unique</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="co"># 向量中元素按照level的顺序排列</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b c
+Levels: a b c</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">f</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b
+Levels: a b c</code></pre>
+</div>
+<details><summary>Show the code</summary><div class="sourceCode" id="cb84"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_drop.html">fct_drop</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="co"># 默认将没有对应值的level去掉</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] a b
+Levels: a b</code></pre>
+</div>
+</div>
+</section><section id="forcats包因子总结" class="level3"><h3 class="anchored" data-anchor-id="forcats包因子总结">4、forcats包因子总结</h3>
+<p>fct_lump(f, n, prop)： 根据因子水平（levels）的值合并为“other”</p>
+<p>fct_collapse(f, …) : levels更改，主要用于levels的合并（主要合并现有的因子水平）</p>
+<p>fac_reorder() : 可以根据不同因子水平分成的组中另一数值型变量的统计量值排序。</p>
+<p>fct_count(f, sort = FALSE) : 对factor的标签进行统计计数并转化为tibble</p>
+<div class="cell">
+<details><summary>Show the code</summary><div class="sourceCode" id="cb86"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>R version 4.2.1 (2022-06-23)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.5.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_3.3.6 forcats_0.5.2
+
+loaded via a namespace (and not attached):
+ [1] compiler_4.2.1    pillar_1.8.1      tools_4.2.1       digest_0.6.29    
+ [5] viridisLite_0.4.1 jsonlite_1.8.0    evaluate_0.16     lifecycle_1.0.1  
+ [9] tibble_3.1.8      gtable_0.3.0      pkgconfig_2.0.3   rlang_1.0.4      
+[13] DBI_1.1.3         cli_3.3.0         rstudioapi_0.14   yaml_2.3.5       
+[17] xfun_0.32         fastmap_1.1.0     withr_2.5.0       stringr_1.4.1    
+[21] dplyr_1.0.9       knitr_1.40        generics_0.1.3    htmlwidgets_1.5.4
+[25] vctrs_0.4.1       grid_4.2.1        tidyselect_1.1.2  glue_1.6.2       
+[29] R6_2.5.1          fansi_1.0.3       rmarkdown_2.16.1  farver_2.1.1     
+[33] purrr_0.3.4       magrittr_2.0.3    ellipsis_0.3.2    scales_1.2.1     
+[37] htmltools_0.5.3   assertthat_0.2.1  colorspace_2.0-3  labeling_0.4.2   
+[41] utf8_1.2.2        stringi_1.7.8     munsell_0.5.0    </code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb88" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 因子数据类型处理</span></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2018-01-14'</span></span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - r</span></span>
+<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
+<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-12"><a href="#cb88-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-13"><a href="#cb88-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-14"><a href="#cb88-14" aria-hidden="true" tabindex="-1"></a>变量可归结为名义型、有序型或连续型变量，</span>
+<span id="cb88-15"><a href="#cb88-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-16"><a href="#cb88-16" aria-hidden="true" tabindex="-1"></a>**类别（名义型）变量**和**有序类别（有序型）变量**在R中称为**因子（factor）** ，如性别、省份、职业。</span>
+<span id="cb88-17"><a href="#cb88-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-18"><a href="#cb88-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**类别（名义型）变量**是没有顺序之分的类别变量。</span>
+<span id="cb88-19"><a href="#cb88-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-20"><a href="#cb88-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-21"><a href="#cb88-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-22"><a href="#cb88-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**有序型变量**表示一种顺序关系，代表有序量度，如打分结果，疾病严重程度等。而非数量关系。</span>
+<span id="cb88-23"><a href="#cb88-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-24"><a href="#cb88-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-25"><a href="#cb88-25" aria-hidden="true" tabindex="-1"></a>**连续型变量**可以呈现为某个范围内的任意值，比如年龄</span>
+<span id="cb88-26"><a href="#cb88-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-27"><a href="#cb88-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1、基础函数</span></span>
+<span id="cb88-28"><a href="#cb88-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-29"><a href="#cb88-29" aria-hidden="true" tabindex="-1"></a>针对因子型数据，我们一般需要用到三种变化</span>
+<span id="cb88-30"><a href="#cb88-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-31"><a href="#cb88-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>更改level标签名</span>
+<span id="cb88-32"><a href="#cb88-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>更改level顺序</span>
+<span id="cb88-33"><a href="#cb88-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>创建有序因子</span>
+<span id="cb88-34"><a href="#cb88-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-35"><a href="#cb88-35" aria-hidden="true" tabindex="-1"></a>用<span class="in">`factor()`</span>函数把字符型向量转换成因子，如</span>
+<span id="cb88-36"><a href="#cb88-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-39"><a href="#cb88-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-40"><a href="#cb88-40" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"男"</span>, <span class="st">"女"</span>, <span class="st">"男"</span>, <span class="st">"男"</span>,  <span class="st">"女"</span>)</span>
+<span id="cb88-41"><a href="#cb88-41" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(x) <span class="co">#将此向量存储为(1, 2, 1, 1，2)，并在内部将其关联为1="男"和2="女"（具体赋值根据字母顺序而定）。</span></span>
+<span id="cb88-42"><a href="#cb88-42" aria-hidden="true" tabindex="-1"></a>sex</span>
+<span id="cb88-43"><a href="#cb88-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-44"><a href="#cb88-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-47"><a href="#cb88-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-48"><a href="#cb88-48" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(sex)</span>
+<span id="cb88-49"><a href="#cb88-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-50"><a href="#cb88-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-51"><a href="#cb88-51" aria-hidden="true" tabindex="-1"></a>因子有class属性，取值为<span class="in">`"factor"`</span>， 还有一个<span class="in">`levels`</span>(水平值)属性， 此属性可以用<span class="in">`levels()`</span>函数访问，如</span>
+<span id="cb88-52"><a href="#cb88-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-55"><a href="#cb88-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-56"><a href="#cb88-56" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sex)<span class="co">#查看某个因子的标签有哪些</span></span>
+<span id="cb88-57"><a href="#cb88-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-58"><a href="#cb88-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-59"><a href="#cb88-59" aria-hidden="true" tabindex="-1"></a>因子的<span class="in">`levels`</span>属性可以看成是一个映射， 把整数值1,2,...,映射成这些水平值， 因子在保存时会保存成整数值1,2,等与水平值对应的编号。 这样可以节省存储空间， 在建模计算的程序中也比较有利于进行数学运算。</span>
+<span id="cb88-60"><a href="#cb88-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-61"><a href="#cb88-61" aria-hidden="true" tabindex="-1"></a>要表示**有序型变量**，需要为函数factor()指定参数ordered=TRUE。给定向量：</span>
+<span id="cb88-62"><a href="#cb88-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-65"><a href="#cb88-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-66"><a href="#cb88-66" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Poor"</span>, <span class="st">"Improved"</span>, <span class="st">"Excellent"</span>, <span class="st">"Poor"</span>)</span>
+<span id="cb88-67"><a href="#cb88-67" aria-hidden="true" tabindex="-1"></a>status1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(status, <span class="at">ordered=</span><span class="cn">TRUE</span>)<span class="co">#会默认关联其值并且按关联的值排序（其实按ascii码表排序），</span></span>
+<span id="cb88-68"><a href="#cb88-68" aria-hidden="true" tabindex="-1"></a>status1  <span class="co"># 明显可以看出这要的排序并不是我们想要的。</span></span>
+<span id="cb88-69"><a href="#cb88-69" aria-hidden="true" tabindex="-1"></a><span class="co">#可以用选项levels自行指定各水平值, 不指定时由x的不同值来求得。</span></span>
+<span id="cb88-70"><a href="#cb88-70" aria-hidden="true" tabindex="-1"></a>status2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(status, <span class="at">order=</span><span class="cn">TRUE</span>,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">"Poor"</span>, <span class="st">"Improved"</span>, <span class="st">"Excellent"</span>))</span>
+<span id="cb88-71"><a href="#cb88-71" aria-hidden="true" tabindex="-1"></a>status2</span>
+<span id="cb88-72"><a href="#cb88-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-73"><a href="#cb88-73" aria-hidden="true" tabindex="-1"></a><span class="co">#也可以将数字型变量转为因子变量 ，</span></span>
+<span id="cb88-74"><a href="#cb88-74" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb88-75"><a href="#cb88-75" aria-hidden="true" tabindex="-1"></a>(<span class="at">sex=</span><span class="fu">factor</span>(x)) <span class="co">#可以看出，因子水平没有任何区分,可以用labels指定标签</span></span>
+<span id="cb88-76"><a href="#cb88-76" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(x, <span class="at">levels=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>)) <span class="co">#注意到标签的顺序必须和水平相一致</span></span>
+<span id="cb88-77"><a href="#cb88-77" aria-hidden="true" tabindex="-1"></a>sex</span>
+<span id="cb88-78"><a href="#cb88-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-79"><a href="#cb88-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-80"><a href="#cb88-80" aria-hidden="true" tabindex="-1"></a><span class="in">`factor()`</span>函数的一般形式为</span>
+<span id="cb88-81"><a href="#cb88-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-82"><a href="#cb88-82" aria-hidden="true" tabindex="-1"></a><span class="in">```R</span></span>
+<span id="cb88-83"><a href="#cb88-83" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(x, <span class="at">levels =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(x), <span class="at">na.last =</span> <span class="cn">TRUE</span>), labels, <span class="at">exclude =</span> <span class="cn">NA</span>, <span class="at">ordered =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb88-84"><a href="#cb88-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-85"><a href="#cb88-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-86"><a href="#cb88-86" aria-hidden="true" tabindex="-1"></a>可以用选项<span class="in">`levels`</span>自行指定各水平值, 不指定时由x的不同值来求得。 可以用选项<span class="in">`labels`</span>指定各水平的标签, 不指定时用各水平值的对应字符串。可以用<span class="in">`exclude`</span>选项指定要转换为缺失值(NA)的元素值集合。 如果指定了<span class="in">`levels`</span>, 则当自变量<span class="in">`x`</span>的某个元素等于第个水平值时输出的因子对应元素值取整数, 如果该元素值没有出现在<span class="in">`levels`</span>中则输出的因子对应元素值取NA。 <span class="in">`ordered`</span>取真值时表示因子水平是有次序的(按编码次序)。</span>
+<span id="cb88-87"><a href="#cb88-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-88"><a href="#cb88-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-89"><a href="#cb88-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-90"><a href="#cb88-90" aria-hidden="true" tabindex="-1"></a>事实上，经常处理数据的时候，数据都是给定的，读入数据的时候常用 <span class="in">`read.csv()`</span>函数的默认操作会把输入文件的字符型列自动转换成因子， 这对于性别、职业、地名这样的列是合适的， 但是对于姓名、日期、详细地址这样的列则不合适。 所以，在<span class="in">`read.csv()`</span>调用中经常加选项<span class="in">`stringsAsFactors=FALSE`</span>选项禁止这样的自动转换，还可以用<span class="in">`colClasses`</span>选项逐个指定每列的类型。</span>
+<span id="cb88-91"><a href="#cb88-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-92"><a href="#cb88-92" aria-hidden="true" tabindex="-1"></a>用<span class="in">`as.numeric()`</span>可以把因子转换为纯粹的整数值，如</span>
+<span id="cb88-93"><a href="#cb88-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-96"><a href="#cb88-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-97"><a href="#cb88-97" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(sex)</span>
+<span id="cb88-98"><a href="#cb88-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-99"><a href="#cb88-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-100"><a href="#cb88-100" aria-hidden="true" tabindex="-1"></a>因为因子实际保存为整数值， 所以对因子进行一些字符型操作可能导致错误。 用<span class="in">`as.character()`</span>可以把因子转换成原来的字符型，如</span>
+<span id="cb88-101"><a href="#cb88-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-104"><a href="#cb88-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-105"><a href="#cb88-105" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(sex)</span>
+<span id="cb88-106"><a href="#cb88-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-107"><a href="#cb88-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-108"><a href="#cb88-108" aria-hidden="true" tabindex="-1"></a>为了对因子执行字符型操作（如取子串）， 保险的做法是先用<span class="in">`as.character()`</span>函数强制转换为字符型。</span>
+<span id="cb88-109"><a href="#cb88-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-110"><a href="#cb88-110" aria-hidden="true" tabindex="-1"></a>因为一个因子的levels属性是该因子独有的， 所以合并两个因子有可能造成错误。如</span>
+<span id="cb88-111"><a href="#cb88-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-114"><a href="#cb88-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-115"><a href="#cb88-115" aria-hidden="true" tabindex="-1"></a>li1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">'男'</span>, <span class="st">'女'</span>))</span>
+<span id="cb88-116"><a href="#cb88-116" aria-hidden="true" tabindex="-1"></a>li2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">'男'</span>, <span class="st">'男'</span>))</span>
+<span id="cb88-117"><a href="#cb88-117" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(li1, li2)</span>
+<span id="cb88-118"><a href="#cb88-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-119"><a href="#cb88-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-120"><a href="#cb88-120" aria-hidden="true" tabindex="-1"></a>结果不再是因子。 正确的做法是</span>
+<span id="cb88-121"><a href="#cb88-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-124"><a href="#cb88-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-125"><a href="#cb88-125" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">as.character</span>(li1), <span class="fu">as.character</span>(li2)))<span class="co">#合并因子正确的方法</span></span>
+<span id="cb88-126"><a href="#cb88-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-127"><a href="#cb88-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-128"><a href="#cb88-128" aria-hidden="true" tabindex="-1"></a>即恢复成字符型后合并， 然后再转换为因子。 在合并两个数据框时也存在这样的问题。 当然，如果在定义<span class="in">`li1`</span>和<span class="in">`li2`</span> 时都用了<span class="in">`levels=c('男', '女')`</span>选项， <span class="in">`c(li1, li2)`</span>也能给出正确结果。</span>
+<span id="cb88-129"><a href="#cb88-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-130"><a href="#cb88-130" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `table()`函数</span></span>
+<span id="cb88-131"><a href="#cb88-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-132"><a href="#cb88-132" aria-hidden="true" tabindex="-1"></a>用<span class="in">`table()`</span>函数统计因子各水平的出现次数（称为频数或频率）。</span>
+<span id="cb88-133"><a href="#cb88-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-136"><a href="#cb88-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-137"><a href="#cb88-137" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sex) <span class="co">#返回一个特殊的有元素名的向量</span></span>
+<span id="cb88-138"><a href="#cb88-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-139"><a href="#cb88-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-140"><a href="#cb88-140" aria-hidden="true" tabindex="-1"></a>对一个变量用table函数计数的结果是一个特殊的有元素名的向量， 元素名是自变量的不同取值， 结果的元素值是对应的频数。 单个因子或单个向量的频数结果可以用向量的下标访问方法取出单个频数或若干个频数的子集。</span>
+<span id="cb88-141"><a href="#cb88-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-142"><a href="#cb88-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-143"><a href="#cb88-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-144"><a href="#cb88-144" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2、forcats包的处理因子函数</span></span>
+<span id="cb88-145"><a href="#cb88-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-146"><a href="#cb88-146" aria-hidden="true" tabindex="-1"></a>在分类变量类数较多时，往往需要对因子水平另外排序、合并等， forcats包提供了一些针对因子的方便函数。</span>
+<span id="cb88-147"><a href="#cb88-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-148"><a href="#cb88-148" aria-hidden="true" tabindex="-1"></a>其中的函数分为如下几类，未特别指明levels和标签一样</span>
+<span id="cb88-149"><a href="#cb88-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-150"><a href="#cb88-150" aria-hidden="true" tabindex="-1"></a>**1.修改levels顺序的函数，向量内元素不变**</span>
+<span id="cb88-151"><a href="#cb88-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-152"><a href="#cb88-152" aria-hidden="true" tabindex="-1"></a>| 函数                                       | 功能                    |</span>
+<span id="cb88-153"><a href="#cb88-153" aria-hidden="true" tabindex="-1"></a>| ---------------------------------------- | --------------------- |</span>
+<span id="cb88-154"><a href="#cb88-154" aria-hidden="true" tabindex="-1"></a>| fct_relevel(f, ..., after =  0L)         | 手动重新排列因子水平            |</span>
+<span id="cb88-155"><a href="#cb88-155" aria-hidden="true" tabindex="-1"></a>| fct_inorder(f, ordered = NA)             | 按照第一次出现的次序排列          |</span>
+<span id="cb88-156"><a href="#cb88-156" aria-hidden="true" tabindex="-1"></a>| fct_infreq(f, ordered = NA)              | 按照出现的频率排列             |</span>
+<span id="cb88-157"><a href="#cb88-157" aria-hidden="true" tabindex="-1"></a>| fct_reorder(f, x, fun = median, ...,  .desc = FALSE) | 通过对另一个变量进行排序来重新排列因子水平 |</span>
+<span id="cb88-158"><a href="#cb88-158" aria-hidden="true" tabindex="-1"></a>| fct_reorder2(f, x, y, fun = last2, ...,  .desc = TRUE) | 同上，作用不一样              |</span>
+<span id="cb88-159"><a href="#cb88-159" aria-hidden="true" tabindex="-1"></a>| fct_shuffle(f)                           | 随机排列因子水平              |</span>
+<span id="cb88-160"><a href="#cb88-160" aria-hidden="true" tabindex="-1"></a>| fct_rev(f)                               | 倒序                    |</span>
+<span id="cb88-161"><a href="#cb88-161" aria-hidden="true" tabindex="-1"></a>| fct_shift(f, n = 1L)                     | 实现前后移动，滚动变化           |</span>
+<span id="cb88-162"><a href="#cb88-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-163"><a href="#cb88-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-164"><a href="#cb88-164" aria-hidden="true" tabindex="-1"></a>**2.变换levels名称的函数** </span>
+<span id="cb88-165"><a href="#cb88-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-166"><a href="#cb88-166" aria-hidden="true" tabindex="-1"></a>| 函数                                       | 作用                                       |</span>
+<span id="cb88-167"><a href="#cb88-167" aria-hidden="true" tabindex="-1"></a>| ---------------------------------------- | ---------------------------------------- |</span>
+<span id="cb88-168"><a href="#cb88-168" aria-hidden="true" tabindex="-1"></a>| fct_anon(f,prefix="")                    | levels用升序的数字替代，prefix参数表示在数字前面要保留的字符     |</span>
+<span id="cb88-169"><a href="#cb88-169" aria-hidden="true" tabindex="-1"></a>| fct_collapse(f, ...)                     | levels更改，主要用于levels的合并                   |</span>
+<span id="cb88-170"><a href="#cb88-170" aria-hidden="true" tabindex="-1"></a>| fct_recode(f, ...)                       | 手动更改,把指定的标签进行更改                          |</span>
+<span id="cb88-171"><a href="#cb88-171" aria-hidden="true" tabindex="-1"></a>| **fct_lump(f, n, prop, other_level =  "Other", ties.method = c("min","average",  "first", "last", "random", "max"))** | 将最小/最常见的因子水平（levels）合并为“other”<span class="kw">&lt;br</span> <span class="kw">/&gt;</span>     |</span>
+<span id="cb88-172"><a href="#cb88-172" aria-hidden="true" tabindex="-1"></a>|                                          | 若n, prop的值丢失，则将出现次数比较低的标签结合在一起变为other(算法没弄懂，何为比较低)<span class="kw">&lt;br</span> <span class="kw">/&gt;</span>若指定n，表明保留n个最多的level，其余的变为other，指定负数，表明保留最少的<span class="kw">&lt;br</span> <span class="kw">/&gt;</span>若指定prop=0.1 表明保留数量超过10%的level，其余的变为other,同理可以指定负数<span class="kw">&lt;br</span> <span class="kw">/&gt;</span>ties.method可以指定计算方法（同时指定n），若为max,表明次数超过n的保留，低于n的改变为other<span class="kw">&lt;br</span> <span class="kw">/&gt;</span>指定other_level可以更改替换名称 |</span>
+<span id="cb88-173"><a href="#cb88-173" aria-hidden="true" tabindex="-1"></a>| fct_other(f, keep, drop, other_level =  "Other") | 若指定keep,将指定的  level保留，其余变成"other",<span class="kw">&lt;br</span> <span class="kw">/&gt;</span>若指定drop,将指定的 level  设置成"other" |</span>
+<span id="cb88-174"><a href="#cb88-174" aria-hidden="true" tabindex="-1"></a>| fct_relabel(f, fun, ...)                 | 在原有基础上进行修改                               |</span>
+<span id="cb88-175"><a href="#cb88-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-176"><a href="#cb88-176" aria-hidden="true" tabindex="-1"></a>**3.其他函数**</span>
+<span id="cb88-177"><a href="#cb88-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-178"><a href="#cb88-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-179"><a href="#cb88-179" aria-hidden="true" tabindex="-1"></a>| 函数                                       | 作用                                |</span>
+<span id="cb88-180"><a href="#cb88-180" aria-hidden="true" tabindex="-1"></a>| ---------------------------------------- | --------------------------------- |</span>
+<span id="cb88-181"><a href="#cb88-181" aria-hidden="true" tabindex="-1"></a>| fct_c(f1,f2)                             | 将两个factor结合 或者fct_c(list(f1, f2)) |</span>
+<span id="cb88-182"><a href="#cb88-182" aria-hidden="true" tabindex="-1"></a>| fct_count(f, sort = FALSE)               | 对factor的标签进行统计计数并转化为tibble        |</span>
+<span id="cb88-183"><a href="#cb88-183" aria-hidden="true" tabindex="-1"></a>| fct_unique(f)                            | 对每一个level只有一个，向量中元素按照level的顺序排列   |</span>
+<span id="cb88-184"><a href="#cb88-184" aria-hidden="true" tabindex="-1"></a>| fct_drop(f)                              | 默认将没有对应level值去掉                   |</span>
+<span id="cb88-185"><a href="#cb88-185" aria-hidden="true" tabindex="-1"></a>| fct_explicit_na(f, na_level =  "(Missing)") | 使显式值缺失                            |</span>
+<span id="cb88-186"><a href="#cb88-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-187"><a href="#cb88-187" aria-hidden="true" tabindex="-1"></a>（下面三个更一般的函数，上面这些函数都有着特定的功能，基本上都是调用下面这三个函数实现的）</span>
+<span id="cb88-188"><a href="#cb88-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-189"><a href="#cb88-189" aria-hidden="true" tabindex="-1"></a>| 函数                                  | 作用          |</span>
+<span id="cb88-190"><a href="#cb88-190" aria-hidden="true" tabindex="-1"></a>| ----------------------------------- | ----------- |</span>
+<span id="cb88-191"><a href="#cb88-191" aria-hidden="true" tabindex="-1"></a>| lvls_reorder(f, idx, ordered  = NA) | 更改level顺序   |</span>
+<span id="cb88-192"><a href="#cb88-192" aria-hidden="true" tabindex="-1"></a>| lvls_revalue(f, new_levels)         | 整体更改level名称 |</span>
+<span id="cb88-193"><a href="#cb88-193" aria-hidden="true" tabindex="-1"></a>| lvls_expand(f, new_levels)          | 增加额外的level值 |</span>
+<span id="cb88-194"><a href="#cb88-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-195"><a href="#cb88-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3、例子</span></span>
+<span id="cb88-196"><a href="#cb88-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-197"><a href="#cb88-197" aria-hidden="true" tabindex="-1"></a>1.修改level顺序的函数使用</span>
+<span id="cb88-198"><a href="#cb88-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-201"><a href="#cb88-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-202"><a href="#cb88-202" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb88-203"><a href="#cb88-203" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb88-204"><a href="#cb88-204" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>))</span>
+<span id="cb88-205"><a href="#cb88-205" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(f) <span class="co"># 查看f的levels</span></span>
+<span id="cb88-206"><a href="#cb88-206" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(f, <span class="st">"c"</span>) <span class="co"># 把水平c移动到第一位</span></span>
+<span id="cb88-207"><a href="#cb88-207" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(f, <span class="st">"b"</span>, <span class="st">"a"</span>) <span class="co">#把水平b a 移动到前两位</span></span>
+<span id="cb88-208"><a href="#cb88-208" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(f, <span class="st">"a"</span>, <span class="at">after =</span> <span class="dv">2</span>) <span class="co"># 把水平a放在第2位之后，即放在第3位</span></span>
+<span id="cb88-209"><a href="#cb88-209" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(f, <span class="st">"a"</span>, <span class="at">after =</span> <span class="cn">Inf</span>) <span class="co"># 把水平a移动到最后</span></span>
+<span id="cb88-210"><a href="#cb88-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-211"><a href="#cb88-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-212"><a href="#cb88-212" aria-hidden="true" tabindex="-1"></a><span class="do">#########################################</span></span>
+<span id="cb88-213"><a href="#cb88-213" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"b"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>))</span>
+<span id="cb88-214"><a href="#cb88-214" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_inorder</span>(f) <span class="co"># 按照第一次出现的次序排列</span></span>
+<span id="cb88-215"><a href="#cb88-215" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_infreq</span>(f) <span class="co"># 按照出现的频率排列</span></span>
+<span id="cb88-216"><a href="#cb88-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-217"><a href="#cb88-217" aria-hidden="true" tabindex="-1"></a><span class="do">#######################</span></span>
+<span id="cb88-218"><a href="#cb88-218" aria-hidden="true" tabindex="-1"></a><span class="co"># 随机排序</span></span>
+<span id="cb88-219"><a href="#cb88-219" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb88-220"><a href="#cb88-220" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_shuffle</span>(f)</span>
+<span id="cb88-221"><a href="#cb88-221" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_shuffle</span>(f)</span>
+<span id="cb88-222"><a href="#cb88-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-223"><a href="#cb88-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-224"><a href="#cb88-224" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb88-225"><a href="#cb88-225" aria-hidden="true" tabindex="-1"></a><span class="co"># 倒序</span></span>
+<span id="cb88-226"><a href="#cb88-226" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb88-227"><a href="#cb88-227" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_rev</span>(f)</span>
+<span id="cb88-228"><a href="#cb88-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-229"><a href="#cb88-229" aria-hidden="true" tabindex="-1"></a><span class="do">#######################</span></span>
+<span id="cb88-230"><a href="#cb88-230" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_shift</span>(f) <span class="co"># 第一项放到最后</span></span>
+<span id="cb88-231"><a href="#cb88-231" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_shift</span>(f, <span class="dv">2</span>) <span class="co"># 前两项放在最后</span></span>
+<span id="cb88-232"><a href="#cb88-232" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_shift</span>(f, <span class="sc">-</span><span class="dv">1</span>) <span class="co"># 最后一项移到最前面</span></span>
+<span id="cb88-233"><a href="#cb88-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-234"><a href="#cb88-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-235"><a href="#cb88-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-236"><a href="#cb88-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,fig.width=10}</span></span>
+<span id="cb88-237"><a href="#cb88-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-238"><a href="#cb88-238" aria-hidden="true" tabindex="-1"></a><span class="do">######################################################################</span></span>
+<span id="cb88-239"><a href="#cb88-239" aria-hidden="true" tabindex="-1"></a><span class="do">##fac_reorder()可以根据不同因子水平分成的组中另一数值型变量的统计量值排序##</span></span>
+<span id="cb88-240"><a href="#cb88-240" aria-hidden="true" tabindex="-1"></a><span class="do">######################################################################</span></span>
+<span id="cb88-241"><a href="#cb88-241" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb88-242"><a href="#cb88-242" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Width <span class="sc">~</span> Species, <span class="at">data =</span> iris,<span class="at">main=</span><span class="st">"因子顺序按默认排序"</span>)<span class="co">#默认的图,因子顺序按默认排序</span></span>
+<span id="cb88-243"><a href="#cb88-243" aria-hidden="true" tabindex="-1"></a><span class="co"># 按照分组变量Sepal.Width的均值从小到大排列(默认)</span></span>
+<span id="cb88-244"><a href="#cb88-244" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Width <span class="sc">~</span> <span class="fu">fct_reorder</span>(Species, Sepal.Width, median), <span class="at">data =</span> iris,<span class="at">main=</span><span class="st">"按分组变量Sepal.Width的均值升序排列"</span>)</span>
+<span id="cb88-245"><a href="#cb88-245" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置.desc=T，则从大到小</span></span>
+<span id="cb88-246"><a href="#cb88-246" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Width <span class="sc">~</span> <span class="fu">fct_reorder</span>(Species, Sepal.Width, median, <span class="at">.desc=</span>T), <span class="at">data =</span> iris,<span class="at">main=</span><span class="st">"按分组变量Sepal.Width的均值降序排列"</span>) </span>
+<span id="cb88-247"><a href="#cb88-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-248"><a href="#cb88-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-249"><a href="#cb88-249" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb88-250"><a href="#cb88-250" aria-hidden="true" tabindex="-1"></a><span class="co"># 按照分组变量time的最后一个值对应的weight的大小顺序排列（升序）</span></span>
+<span id="cb88-251"><a href="#cb88-251" aria-hidden="true" tabindex="-1"></a>chks <span class="ot">&lt;-</span> <span class="fu">subset</span>(ChickWeight, <span class="fu">as.integer</span>(Chick) <span class="sc">&lt;</span> <span class="dv">10</span>)</span>
+<span id="cb88-252"><a href="#cb88-252" aria-hidden="true" tabindex="-1"></a>chks <span class="ot">&lt;-</span> <span class="fu">transform</span>(chks, <span class="at">Chick =</span> <span class="fu">fct_shuffle</span>(Chick))<span class="co">#fct_shuffle()函数随机排列因子水平</span></span>
+<span id="cb88-253"><a href="#cb88-253" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(chks, <span class="fu">aes</span>(Time, weight, <span class="at">colour =</span> <span class="fu">fct_reorder2</span>(Chick, Time, weight))) <span class="sc">+</span></span>
+<span id="cb88-254"><a href="#cb88-254" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">geom_line</span>() <span class="sc">+</span><span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Chick"</span>)<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"按照分组变量time的最后一个值对应的weight的大小顺序排列(升序)"</span>)<span class="sc">+</span></span>
+<span id="cb88-255"><a href="#cb88-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  <span class="co">#也就加上这一行标题就居中了</span></span>
+<span id="cb88-256"><a href="#cb88-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-257"><a href="#cb88-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-258"><a href="#cb88-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-259"><a href="#cb88-259" aria-hidden="true" tabindex="-1"></a>2.修改level标签的函数使用</span>
+<span id="cb88-260"><a href="#cb88-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-263"><a href="#cb88-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-264"><a href="#cb88-264" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"b"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>))</span>
+<span id="cb88-265"><a href="#cb88-265" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_anon</span>(f)      <span class="co">#levels用升序的数字替代，</span></span>
+<span id="cb88-266"><a href="#cb88-266" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_anon</span>(f, <span class="st">"x"</span>)     <span class="co"># prefix参数表示在数字前面要保留的字符</span></span>
+<span id="cb88-267"><a href="#cb88-267" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_collapse</span>(f, <span class="st">"x"</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>), <span class="st">"y"</span><span class="ot">=</span><span class="st">"c"</span>) <span class="co">#把a。b标签合并成x，c标签替代为y</span></span>
+<span id="cb88-268"><a href="#cb88-268" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_collapse</span>(f, <span class="st">"x"</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>)) <span class="co"># 只改变一部分也可以</span></span>
+<span id="cb88-269"><a href="#cb88-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-270"><a href="#cb88-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-271"><a href="#cb88-271" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>], <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">27</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)))</span>
+<span id="cb88-272"><a href="#cb88-272" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="co">#统计标签的出现的次数</span></span>
+<span id="cb88-273"><a href="#cb88-273" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">fct_lump</span>() <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="co">#把出现次数比较低值得标签保留，其余的变成other,并统计出现的次数</span></span>
+<span id="cb88-274"><a href="#cb88-274" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">fct_lump</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_inorder</span>() <span class="sc">%&gt;%</span> <span class="fu">table</span>()</span>
+<span id="cb88-275"><a href="#cb88-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-276"><a href="#cb88-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-277"><a href="#cb88-277" aria-hidden="true" tabindex="-1"></a><span class="co"># 将指定的level设置成other</span></span>
+<span id="cb88-278"><a href="#cb88-278" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>], <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">27</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)))</span>
+<span id="cb88-279"><a href="#cb88-279" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_other</span>(x, <span class="at">keep =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>)) <span class="co"># 保留这两个A、B这两个标签，其余变为other</span></span>
+<span id="cb88-280"><a href="#cb88-280" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_other</span>(x, <span class="at">drop =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>)) <span class="co"># 把A、B这个两个标签变成other</span></span>
+<span id="cb88-281"><a href="#cb88-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-282"><a href="#cb88-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-283"><a href="#cb88-283" aria-hidden="true" tabindex="-1"></a><span class="co"># 手动更改</span></span>
+<span id="cb88-284"><a href="#cb88-284" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"bear"</span>, <span class="st">"banana"</span>, <span class="st">"dear"</span>))</span>
+<span id="cb88-285"><a href="#cb88-285" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_recode</span>(x, <span class="at">fruit =</span> <span class="st">"apple"</span>, <span class="st">"fruit"</span> <span class="ot">=</span> <span class="st">"banana"</span>)<span class="co">#把标签apple替换为friut，banana也替换为friut,双引号可加可不加</span></span>
+<span id="cb88-286"><a href="#cb88-286" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_recode</span>(x, <span class="at">NULL =</span> <span class="st">"apple"</span>, <span class="at">fruit =</span> <span class="st">"banana"</span>) <span class="co"># 移除apple标签，向量对应位置变成NA</span></span>
+<span id="cb88-287"><a href="#cb88-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-288"><a href="#cb88-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-289"><a href="#cb88-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-290"><a href="#cb88-290" aria-hidden="true" tabindex="-1"></a>3.其他函数</span>
+<span id="cb88-291"><a href="#cb88-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-294"><a href="#cb88-294" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-295"><a href="#cb88-295" aria-hidden="true" tabindex="-1"></a><span class="co"># 对每一个level计数</span></span>
+<span id="cb88-296"><a href="#cb88-296" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"b"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>))</span>
+<span id="cb88-297"><a href="#cb88-297" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_count</span>(f)   <span class="co"># 对factor的标签进行统计计数并转化为tibble</span></span>
+<span id="cb88-298"><a href="#cb88-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-299"><a href="#cb88-299" aria-hidden="true" tabindex="-1"></a><span class="co"># 唯一化</span></span>
+<span id="cb88-300"><a href="#cb88-300" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(f)</span>
+<span id="cb88-301"><a href="#cb88-301" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_unique</span>(f) <span class="co"># 向量中元素按照level的顺序排列</span></span>
+<span id="cb88-302"><a href="#cb88-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-303"><a href="#cb88-303" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb88-304"><a href="#cb88-304" aria-hidden="true" tabindex="-1"></a>f</span>
+<span id="cb88-305"><a href="#cb88-305" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_drop</span>(f) <span class="co"># 默认将没有对应值的level去掉</span></span>
+<span id="cb88-306"><a href="#cb88-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-307"><a href="#cb88-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-308"><a href="#cb88-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-309"><a href="#cb88-309" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4、forcats包因子总结</span></span>
+<span id="cb88-310"><a href="#cb88-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-311"><a href="#cb88-311" aria-hidden="true" tabindex="-1"></a>fct_lump(f, n, prop)： 根据因子水平（levels）的值合并为“other”</span>
+<span id="cb88-312"><a href="#cb88-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-313"><a href="#cb88-313" aria-hidden="true" tabindex="-1"></a>fct_collapse(f, ...)  :  levels更改，主要用于levels的合并（主要合并现有的因子水平）</span>
+<span id="cb88-314"><a href="#cb88-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-315"><a href="#cb88-315" aria-hidden="true" tabindex="-1"></a>fac_reorder()   : 可以根据不同因子水平分成的组中另一数值型变量的统计量值排序。</span>
+<span id="cb88-316"><a href="#cb88-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-317"><a href="#cb88-317" aria-hidden="true" tabindex="-1"></a>fct_count(f, sort = FALSE)  : 对factor的标签进行统计计数并转化为tibble</span>
+<span id="cb88-318"><a href="#cb88-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-319"><a href="#cb88-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-322"><a href="#cb88-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb88-323"><a href="#cb88-323" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb88-324"><a href="#cb88-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

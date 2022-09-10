@@ -2,7 +2,6 @@
 title: latex 笔记
 date: '2020-08-10'
 categories:
-  - mac
   - latex
 ---
 

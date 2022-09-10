@@ -1,15 +1,22 @@
 project:
   type: website
   output-dir: public
-  pre-render: "static/prepare.R"
+  pre-render: 
+    - "static/prepare.R"
+  post-render: 
+    - "static/checkhtml.R"
   resources: 
     - "static/"
 
+execute:
+  freeze: auto
+favicon: "static/favicon.png"
 website:
   title: "快乐的一天"
-  image: profile.jpg
+  image: "static/favicon.png"
   open-graph: true
   navbar:
+    logo: "static/logo.png"
     background: primary
     search: true
     right:
@@ -50,7 +57,9 @@ format:
     css: styles.css  
   gfm:
     html-math-method: webtex
-    
+
+
+
 editor: source
 
 

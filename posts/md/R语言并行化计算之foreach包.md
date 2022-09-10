@@ -1,9 +1,8 @@
 ---
-title: R 语言并行化计算之foreach包
+title: 并行化计算之foreach包
 date: '2018-04-08'
 categories:
   - r
-  - foreach
 ---
 
 

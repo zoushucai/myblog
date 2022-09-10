@@ -1,7 +1,7 @@
 ---
 title: 用c语言设置定时关机
 date: '2018-11-20'
-categories: r
+categories: c
 ---
 
 

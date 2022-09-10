@@ -2,7 +2,6 @@
 title: 创建属于自己的rmarkdown模板文件
 date: '2020-05-18'
 categories:
-  - shiny
   - r
 ---
 

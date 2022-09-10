@@ -12,9 +12,22 @@ extract_text = function(inpath='./posts/macnote', ftitle = "mac笔记", outfile=
   
   s0 = str_glue('---\ntitle: "{ftitle}"\ndate: "2022-08-28"\nlang: zh\ntoc: true\nauthor: "zsc"\ntitle-block-banner: true\n---\n')
   s1 = str_glue("[{file_title}]({filePath})")
+  txt =  paste(c(s0,s1),collapse = "\n\n")
+  if (file.exists(outfile)) {
+    rawtxt = readLines(outfile,encoding = "UTF-8")
+    rawtxt = paste(rawtxt,collapse = "\n\n")
+    if (str_squish(rawtxt) != str_squish(txt)) {
+      print("写入文件")
+      writeLines(txt, con = outfile,sep = "\n\n")
+    }else{
+      print("不写入文件")
+    }
+  }else{
+    print("写入文件")
+    writeLines(txt, con = outfile,sep = "\n\n")
+    #invisible()
+  }
   
-  writeLines(text = c(s0,s1), con =outfile,sep = "\n\n")
-  #invisible()
 }
 
 

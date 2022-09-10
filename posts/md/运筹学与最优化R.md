@@ -1,7 +1,9 @@
 ---
 title: 运筹学与最优化--在R软件中的实现
 date: '2019-02-18'
-categories: r
+categories: 
+  - r
+  - matlab
 ---
 
 

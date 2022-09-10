@@ -1,0 +1,63 @@
+---
+title: 测试文件
+date: '2000-01-01'
+categories: r
+---
+
+
+这是一个测试文件, 用于测试一些新的功能
+
+
+定义一个 center环境
+::: {.center}
+The contents of this div will be output in a `center`
+LaTeX environment, but will appear in HTML (and any other output 
+format as a simple div with the class `center`)
+:::
+
+:::{.callout-note collapse=false appearance='default' icon=true}
+## Optional caption (note)
+- Hide callout body with 'collapse=true'
+- Remove 'collapse' to prevent expandability
+- Set appearance to 'default', 'simple' or 'minimal'
+- Remove icon with 'icon=false'
+:::
+
+
+{{< fa thumbs-up >}} 
+{{< fa folder >}}
+{{< fa chess-pawn >}}
+{{< fa brands bluetooth >}}
+{{< fa brands twitter size=2xl >}}
+{{< fa brands github size=5x >}}
+{{< fa battery-half size=Huge >}}
+{{< fa envelope title="An envelope" >}}
+
+
+::: {.panel-tabset group="language"}
+## R
+
+Tab content
+
+## Python
+
+Tab content
+:::
+
+
+:::{.callout-note}
+Note that there are five types of callouts, including:
+`note`, `warning`, `important`, `tip`, and `caution`.
+:::
+
+:::{.callout-tip}
+## Tip With Caption
+
+This is an example of a callout with a caption.
+:::
+
+:::{.callout-caution collapse="true"}
+## Expand To Learn About Collapse
+
+This is an example of a 'folded' caution callout that can be expanded by the user. You can use `collapse="true"` to collapse it by default or `collapse="false"` to make a collapsible callout that is expanded by default.
+:::
