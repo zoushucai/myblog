@@ -55,8 +55,7 @@ format:
       light: cosmo
       dark: darkly
     css: styles.css  
-  gfm:
-    html-math-method: webtex
+
 
 
 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.147">
+<meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="zsc">
 <title>快乐的一天 - 相关图之corrplot</title>
@@ -15,9 +15,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -44,43 +45,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -116,11 +87,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "更多匹配结果",
     "search-clear-button-title": "清除",
     "search-detached-cancel-button-title": "取消",
-    "search-submit-button-title": "提交"
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
   }
 }</script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="快乐的一天 - 相关图之corrplot">
+<meta property="og:image" content="相关图之corrplot_files/figure-html/unnamed-chunk-1-1.png">
 <meta property="og:site-name" content="快乐的一天">
 </head>
 <body class="nav-sidebar docked nav-fixed">
@@ -128,48 +101,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../static/logo.png" alt="" class="navbar-logo"></a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">快乐的一天</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="切换导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item">
-    <a class="nav-link" href="../../mac.html">mac</a>
+    <a class="nav-link" href="../../mac.html" rel="" target="">
+ <span class="menu-text">mac</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../matlab.html">matlab</a>
+    <a class="nav-link" href="../../matlab.html" rel="" target="">
+ <span class="menu-text">matlab</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../uncertain.html">uncertain</a>
+    <a class="nav-link" href="../../uncertain.html" rel="" target="">
+ <span class="menu-text">uncertain</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
-<div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+<div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">相关图之corrplot</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">相关图之corrplot</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">相关图之corrplot</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i></button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">查看源代码</a></li></ul></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">相关图之corrplot</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i></button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">查看源代码</a></li></ul></div></div>
                                 <div class="quarto-categories">
                 <div class="quarto-category">r</div>
               </div>
@@ -192,18 +176,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <p class="date">2018年7月15日</p>
       </div>
     </div>
+    
       
     </div>
     
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="搜索"></div>
         </div>
-      </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        </div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">该页面内容</h2>
    
   <ul>
@@ -219,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <main class="content quarto-banner-title-block" id="quarto-document-content"><section id="相关矩阵图二corrplot" class="level2"><h2 class="anchored" data-anchor-id="相关矩阵图二corrplot">相关矩阵图二—–corrplot</h2>
 <section id="corrplotcorrplot函数" class="level3"><h3 class="anchored" data-anchor-id="corrplotcorrplot函数">
 <code>corrplot::corrplot()</code>函数</h3>
-<p>由于<code>corrgram::corrgram()</code>函数没有显示相关性的大小度量关系，于是经常用<code><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot::corrplot()</a></code>函数来画相关矩阵图，不过此图的缺点是<code>title</code>画出来不好看</p>
+<p>由于<code>corrgram::corrgram()</code>函数没有显示相关性的大小度量关系，于是经常用<code>corrplot::corrplot()</code>函数来画相关矩阵图，不过此图的缺点是<code>title</code>画出来不好看</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(corr, </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"circle"</span>, <span class="st">"square"</span>, <span class="st">"ellipse"</span>, <span class="st">"number"</span>, <span class="st">"shade"</span>,<span class="st">"color"</span>, <span class="st">"pie"</span>), </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"full"</span>, <span class="st">"lower"</span>, <span class="st">"upper"</span>), <span class="at">add =</span> <span class="cn">FALSE</span>,</span>
@@ -283,65 +270,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>对于文本标签，这两个函数 tl.col（文本标签颜色）和tl.srt（文本标签字符串旋转）用于更改文本颜色和旋转。</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="使用不同的method绘制相关矩阵图" class="level4"><h4 class="anchored" data-anchor-id="使用不同的method绘制相关矩阵图">使用不同的method绘制相关矩阵图</h4>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">method</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"circle"</span>, <span class="st">"square"</span>, <span class="st">"ellipse"</span>, <span class="st">"number"</span>, <span class="st">"shade"</span>,<span class="st">"color"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">t</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>,method <span class="op">=</span> <span class="va">x</span>,order <span class="op">=</span> <span class="st">"AOE"</span>,title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"method="</span>,<span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">}</span>,<span class="va">method</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">t</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>,method <span class="op">=</span> <span class="va">x</span>,order <span class="op">=</span> <span class="st">"AOE"</span>,title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"method="</span>,<span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">}</span>,<span class="va">method</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="设置布局类型参数type" class="level4"><h4 class="anchored" data-anchor-id="设置布局类型参数type">设置布局类型（参数type）：</h4>
 <p>type = c(“full”, “lower”, “upper”)<br>
 corrplot.mixed() 是一个混合可视化风格的包装函数。</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">type</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"full"</span>, <span class="st">"lower"</span>, <span class="st">"upper"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">t</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>,order <span class="op">=</span> <span class="st">"hclust"</span>,type <span class="op">=</span> <span class="va">x</span>,title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"type="</span>,<span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">}</span>,<span class="va">type</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">t</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>,order <span class="op">=</span> <span class="st">"hclust"</span>,type <span class="op">=</span> <span class="va">x</span>,title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"type="</span>,<span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">}</span>,<span class="va">type</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.mixed.html">corrplot.mixed</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.mixed.html">corrplot.mixed</a></span><span class="op">(</span><span class="va">M</span>, lower.col <span class="op">=</span> <span class="st">"black"</span>, number.cex <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.mixed.html">corrplot.mixed</a></span><span class="op">(</span><span class="va">M</span>, lower <span class="op">=</span> <span class="st">"ellipse"</span>, upper <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.mixed.html">corrplot.mixed</a></span><span class="op">(</span><span class="va">M</span>, lower <span class="op">=</span> <span class="st">"square"</span>, upper <span class="op">=</span> <span class="st">"circle"</span>, tl.col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="co"># tl.col：指定文本标签的颜色</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>代码</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot.mixed</span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
+<span><span class="fu">corrplot.mixed</span><span class="op">(</span><span class="va">M</span>, lower.col <span class="op">=</span> <span class="st">"black"</span>, number.cex <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span></span>
+<span><span class="fu">corrplot.mixed</span><span class="op">(</span><span class="va">M</span>, lower <span class="op">=</span> <span class="st">"ellipse"</span>, upper <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span>
+<span><span class="fu">corrplot.mixed</span><span class="op">(</span><span class="va">M</span>, lower <span class="op">=</span> <span class="st">"square"</span>, upper <span class="op">=</span> <span class="st">"circle"</span>, tl.col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="co"># tl.col：指定文本标签的颜色</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="相关矩阵重排序" class="level4"><h4 class="anchored" data-anchor-id="相关矩阵重排序">相关矩阵重排序</h4>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">order</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"original"</span>,<span class="st">"AOE"</span>, <span class="st">"FPC"</span>, <span class="st">"hclust"</span>, <span class="st">"alphabet"</span><span class="op">)</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">order</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"original"</span>,<span class="st">"AOE"</span>, <span class="st">"FPC"</span>, <span class="st">"hclust"</span>, <span class="st">"alphabet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">t</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>,order <span class="op">=</span> <span class="va">x</span>,title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"order="</span>,<span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">}</span>,<span class="va">order</span><span class="op">)</span></span>
+<span><span class="va">t</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>,order <span class="op">=</span> <span class="va">x</span>,title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"order="</span>,<span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">}</span>,<span class="va">order</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co">####### # 如果使用"hclust"，corrplot()可以根据层次聚类的结果在corrrlation矩阵图表周围绘制矩形。</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
-<details><summary>Show the code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>代码</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
 </div>
-<details><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">####### # 改变背景颜色以及图像颜色</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">####### # 改变背景颜色以及图像颜色</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"upper"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"white"</span><span class="op">)</span>, bg <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"upper"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"white"</span><span class="op">)</span>, bg <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="使用不同的色谱" class="level4"><h4 class="anchored" data-anchor-id="使用不同的色谱">使用不同的色谱</h4>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 如上一节所示，可以定制相关图的颜色。该功能colorRampPalette()非常便于产生色谱。</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 如上一节所示，可以定制相关图的颜色。该功能colorRampPalette()非常便于产生色谱。</span></span>
 <span></span>
 <span><span class="va">col1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#7F0000"</span>, <span class="st">"red"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"yellow"</span>, <span class="st">"white"</span>,</span>
 <span>                           <span class="st">"cyan"</span>, <span class="st">"#007FFF"</span>, <span class="st">"blue"</span>, <span class="st">"#00007F"</span><span class="op">)</span><span class="op">)</span></span>
@@ -355,193 +342,193 @@ corrplot.mixed() 是一个混合可视化风格的包装函数。</p>
 <span></span>
 <span><span class="co">## using these color spectra</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu">col1</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu">col2</span><span class="op">(</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu">col3</span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu">col4</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu">col1</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu">col2</span><span class="op">(</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu">col3</span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu">col4</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
-<details><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="va">whiteblack</span>, bg <span class="op">=</span> <span class="st">"gold2"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="va">whiteblack</span>, bg <span class="op">=</span> <span class="st">"gold2"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
 </div>
-<details><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="co">### 使用调色板包</span></span>
 <span><span class="co"># 您也可以使用标准调色板（包grDevices）</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">terrain.colors</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">cm.colors</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.colors.html">gray.colors</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">terrain.colors</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">cm.colors</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, addrect <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.colors.html">gray.colors</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="672"></p>
 </div>
-<details><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="co">### 使用调色板包---使用RcolorBrewer包。</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"upper"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>,col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"upper"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>,col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, name <span class="op">=</span> <span class="st">"RdYlBu"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"upper"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>,col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, name <span class="op">=</span> <span class="st">"PuOr"</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"upper"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>,col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, name <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"upper"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>,col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, name <span class="op">=</span> <span class="st">"RdYlBu"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"upper"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>,col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">8</span>, name <span class="op">=</span> <span class="st">"PuOr"</span><span class="op">)</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-5-4.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-5-4.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="更改文本标签和图例的颜色和旋转" class="level4"><h4 class="anchored" data-anchor-id="更改文本标签和图例的颜色和旋转">更改文本标签和图例的颜色和旋转</h4>
 <p>参数 <code>cl.*</code> 用于设置图例的颜色，<code>tl.*</code> 用于设置图例的文本。</p>
 <p>对于文本标签，这两个函数<code>tl.col</code>（文本标签颜色）和<code>tl.srt</code>（文本标签字符串旋转）用于更改文本颜色和旋转。</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## remove color legend and text legend 移除图例的颜色部分和文字标签部分</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"AOE"</span>, cl.pos <span class="op">=</span> <span class="st">"n"</span>, tl.pos <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span>  </span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"AOE"</span>, cl.pos <span class="op">=</span> <span class="st">"n"</span>, tl.pos <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span>  </span>
 <span></span>
 <span><span class="co">## bottom  color legend, diagonal text legend, rotate text label</span></span>
 <span><span class="co">## 图底图例，对角线文字图例，旋转文字标签</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"AOE"</span>, cl.pos <span class="op">=</span> <span class="st">"b"</span>, tl.pos <span class="op">=</span> <span class="st">"d"</span>, tl.srt <span class="op">=</span> <span class="fl">60</span><span class="op">)</span> </span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"AOE"</span>, cl.pos <span class="op">=</span> <span class="st">"b"</span>, tl.pos <span class="op">=</span> <span class="st">"d"</span>, tl.srt <span class="op">=</span> <span class="fl">60</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co">## a wider color legend with numbers right aligned</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"AOE"</span>, cl.ratio <span class="op">=</span> <span class="fl">0.2</span>, cl.align <span class="op">=</span> <span class="st">"r"</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, order <span class="op">=</span> <span class="st">"AOE"</span>, cl.ratio <span class="op">=</span> <span class="fl">0.2</span>, cl.align <span class="op">=</span> <span class="st">"r"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## text labels rotated 45 degrees</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"lower"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, tl.col <span class="op">=</span> <span class="st">"black"</span>, tl.srt <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, type <span class="op">=</span> <span class="st">"lower"</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, tl.col <span class="op">=</span> <span class="st">"black"</span>, tl.srt <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="处理非相关矩阵" class="level4"><h4 class="anchored" data-anchor-id="处理非相关矩阵">处理非相关矩阵</h4>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span>,order <span class="op">=</span> <span class="st">"AOE"</span>, col <span class="op">=</span> <span class="fu">col3</span><span class="op">(</span><span class="fl">200</span><span class="op">)</span>, cl.lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span>,order <span class="op">=</span> <span class="st">"AOE"</span>, col <span class="op">=</span> <span class="fu">col3</span><span class="op">(</span><span class="fl">200</span><span class="op">)</span>, cl.lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## visualize a  matrix in [-100, 100]</span></span>
 <span><span class="va">ran</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">225</span>, <span class="op">-</span><span class="fl">100</span>,<span class="fl">100</span><span class="op">)</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">ran</span>, is.corr <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="st">"square"</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">ran</span>, is.corr <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="st">"square"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## a beautiful color legend </span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">ran</span>, is.corr <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="st">"ellipse"</span>, cl.lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">ran</span>, is.corr <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="st">"ellipse"</span>, cl.lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#如果矩阵是矩形，则可以使用win.asp参数调整纵横比， 以使矩阵呈现为正方形。</span></span>
 <span><span class="va">ran</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">70</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">ran</span>, is.corr <span class="op">=</span> <span class="cn">FALSE</span>, win.asp <span class="op">=</span> <span class="fl">.7</span>, method <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">ran</span>, is.corr <span class="op">=</span> <span class="cn">FALSE</span>, win.asp <span class="op">=</span> <span class="fl">.7</span>, method <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="处理缺失na值" class="level4"><h4 class="anchored" data-anchor-id="处理缺失na值">处理缺失（NA）值</h4>
 <p>默认情况下，corrplot将NA值呈现为”?“字符。使用na.label 参数，可以使用不同的值（最多支持两个字符）。</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M2</span> <span class="op">&lt;-</span> <span class="va">M</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M2</span> <span class="op">&lt;-</span> <span class="va">M</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">M2</span><span class="op">)</span> <span class="op">=</span> <span class="cn">NA</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M2</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M2</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
-<details><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M2</span>, na.label <span class="op">=</span> <span class="st">"o"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M2</span>, na.label <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>代码</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M2</span>, na.label <span class="op">=</span> <span class="st">"o"</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M2</span>, na.label <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="在标签中使用plotmath表达式" class="level4"><h4 class="anchored" data-anchor-id="在标签中使用plotmath表达式">在标签中使用<code>"plotmath"</code>表达式</h4>
 <p>从版本开始0.78，可以 在变量名中使用<code>plotmath</code>表达式。要激活<code>plotmath</code>渲染，请在标签前加上一个字符<code>":"，"="</code>or <code>"$"</code>。</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M2</span> <span class="op">&lt;-</span> <span class="va">M</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M2</span> <span class="op">&lt;-</span> <span class="va">M</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">M2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span>, <span class="st">":alpha+beta"</span>, <span class="st">":a[0]"</span>, <span class="st">"=a[beta]"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">M2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span>, <span class="cn">NA</span>, <span class="st">"$a[0]"</span>, <span class="st">"$ a[beta]"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M2</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M2</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="将相关图与显着性检验相结合" class="level4"><h4 class="anchored" data-anchor-id="将相关图与显着性检验相结合">将相关图与显着性检验相结合</h4>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/cor.mtest.html">cor.mtest</a></span><span class="op">(</span><span class="va">mtcars</span>, conf.level <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span></span>
-<span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/cor.mtest.html">cor.mtest</a></span><span class="op">(</span><span class="va">mtcars</span>, conf.level <span class="op">=</span> <span class="fl">.99</span><span class="op">)</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu">cor.mtest</span><span class="op">(</span><span class="va">mtcars</span>, conf.level <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span></span>
+<span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu">cor.mtest</span><span class="op">(</span><span class="va">mtcars</span>, conf.level <span class="op">=</span> <span class="fl">.99</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">## specialized the insignificant value according to the significant level</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, sig.level <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, sig.level <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, sig.level <span class="op">=</span> <span class="fl">.05</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, sig.level <span class="op">=</span> <span class="fl">.05</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, sig.level <span class="op">=</span> <span class="fl">.01</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, sig.level <span class="op">=</span> <span class="fl">.01</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
-<details><summary>Show the code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span></span>
 <span><span class="co">## leave blank on no significant coefficient</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"blank"</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"blank"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## add p-values on no significant coefficient</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"p-value"</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"p-value"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## add all p-values</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"p-value"</span>, sig.level <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"p-value"</span>, sig.level <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
 </div>
-<details><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span></span>
 <span><span class="co">## add cross on no significant coefficient </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, insig <span class="op">=</span> <span class="st">"pch"</span>, addrect <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, order <span class="op">=</span> <span class="st">"hclust"</span>, insig <span class="op">=</span> <span class="st">"pch"</span>, addrect <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="可视化置信区间" class="level4"><h4 class="anchored" data-anchor-id="可视化置信区间">可视化置信区间</h4>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, low <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">lowCI</span>, upp <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">uppCI</span>, order <span class="op">=</span> <span class="st">"hclust"</span>,</span>
+<details><summary>代码</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, low <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">lowCI</span>, upp <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">uppCI</span>, order <span class="op">=</span> <span class="st">"hclust"</span>,</span>
 <span>         rect.col <span class="op">=</span> <span class="st">"navy"</span>, plotC <span class="op">=</span> <span class="st">"rect"</span>, cl.pos <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, low <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">lowCI</span>, upp <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">uppCI</span>,</span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, low <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">lowCI</span>, upp <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">uppCI</span>,</span>
 <span>         order <span class="op">=</span> <span class="st">"hclust"</span>, pch.col <span class="op">=</span> <span class="st">"red"</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>,</span>
 <span>         addrect <span class="op">=</span> <span class="fl">3</span>, rect.col <span class="op">=</span> <span class="st">"navy"</span>, plotC <span class="op">=</span> <span class="st">"rect"</span>, cl.pos <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span></span>
 <span></span>
-<span><span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/cor.mtest.html">cor.mtest</a></span><span class="op">(</span><span class="va">mtcars</span>, conf.level <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"label_sig"</span>,</span>
+<span><span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu">cor.mtest</span><span class="op">(</span><span class="va">mtcars</span>, conf.level <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"label_sig"</span>,</span>
 <span>         sig.level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.001</span>, <span class="fl">.01</span>, <span class="fl">.05</span><span class="op">)</span>, pch.cex <span class="op">=</span> <span class="fl">.9</span>, pch.col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, method <span class="op">=</span> <span class="st">"color"</span>,</span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, method <span class="op">=</span> <span class="st">"color"</span>,</span>
 <span>         insig <span class="op">=</span> <span class="st">"label_sig"</span>, pch.col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, method <span class="op">=</span> <span class="st">"color"</span>, type <span class="op">=</span> <span class="st">"upper"</span>,</span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, method <span class="op">=</span> <span class="st">"color"</span>, type <span class="op">=</span> <span class="st">"upper"</span>,</span>
 <span>         sig.level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.001</span>, <span class="fl">.01</span>, <span class="fl">.05</span><span class="op">)</span>, pch.cex <span class="op">=</span> <span class="fl">.9</span>,</span>
 <span>         insig <span class="op">=</span> <span class="st">"label_sig"</span>, pch.col <span class="op">=</span> <span class="st">"white"</span>, order <span class="op">=</span> <span class="st">"AOE"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"label_sig"</span>, pch.col <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span><span class="fu">corrplot</span><span class="op">(</span><span class="va">M</span>, p.mat <span class="op">=</span> <span class="va">res1</span><span class="op">$</span><span class="va">p</span>, insig <span class="op">=</span> <span class="st">"label_sig"</span>, pch.col <span class="op">=</span> <span class="st">"white"</span>,</span>
 <span>         pch <span class="op">=</span> <span class="st">"p&lt;.05"</span>, pch.cex <span class="op">=</span> <span class="fl">.5</span>, order <span class="op">=</span> <span class="st">"AOE"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="%E7%9B%B8%E5%85%B3%E5%9B%BE%E4%B9%8Bcorrplot_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="相关图之corrplot_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="自定义相关图" class="level4"><h4 class="anchored" data-anchor-id="自定义相关图">自定义相关图</h4>
 <p>略</p>
 <p>参考： https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html</p>
 <div class="cell">
-<details><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<details><summary>代码</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
 <span><span class="co">#&gt; Platform: aarch64-apple-darwin20 (64-bit)</span></span>
 <span><span class="co">#&gt; Running under: macOS Monterey 12.5.1</span></span>
@@ -703,7 +690,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -711,9 +700,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -725,7 +728,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "已复制");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "已复制");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -812,24 +832,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

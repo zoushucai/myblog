@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -122,7 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "更多匹配结果",
     "search-clear-button-title": "清除",
     "search-detached-cancel-button-title": "取消",
-    "search-submit-button-title": "提交"
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
   }
 }</script>
 <script>
@@ -157,6 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
@@ -178,41 +151,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <span class="navbar-title">快乐的一天</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="切换导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./mac.html">mac</a>
+    <a class="nav-link" href="./mac.html" rel="" target="">
+ <span class="menu-text">mac</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./matlab.html">matlab</a>
+    <a class="nav-link" href="./matlab.html" rel="" target="">
+ <span class="menu-text">matlab</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./uncertain.html">uncertain</a>
+    <a class="nav-link" href="./uncertain.html" rel="" target="">
+ <span class="menu-text">uncertain</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">About</a>
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/zoushucai/myblog"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/zoushucai/myblog" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">笔记</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">笔记</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -221,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">笔记</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+      <div class="quarto-title-block"><div><h1 class="title">笔记</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
                       </div>
   </div>
     
@@ -229,19 +211,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <div class="quarto-title-meta">
 
       
+    
       
     </div>
     
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-      <div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="搜索"></div>
         </div>
-      </div>
+        </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -291,967 +275,967 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-categories="mac" data-listing-date-sort="1661616000000" data-listing-file-modified-sort="1661787236021" data-listing-reading-time-sort="0.035" data-listing-title-sort="mac重装系统6抹掉所有内容和设置" data-listing-filename-sort="mac重装系统6重置系统.md">
-<td class="listing-date">
-2022-08-28
+<tr data-index="0" data-categories="mac" data-listing-date-sort="1661616000000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="mac重装系统6抹掉所有内容和设置" data-listing-filename-sort="mac重装系统6重置系统.md">
+<td>
+<span class="listing-date">2022-08-28</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/mac重装系统6重置系统.html" class="title">mac重装系统6抹掉所有内容和设置</a>
+<td>
+<a href="./posts/macnote/mac重装系统6重置系统.html" class="title listing-title">mac重装系统6抹掉所有内容和设置</a>
 </td>
 </tr>
-<tr data-index="1" data-categories="matlab" data-listing-date-sort="1621094400000" data-listing-file-modified-sort="1661691917249" data-listing-reading-time-sort="4.86" data-listing-title-sort="matlab优化工具04二次规划之quadprog" data-listing-filename-sort="matlab优化工具04quadprog.md">
-<td class="listing-date">
-2021-05-16
+<tr data-index="1" data-categories="matlab" data-listing-date-sort="1621094400000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="matlab优化工具04二次规划之quadprog" data-listing-filename-sort="matlab优化工具04quadprog.md">
+<td>
+<span class="listing-date">2021-05-16</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/matlab优化工具04quadprog.html" class="title">matlab优化工具04二次规划之quadprog</a>
+<td>
+<a href="./posts/md/matlab优化工具04quadprog.html" class="title listing-title">matlab优化工具04二次规划之quadprog</a>
 </td>
 </tr>
-<tr data-index="2" data-categories="matlab" data-listing-date-sort="1621094400000" data-listing-file-modified-sort="1661691739391" data-listing-reading-time-sort="13.175" data-listing-title-sort="matlab优化工具03全局优化之ga" data-listing-filename-sort="matlab优化工具03全局优化之ga.md">
-<td class="listing-date">
-2021-05-16
+<tr data-index="2" data-categories="matlab" data-listing-date-sort="1621094400000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="matlab优化工具03全局优化之ga" data-listing-filename-sort="matlab优化工具03全局优化之ga.md">
+<td>
+<span class="listing-date">2021-05-16</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/matlab优化工具03全局优化之ga.html" class="title">matlab优化工具03全局优化之ga</a>
+<td>
+<a href="./posts/md/matlab优化工具03全局优化之ga.html" class="title listing-title">matlab优化工具03全局优化之ga</a>
 </td>
 </tr>
-<tr data-index="3" data-categories="matlab" data-listing-date-sort="1621094400000" data-listing-file-modified-sort="1661691739388" data-listing-reading-time-sort="3.11" data-listing-title-sort="matlab优化工具01线性规划之linprog" data-listing-filename-sort="matlab优化工具01线性规划之linprog.md">
-<td class="listing-date">
-2021-05-16
+<tr data-index="3" data-categories="matlab" data-listing-date-sort="1621094400000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="matlab优化工具01线性规划之linprog" data-listing-filename-sort="matlab优化工具01线性规划之linprog.md">
+<td>
+<span class="listing-date">2021-05-16</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/matlab优化工具01线性规划之linprog.html" class="title">matlab优化工具01线性规划之linprog</a>
+<td>
+<a href="./posts/md/matlab优化工具01线性规划之linprog.html" class="title listing-title">matlab优化工具01线性规划之linprog</a>
 </td>
 </tr>
-<tr data-index="4" data-categories="matlab" data-listing-date-sort="1621094400000" data-listing-file-modified-sort="1661691739390" data-listing-reading-time-sort="8.115" data-listing-title-sort="matlab优化工具02非线性规划之fmincon" data-listing-filename-sort="matlab优化工具02非线性规划之fmincon.md">
-<td class="listing-date">
-2021-05-16
+<tr data-index="4" data-categories="matlab" data-listing-date-sort="1621094400000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="matlab优化工具02非线性规划之fmincon" data-listing-filename-sort="matlab优化工具02非线性规划之fmincon.md">
+<td>
+<span class="listing-date">2021-05-16</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/matlab优化工具02非线性规划之fmincon.html" class="title">matlab优化工具02非线性规划之fmincon</a>
+<td>
+<a href="./posts/md/matlab优化工具02非线性规划之fmincon.html" class="title listing-title">matlab优化工具02非线性规划之fmincon</a>
 </td>
 </tr>
-<tr data-index="5" data-categories="mac" data-listing-date-sort="1602000000000" data-listing-file-modified-sort="1661787229988" data-listing-reading-time-sort="1.12" data-listing-title-sort="mac重装系统5sublime配置" data-listing-filename-sort="mac重装系统5sublime配置.md">
-<td class="listing-date">
-2020-10-07
+<tr data-index="5" data-categories="mac" data-listing-date-sort="1602000000000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="mac重装系统5sublime配置" data-listing-filename-sort="mac重装系统5sublime配置.md">
+<td>
+<span class="listing-date">2020-10-07</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/mac重装系统5sublime配置.html" class="title">mac重装系统5sublime配置</a>
+<td>
+<a href="./posts/macnote/mac重装系统5sublime配置.html" class="title listing-title">mac重装系统5sublime配置</a>
 </td>
 </tr>
-<tr data-index="6" data-categories="mac" data-listing-date-sort="1601913600000" data-listing-file-modified-sort="1661787223478" data-listing-reading-time-sort="4.065" data-listing-title-sort="mac重装系统4软件安装" data-listing-filename-sort="mac重装系统4软件安装.md">
-<td class="listing-date">
-2020-10-06
+<tr data-index="6" data-categories="mac" data-listing-date-sort="1601913600000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="mac重装系统4软件安装" data-listing-filename-sort="mac重装系统4软件安装.md">
+<td>
+<span class="listing-date">2020-10-06</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/mac重装系统4软件安装.html" class="title">mac重装系统4软件安装</a>
+<td>
+<a href="./posts/macnote/mac重装系统4软件安装.html" class="title listing-title">mac重装系统4软件安装</a>
 </td>
 </tr>
-<tr data-index="7" data-categories="mac" data-listing-date-sort="1601827200000" data-listing-file-modified-sort="1661787217477" data-listing-reading-time-sort="0.665" data-listing-title-sort="mac重装系统3系统设置" data-listing-filename-sort="mac重装系统3系统设置.md">
-<td class="listing-date">
-2020-10-05
+<tr data-index="7" data-categories="mac" data-listing-date-sort="1601827200000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="mac重装系统3系统设置" data-listing-filename-sort="mac重装系统3系统设置.md">
+<td>
+<span class="listing-date">2020-10-05</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/mac重装系统3系统设置.html" class="title">mac重装系统3系统设置</a>
+<td>
+<a href="./posts/macnote/mac重装系统3系统设置.html" class="title listing-title">mac重装系统3系统设置</a>
 </td>
 </tr>
-<tr data-index="8" data-categories="mac" data-listing-date-sort="1601740800000" data-listing-file-modified-sort="1661787211748" data-listing-reading-time-sort="0.19" data-listing-title-sort="mac重装系统2系统制作与安装" data-listing-filename-sort="mac重装系统2系统制作与安装.md">
-<td class="listing-date">
-2020-10-04
+<tr data-index="8" data-categories="mac" data-listing-date-sort="1601740800000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="mac重装系统2系统制作与安装" data-listing-filename-sort="mac重装系统2系统制作与安装.md">
+<td>
+<span class="listing-date">2020-10-04</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/mac重装系统2系统制作与安装.html" class="title">mac重装系统2系统制作与安装</a>
+<td>
+<a href="./posts/macnote/mac重装系统2系统制作与安装.html" class="title listing-title">mac重装系统2系统制作与安装</a>
 </td>
 </tr>
-<tr data-index="9" data-categories="mac" data-listing-date-sort="1601654400000" data-listing-file-modified-sort="1661787206169" data-listing-reading-time-sort="0.16" data-listing-title-sort="mac重装系统1起因" data-listing-filename-sort="mac重装系统1起因.md">
-<td class="listing-date">
-2020-10-03
+<tr data-index="9" data-categories="mac" data-listing-date-sort="1601654400000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="mac重装系统1起因" data-listing-filename-sort="mac重装系统1起因.md">
+<td>
+<span class="listing-date">2020-10-03</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/mac重装系统1起因.html" class="title">mac重装系统1起因</a>
+<td>
+<a href="./posts/macnote/mac重装系统1起因.html" class="title listing-title">mac重装系统1起因</a>
 </td>
 </tr>
-<tr data-index="10" data-categories="r" data-listing-date-sort="1597507200000" data-listing-file-modified-sort="1661691739387" data-listing-reading-time-sort="0.185" data-listing-title-sort="R动画" data-listing-filename-sort="R动画.md">
-<td class="listing-date">
-2020-08-16
+<tr data-index="10" data-categories="r" data-listing-date-sort="1597507200000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="R动画" data-listing-filename-sort="R动画.md">
+<td>
+<span class="listing-date">2020-08-16</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/R动画.html" class="title">R动画</a>
+<td>
+<a href="./posts/md/R动画.html" class="title listing-title">R动画</a>
 </td>
 </tr>
-<tr data-index="11" data-categories="r" data-listing-date-sort="1597420800000" data-listing-file-modified-sort="1661819104473" data-listing-reading-time-sort="2.46" data-listing-title-sort="画函数图像--R语言" data-listing-filename-sort="R之画函数图像.md">
-<td class="listing-date">
-2020-08-15
+<tr data-index="11" data-categories="r" data-listing-date-sort="1597420800000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="画函数图像--R语言" data-listing-filename-sort="R之画函数图像.md">
+<td>
+<span class="listing-date">2020-08-15</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/R之画函数图像.html" class="title">画函数图像–R语言</a>
+<td>
+<a href="./posts/md/R之画函数图像.html" class="title listing-title">画函数图像–R语言</a>
 </td>
 </tr>
-<tr data-index="12" data-categories="latex" data-listing-date-sort="1597334400000" data-listing-file-modified-sort="1661691739385" data-listing-reading-time-sort="0.305" data-listing-title-sort="latex 参考文献格式: GB/7714" data-listing-filename-sort="GB7714.md">
-<td class="listing-date">
-2020-08-14
+<tr data-index="12" data-categories="latex" data-listing-date-sort="1597334400000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="latex 参考文献格式: GB/7714" data-listing-filename-sort="GB7714.md">
+<td>
+<span class="listing-date">2020-08-14</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/GB7714.html" class="title">latex 参考文献格式: GB/7714</a>
+<td>
+<a href="./posts/md/GB7714.html" class="title listing-title">latex 参考文献格式: GB/7714</a>
 </td>
 </tr>
-<tr data-index="13" data-categories="latex" data-listing-date-sort="1597248000000" data-listing-file-modified-sort="1661691739384" data-listing-reading-time-sort="0.94" data-listing-title-sort="latex 参考文献生成(总结)" data-listing-filename-sort="latex参考文献生成.md">
-<td class="listing-date">
-2020-08-13
+<tr data-index="13" data-categories="latex" data-listing-date-sort="1597248000000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="latex 参考文献生成(总结)" data-listing-filename-sort="latex参考文献生成.md">
+<td>
+<span class="listing-date">2020-08-13</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/latex参考文献生成.html" class="title">latex 参考文献生成(总结)</a>
+<td>
+<a href="./posts/md/latex参考文献生成.html" class="title listing-title">latex 参考文献生成(总结)</a>
 </td>
 </tr>
-<tr data-index="14" data-categories="latex,r" data-listing-date-sort="1597075200000" data-listing-file-modified-sort="1661691739383" data-listing-reading-time-sort="0.345" data-listing-title-sort="latex 缩写期刊" data-listing-filename-sort="latex缩写期刊.md">
-<td class="listing-date">
-2020-08-11
+<tr data-index="14" data-categories="latex,r" data-listing-date-sort="1597075200000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="latex 缩写期刊" data-listing-filename-sort="latex缩写期刊.md">
+<td>
+<span class="listing-date">2020-08-11</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/latex缩写期刊.html" class="title">latex 缩写期刊</a>
+<td>
+<a href="./posts/md/latex缩写期刊.html" class="title listing-title">latex 缩写期刊</a>
 </td>
 </tr>
-<tr data-index="15" data-categories="latex" data-listing-date-sort="1596988800000" data-listing-file-modified-sort="1661819807724" data-listing-reading-time-sort="1.66" data-listing-title-sort="latex 笔记" data-listing-filename-sort="latex笔记.md">
-<td class="listing-date">
-2020-08-10
+<tr data-index="15" data-categories="latex" data-listing-date-sort="1596988800000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="latex 笔记" data-listing-filename-sort="latex笔记.md">
+<td>
+<span class="listing-date">2020-08-10</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/latex笔记.html" class="title">latex 笔记</a>
+<td>
+<a href="./posts/md/latex笔记.html" class="title listing-title">latex 笔记</a>
 </td>
 </tr>
-<tr data-index="16" data-categories="latex" data-listing-date-sort="1595952000000" data-listing-file-modified-sort="1661691739382" data-listing-reading-time-sort="0.08" data-listing-title-sort="bib与enw文件之间的相互转换" data-listing-filename-sort="bib与enw相互转换.md">
-<td class="listing-date">
-2020-07-29
+<tr data-index="16" data-categories="latex" data-listing-date-sort="1595952000000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="bib与enw文件之间的相互转换" data-listing-filename-sort="bib与enw相互转换.md">
+<td>
+<span class="listing-date">2020-07-29</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/bib与enw相互转换.html" class="title">bib与enw文件之间的相互转换</a>
+<td>
+<a href="./posts/md/bib与enw相互转换.html" class="title listing-title">bib与enw文件之间的相互转换</a>
 </td>
 </tr>
-<tr data-index="17" data-categories="latex" data-listing-date-sort="1593532800000" data-listing-file-modified-sort="1661691739381" data-listing-reading-time-sort="0.14" data-listing-title-sort="mactex卸载" data-listing-filename-sort="mactex卸载.md">
-<td class="listing-date">
-2020-07-01
+<tr data-index="17" data-categories="latex" data-listing-date-sort="1593532800000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="mactex卸载" data-listing-filename-sort="mactex卸载.md">
+<td>
+<span class="listing-date">2020-07-01</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/mactex卸载.html" class="title">mactex卸载</a>
+<td>
+<a href="./posts/md/mactex卸载.html" class="title listing-title">mactex卸载</a>
 </td>
 </tr>
-<tr data-index="18" data-categories="r" data-listing-date-sort="1589731200000" data-listing-file-modified-sort="1661819070813" data-listing-reading-time-sort="0.09" data-listing-title-sort="创建属于自己的rmarkdown模板文件" data-listing-filename-sort="创建自己的rmd模板.md">
-<td class="listing-date">
-2020-05-18
+<tr data-index="18" data-categories="r" data-listing-date-sort="1589731200000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="创建属于自己的rmarkdown模板文件" data-listing-filename-sort="创建自己的rmd模板.md">
+<td>
+<span class="listing-date">2020-05-18</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/创建自己的rmd模板.html" class="title">创建属于自己的rmarkdown模板文件</a>
+<td>
+<a href="./posts/md/创建自己的rmd模板.html" class="title listing-title">创建属于自己的rmarkdown模板文件</a>
 </td>
 </tr>
-<tr data-index="19" data-categories="shiny,r" data-listing-date-sort="1589731200000" data-listing-file-modified-sort="1661691739380" data-listing-reading-time-sort="1.66" data-listing-title-sort="R&amp;shiny自动截图" data-listing-filename-sort="shiny截图.md">
-<td class="listing-date">
-2020-05-18
+<tr data-index="19" data-categories="shiny,r" data-listing-date-sort="1589731200000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="R&amp;shiny自动截图" data-listing-filename-sort="shiny截图.md">
+<td>
+<span class="listing-date">2020-05-18</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/shiny截图.html" class="title">R&amp;shiny自动截图</a>
+<td>
+<a href="./posts/md/shiny截图.html" class="title listing-title">R&amp;shiny自动截图</a>
 </td>
 </tr>
-<tr data-index="20" data-categories="r" data-listing-date-sort="1583769600000" data-listing-file-modified-sort="1661819377958" data-listing-reading-time-sort="0.37" data-listing-title-sort="基本绘图中添加指定中文字体" data-listing-filename-sort="R语言绘图中添加中文方法汇总.md">
-<td class="listing-date">
-2020-03-10
+<tr data-index="20" data-categories="r" data-listing-date-sort="1583769600000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="基本绘图中添加指定中文字体" data-listing-filename-sort="R语言绘图中添加中文方法汇总.md">
+<td>
+<span class="listing-date">2020-03-10</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/R语言绘图中添加中文方法汇总.html" class="title">基本绘图中添加指定中文字体</a>
+<td>
+<a href="./posts/md/R语言绘图中添加中文方法汇总.html" class="title listing-title">基本绘图中添加指定中文字体</a>
 </td>
 </tr>
-<tr data-index="21" data-categories="matlab" data-listing-date-sort="1575993600000" data-listing-file-modified-sort="1661819112992" data-listing-reading-time-sort="0.07" data-listing-title-sort="计算各种距离 （matlab）" data-listing-filename-sort="计算各种距离matlab.md">
-<td class="listing-date">
-2019-12-11
+<tr data-index="21" data-categories="matlab" data-listing-date-sort="1575993600000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="计算各种距离 （matlab）" data-listing-filename-sort="计算各种距离matlab.md">
+<td>
+<span class="listing-date">2019-12-11</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/计算各种距离matlab.html" class="title">计算各种距离 （matlab）</a>
+<td>
+<a href="./posts/md/计算各种距离matlab.html" class="title listing-title">计算各种距离 （matlab）</a>
 </td>
 </tr>
-<tr data-index="22" data-categories="matlab" data-listing-date-sort="1575993600000" data-listing-file-modified-sort="1661691739379" data-listing-reading-time-sort="0.315" data-listing-title-sort="corr详解(MATLAB)" data-listing-filename-sort="corr详解matlab.md">
-<td class="listing-date">
-2019-12-11
+<tr data-index="22" data-categories="matlab" data-listing-date-sort="1575993600000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="corr详解(MATLAB)" data-listing-filename-sort="corr详解matlab.md">
+<td>
+<span class="listing-date">2019-12-11</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/corr详解matlab.html" class="title">corr详解(MATLAB)</a>
+<td>
+<a href="./posts/md/corr详解matlab.html" class="title listing-title">corr详解(MATLAB)</a>
 </td>
 </tr>
-<tr data-index="23" data-categories="mac" data-listing-date-sort="1574352000000" data-listing-file-modified-sort="1661787242234" data-listing-reading-time-sort="0.06" data-listing-title-sort="macOS tcping 检测IP端口" data-listing-filename-sort="tcping检测IP端口.md">
-<td class="listing-date">
-2019-11-22
+<tr data-index="23" data-categories="mac" data-listing-date-sort="1574352000000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="macOS tcping 检测IP端口" data-listing-filename-sort="tcping检测IP端口.md">
+<td>
+<span class="listing-date">2019-11-22</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/tcping检测IP端口.html" class="title">macOS tcping 检测IP端口</a>
+<td>
+<a href="./posts/macnote/tcping检测IP端口.html" class="title listing-title">macOS tcping 检测IP端口</a>
 </td>
 </tr>
-<tr data-index="24" data-categories="mac" data-listing-date-sort="1574265600000" data-listing-file-modified-sort="1661787193536" data-listing-reading-time-sort="0.025" data-listing-title-sort="mac硬盘文件变灰色" data-listing-filename-sort="mac硬盘文件变灰色.md">
-<td class="listing-date">
-2019-11-21
+<tr data-index="24" data-categories="mac" data-listing-date-sort="1574265600000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="mac硬盘文件变灰色" data-listing-filename-sort="mac硬盘文件变灰色.md">
+<td>
+<span class="listing-date">2019-11-21</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/mac硬盘文件变灰色.html" class="title">mac硬盘文件变灰色</a>
+<td>
+<a href="./posts/macnote/mac硬盘文件变灰色.html" class="title listing-title">mac硬盘文件变灰色</a>
 </td>
 </tr>
-<tr data-index="25" data-categories="git" data-listing-date-sort="1574179200000" data-listing-file-modified-sort="1661819683509" data-listing-reading-time-sort="3.36" data-listing-title-sort="git 笔记" data-listing-filename-sort="git笔记.md">
-<td class="listing-date">
-2019-11-20
+<tr data-index="25" data-categories="git" data-listing-date-sort="1574179200000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="git 笔记" data-listing-filename-sort="git笔记.md">
+<td>
+<span class="listing-date">2019-11-20</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/git笔记.html" class="title">git 笔记</a>
+<td>
+<a href="./posts/md/git笔记.html" class="title listing-title">git 笔记</a>
 </td>
 </tr>
-<tr data-index="26" data-categories="mac" data-listing-date-sort="1574179200000" data-listing-file-modified-sort="1661762273903" data-listing-reading-time-sort="2.67" data-listing-title-sort="mac 常用软件" data-listing-filename-sort="mac常用软件.md">
-<td class="listing-date">
-2019-11-20
+<tr data-index="26" data-categories="mac" data-listing-date-sort="1574179200000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="mac 常用软件" data-listing-filename-sort="mac常用软件.md">
+<td>
+<span class="listing-date">2019-11-20</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/mac常用软件.html" class="title">mac 常用软件</a>
+<td>
+<a href="./posts/md/mac常用软件.html" class="title listing-title">mac 常用软件</a>
 </td>
 </tr>
-<tr data-index="27" data-categories="mac" data-listing-date-sort="1574092800000" data-listing-file-modified-sort="1661787200225" data-listing-reading-time-sort="1.375" data-listing-title-sort="mac终端样式PS1" data-listing-filename-sort="mac终端样式PS1.md">
-<td class="listing-date">
-2019-11-19
+<tr data-index="27" data-categories="mac" data-listing-date-sort="1574092800000" data-listing-file-modified-sort="1692061470550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="mac终端样式PS1" data-listing-filename-sort="mac终端样式PS1.md">
+<td>
+<span class="listing-date">2019-11-19</span>
 </td>
-<td class="listing-title">
-<a href="./posts/macnote/mac终端样式PS1.html" class="title">mac终端样式PS1</a>
+<td>
+<a href="./posts/macnote/mac终端样式PS1.html" class="title listing-title">mac终端样式PS1</a>
 </td>
 </tr>
-<tr data-index="28" data-categories="r" data-listing-date-sort="1574092800000" data-listing-file-modified-sort="1661819412066" data-listing-reading-time-sort="0.205" data-listing-title-sort="常用的批处理操作" data-listing-filename-sort="常用批处理操作.md">
-<td class="listing-date">
-2019-11-19
+<tr data-index="28" data-categories="r" data-listing-date-sort="1574092800000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="常用的批处理操作" data-listing-filename-sort="常用批处理操作.md">
+<td>
+<span class="listing-date">2019-11-19</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/常用批处理操作.html" class="title">常用的批处理操作</a>
+<td>
+<a href="./posts/md/常用批处理操作.html" class="title listing-title">常用的批处理操作</a>
 </td>
 </tr>
-<tr data-index="29" data-categories="matlab" data-listing-date-sort="1573747200000" data-listing-file-modified-sort="1661787162275" data-listing-reading-time-sort="1.205" data-listing-title-sort="MATLAB 与 R 在排序上的区别" data-listing-filename-sort="matlab-R-rank.md">
-<td class="listing-date">
-2019-11-15
+<tr data-index="29" data-categories="matlab" data-listing-date-sort="1573747200000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="MATLAB 与 R 在排序上的区别" data-listing-filename-sort="matlab-R-rank.md">
+<td>
+<span class="listing-date">2019-11-15</span>
 </td>
-<td class="listing-title">
-<a href="./posts/matlab/matlab-R-rank.html" class="title">MATLAB 与 R 在排序上的区别</a>
+<td>
+<a href="./posts/matlab/matlab-R-rank.html" class="title listing-title">MATLAB 与 R 在排序上的区别</a>
 </td>
 </tr>
-<tr data-index="30" data-categories="matlab" data-listing-date-sort="1573660800000" data-listing-file-modified-sort="1661787154572" data-listing-reading-time-sort="59.61" data-listing-title-sort="Armadillo + Rcpp  VS  MATLAB/octave" data-listing-filename-sort="MATLAB_Rcpp_c.md">
-<td class="listing-date">
-2019-11-14
+<tr data-index="30" data-categories="matlab" data-listing-date-sort="1573660800000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="60" data-listing-title-sort="Armadillo + Rcpp  VS  MATLAB/octave" data-listing-filename-sort="MATLAB_Rcpp_c.md">
+<td>
+<span class="listing-date">2019-11-14</span>
 </td>
-<td class="listing-title">
-<a href="./posts/matlab/MATLAB_Rcpp_c.html" class="title">Armadillo + Rcpp VS MATLAB/octave</a>
+<td>
+<a href="./posts/matlab/MATLAB_Rcpp_c.html" class="title listing-title">Armadillo + Rcpp VS MATLAB/octave</a>
 </td>
 </tr>
-<tr data-index="31" data-categories="matlab" data-listing-date-sort="1573574400000" data-listing-file-modified-sort="1661701683985" data-listing-reading-time-sort="5.5" data-listing-title-sort="matlab 问题集合基础" data-listing-filename-sort="matlab-question.md">
-<td class="listing-date">
-2019-11-13
+<tr data-index="31" data-categories="matlab" data-listing-date-sort="1573574400000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-title-sort="matlab 问题集合基础" data-listing-filename-sort="matlab-question.md">
+<td>
+<span class="listing-date">2019-11-13</span>
 </td>
-<td class="listing-title">
-<a href="./posts/matlab/matlab-question.html" class="title">matlab 问题集合基础</a>
+<td>
+<a href="./posts/matlab/matlab-question.html" class="title listing-title">matlab 问题集合基础</a>
 </td>
 </tr>
-<tr data-index="32" data-categories="matlab" data-listing-date-sort="1573574400000" data-listing-file-modified-sort="1661701683984" data-listing-reading-time-sort="0.47" data-listing-title-sort="MATLAB函数中参数的问题" data-listing-filename-sort="MATLAB-fun-arg.md">
-<td class="listing-date">
-2019-11-13
+<tr data-index="32" data-categories="matlab" data-listing-date-sort="1573574400000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="MATLAB函数中参数的问题" data-listing-filename-sort="MATLAB-fun-arg.md">
+<td>
+<span class="listing-date">2019-11-13</span>
 </td>
-<td class="listing-title">
-<a href="./posts/matlab/MATLAB-fun-arg.html" class="title">MATLAB函数中参数的问题</a>
+<td>
+<a href="./posts/matlab/MATLAB-fun-arg.html" class="title listing-title">MATLAB函数中参数的问题</a>
 </td>
 </tr>
-<tr data-index="33" data-categories="latex" data-listing-date-sort="1572796800000" data-listing-file-modified-sort="1661691739375" data-listing-reading-time-sort="0.15" data-listing-title-sort="latex + bib + csl" data-listing-filename-sort="latex-bib-csl.md">
-<td class="listing-date">
-2019-11-04
+<tr data-index="33" data-categories="latex" data-listing-date-sort="1572796800000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="latex + bib + csl" data-listing-filename-sort="latex-bib-csl.md">
+<td>
+<span class="listing-date">2019-11-04</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/latex-bib-csl.html" class="title">latex + bib + csl</a>
+<td>
+<a href="./posts/md/latex-bib-csl.html" class="title listing-title">latex + bib + csl</a>
 </td>
 </tr>
-<tr data-index="34" data-categories="r,matlab" data-listing-date-sort="1561392000000" data-listing-file-modified-sort="1661819092864" data-listing-reading-time-sort="4.71" data-listing-title-sort="非线性规划" data-listing-filename-sort="非线性规划.md">
-<td class="listing-date">
-2019-06-25
+<tr data-index="34" data-categories="r,matlab" data-listing-date-sort="1561392000000" data-listing-file-modified-sort="1692061470557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="非线性规划" data-listing-filename-sort="非线性规划.md">
+<td>
+<span class="listing-date">2019-06-25</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/非线性规划.html" class="title">非线性规划</a>
+<td>
+<a href="./posts/md/非线性规划.html" class="title listing-title">非线性规划</a>
 </td>
 </tr>
-<tr data-index="35" data-categories="matlab" data-listing-date-sort="1561305600000" data-listing-file-modified-sort="1661787164704" data-listing-reading-time-sort="0.005" data-listing-title-sort="MATLAB集合" data-listing-filename-sort="plotMathfun.md">
-<td class="listing-date">
-2019-06-24
+<tr data-index="35" data-categories="matlab" data-listing-date-sort="1561305600000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="MATLAB集合" data-listing-filename-sort="plotMathfun.md">
+<td>
+<span class="listing-date">2019-06-24</span>
 </td>
-<td class="listing-title">
-<a href="./posts/matlab/plotMathfun.html" class="title">MATLAB集合</a>
+<td>
+<a href="./posts/matlab/plotMathfun.html" class="title listing-title">MATLAB集合</a>
 </td>
 </tr>
-<tr data-index="36" data-categories="r" data-listing-date-sort="1558800000000" data-listing-file-modified-sort="1661691739372" data-listing-reading-time-sort="0.045" data-listing-title-sort="动态可视化如此简单" data-listing-filename-sort="dongtaikeshihua.md">
-<td class="listing-date">
-2019-05-26
+<tr data-index="36" data-categories="r" data-listing-date-sort="1558800000000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="动态可视化如此简单" data-listing-filename-sort="dongtaikeshihua.md">
+<td>
+<span class="listing-date">2019-05-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/dongtaikeshihua.html" class="title">动态可视化如此简单</a>
+<td>
+<a href="./posts/md/dongtaikeshihua.html" class="title listing-title">动态可视化如此简单</a>
 </td>
 </tr>
-<tr data-index="37" data-categories="c" data-listing-date-sort="1558627200000" data-listing-file-modified-sort="1661819469936" data-listing-reading-time-sort="4.02" data-listing-title-sort="R结合C++" data-listing-filename-sort="RandC.md">
-<td class="listing-date">
-2019-05-24
+<tr data-index="37" data-categories="c" data-listing-date-sort="1558627200000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="R结合C++" data-listing-filename-sort="RandC.md">
+<td>
+<span class="listing-date">2019-05-24</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/RandC.html" class="title">R结合C++</a>
+<td>
+<a href="./posts/md/RandC.html" class="title listing-title">R结合C++</a>
 </td>
 </tr>
-<tr data-index="38" data-categories="r" data-listing-date-sort="1557504000000" data-listing-file-modified-sort="1661820188730" data-listing-reading-time-sort="0.62" data-listing-title-sort="测试rmarkdown输出页面" data-listing-filename-sort="rmd输出页面.qmd">
-<td class="listing-date">
-2019-05-11
+<tr data-index="38" data-categories="r" data-listing-date-sort="1557504000000" data-listing-file-modified-sort="1692061470559" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="测试rmarkdown输出页面" data-listing-filename-sort="rmd输出页面.qmd">
+<td>
+<span class="listing-date">2019-05-11</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/rmd输出页面.html" class="title">测试rmarkdown输出页面</a>
+<td>
+<a href="./posts/post/rmd输出页面.html" class="title listing-title">测试rmarkdown输出页面</a>
 </td>
 </tr>
-<tr data-index="39" data-categories="uncertain" data-listing-date-sort="1556985600000" data-listing-file-modified-sort="1661789839014" data-listing-reading-time-sort="20.175" data-listing-title-sort="残缺区间群体决策模型（GDM Liu 2012)" data-listing-filename-sort="2019-05-05-incomplete-interval-GDM.qmd">
-<td class="listing-date">
-2019-05-05
+<tr data-index="39" data-categories="uncertain" data-listing-date-sort="1556985600000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-title-sort="残缺区间群体决策模型（GDM Liu 2012)" data-listing-filename-sort="2019-05-05-incomplete-interval-GDM.qmd">
+<td>
+<span class="listing-date">2019-05-05</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-05-05-incomplete-interval-GDM.html" class="title">残缺区间群体决策模型（GDM Liu 2012)</a>
+<td>
+<a href="./posts/uncertain/2019-05-05-incomplete-interval-GDM.html" class="title listing-title">残缺区间群体决策模型（GDM Liu 2012)</a>
 </td>
 </tr>
-<tr data-index="40" data-categories="uncertain" data-listing-date-sort="1556899200000" data-listing-file-modified-sort="1661789832653" data-listing-reading-time-sort="6.79" data-listing-title-sort="求区间可能度矩阵的算法(Liu 2009)" data-listing-filename-sort="2019-05-04-interval-of-possibility-degree.qmd">
-<td class="listing-date">
-2019-05-04
+<tr data-index="40" data-categories="uncertain" data-listing-date-sort="1556899200000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="求区间可能度矩阵的算法(Liu 2009)" data-listing-filename-sort="2019-05-04-interval-of-possibility-degree.qmd">
+<td>
+<span class="listing-date">2019-05-04</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-05-04-interval-of-possibility-degree.html" class="title">求区间可能度矩阵的算法(Liu 2009)</a>
+<td>
+<a href="./posts/uncertain/2019-05-04-interval-of-possibility-degree.html" class="title listing-title">求区间可能度矩阵的算法(Liu 2009)</a>
 </td>
 </tr>
-<tr data-index="41" data-categories="uncertain" data-listing-date-sort="1556812800000" data-listing-file-modified-sort="1661789826278" data-listing-reading-time-sort="2.295" data-listing-title-sort="正互反矩阵一致性调整方法(徐泽水1999)" data-listing-filename-sort="2019-05-03-adjust-w-xuzeshui1999.qmd">
-<td class="listing-date">
-2019-05-03
+<tr data-index="41" data-categories="uncertain" data-listing-date-sort="1556812800000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="正互反矩阵一致性调整方法(徐泽水1999)" data-listing-filename-sort="2019-05-03-adjust-w-xuzeshui1999.qmd">
+<td>
+<span class="listing-date">2019-05-03</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-05-03-adjust-w-xuzeshui1999.html" class="title">正互反矩阵一致性调整方法(徐泽水1999)</a>
+<td>
+<a href="./posts/uncertain/2019-05-03-adjust-w-xuzeshui1999.html" class="title listing-title">正互反矩阵一致性调整方法(徐泽水1999)</a>
 </td>
 </tr>
-<tr data-index="42" data-categories="r" data-listing-date-sort="1556726400000" data-listing-file-modified-sort="1661820169085" data-listing-reading-time-sort="2.485" data-listing-title-sort="R非标准计算" data-listing-filename-sort="R非标准计算.qmd">
-<td class="listing-date">
-2019-05-02
+<tr data-index="42" data-categories="r" data-listing-date-sort="1556726400000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="R非标准计算" data-listing-filename-sort="R非标准计算.qmd">
+<td>
+<span class="listing-date">2019-05-02</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/R非标准计算.html" class="title">R非标准计算</a>
+<td>
+<a href="./posts/post/R非标准计算.html" class="title listing-title">R非标准计算</a>
 </td>
 </tr>
-<tr data-index="43" data-categories="r" data-listing-date-sort="1556726400000" data-listing-file-modified-sort="1661691739370" data-listing-reading-time-sort="8.76" data-listing-title-sort="环境" data-listing-filename-sort="R环境.md">
-<td class="listing-date">
-2019-05-02
+<tr data-index="43" data-categories="r" data-listing-date-sort="1556726400000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="环境" data-listing-filename-sort="R环境.md">
+<td>
+<span class="listing-date">2019-05-02</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/R环境.html" class="title">环境</a>
+<td>
+<a href="./posts/md/R环境.html" class="title listing-title">环境</a>
 </td>
 </tr>
-<tr data-index="44" data-categories="r" data-listing-date-sort="1556640000000" data-listing-file-modified-sort="1661774685108" data-listing-reading-time-sort="1.52" data-listing-title-sort="R函数参数的有关问题" data-listing-filename-sort="R函数参数的有关问题.qmd">
-<td class="listing-date">
-2019-05-01
+<tr data-index="44" data-categories="r" data-listing-date-sort="1556640000000" data-listing-file-modified-sort="1692061470557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="R函数参数的有关问题" data-listing-filename-sort="R函数参数的有关问题.qmd">
+<td>
+<span class="listing-date">2019-05-01</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/R函数参数的有关问题.html" class="title">R函数参数的有关问题</a>
+<td>
+<a href="./posts/post/R函数参数的有关问题.html" class="title listing-title">R函数参数的有关问题</a>
 </td>
 </tr>
-<tr data-index="45" data-categories="r" data-listing-date-sort="1556640000000" data-listing-file-modified-sort="1661691739370" data-listing-reading-time-sort="0.07" data-listing-title-sort="数据框删除列的方法汇总" data-listing-filename-sort="数据框删除列的方法汇总.md">
-<td class="listing-date">
-2019-05-01
+<tr data-index="45" data-categories="r" data-listing-date-sort="1556640000000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="数据框删除列的方法汇总" data-listing-filename-sort="数据框删除列的方法汇总.md">
+<td>
+<span class="listing-date">2019-05-01</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/数据框删除列的方法汇总.html" class="title">数据框删除列的方法汇总</a>
+<td>
+<a href="./posts/md/数据框删除列的方法汇总.html" class="title listing-title">数据框删除列的方法汇总</a>
 </td>
 </tr>
-<tr data-index="46" data-categories="r" data-listing-date-sort="1556553600000" data-listing-file-modified-sort="1661820148018" data-listing-reading-time-sort="1.635" data-listing-title-sort="list操作" data-listing-filename-sort="list操作.qmd">
-<td class="listing-date">
-2019-04-30
+<tr data-index="46" data-categories="r" data-listing-date-sort="1556553600000" data-listing-file-modified-sort="1692061470559" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="list操作" data-listing-filename-sort="list操作.qmd">
+<td>
+<span class="listing-date">2019-04-30</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/list操作.html" class="title">list操作</a>
+<td>
+<a href="./posts/post/list操作.html" class="title listing-title">list操作</a>
 </td>
 </tr>
-<tr data-index="47" data-categories="r" data-listing-date-sort="1556553600000" data-listing-file-modified-sort="1661774685107" data-listing-reading-time-sort="1.915" data-listing-title-sort="省略号参数— 可变长参数" data-listing-filename-sort="省略号参数.qmd">
-<td class="listing-date">
-2019-04-30
+<tr data-index="47" data-categories="r" data-listing-date-sort="1556553600000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="省略号参数— 可变长参数" data-listing-filename-sort="省略号参数.qmd">
+<td>
+<span class="listing-date">2019-04-30</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/省略号参数.html" class="title">省略号参数— 可变长参数</a>
+<td>
+<a href="./posts/post/省略号参数.html" class="title listing-title">省略号参数— 可变长参数</a>
 </td>
 </tr>
-<tr data-index="48" data-categories="r" data-listing-date-sort="1556208000000" data-listing-file-modified-sort="1661774685107" data-listing-reading-time-sort="1.73" data-listing-title-sort="R画带箭头的坐标轴" data-listing-filename-sort="R画带箭头的坐标轴.qmd">
-<td class="listing-date">
-2019-04-26
+<tr data-index="48" data-categories="r" data-listing-date-sort="1556208000000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="R画带箭头的坐标轴" data-listing-filename-sort="R画带箭头的坐标轴.qmd">
+<td>
+<span class="listing-date">2019-04-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/R画带箭头的坐标轴.html" class="title">R画带箭头的坐标轴</a>
+<td>
+<a href="./posts/post/R画带箭头的坐标轴.html" class="title listing-title">R画带箭头的坐标轴</a>
 </td>
 </tr>
-<tr data-index="49" data-categories="latex" data-listing-date-sort="1556208000000" data-listing-file-modified-sort="1661819131113" data-listing-reading-time-sort="0.54" data-listing-title-sort="学术论文写作工具" data-listing-filename-sort="论文写作工具.md">
-<td class="listing-date">
-2019-04-26
+<tr data-index="49" data-categories="latex" data-listing-date-sort="1556208000000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="学术论文写作工具" data-listing-filename-sort="论文写作工具.md">
+<td>
+<span class="listing-date">2019-04-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/论文写作工具.html" class="title">学术论文写作工具</a>
+<td>
+<a href="./posts/md/论文写作工具.html" class="title listing-title">学术论文写作工具</a>
 </td>
 </tr>
-<tr data-index="50" data-categories="r" data-listing-date-sort="1554048000000" data-listing-file-modified-sort="1661820276750" data-listing-reading-time-sort="0.615" data-listing-title-sort="R语言绘制双坐标图" data-listing-filename-sort="R语言绘制双坐标图.qmd">
-<td class="listing-date">
-2019-04-01
+<tr data-index="50" data-categories="r" data-listing-date-sort="1554048000000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="R语言绘制双坐标图" data-listing-filename-sort="R语言绘制双坐标图.qmd">
+<td>
+<span class="listing-date">2019-04-01</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/R语言绘制双坐标图.html" class="title">R语言绘制双坐标图</a>
+<td>
+<a href="./posts/post/R语言绘制双坐标图.html" class="title listing-title">R语言绘制双坐标图</a>
 </td>
 </tr>
-<tr data-index="51" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661818732766" data-listing-reading-time-sort="1.855" data-listing-title-sort="3.3 基于方差最大化模型的多属性决策方法" data-listing-filename-sort="2019-02-26-3-3基于方差最大化模型的多属性决策方法.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="51" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="3.3 基于方差最大化模型的多属性决策方法" data-listing-filename-sort="2019-02-26-3-3基于方差最大化模型的多属性决策方法.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-3-3基于方差最大化模型的多属性决策方法.html" class="title">3.3 基于方差最大化模型的多属性决策方法</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-3-3基于方差最大化模型的多属性决策方法.html" class="title listing-title">3.3 基于方差最大化模型的多属性决策方法</a>
 </td>
 </tr>
-<tr data-index="52" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661789814600" data-listing-reading-time-sort="1.39" data-listing-title-sort="4.1 基于可能度的多属性决策方法" data-listing-filename-sort="2019-02-26-4-1基于可能度的多属性决策方法.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="52" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="4.1 基于可能度的多属性决策方法" data-listing-filename-sort="2019-02-26-4-1基于可能度的多属性决策方法.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-4-1基于可能度的多属性决策方法.html" class="title">4.1 基于可能度的多属性决策方法</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-4-1基于可能度的多属性决策方法.html" class="title listing-title">4.1 基于可能度的多属性决策方法</a>
 </td>
 </tr>
-<tr data-index="53" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661789769226" data-listing-reading-time-sort="0.885" data-listing-title-sort="1.6 基于信息熵的多属性决策方法" data-listing-filename-sort="2019-02-26-1-6基于信息熵的多属性决策方法.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="53" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="1.6 基于信息熵的多属性决策方法" data-listing-filename-sort="2019-02-26-1-6基于信息熵的多属性决策方法.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-1-6基于信息熵的多属性决策方法.html" class="title">1.6 基于信息熵的多属性决策方法</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-1-6基于信息熵的多属性决策方法.html" class="title listing-title">1.6 基于信息熵的多属性决策方法</a>
 </td>
 </tr>
-<tr data-index="54" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661789757329" data-listing-reading-time-sort="1.055" data-listing-title-sort="1.5.2离差最大化的多属性决策方法" data-listing-filename-sort="2019-02-26-1-5基于离差最大化.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="54" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="1.5.2离差最大化的多属性决策方法" data-listing-filename-sort="2019-02-26-1-5基于离差最大化.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-1-5基于离差最大化.html" class="title">1.5.2离差最大化的多属性决策方法</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-1-5基于离差最大化.html" class="title listing-title">1.5.2离差最大化的多属性决策方法</a>
 </td>
 </tr>
-<tr data-index="55" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661789802717" data-listing-reading-time-sort="4.5" data-listing-title-sort="3.2 基于方案满意度的多属性决策方法" data-listing-filename-sort="2019-02-26-3-2基于方案满意度的多属性决策方法.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="55" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="3.2 基于方案满意度的多属性决策方法" data-listing-filename-sort="2019-02-26-3-2基于方案满意度的多属性决策方法.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-3-2基于方案满意度的多属性决策方法.html" class="title">3.2 基于方案满意度的多属性决策方法</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-3-2基于方案满意度的多属性决策方法.html" class="title listing-title">3.2 基于方案满意度的多属性决策方法</a>
 </td>
 </tr>
-<tr data-index="56" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661789790767" data-listing-reading-time-sort="3.405" data-listing-title-sort="3.1 基于理想点的多属性决策方法" data-listing-filename-sort="2019-02-26-3-1基于理想点的多属性决策方法.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="56" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="3.1 基于理想点的多属性决策方法" data-listing-filename-sort="2019-02-26-3-1基于理想点的多属性决策方法.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-3-1基于理想点的多属性决策方法.html" class="title">3.1 基于理想点的多属性决策方法</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-3-1基于理想点的多属性决策方法.html" class="title listing-title">3.1 基于理想点的多属性决策方法</a>
 </td>
 </tr>
-<tr data-index="57" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661789782048" data-listing-reading-time-sort="4.14" data-listing-title-sort="2.1 模糊互补判断矩阵的排序方法" data-listing-filename-sort="2019-02-26-2-1模糊互补判断矩阵的排序方法.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="57" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="2.1 模糊互补判断矩阵的排序方法" data-listing-filename-sort="2019-02-26-2-1模糊互补判断矩阵的排序方法.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-2-1模糊互补判断矩阵的排序方法.html" class="title">2.1 模糊互补判断矩阵的排序方法</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-2-1模糊互补判断矩阵的排序方法.html" class="title listing-title">2.1 模糊互补判断矩阵的排序方法</a>
 </td>
 </tr>
-<tr data-index="58" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661789820328" data-listing-reading-time-sort="3.165" data-listing-title-sort="4.2基于投影的多属性决策方法(含4.3区间归一化)" data-listing-filename-sort="2019-02-26-4-2基于投影的多属性决策方法.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="58" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="4.2基于投影的多属性决策方法(含4.3区间归一化)" data-listing-filename-sort="2019-02-26-4-2基于投影的多属性决策方法.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-4-2基于投影的多属性决策方法.html" class="title">4.2基于投影的多属性决策方法(含4.3区间归一化)</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-4-2基于投影的多属性决策方法.html" class="title listing-title">4.2基于投影的多属性决策方法(含4.3区间归一化)</a>
 </td>
 </tr>
-<tr data-index="59" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1661789775926" data-listing-reading-time-sort="1.21" data-listing-title-sort="1.7方案有偏好信息的多属性决策方法" data-listing-filename-sort="2019-02-26-1-7方案有偏好信息的多属性决策方法.qmd">
-<td class="listing-date">
-2019-02-26
+<tr data-index="59" data-categories="uncertain" data-listing-date-sort="1551110400000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="1.7方案有偏好信息的多属性决策方法" data-listing-filename-sort="2019-02-26-1-7方案有偏好信息的多属性决策方法.qmd">
+<td>
+<span class="listing-date">2019-02-26</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-26-1-7方案有偏好信息的多属性决策方法.html" class="title">1.7方案有偏好信息的多属性决策方法</a>
+<td>
+<a href="./posts/uncertain/2019-02-26-1-7方案有偏好信息的多属性决策方法.html" class="title listing-title">1.7方案有偏好信息的多属性决策方法</a>
 </td>
 </tr>
-<tr data-index="60" data-categories="uncertain" data-listing-date-sort="1551024000000" data-listing-file-modified-sort="1661789762019" data-listing-reading-time-sort="0.005" data-listing-title-sort="不确定多属性决策方法徐泽水pdf" data-listing-filename-sort="2019-02-25不确定多属性方法徐泽水pdf.qmd">
-<td class="listing-date">
-2019-02-25
+<tr data-index="60" data-categories="uncertain" data-listing-date-sort="1551024000000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="不确定多属性决策方法徐泽水pdf" data-listing-filename-sort="2019-02-25不确定多属性方法徐泽水pdf.qmd">
+<td>
+<span class="listing-date">2019-02-25</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uncertain/2019-02-25不确定多属性方法徐泽水pdf.html" class="title">不确定多属性决策方法徐泽水pdf</a>
+<td>
+<a href="./posts/uncertain/2019-02-25不确定多属性方法徐泽水pdf.html" class="title listing-title">不确定多属性决策方法徐泽水pdf</a>
 </td>
 </tr>
-<tr data-index="61" data-categories="matlab" data-listing-date-sort="1550678400000" data-listing-file-modified-sort="1661820315808" data-listing-reading-time-sort="1.9" data-listing-title-sort="智能算法测试函数可视化" data-listing-filename-sort="智能算法测试函数可视化.qmd">
-<td class="listing-date">
-2019-02-21
+<tr data-index="61" data-categories="matlab" data-listing-date-sort="1550678400000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="智能算法测试函数可视化" data-listing-filename-sort="智能算法测试函数可视化.qmd">
+<td>
+<span class="listing-date">2019-02-21</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/智能算法测试函数可视化.html" class="title">智能算法测试函数可视化</a>
+<td>
+<a href="./posts/post/智能算法测试函数可视化.html" class="title listing-title">智能算法测试函数可视化</a>
 </td>
 </tr>
-<tr data-index="62" data-categories="matlab" data-listing-date-sort="1550592000000" data-listing-file-modified-sort="1661819238422" data-listing-reading-time-sort="15.155" data-listing-title-sort="遗传算法（待完善）" data-listing-filename-sort="遗传算法.md">
-<td class="listing-date">
-2019-02-20
+<tr data-index="62" data-categories="matlab" data-listing-date-sort="1550592000000" data-listing-file-modified-sort="1692061470557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-title-sort="遗传算法（待完善）" data-listing-filename-sort="遗传算法.md">
+<td>
+<span class="listing-date">2019-02-20</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/遗传算法.html" class="title">遗传算法（待完善）</a>
+<td>
+<a href="./posts/md/遗传算法.html" class="title listing-title">遗传算法（待完善）</a>
 </td>
 </tr>
-<tr data-index="63" data-categories="matlab" data-listing-date-sort="1550505600000" data-listing-file-modified-sort="1661819184448" data-listing-reading-time-sort="1.665" data-listing-title-sort="模拟退火算法（待完善）" data-listing-filename-sort="模拟退火算法.md">
-<td class="listing-date">
-2019-02-19
+<tr data-index="63" data-categories="matlab" data-listing-date-sort="1550505600000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="模拟退火算法（待完善）" data-listing-filename-sort="模拟退火算法.md">
+<td>
+<span class="listing-date">2019-02-19</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/模拟退火算法.html" class="title">模拟退火算法（待完善）</a>
+<td>
+<a href="./posts/md/模拟退火算法.html" class="title listing-title">模拟退火算法（待完善）</a>
 </td>
 </tr>
-<tr data-index="64" data-categories="r,matlab" data-listing-date-sort="1550419200000" data-listing-file-modified-sort="1661819267427" data-listing-reading-time-sort="0.005" data-listing-title-sort="运筹学与最优化--在R软件中的实现" data-listing-filename-sort="运筹学与最优化R.md">
-<td class="listing-date">
-2019-02-18
+<tr data-index="64" data-categories="r,matlab" data-listing-date-sort="1550419200000" data-listing-file-modified-sort="1692061470557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="运筹学与最优化--在R软件中的实现" data-listing-filename-sort="运筹学与最优化R.md">
+<td>
+<span class="listing-date">2019-02-18</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/运筹学与最优化R.html" class="title">运筹学与最优化–在R软件中的实现</a>
+<td>
+<a href="./posts/md/运筹学与最优化R.html" class="title listing-title">运筹学与最优化–在R软件中的实现</a>
 </td>
 </tr>
-<tr data-index="65" data-categories="matlab" data-listing-date-sort="1547308800000" data-listing-file-modified-sort="1661819107410" data-listing-reading-time-sort="0.005" data-listing-title-sort="混合粒子群算法matlab" data-listing-filename-sort="混合粒子群算法matlab.md">
-<td class="listing-date">
-2019-01-13
+<tr data-index="65" data-categories="matlab" data-listing-date-sort="1547308800000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="混合粒子群算法matlab" data-listing-filename-sort="混合粒子群算法matlab.md">
+<td>
+<span class="listing-date">2019-01-13</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/混合粒子群算法matlab.html" class="title">混合粒子群算法matlab</a>
+<td>
+<a href="./posts/md/混合粒子群算法matlab.html" class="title listing-title">混合粒子群算法matlab</a>
 </td>
 </tr>
-<tr data-index="66" data-categories="r,matlab" data-listing-date-sort="1542816000000" data-listing-file-modified-sort="1661819276009" data-listing-reading-time-sort="0.005" data-listing-title-sort="运筹学最短路问题" data-listing-filename-sort="运筹学最短路问题.md">
-<td class="listing-date">
-2018-11-22
+<tr data-index="66" data-categories="r,matlab" data-listing-date-sort="1542816000000" data-listing-file-modified-sort="1692061470557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="运筹学最短路问题" data-listing-filename-sort="运筹学最短路问题.md">
+<td>
+<span class="listing-date">2018-11-22</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/运筹学最短路问题.html" class="title">运筹学最短路问题</a>
+<td>
+<a href="./posts/md/运筹学最短路问题.html" class="title listing-title">运筹学最短路问题</a>
 </td>
 </tr>
-<tr data-index="67" data-categories="r" data-listing-date-sort="1542729600000" data-listing-file-modified-sort="1661774685105" data-listing-reading-time-sort="0.27" data-listing-title-sort="R语言输出latex或html" data-listing-filename-sort="R输出latex或html格式.qmd">
-<td class="listing-date">
-2018-11-21
+<tr data-index="67" data-categories="r" data-listing-date-sort="1542729600000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="R语言输出latex或html" data-listing-filename-sort="R输出latex或html格式.qmd">
+<td>
+<span class="listing-date">2018-11-21</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/R输出latex或html格式.html" class="title">R语言输出latex或html</a>
+<td>
+<a href="./posts/post/R输出latex或html格式.html" class="title listing-title">R语言输出latex或html</a>
 </td>
 </tr>
-<tr data-index="68" data-categories="c" data-listing-date-sort="1542643200000" data-listing-file-modified-sort="1661819303224" data-listing-reading-time-sort="2.1" data-listing-title-sort="用c语言设置定时关机" data-listing-filename-sort="C语言.md">
-<td class="listing-date">
-2018-11-20
+<tr data-index="68" data-categories="c" data-listing-date-sort="1542643200000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="用c语言设置定时关机" data-listing-filename-sort="C语言.md">
+<td>
+<span class="listing-date">2018-11-20</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/C语言.html" class="title">用c语言设置定时关机</a>
+<td>
+<a href="./posts/md/C语言.html" class="title listing-title">用c语言设置定时关机</a>
 </td>
 </tr>
-<tr data-index="69" data-categories="matlab" data-listing-date-sort="1542470400000" data-listing-file-modified-sort="1661819245295" data-listing-reading-time-sort="0.005" data-listing-title-sort="运筹学与最优化matlab" data-listing-filename-sort="运筹学与最优化matlab.md">
-<td class="listing-date">
-2018-11-18
+<tr data-index="69" data-categories="matlab" data-listing-date-sort="1542470400000" data-listing-file-modified-sort="1692061470557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="运筹学与最优化matlab" data-listing-filename-sort="运筹学与最优化matlab.md">
+<td>
+<span class="listing-date">2018-11-18</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/运筹学与最优化matlab.html" class="title">运筹学与最优化matlab</a>
+<td>
+<a href="./posts/md/运筹学与最优化matlab.html" class="title listing-title">运筹学与最优化matlab</a>
 </td>
 </tr>
-<tr data-index="70" data-categories="win" data-listing-date-sort="1542384000000" data-listing-file-modified-sort="1661819288612" data-listing-reading-time-sort="0.025" data-listing-title-sort="重装系统后一些有用的激活工具" data-listing-filename-sort="重装系统后的常用工具.md">
-<td class="listing-date">
-2018-11-17
+<tr data-index="70" data-categories="win" data-listing-date-sort="1542384000000" data-listing-file-modified-sort="1692061470557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="重装系统后一些有用的激活工具" data-listing-filename-sort="重装系统后的常用工具.md">
+<td>
+<span class="listing-date">2018-11-17</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/重装系统后的常用工具.html" class="title">重装系统后一些有用的激活工具</a>
+<td>
+<a href="./posts/md/重装系统后的常用工具.html" class="title listing-title">重装系统后一些有用的激活工具</a>
 </td>
 </tr>
-<tr data-index="71" data-categories="r" data-listing-date-sort="1542384000000" data-listing-file-modified-sort="1661691739362" data-listing-reading-time-sort="0.28" data-listing-title-sort="线性规划的一般模型(草稿)" data-listing-filename-sort="线性规划的一般模型(test).md">
-<td class="listing-date">
-2018-11-17
+<tr data-index="71" data-categories="r" data-listing-date-sort="1542384000000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="线性规划的一般模型(草稿)" data-listing-filename-sort="线性规划的一般模型(test).md">
+<td>
+<span class="listing-date">2018-11-17</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/线性规划的一般模型(test).html" class="title">线性规划的一般模型(草稿)</a>
+<td>
+<a href="./posts/md/线性规划的一般模型(test).html" class="title listing-title">线性规划的一般模型(草稿)</a>
 </td>
 </tr>
-<tr data-index="72" data-categories="r" data-listing-date-sort="1542124800000" data-listing-file-modified-sort="1661774685104" data-listing-reading-time-sort="7.29" data-listing-title-sort="R金融分析以及VaR" data-listing-filename-sort="R金融分析与VaR.qmd">
-<td class="listing-date">
-2018-11-14
+<tr data-index="72" data-categories="r" data-listing-date-sort="1542124800000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="R金融分析以及VaR" data-listing-filename-sort="R金融分析与VaR.qmd">
+<td>
+<span class="listing-date">2018-11-14</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/R金融分析与VaR.html" class="title">R金融分析以及VaR</a>
+<td>
+<a href="./posts/post/R金融分析与VaR.html" class="title listing-title">R金融分析以及VaR</a>
 </td>
 </tr>
-<tr data-index="73" data-categories="r" data-listing-date-sort="1542038400000" data-listing-file-modified-sort="1661691739361" data-listing-reading-time-sort="4.305" data-listing-title-sort="R语言发邮件--mailR包" data-listing-filename-sort="发邮件mailR包.md">
-<td class="listing-date">
-2018-11-13
+<tr data-index="73" data-categories="r" data-listing-date-sort="1542038400000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="R语言发邮件--mailR包" data-listing-filename-sort="发邮件mailR包.md">
+<td>
+<span class="listing-date">2018-11-13</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/发邮件mailR包.html" class="title">R语言发邮件–mailR包</a>
+<td>
+<a href="./posts/md/发邮件mailR包.html" class="title listing-title">R语言发邮件–mailR包</a>
 </td>
 </tr>
-<tr data-index="74" data-categories="r" data-listing-date-sort="1541433600000" data-listing-file-modified-sort="1661691739361" data-listing-reading-time-sort="0.655" data-listing-title-sort="谈谈字符编码问题" data-listing-filename-sort="谈谈字符编码问题.md">
-<td class="listing-date">
-2018-11-06
+<tr data-index="74" data-categories="r" data-listing-date-sort="1541433600000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="谈谈字符编码问题" data-listing-filename-sort="谈谈字符编码问题.md">
+<td>
+<span class="listing-date">2018-11-06</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/谈谈字符编码问题.html" class="title">谈谈字符编码问题</a>
+<td>
+<a href="./posts/md/谈谈字符编码问题.html" class="title listing-title">谈谈字符编码问题</a>
 </td>
 </tr>
-<tr data-index="75" data-categories="git" data-listing-date-sort="1541433600000" data-listing-file-modified-sort="1661819688909" data-listing-reading-time-sort="0.195" data-listing-title-sort="GitHubDesktop权限问题解决办法" data-listing-filename-sort="GitHubDesktop权限问题解决办法.md">
-<td class="listing-date">
-2018-11-06
+<tr data-index="75" data-categories="git" data-listing-date-sort="1541433600000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="GitHubDesktop权限问题解决办法" data-listing-filename-sort="GitHubDesktop权限问题解决办法.md">
+<td>
+<span class="listing-date">2018-11-06</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/GitHubDesktop权限问题解决办法.html" class="title">GitHubDesktop权限问题解决办法</a>
+<td>
+<a href="./posts/md/GitHubDesktop权限问题解决办法.html" class="title listing-title">GitHubDesktop权限问题解决办法</a>
 </td>
 </tr>
-<tr data-index="76" data-categories="r" data-listing-date-sort="1536768000000" data-listing-file-modified-sort="1661820108476" data-listing-reading-time-sort="6.03" data-listing-title-sort="glmnet包解读" data-listing-filename-sort="glmnet包.qmd">
-<td class="listing-date">
-2018-09-13
+<tr data-index="76" data-categories="r" data-listing-date-sort="1536768000000" data-listing-file-modified-sort="1692061470559" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="glmnet包解读" data-listing-filename-sort="glmnet包.qmd">
+<td>
+<span class="listing-date">2018-09-13</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/glmnet包.html" class="title">glmnet包解读</a>
+<td>
+<a href="./posts/post/glmnet包.html" class="title listing-title">glmnet包解读</a>
 </td>
 </tr>
-<tr data-index="77" data-categories="r" data-listing-date-sort="1535644800000" data-listing-file-modified-sort="1661820335012" data-listing-reading-time-sort="1.635" data-listing-title-sort="独热编码--哑变量" data-listing-filename-sort="独热编码--哑变量.qmd">
-<td class="listing-date">
-2018-08-31
+<tr data-index="77" data-categories="r" data-listing-date-sort="1535644800000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="独热编码--哑变量" data-listing-filename-sort="独热编码--哑变量.qmd">
+<td>
+<span class="listing-date">2018-08-31</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/独热编码--哑变量.html" class="title">独热编码–哑变量</a>
+<td>
+<a href="./posts/post/独热编码--哑变量.html" class="title listing-title">独热编码–哑变量</a>
 </td>
 </tr>
-<tr data-index="78" data-categories="python,selenium" data-listing-date-sort="1533830400000" data-listing-file-modified-sort="1661819550965" data-listing-reading-time-sort="6.745" data-listing-title-sort="Scrapy框架+selenium爬取京东相机" data-listing-filename-sort="scrapy框架.md">
-<td class="listing-date">
-2018-08-10
+<tr data-index="78" data-categories="python,selenium" data-listing-date-sort="1533830400000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="Scrapy框架+selenium爬取京东相机" data-listing-filename-sort="scrapy框架.md">
+<td>
+<span class="listing-date">2018-08-10</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/scrapy框架.html" class="title">Scrapy框架+selenium爬取京东相机</a>
+<td>
+<a href="./posts/md/scrapy框架.html" class="title listing-title">Scrapy框架+selenium爬取京东相机</a>
 </td>
 </tr>
-<tr data-index="79" data-categories="r" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1661774685097" data-listing-reading-time-sort="1.19" data-listing-title-sort="ggplot2一页多图(图独立)" data-listing-filename-sort="ggplot2一页多图独立图.qmd">
-<td class="listing-date">
-2018-07-15
+<tr data-index="79" data-categories="r" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="ggplot2一页多图(图独立)" data-listing-filename-sort="ggplot2一页多图独立图.qmd">
+<td>
+<span class="listing-date">2018-07-15</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/ggplot2一页多图独立图.html" class="title">ggplot2一页多图(图独立)</a>
+<td>
+<a href="./posts/post/ggplot2一页多图独立图.html" class="title listing-title">ggplot2一页多图(图独立)</a>
 </td>
 </tr>
-<tr data-index="80" data-categories="r" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1661774685098" data-listing-reading-time-sort="5.47" data-listing-title-sort="相关图之corrplot" data-listing-filename-sort="相关图之corrplot.qmd">
-<td class="listing-date">
-2018-07-15
+<tr data-index="80" data-categories="r" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-title-sort="相关图之corrplot" data-listing-filename-sort="相关图之corrplot.qmd">
+<td>
+<span class="listing-date">2018-07-15</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/相关图之corrplot.html" class="title">相关图之corrplot</a>
+<td>
+<a href="./posts/post/相关图之corrplot.html" class="title listing-title">相关图之corrplot</a>
 </td>
 </tr>
-<tr data-index="81" data-categories="r" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1661819954787" data-listing-reading-time-sort="1.985" data-listing-title-sort="相关图之ggplot系列扩展" data-listing-filename-sort="相关图之ggplot扩展.qmd">
-<td class="listing-date">
-2018-07-15
+<tr data-index="81" data-categories="r" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="相关图之ggplot系列扩展" data-listing-filename-sort="相关图之ggplot扩展.qmd">
+<td>
+<span class="listing-date">2018-07-15</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/相关图之ggplot扩展.html" class="title">相关图之ggplot系列扩展</a>
+<td>
+<a href="./posts/post/相关图之ggplot扩展.html" class="title listing-title">相关图之ggplot系列扩展</a>
 </td>
 </tr>
-<tr data-index="82" data-categories="r,selenium" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1661819144356" data-listing-reading-time-sort="12.625" data-listing-title-sort="猫眼电影票房抓取" data-listing-filename-sort="猫眼电影抓取.md">
-<td class="listing-date">
-2018-07-15
+<tr data-index="82" data-categories="r,selenium" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="猫眼电影票房抓取" data-listing-filename-sort="猫眼电影抓取.md">
+<td>
+<span class="listing-date">2018-07-15</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/猫眼电影抓取.html" class="title">猫眼电影票房抓取</a>
+<td>
+<a href="./posts/md/猫眼电影抓取.html" class="title listing-title">猫眼电影票房抓取</a>
 </td>
 </tr>
-<tr data-index="83" data-categories="r" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1661691739358" data-listing-reading-time-sort="1.475" data-listing-title-sort="相关图之corrgram" data-listing-filename-sort="相关图之corrgram.md">
-<td class="listing-date">
-2018-07-15
+<tr data-index="83" data-categories="r" data-listing-date-sort="1531584000000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="相关图之corrgram" data-listing-filename-sort="相关图之corrgram.md">
+<td>
+<span class="listing-date">2018-07-15</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/相关图之corrgram.html" class="title">相关图之corrgram</a>
+<td>
+<a href="./posts/md/相关图之corrgram.html" class="title listing-title">相关图之corrgram</a>
 </td>
 </tr>
-<tr data-index="84" data-categories="r,kaggle" data-listing-date-sort="1531497600000" data-listing-file-modified-sort="1661819798825" data-listing-reading-time-sort="52.235" data-listing-title-sort="泰坦尼克号预测(kaggle)" data-listing-filename-sort="kaggle-泰坦.md">
-<td class="listing-date">
-2018-07-14
+<tr data-index="84" data-categories="r,kaggle" data-listing-date-sort="1531497600000" data-listing-file-modified-sort="1692061470554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="53" data-listing-title-sort="泰坦尼克号预测(kaggle)" data-listing-filename-sort="kaggle-泰坦.md">
+<td>
+<span class="listing-date">2018-07-14</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/kaggle-泰坦.html" class="title">泰坦尼克号预测(kaggle)</a>
+<td>
+<a href="./posts/md/kaggle-泰坦.html" class="title listing-title">泰坦尼克号预测(kaggle)</a>
 </td>
 </tr>
-<tr data-index="85" data-categories="r" data-listing-date-sort="1530979200000" data-listing-file-modified-sort="1661691739352" data-listing-reading-time-sort="0.285" data-listing-title-sort="seq*函数族" data-listing-filename-sort="seq函数族.md">
-<td class="listing-date">
-2018-07-08
+<tr data-index="85" data-categories="r" data-listing-date-sort="1530979200000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="seq*函数族" data-listing-filename-sort="seq函数族.md">
+<td>
+<span class="listing-date">2018-07-08</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/seq函数族.html" class="title">seq*函数族</a>
+<td>
+<a href="./posts/md/seq函数族.html" class="title listing-title">seq*函数族</a>
 </td>
 </tr>
-<tr data-index="86" data-categories="r" data-listing-date-sort="1526659200000" data-listing-file-modified-sort="1661691739351" data-listing-reading-time-sort="13.87" data-listing-title-sort="正则表达式(通用)" data-listing-filename-sort="正则表达式通用.md">
-<td class="listing-date">
-2018-05-19
+<tr data-index="86" data-categories="r" data-listing-date-sort="1526659200000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="正则表达式(通用)" data-listing-filename-sort="正则表达式通用.md">
+<td>
+<span class="listing-date">2018-05-19</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/正则表达式通用.html" class="title">正则表达式(通用)</a>
+<td>
+<a href="./posts/md/正则表达式通用.html" class="title listing-title">正则表达式(通用)</a>
 </td>
 </tr>
-<tr data-index="87" data-categories="r" data-listing-date-sort="1523635200000" data-listing-file-modified-sort="1661819458327" data-listing-reading-time-sort="2.005" data-listing-title-sort="R中时间类型概念" data-listing-filename-sort="R中时间类型概念.md">
-<td class="listing-date">
-2018-04-14
+<tr data-index="87" data-categories="r" data-listing-date-sort="1523635200000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="R中时间类型概念" data-listing-filename-sort="R中时间类型概念.md">
+<td>
+<span class="listing-date">2018-04-14</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/R中时间类型概念.html" class="title">R中时间类型概念</a>
+<td>
+<a href="./posts/md/R中时间类型概念.html" class="title listing-title">R中时间类型概念</a>
 </td>
 </tr>
-<tr data-index="88" data-categories="r" data-listing-date-sort="1523116800000" data-listing-file-modified-sort="1661819372640" data-listing-reading-time-sort="2.835" data-listing-title-sort="并行化计算之foreach包" data-listing-filename-sort="R语言并行化计算之foreach包.md">
-<td class="listing-date">
-2018-04-08
+<tr data-index="88" data-categories="r" data-listing-date-sort="1523116800000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="并行化计算之foreach包" data-listing-filename-sort="R语言并行化计算之foreach包.md">
+<td>
+<span class="listing-date">2018-04-08</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/R语言并行化计算之foreach包.html" class="title">并行化计算之foreach包</a>
+<td>
+<a href="./posts/md/R语言并行化计算之foreach包.html" class="title listing-title">并行化计算之foreach包</a>
 </td>
 </tr>
-<tr data-index="89" data-categories="r,selenium" data-listing-date-sort="1523030400000" data-listing-file-modified-sort="1661691739348" data-listing-reading-time-sort="1.93" data-listing-title-sort="RSelenium应用--京东商品" data-listing-filename-sort="RSelenium应用京东商品.md">
-<td class="listing-date">
-2018-04-07
+<tr data-index="89" data-categories="r,selenium" data-listing-date-sort="1523030400000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="RSelenium应用--京东商品" data-listing-filename-sort="RSelenium应用京东商品.md">
+<td>
+<span class="listing-date">2018-04-07</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/RSelenium应用京东商品.html" class="title">RSelenium应用–京东商品</a>
+<td>
+<a href="./posts/md/RSelenium应用京东商品.html" class="title listing-title">RSelenium应用–京东商品</a>
 </td>
 </tr>
-<tr data-index="90" data-categories="r,selenium" data-listing-date-sort="1522944000000" data-listing-file-modified-sort="1661819487845" data-listing-reading-time-sort="6.64" data-listing-title-sort="利用RSelenium包模拟浏览器爬取网页信息" data-listing-filename-sort="RSelenium.md">
-<td class="listing-date">
-2018-04-06
+<tr data-index="90" data-categories="r,selenium" data-listing-date-sort="1522944000000" data-listing-file-modified-sort="1692061470551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="利用RSelenium包模拟浏览器爬取网页信息" data-listing-filename-sort="RSelenium.md">
+<td>
+<span class="listing-date">2018-04-06</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/RSelenium.html" class="title">利用RSelenium包模拟浏览器爬取网页信息</a>
+<td>
+<a href="./posts/md/RSelenium.html" class="title listing-title">利用RSelenium包模拟浏览器爬取网页信息</a>
 </td>
 </tr>
-<tr data-index="91" data-categories="r,stringr" data-listing-date-sort="1522857600000" data-listing-file-modified-sort="1661819443480" data-listing-reading-time-sort="14.12" data-listing-title-sort="R语言字符处理函数包---stringr包" data-listing-filename-sort="R语言字符处理之stringr包.md">
-<td class="listing-date">
-2018-04-05
+<tr data-index="91" data-categories="r,stringr" data-listing-date-sort="1522857600000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-title-sort="R语言字符处理函数包---stringr包" data-listing-filename-sort="R语言字符处理之stringr包.md">
+<td>
+<span class="listing-date">2018-04-05</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/R语言字符处理之stringr包.html" class="title">R语言字符处理函数包—stringr包</a>
+<td>
+<a href="./posts/md/R语言字符处理之stringr包.html" class="title listing-title">R语言字符处理函数包—stringr包</a>
 </td>
 </tr>
-<tr data-index="92" data-categories="r" data-listing-date-sort="1522857600000" data-listing-file-modified-sort="1661819439793" data-listing-reading-time-sort="7.94" data-listing-title-sort="R语言字符处理---基本函数" data-listing-filename-sort="R语言字符处理之base函数.md">
-<td class="listing-date">
-2018-04-05
+<tr data-index="92" data-categories="r" data-listing-date-sort="1522857600000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="R语言字符处理---基本函数" data-listing-filename-sort="R语言字符处理之base函数.md">
+<td>
+<span class="listing-date">2018-04-05</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/R语言字符处理之base函数.html" class="title">R语言字符处理—基本函数</a>
+<td>
+<a href="./posts/md/R语言字符处理之base函数.html" class="title listing-title">R语言字符处理—基本函数</a>
 </td>
 </tr>
-<tr data-index="93" data-categories="r" data-listing-date-sort="1520611200000" data-listing-file-modified-sort="1661819479528" data-listing-reading-time-sort="1.845" data-listing-title-sort="Windows系统下R Markdown 设置中文pdf完美解决方案" data-listing-filename-sort="rmd中文.md">
-<td class="listing-date">
-2018-03-10
+<tr data-index="93" data-categories="r" data-listing-date-sort="1520611200000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Windows系统下R Markdown 设置中文pdf完美解决方案" data-listing-filename-sort="rmd中文.md">
+<td>
+<span class="listing-date">2018-03-10</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/rmd中文.html" class="title">Windows系统下R Markdown 设置中文pdf完美解决方案</a>
+<td>
+<a href="./posts/md/rmd中文.html" class="title listing-title">Windows系统下R Markdown 设置中文pdf完美解决方案</a>
 </td>
 </tr>
-<tr data-index="94" data-categories="r" data-listing-date-sort="1518192000000" data-listing-file-modified-sort="1661820234210" data-listing-reading-time-sort="1.105" data-listing-title-sort="R计算微积分" data-listing-filename-sort="R计算微积分.qmd">
-<td class="listing-date">
-2018-02-10
+<tr data-index="94" data-categories="r" data-listing-date-sort="1518192000000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="R计算微积分" data-listing-filename-sort="R计算微积分.qmd">
+<td>
+<span class="listing-date">2018-02-10</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/R计算微积分.html" class="title">R计算微积分</a>
+<td>
+<a href="./posts/post/R计算微积分.html" class="title listing-title">R计算微积分</a>
 </td>
 </tr>
 
-<tr data-index="95" data-categories="data.table" data-listing-date-sort="1516204800000" data-listing-file-modified-sort="1661691739341" data-listing-reading-time-sort="3.235" data-listing-title-sort="data.table -- 3常见操作" data-listing-filename-sort="datatable3.md">
-<td class="listing-date">
-2018-01-18
+<tr data-index="95" data-categories="data.table" data-listing-date-sort="1516204800000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="data.table -- 3常见操作" data-listing-filename-sort="datatable3.md">
+<td>
+<span class="listing-date">2018-01-18</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/datatable3.html" class="title">data.table – 3常见操作</a>
-</td>
-</tr>
-
-<tr data-index="96" data-categories="r,data.table" data-listing-date-sort="1516118400000" data-listing-file-modified-sort="1661691739340" data-listing-reading-time-sort="7.325" data-listing-title-sort="data.table -- 2基本概念" data-listing-filename-sort="datatable2.md">
-<td class="listing-date">
-2018-01-17
-</td>
-<td class="listing-title">
-<a href="./posts/md/datatable2.html" class="title">data.table – 2基本概念</a>
+<td>
+<a href="./posts/md/datatable3.html" class="title listing-title">data.table – 3常见操作</a>
 </td>
 </tr>
 
-<tr data-index="97" data-categories="r,data.table" data-listing-date-sort="1516032000000" data-listing-file-modified-sort="1661691739338" data-listing-reading-time-sort="7.7" data-listing-title-sort="data.table -- 1基本函数" data-listing-filename-sort="datatable1.md">
-<td class="listing-date">
-2018-01-16
+<tr data-index="96" data-categories="r,data.table" data-listing-date-sort="1516118400000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="data.table -- 2基本概念" data-listing-filename-sort="datatable2.md">
+<td>
+<span class="listing-date">2018-01-17</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/datatable1.html" class="title">data.table – 1基本函数</a>
-</td>
-</tr>
-<tr data-index="98" data-categories="r" data-listing-date-sort="1515859200000" data-listing-file-modified-sort="1661820326081" data-listing-reading-time-sort="6.915" data-listing-title-sort="因子数据类型处理" data-listing-filename-sort="因子数据类型factor.qmd">
-<td class="listing-date">
-2018-01-14
-</td>
-<td class="listing-title">
-<a href="./posts/post/因子数据类型factor.html" class="title">因子数据类型处理</a>
+<td>
+<a href="./posts/md/datatable2.html" class="title listing-title">data.table – 2基本概念</a>
 </td>
 </tr>
-<tr data-index="99" data-categories="r" data-listing-date-sort="1515254400000" data-listing-file-modified-sort="1661819212708" data-listing-reading-time-sort="0.895" data-listing-title-sort="R软件常见问题" data-listing-filename-sort="使用R软件遇到的问题.md">
-<td class="listing-date">
-2018-01-07
+
+<tr data-index="97" data-categories="r,data.table" data-listing-date-sort="1516032000000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="data.table -- 1基本函数" data-listing-filename-sort="datatable1.md">
+<td>
+<span class="listing-date">2018-01-16</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/使用R软件遇到的问题.html" class="title">R软件常见问题</a>
-</td>
-</tr>
-<tr data-index="100" data-categories="other" data-listing-date-sort="1515081600000" data-listing-file-modified-sort="1661819695599" data-listing-reading-time-sort="1.47" data-listing-title-sort="1、go语言安装与LiteIDE的配置" data-listing-filename-sort="go语言安装与LiteIDE的配置.md">
-<td class="listing-date">
-2018-01-05
-</td>
-<td class="listing-title">
-<a href="./posts/md/go语言安装与LiteIDE的配置.html" class="title">1、go语言安装与LiteIDE的配置</a>
+<td>
+<a href="./posts/md/datatable1.html" class="title listing-title">data.table – 1基本函数</a>
 </td>
 </tr>
-<tr data-index="101" data-categories="r,dplyr" data-listing-date-sort="1514908800000" data-listing-file-modified-sort="1661820058830" data-listing-reading-time-sort="2.145" data-listing-title-sort="dplyr -- 2实战" data-listing-filename-sort="dplyrshizhan2.qmd">
-<td class="listing-date">
-2018-01-03
+<tr data-index="98" data-categories="r" data-listing-date-sort="1515859200000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="因子数据类型处理" data-listing-filename-sort="因子数据类型factor.qmd">
+<td>
+<span class="listing-date">2018-01-14</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/dplyrshizhan2.html" class="title">dplyr – 2实战</a>
-</td>
-</tr>
-<tr data-index="102" data-categories="r,dplyr" data-listing-date-sort="1514736000000" data-listing-file-modified-sort="1661691739333" data-listing-reading-time-sort="6.565" data-listing-title-sort="dplyr -- 1基本函数简介" data-listing-filename-sort="dplyr.md">
-<td class="listing-date">
-2018-01-01
-</td>
-<td class="listing-title">
-<a href="./posts/md/dplyr.html" class="title">dplyr – 1基本函数简介</a>
+<td>
+<a href="./posts/post/因子数据类型factor.html" class="title listing-title">因子数据类型处理</a>
 </td>
 </tr>
-<tr data-index="103" data-categories="r,dplyr" data-listing-date-sort="1514649600000" data-listing-file-modified-sort="1661691739332" data-listing-reading-time-sort="0.74" data-listing-title-sort="tibble包的列和行名相互转换以及添加行和列" data-listing-filename-sort="tibble包的列-行名转换.md">
-<td class="listing-date">
-2017-12-31
+<tr data-index="99" data-categories="r" data-listing-date-sort="1515254400000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="R软件常见问题" data-listing-filename-sort="使用R软件遇到的问题.md">
+<td>
+<span class="listing-date">2018-01-07</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/tibble包的列-行名转换.html" class="title">tibble包的列和行名相互转换以及添加行和列</a>
-</td>
-</tr>
-<tr data-index="104" data-categories="r" data-listing-date-sort="1514563200000" data-listing-file-modified-sort="1661819223608" data-listing-reading-time-sort="0.025" data-listing-title-sort="添加谷歌网站分析" data-listing-filename-sort="添加谷歌分析.md">
-<td class="listing-date">
-2017-12-30
-</td>
-<td class="listing-title">
-<a href="./posts/md/添加谷歌分析.html" class="title">添加谷歌网站分析</a>
+<td>
+<a href="./posts/md/使用R软件遇到的问题.html" class="title listing-title">R软件常见问题</a>
 </td>
 </tr>
-<tr data-index="105" data-categories="hugo" data-listing-date-sort="1514563200000" data-listing-file-modified-sort="1661819760817" data-listing-reading-time-sort="2.08" data-listing-title-sort="hugo--分类标签添加" data-listing-filename-sort="hugo分类标签添加.md">
-<td class="listing-date">
-2017-12-30
+<tr data-index="100" data-categories="other" data-listing-date-sort="1515081600000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="1、go语言安装与LiteIDE的配置" data-listing-filename-sort="go语言安装与LiteIDE的配置.md">
+<td>
+<span class="listing-date">2018-01-05</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/hugo分类标签添加.html" class="title">hugo–分类标签添加</a>
-</td>
-</tr>
-<tr data-index="106" data-categories="hugo" data-listing-date-sort="1514563200000" data-listing-file-modified-sort="1661819722889" data-listing-reading-time-sort="2.665" data-listing-title-sort="hugo--blogdown生成的目录" data-listing-filename-sort="hugo生成的目录.md">
-<td class="listing-date">
-2017-12-30
-</td>
-<td class="listing-title">
-<a href="./posts/md/hugo生成的目录.html" class="title">hugo–blogdown生成的目录</a>
+<td>
+<a href="./posts/md/go语言安装与LiteIDE的配置.html" class="title listing-title">1、go语言安装与LiteIDE的配置</a>
 </td>
 </tr>
-<tr data-index="107" data-categories="r" data-listing-date-sort="1514476800000" data-listing-file-modified-sort="1661819061779" data-listing-reading-time-sort="0.775" data-listing-title-sort="博客搭建——blogdown之md" data-listing-filename-sort="博客搭建.md">
-<td class="listing-date">
-2017-12-29
+<tr data-index="101" data-categories="r,dplyr" data-listing-date-sort="1514908800000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="dplyr -- 2实战" data-listing-filename-sort="dplyrshizhan2.qmd">
+<td>
+<span class="listing-date">2018-01-03</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/博客搭建.html" class="title">博客搭建——blogdown之md</a>
-</td>
-</tr>
-<tr data-index="108" data-categories="r,hugo" data-listing-date-sort="1514390400000" data-listing-file-modified-sort="1661819719601" data-listing-reading-time-sort="0.27" data-listing-title-sort="hugo-blogdown搭建网页过程中的小问题" data-listing-filename-sort="hugo遇到的问题.md">
-<td class="listing-date">
-2017-12-28
-</td>
-<td class="listing-title">
-<a href="./posts/md/hugo遇到的问题.html" class="title">hugo-blogdown搭建网页过程中的小问题</a>
+<td>
+<a href="./posts/post/dplyrshizhan2.html" class="title listing-title">dplyr – 2实战</a>
 </td>
 </tr>
-<tr data-index="109" data-categories="r" data-listing-date-sort="1510502400000" data-listing-file-modified-sort="1661774685093" data-listing-reading-time-sort="1.89" data-listing-title-sort="R语言标准化数据处理" data-listing-filename-sort="数据标准化方法.qmd">
-<td class="listing-date">
-2017-11-13
+<tr data-index="102" data-categories="r,dplyr" data-listing-date-sort="1514736000000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="dplyr -- 1基本函数简介" data-listing-filename-sort="dplyr.md">
+<td>
+<span class="listing-date">2018-01-01</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/数据标准化方法.html" class="title">R语言标准化数据处理</a>
-</td>
-</tr>
-<tr data-index="110" data-categories="r" data-listing-date-sort="1510502400000" data-listing-file-modified-sort="1661691739328" data-listing-reading-time-sort="0.64" data-listing-title-sort="数据集划分—-训练集和测试集方法" data-listing-filename-sort="数据集划分.md">
-<td class="listing-date">
-2017-11-13
-</td>
-<td class="listing-title">
-<a href="./posts/md/数据集划分.html" class="title">数据集划分—-训练集和测试集方法</a>
+<td>
+<a href="./posts/md/dplyr.html" class="title listing-title">dplyr – 1基本函数简介</a>
 </td>
 </tr>
-<tr data-index="111" data-categories="hugo" data-listing-date-sort="1509724800000" data-listing-file-modified-sort="1661819790906" data-listing-reading-time-sort="0.185" data-listing-title-sort="install old hugo version" data-listing-filename-sort="hugo安装.md">
-<td class="listing-date">
-2017-11-04
+<tr data-index="103" data-categories="r,dplyr" data-listing-date-sort="1514649600000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="tibble包的列和行名相互转换以及添加行和列" data-listing-filename-sort="tibble包的列-行名转换.md">
+<td>
+<span class="listing-date">2017-12-31</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/hugo安装.html" class="title">install old hugo version</a>
-</td>
-</tr>
-<tr data-index="112" data-categories="r" data-listing-date-sort="1491580800000" data-listing-file-modified-sort="1661819460483" data-listing-reading-time-sort="2.46" data-listing-title-sort="R语言文件目录相关操作" data-listing-filename-sort="R语言文件目录相关操作.md">
-<td class="listing-date">
-2017-04-08
-</td>
-<td class="listing-title">
-<a href="./posts/md/R语言文件目录相关操作.html" class="title">R语言文件目录相关操作</a>
+<td>
+<a href="./posts/md/tibble包的列-行名转换.html" class="title listing-title">tibble包的列和行名相互转换以及添加行和列</a>
 </td>
 </tr>
-<tr data-index="113" data-categories="r" data-listing-date-sort="1490198400000" data-listing-file-modified-sort="1661774685092" data-listing-reading-time-sort="2.12" data-listing-title-sort="knn算法简介" data-listing-filename-sort="knn算法.qmd">
-<td class="listing-date">
-2017-03-23
+<tr data-index="104" data-categories="r" data-listing-date-sort="1514563200000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="添加谷歌网站分析" data-listing-filename-sort="添加谷歌分析.md">
+<td>
+<span class="listing-date">2017-12-30</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/knn算法.html" class="title">knn算法简介</a>
-</td>
-</tr>
-<tr data-index="114" data-categories="r" data-listing-date-sort="1487347200000" data-listing-file-modified-sort="1661774685091" data-listing-reading-time-sort="1.315" data-listing-title-sort="回归树与模型树" data-listing-filename-sort="回归树与模型树.qmd">
-<td class="listing-date">
-2017-02-18
-</td>
-<td class="listing-title">
-<a href="./posts/post/回归树与模型树.html" class="title">回归树与模型树</a>
+<td>
+<a href="./posts/md/添加谷歌分析.html" class="title listing-title">添加谷歌网站分析</a>
 </td>
 </tr>
-<tr data-index="115" data-categories="r" data-listing-date-sort="1486828800000" data-listing-file-modified-sort="1661774685090" data-listing-reading-time-sort="4.395" data-listing-title-sort="ggfortify包简介" data-listing-filename-sort="ggfortify包简介.qmd">
-<td class="listing-date">
-2017-02-12
+<tr data-index="105" data-categories="hugo" data-listing-date-sort="1514563200000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="hugo--分类标签添加" data-listing-filename-sort="hugo分类标签添加.md">
+<td>
+<span class="listing-date">2017-12-30</span>
 </td>
-<td class="listing-title">
-<a href="./posts/post/ggfortify包简介.html" class="title">ggfortify包简介</a>
-</td>
-</tr>
-<tr data-index="116" data-categories="r" data-listing-date-sort="1484409600000" data-listing-file-modified-sort="1661819382801" data-listing-reading-time-sort="0.32" data-listing-title-sort="R语言与可视化" data-listing-filename-sort="R语言与可视化.md">
-<td class="listing-date">
-2017-01-15
-</td>
-<td class="listing-title">
-<a href="./posts/md/R语言与可视化.html" class="title">R语言与可视化</a>
+<td>
+<a href="./posts/md/hugo分类标签添加.html" class="title listing-title">hugo–分类标签添加</a>
 </td>
 </tr>
-<tr data-index="117" data-categories="r" data-listing-date-sort="1447603200000" data-listing-file-modified-sort="1661819941167" data-listing-reading-time-sort="1.875" data-listing-title-sort="Rweka包解读" data-listing-filename-sort="Rweka.md">
-<td class="listing-date">
-2015-11-16
+<tr data-index="106" data-categories="hugo" data-listing-date-sort="1514563200000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="hugo--blogdown生成的目录" data-listing-filename-sort="hugo生成的目录.md">
+<td>
+<span class="listing-date">2017-12-30</span>
 </td>
-<td class="listing-title">
-<a href="./posts/md/Rweka.html" class="title">Rweka包解读</a>
-</td>
-</tr>
-<tr data-index="118" data-categories="r" data-listing-date-sort="1446998400000" data-listing-file-modified-sort="1661774685088" data-listing-reading-time-sort="7.61" data-listing-title-sort="GA包---遗传算法" data-listing-filename-sort="GA.qmd">
-<td class="listing-date">
-2015-11-09
-</td>
-<td class="listing-title">
-<a href="./posts/post/GA.html" class="title">GA包—遗传算法</a>
+<td>
+<a href="./posts/md/hugo生成的目录.html" class="title listing-title">hugo–blogdown生成的目录</a>
 </td>
 </tr>
-<tr data-index="119" data-categories="r" data-listing-date-sort="946656000000" data-listing-file-modified-sort="1661830873024" data-listing-reading-time-sort="0.815" data-listing-title-sort="测试文件" data-listing-filename-sort="测试文件.qmd">
-<td class="listing-date">
-2000-01-01
+<tr data-index="107" data-categories="r" data-listing-date-sort="1514476800000" data-listing-file-modified-sort="1692061470555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="博客搭建——blogdown之md" data-listing-filename-sort="博客搭建.md">
+<td>
+<span class="listing-date">2017-12-29</span>
 </td>
-<td class="listing-title">
-<a href="./posts/测试文件.html" class="title">测试文件</a>
+<td>
+<a href="./posts/md/博客搭建.html" class="title listing-title">博客搭建——blogdown之md</a>
+</td>
+</tr>
+<tr data-index="108" data-categories="r,hugo" data-listing-date-sort="1514390400000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="hugo-blogdown搭建网页过程中的小问题" data-listing-filename-sort="hugo遇到的问题.md">
+<td>
+<span class="listing-date">2017-12-28</span>
+</td>
+<td>
+<a href="./posts/md/hugo遇到的问题.html" class="title listing-title">hugo-blogdown搭建网页过程中的小问题</a>
+</td>
+</tr>
+<tr data-index="109" data-categories="r" data-listing-date-sort="1510502400000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="R语言标准化数据处理" data-listing-filename-sort="数据标准化方法.qmd">
+<td>
+<span class="listing-date">2017-11-13</span>
+</td>
+<td>
+<a href="./posts/post/数据标准化方法.html" class="title listing-title">R语言标准化数据处理</a>
+</td>
+</tr>
+<tr data-index="110" data-categories="r" data-listing-date-sort="1510502400000" data-listing-file-modified-sort="1692061470556" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="数据集划分—-训练集和测试集方法" data-listing-filename-sort="数据集划分.md">
+<td>
+<span class="listing-date">2017-11-13</span>
+</td>
+<td>
+<a href="./posts/md/数据集划分.html" class="title listing-title">数据集划分—-训练集和测试集方法</a>
+</td>
+</tr>
+<tr data-index="111" data-categories="hugo" data-listing-date-sort="1509724800000" data-listing-file-modified-sort="1692061470553" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="install old hugo version" data-listing-filename-sort="hugo安装.md">
+<td>
+<span class="listing-date">2017-11-04</span>
+</td>
+<td>
+<a href="./posts/md/hugo安装.html" class="title listing-title">install old hugo version</a>
+</td>
+</tr>
+<tr data-index="112" data-categories="r" data-listing-date-sort="1491580800000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="R语言文件目录相关操作" data-listing-filename-sort="R语言文件目录相关操作.md">
+<td>
+<span class="listing-date">2017-04-08</span>
+</td>
+<td>
+<a href="./posts/md/R语言文件目录相关操作.html" class="title listing-title">R语言文件目录相关操作</a>
+</td>
+</tr>
+<tr data-index="113" data-categories="r" data-listing-date-sort="1490198400000" data-listing-file-modified-sort="1692061470559" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="knn算法简介" data-listing-filename-sort="knn算法.qmd">
+<td>
+<span class="listing-date">2017-03-23</span>
+</td>
+<td>
+<a href="./posts/post/knn算法.html" class="title listing-title">knn算法简介</a>
+</td>
+</tr>
+<tr data-index="114" data-categories="r" data-listing-date-sort="1487347200000" data-listing-file-modified-sort="1692061470561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="回归树与模型树" data-listing-filename-sort="回归树与模型树.qmd">
+<td>
+<span class="listing-date">2017-02-18</span>
+</td>
+<td>
+<a href="./posts/post/回归树与模型树.html" class="title listing-title">回归树与模型树</a>
+</td>
+</tr>
+<tr data-index="115" data-categories="r" data-listing-date-sort="1486828800000" data-listing-file-modified-sort="1692061470558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="ggfortify包简介" data-listing-filename-sort="ggfortify包简介.qmd">
+<td>
+<span class="listing-date">2017-02-12</span>
+</td>
+<td>
+<a href="./posts/post/ggfortify包简介.html" class="title listing-title">ggfortify包简介</a>
+</td>
+</tr>
+<tr data-index="116" data-categories="r" data-listing-date-sort="1484409600000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="R语言与可视化" data-listing-filename-sort="R语言与可视化.md">
+<td>
+<span class="listing-date">2017-01-15</span>
+</td>
+<td>
+<a href="./posts/md/R语言与可视化.html" class="title listing-title">R语言与可视化</a>
+</td>
+</tr>
+<tr data-index="117" data-categories="r" data-listing-date-sort="1447603200000" data-listing-file-modified-sort="1692061470552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Rweka包解读" data-listing-filename-sort="Rweka.md">
+<td>
+<span class="listing-date">2015-11-16</span>
+</td>
+<td>
+<a href="./posts/md/Rweka.html" class="title listing-title">Rweka包解读</a>
+</td>
+</tr>
+<tr data-index="118" data-categories="r" data-listing-date-sort="1446998400000" data-listing-file-modified-sort="1692061470557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="GA包---遗传算法" data-listing-filename-sort="GA.qmd">
+<td>
+<span class="listing-date">2015-11-09</span>
+</td>
+<td>
+<a href="./posts/post/GA.html" class="title listing-title">GA包—遗传算法</a>
+</td>
+</tr>
+<tr data-index="119" data-categories="r" data-listing-date-sort="946656000000" data-listing-file-modified-sort="1692061470562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="测试文件" data-listing-filename-sort="测试文件.qmd">
+<td>
+<span class="listing-date">2000-01-01</span>
+</td>
+<td>
+<a href="./posts/测试文件.html" class="title listing-title">测试文件</a>
 </td>
 </tr>
 </tbody>
@@ -1396,7 +1380,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1404,9 +1390,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1418,7 +1418,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "已复制");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "已复制");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1505,24 +1522,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
